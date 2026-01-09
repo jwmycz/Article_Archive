@@ -1,0 +1,2988 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta content="webkit" name="renderer">
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<title>教学用操作系统内核代码 - 吾爱破解 - 52pojie.cn </title>
+<link href="https://www.52pojie.cn/thread-2083831-1-1.html" rel="canonical"/>
+<meta content="教学用操作系统内核代码" name="keywords"/>
+<meta content="这个内核包含了必要的引导程序、错误处理和保护模式设置。请注意，运行自制操作系统有风险，请在虚拟机或专用测试硬件上测试。项目结构[mw_shl_code=text,true]s ... " name="description"/>
+<meta content="Discuz!" name="generator"/>
+<meta content="True" name="MSSmartTagsPreventParsing"/>
+<meta content="Yes" http-equiv="MSThemeCompatible"/>
+
+<link href="/favicon.svg" rel="mask-icon"/>
+<link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="apple-touch-icon.png" rel="apple-touch-icon"/>
+<link href="apple-touch-icon.png" rel="apple-touch-icon" size="180x180"/>
+<link href="apple-touch-icon-167x167.png" rel="apple-touch-icon" size="167x167"/>
+<link href="apple-touch-icon-152x152.png" rel="apple-touch-icon" size="152x152"/><link href="https://static.52pojie.cn/cache/style_1_common.css?BC3" rel="stylesheet" type="text/css"><link href="https://static.52pojie.cn/cache/style_1_forum_viewthread.css?BC3" rel="stylesheet" type="text/css"><link href="./template/default/style/t5/style.css" id="css_extstyle" rel="stylesheet" type="text/css">
+<meta content="吾爱破解 - 52pojie.cn" name="application-name"/>
+<meta content="吾爱破解 - 52pojie.cn" name="msapplication-tooltip"/>
+<meta content="name=门户;action-uri=https://www.52pojie.cn/portal.php;icon-uri=https://static.52pojie.cn/static/image/common/portal.ico" name="msapplication-task"/>
+<meta content="name=网站;action-uri=https://www.52pojie.cn/forum.php;icon-uri=https://static.52pojie.cn/static/image/common/bbs.ico" name="msapplication-task"/>
+<link href="https://www.52pojie.cn/archiver/" rel="archives" title="吾爱破解 - 52pojie.cn">
+<link href="https://static.52pojie.cn/cache/style_1_widthauto.css?BC3" id="css_widthauto" rel="stylesheet" type="text/css">
+<link href="https://static.52pojie.cn/cache/style_1_responsive.css?BC3" id="css_responsive" rel="stylesheet" type="text/css">
+</link></link></link></link></link></link></meta></head>
+<body class="pg_viewthread" id="nv_forum" onkeydown="if(event.keyCode==27) return false;">
+<div id="append_parent"></div><div id="ajaxwaitid"></div>
+<div class="cl" id="toptb">
+<div class="wp">
+<div class="z"><a href="https://space.bilibili.com/544451485" rel="nofollow" target="_blank">官方bilibili</a><a href="thread-582852-1-1.html" style="color: red" target="_blank">Windows破解入门</a><a href="thread-408645-1-1.html" style="color: red" target="_blank">Android逆向入门</a></div>
+<div class="y">
+<a class="switchblind" href="javascript:;" id="switchblind" onclick="toggleBlind(this)" title="开启辅助访问"></a>
+<a href="thread-209287-1-1.html" target="_blank" title="修复各种访问不了论坛、访问论坛异常、验证码异常等各种问题的大杀器！">【网络诊断修复工具】</a><a class="switchwidth" href="javascript:;" id="switchwidth" onclick="widthauto(this)" title="切换到窄版">切换到窄版</a>
+<a href="javascript:;" id="sslct" onmouseover="delayShow(this, function() {showMenu({'ctrlid':'sslct','pos':'34!'})});">切换风格</a></div>
+</div>
+</div>
+<ul class="p_pop" disautofocus="true" id="myprompt_menu" style="display: none;">
+<li><a href="home.php?mod=space&amp;do=pm" id="pm_ntc" style="background-repeat: no-repeat; background-position: 0 50%;"><em class="prompt_news_0"></em>消息</a></li>
+<li><a href="home.php?mod=follow&amp;do=follower"><em class="prompt_follower_0"></em>新听众</a></li>
+<li class="ignore_noticeli"><a href="javascript:;" onclick="setcookie('ignore_notice', 1);hideMenu('myprompt_menu')" title="暂不提醒"><em class="ignore_notice"></em></a></li>
+</ul>
+<div class="cl p_pop" id="sslct_menu" style="display: none;">
+<span class="sslct_btn" onclick="extstyle('./template/default/style/t1')" title="红"><i style="background:#BA350F"></i></span>
+<span class="sslct_btn" onclick="extstyle('./template/default/style/t2')" title="青"><i style="background:#429296"></i></span>
+<span class="sslct_btn" onclick="extstyle('./template/default/style/t3')" title="橙"><i style="background:#FE9500"></i></span>
+<span class="sslct_btn" onclick="extstyle('./template/default/style/t4')" title="紫"><i style="background:#9934B7"></i></span>
+<span class="sslct_btn" onclick="extstyle('./template/default/style/t5')" title="蓝"><i style="background:#0053B9"></i></span>
+</div>
+<ul class="p_pop" id="myitem_menu" style="display: none;">
+<li><a href="forum.php?mod=guide&amp;view=my">帖子</a></li>
+<li><a href="home.php?mod=space&amp;do=favorite&amp;view=me">收藏</a></li>
+<li><a href="home.php?mod=space&amp;do=friend">好友</a></li>
+</ul>
+<div class="p_pop" id="qmenu_menu" style="display: none;">
+<ul class="cl nav"><li><a href="forum.php?mod=guide" style="background-image:url(https://static.52pojie.cn/static/image/feed/guide_b.png) !important">导读</a></li>
+<li><a href="forum.php?mod=guide&amp;view=my" style="background-image:url(https://static.52pojie.cn/static/image/feed/thread_b.png) !important">帖子</a></li>
+<li><a href="home.php?mod=space&amp;do=favorite&amp;view=me" style="background-image:url(https://static.52pojie.cn/static/image/feed/favorite_b.png) !important">收藏</a></li>
+<li><a href="forum.php?mod=collection&amp;op=my" style="background-image:url(https://static.52pojie.cn/static/image/feed/collection_b.png) !important">淘帖</a></li>
+<li><a href="home.php?mod=medal" style="background-image:url(https://static.52pojie.cn/static/image/feed/medal_b.png) !important">勋章</a></li>
+<li><a href="home.php?mod=task" style="background-image:url(https://static.52pojie.cn/static/image/feed/task_b.png) !important">任务</a></li>
+<li><a href="home.php?mod=space&amp;do=friend" style="background-image:url(https://static.52pojie.cn/static/image/feed/friend_b.png) !important">好友</a></li>
+<li><a href="misc.php?mod=ranklist" style="background-image:url(https://static.52pojie.cn/static/image/feed/ranklist_b.png) !important">排行榜</a></li>
+<li><a href="home.php?mod=spacecp&amp;ac=credit&amp;op=buy" style="background-image:url(https://static.52pojie.cn/static/image/feed/money.png) !important" title="论坛币捐助充值入口。">充值</a></li>
+</ul>
+<div class="btda" id="fjump_menu"></div></div><div id="hd">
+<div class="wp">
+<div class="hdc cl"><h2><a href="./" title="吾爱破解 - 52pojie.cn"><img alt="吾爱破解 - 52pojie.cn" border="0" src="../common_images/logo.png"/></a></h2><div id="um">
+<div class="avt y"><a href="home.php?mod=space&amp;uid=588268"><img onerror="this.onerror=null;this.src='https://avatar.52pojie.cn/images/noavatar_small.gif'" src="../common_images/68_avatar_small.jpg"/></a></div>
+<p>
+<strong class="vwmy"><a href="https://github.com/jwmycz" target="_blank" style="color: #0366d6; text-decoration: none;">微信公众号：将往的爬虫逆向日记</a></strong>
+<span class="pipe">|</span><a href="connect.php?mod=config" target="_blank"><img align="absmiddle" alt="QQ绑定" class="qq_bind" src="../common_images/qq_bind_small.gif"/></a>
+<span class="pipe">|</span><a class="showmenu a" href="home.php?mod=space&amp;do=reward&amp;view=me" id="rewards" onmouseover="showMenu({'ctrlid':'rewards'})"><em class="showtipex"></em>悬赏</a><span class="pipe">|</span><a class="showmenu" href="javascript:;" id="myitem" onmouseover="showMenu({'ctrlid':'myitem'});">我的</a>
+<span class="pipe">|</span><a href="home.php?mod=spacecp">设置</a>
+<span class="pipe">|</span><a href="home.php?mod=space&amp;do=pm" id="pm_ntc">消息</a>
+<span class="pipe">|</span><a class="a showmenu" href="home.php?mod=space&amp;do=notice" id="myprompt" onmouseover="showMenu({'ctrlid':'myprompt'});">提醒</a><span id="myprompt_check"></span>
+<span class="pipe">|</span><a href="member.php?mod=logging&amp;action=logout&amp;formhash=7f5fdc25">退出</a>
+</p>
+<p>
+<img align="absmiddle" alt="" class="qq_bind" src="../common_images/wbs.png"/> <span class="pipe">|</span><a class="showmenu" href="home.php?mod=spacecp&amp;ac=credit&amp;showcredit=1" id="extcreditmenu" onmouseover="delayShow(this, showCreditmenu);">积分: 231</a>
+<span class="pipe">|</span><a class="showmenu" href="home.php?mod=spacecp&amp;ac=usergroup" id="g_upmine" onmouseover="delayShow(this, showUpgradeinfo)">用户组: 前途无量</a>
+</p>
+</div>
+</div>
+<div id="nv">
+<a href="javascript:;" id="qmenu" onmouseover="delayShow(this, function () {showMenu({'ctrlid':'qmenu','pos':'34!','ctrlclass':'a','duration':2});showForummenu(24);})">快捷导航</a>
+<ul><li id="mn_portal"><a hidefocus="true" href="portal.php" title="吾爱破解门户">门户<span>吾爱破解门户</span></a></li><li class="a" id="mn_forum"><a hidefocus="true" href="/" title="吾爱破解论坛">网站<span>吾爱破解论坛</span></a></li><li id="mn_Na063" onmouseover="showMenu({'ctrlid':this.id,'ctrlclass':'hover','duration':2})"><a hidefocus="true" href="forum.php?mod=guide&amp;view=newthread" style="color: yellow" title="吾爱破解论坛新帖导读">新帖<span>吾爱破解论坛新帖导读</span></a></li><li id="mn_forum_11"><a hidefocus="true" href="forum.php?mod=collection" title="吾爱破解文章专辑列表">专辑<span>吾爱破解文章专辑列表</span></a></li><li id="mn_home_4" onmouseover="showMenu({'ctrlid':this.id,'ctrlclass':'hover','duration':2})"><a hidefocus="true" href="home.php" title="Space">家园<span>Space</span></a></li><li id="mn_N12a7"><a hidefocus="true" href="misc.php?mod=ranklist" title="吾爱破解排行榜">排行榜<span>吾爱破解排行榜</span></a></li><li id="mn_N05be"><a hidefocus="true" href="thread-143136-1-1.html" target="_blank" title="吾爱破解论坛总版规">总版规<span>吾爱破解论坛总版规</span></a></li><li id="mn_N34c9"><a hidefocus="true" href="forum-15-1.html" target="_blank" title="吾爱破解论坛欢迎大家积极举报违规帖子!">投诉举报<span>吾爱破解论坛欢迎大家积极举报违规帖子!</span></a></li><li id="mn_Na678" onmouseover="showMenu({'ctrlid':this.id,'ctrlclass':'hover','duration':2})"><a hidefocus="true" href="https://down.52pojie.cn" style="font-weight: bold;color: yellow" target="_blank" title="爱盘，在线破解工具包，实时提供最新逆向资源！">爱盘<span>爱盘，在线破解工具包，实时提供最新逆向资源！</span></a></li><li id="mn_N0a2c"><a hidefocus="true" href="misc.php?mod=faq" title="吾爱破解论坛常见问题解答中心">帮助<span>吾爱破解论坛常见问题解答中心</span></a></li></ul>
+<a href="javascript:;" onclick="showWindow('csu_wechat_scan_scan','plugin.php?id=csu_wechat_scan:scan','get',0);return false;" style="float: right;display: inline;margin-top: 5px;margin-left: 3px;margin-right: 3px;">
+<img alt="ganzhuweixin" src="../common_images/scan.gif"/>
+</a></div>
+<ul class="p_pop h_pop" id="mn_Na063_menu" style="display: none"><li><a hidefocus="true" href="home.php?mod=follow&amp;view=follow" style="color: red" target="_blank">关注人的新帖</a></li><li><a hidefocus="true" href="forum.php?mod=guide&amp;view=tech" style="color: blue" target="_blank">技术新帖合集</a></li><li><a hidefocus="true" href="forum.php?mod=guide&amp;view=soft" style="color: green" target="_blank">最新软件合集</a></li><li><a hidefocus="true" href="forum.php?mod=forumdisplay&amp;fid=2&amp;filter=author&amp;orderby=dateline" target="_blank">原创发布新贴</a></li><li><a hidefocus="true" href="forum.php?mod=forumdisplay&amp;fid=5&amp;filter=author&amp;orderby=dateline" target="_blank">脱壳破解新帖</a></li><li><a hidefocus="true" href="forum.php?mod=forumdisplay&amp;fid=65&amp;filter=author&amp;orderby=dateline" target="_blank">移动安全新帖</a></li><li><a hidefocus="true" href="forum.php?mod=forumdisplay&amp;fid=32&amp;filter=author&amp;orderby=dateline" target="_blank">病毒分析新帖</a></li><li><a hidefocus="true" href="forum.php?mod=forumdisplay&amp;fid=59&amp;filter=author&amp;orderby=dateline" target="_blank">软件调试新贴</a></li><li><a hidefocus="true" href="forum.php?mod=forumdisplay&amp;fid=6&amp;filter=author&amp;orderby=dateline" target="_blank">动画发布新帖</a></li><li><a hidefocus="true" href="forum.php?mod=forumdisplay&amp;fid=24&amp;filter=author&amp;orderby=dateline" target="_blank">编程语言新帖</a></li></ul><ul class="p_pop h_pop" id="mn_home_4_menu" style="display: none"><li><a hidefocus="true" href="home.php?mod=spacecp&amp;ac=invite" style="font-weight: bold;color: red" title="通过购买邀请码邀请好友注册论坛">邀请好友注册</a></li></ul><div class="p_pop h_pop" id="mn_userapp_menu" style="display: none"></div><ul class="p_pop h_pop" id="mn_Na678_menu" style="display: none"><li><a hidefocus="true" href="https://down.52pojie.cn/Tools/" target="_blank">Tools</a></li><li><a hidefocus="true" href="https://down.52pojie.cn/Logo/" target="_blank">吾爱破解Logo</a></li><li><a hidefocus="true" href="https://down.52pojie.cn/Logo/Wallpaper/" target="_blank">吾爱破解桌面壁纸</a></li><li><a hidefocus="true" href="https://down.52pojie.cn/%E5%90%BE%E7%88%B1%E7%A0%B4%E8%A7%A3%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B/" target="_blank">吾爱破解视频教程</a></li><li><a hidefocus="true" href="https://down.52pojie.cn/%E5%90%BE%E7%88%B1%E7%A0%B4%E8%A7%A3%E8%AE%BA%E5%9D%9B%E7%B2%BE%E5%8D%8E%E9%9B%86/" target="_blank">吾爱破解论坛精华集</a></li><li><a hidefocus="true" href="https://down.52pojie.cn/Tools/Debuggers/" target="_blank">吾爱破解专用版Ollydbg</a></li></ul><ul class="p_pop h_pop" id="mn_Ndb2c_menu" style="display: none"><li><a hidefocus="true" href="forum.php?mod=forumdisplay&amp;fid=15&amp;filter=typeid&amp;typeid=182&amp;orderby=dateline">处理举报贴</a></li><li><a hidefocus="true" href="forum.php?mod=forumdisplay&amp;fid=72&amp;filter=author&amp;orderby=dateline">处理站务贴</a></li><li><a hidefocus="true" href="forum.php?mod=forumdisplay&amp;fid=66&amp;filter=author&amp;orderby=dateline">处理福利贴</a></li><li><a hidefocus="true" href="forum.php?mod=forumdisplay&amp;fid=10&amp;filter=author&amp;orderby=dateline">处理水区贴</a></li><li><a hidefocus="true" href="forum-23-1.html">办公区</a></li><li><a hidefocus="true" href="forum-34-1.html">证据区</a></li></ul><div class="cl" id="mu">
+</div><div class="comiis_nav">
+<ul class="nav_ico02">
+<li><a href="forum-2-1.html" target="_blank" title="吾爱破解坛友原创作品展示，包含Windows原创工具，也有Android、iOS和Mac OS程序相应的原创程序！"><font color="green">原创发布区</font></a></li>
+<li><a href="forum-16-1.html" target="_blank" title="精品软件推荐，软件交流天地，汇集众多精彩评论，热心会员每日更新。找你所需要的，给你我分享的！">精品软件区</a></li>
+<li><a href="forum-4-1.html" target="_blank" title="加密解密相关软件发布区，包含最新最全的软件加密解密相关工具，工欲善其事必先利其器！"><font color="green">逆向资源区</font></a></li>
+<li><a href="forum-10-1.html" target="_blank" title="据说人滴祖先生活在水里">水漫金山区</a></li>
+<li><a href="forum-50-1.html" target="_blank" title="你的计算机又受到病毒的侵扰使你不知所措了？不要着急，让我们一起帮助你解决问题！"><font color="green">病毒救援区</font></a></li>
+<li><a href="forum-66-1.html" target="_blank" title="福利资讯、经验分享">福利经验区</a></li>
+</ul>
+<ul class="nav_ico03">
+<li><a href="forum-5-1.html" target="_blank" title="讨论Windows软件脱壳分析、软件逆向分析、代码逆向改造、虚拟机加密分析，也包括Mac OS等其他平台程序逆向分析一切尽在此！"><font color="blue">脱壳破解区</font></a></li>
+<li><a href="forum-65-1.html" target="_blank" title="讨论Android软件脱壳分析、Android软件逆向分析、Android系统安全分析、Android软件加密分析，当然iOS等移动程序逆向分析一切尽在此！"><font color="red"><b>移动安全区</b></font></a></li>
+<li><a href="forum-32-1.html" target="_blank" title="分析研究病毒木马技术，预防病毒木马，查杀病毒木马"><font color="blue">病毒分析区</font></a></li>
+<li><a href="forum-24-1.html" target="_blank" title="学习编程探讨编程技巧，共同分享程序源代码">编程语言区</a></li>
+<li><a href="forum-6-1.html" target="_blank" title="软件脱壳、软件汉化、软件逆向相关动画教程，学习心得分享。在这里我们可以携手并进，是我们汲取知识的伟大航路！"><font color="blue">动画发布区</font></a></li>
+<li><a href="forum-41-1.html" target="_blank" title="工欲善其事 必先利其器，从这里能找到你想要的利器">安全工具区</a></li>
+</ul>
+<ul class="nav_ico01">
+<li><a href="forum-13-1.html" target="_blank" title="开放注册信息，版块调整公告，站点信息发布，会员违规处理等"><font color="red"><b>站点公告</b></font></a></li>
+<li><a href="thread-147931-1-1.html" target="_blank" title="【吾爱破解站点导航帖】 - [让你快速融入吾爱破解大家庭]">站点导航</a></li>
+<li><a href="thread-143136-1-1.html" target="_blank" title="吾爱破解站点总版规！"><font color="blue"><b>站点总版规</b></font></a></li>
+<li><a href="forum-25-1.html" target="_blank" title="会员、版主、勋章、友情链接申请，发帖前请认真阅读本版规则！本区可以匿名发帖、跟帖相应的申请！">申请专区</a></li>
+<li><a href="forum-39-1.html" target="_blank" title="此版块只允许发布招聘和求职相关信息！本区可以匿名发帖，欢迎正规公司前来发布招聘信息！"><font color="green"><b>招聘求职</b></font></a></li>
+<li><a href="thread-309877-1-1.html" target="_blank" title=" 版规速读，主要关于如何给自己加违规和如何消违规"><b>违规怎么办</b></a></li>
+</ul>
+<ul class="nav_ico04" style="width:80px;">
+<li><a href="misc.php?mod=faq" target="_blank" title="有什么问题来这里看看吧，这里有你想知道的内容！"><font color="blue"><b>站点帮助</b></font></a></li>
+<li><a href="forum-72-1.html" target="_blank" title="如果你对我们有什么意见或者建议，请在此提出">站务处理</a></li>
+</ul>
+</div>
+<div class="cl" id="scbar">
+<form action="search.php?searchsubmit=yes" autocomplete="off" id="scbar_form" method="post" onsubmit="searchFocus($('scbar_txt'))" target="_blank">
+<input id="scbar_mod" name="mod" type="hidden" value="search"/>
+<input name="formhash" type="hidden" value="7f5fdc25"/><input name="srchtype" type="hidden" value="title"/>
+<input name="srhfid" type="hidden" value="24"/>
+<input name="srhlocality" type="hidden" value="forum::viewthread"/>
+<table cellpadding="0" cellspacing="0">
+<tr>
+<td class="scbar_icon_td"></td>
+<td class="scbar_txt_td"><input autocomplete="off" id="scbar_txt" name="srchtxt" speech="" type="text" x-webkit-speech=""/></td>
+<td class="scbar_type_td"><a class="xg1" hidefocus="true" href="javascript:;" id="scbar_type" onclick="showMenu(this.id)">搜索</a></td>
+<td class="scbar_btn_td"><button class="pn pnc" id="scbar_btn" name="searchsubmit" sc="1" type="submit" value="true"><strong class="xi2">搜索</strong></button></td>
+<td class="scbar_hot_td">
+<div id="scbar_hot">
+<strong class="xw1">热搜: </strong>
+<a class="xi2" href="search.php?mod=forum&amp;srchtxt=ctf&amp;formhash=7f5fdc25&amp;searchsubmit=true&amp;source=hotsearch" sc="1" target="_blank">ctf</a>
+<a class="xi2" href="search.php?mod=forum&amp;srchtxt=%D0%C2%CA%D6&amp;formhash=7f5fdc25&amp;searchsubmit=true&amp;source=hotsearch" sc="1" target="_blank">新手</a>
+<a class="xi2" href="search.php?mod=forum&amp;srchtxt=%CD%D1%BF%C7&amp;formhash=7f5fdc25&amp;searchsubmit=true&amp;source=hotsearch" sc="1" target="_blank">脱壳</a>
+<a class="xi2" href="search.php?mod=forum&amp;srchtxt=%BD%CC%B3%CC&amp;formhash=7f5fdc25&amp;searchsubmit=true&amp;source=hotsearch" sc="1" target="_blank">教程</a>
+<a class="xi2" href="search.php?mod=forum&amp;srchtxt=Crackme&amp;formhash=7f5fdc25&amp;searchsubmit=true&amp;source=hotsearch" sc="1" target="_blank">Crackme</a>
+</div>
+</td>
+</tr>
+</table>
+</form>
+</div>
+<ul class="p_pop" id="scbar_type_menu" style="display: none;"><li><a fid="24" href="javascript:;" rel="curforum">本版</a></li><li><a class="curtype" href="javascript:;" rel="forum">帖子</a></li><li><a href="javascript:;" rel="user">用户</a></li></ul>
+</div>
+</div>
+<style type="text/css">
+@import url('https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/styles/shCore.css?ver=3.0.90');
+@import url('https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/styles/shCoreRDark.css?ver=3.0.90');
+@import url('https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/styles/shThemeRDark.css?ver=3.0.90');
+@import url('https://static.52pojie.cn/mw_syntaxhighlighter/static/css/mw_syntaxhighlighter.css?ver=3.0.90');
+.syntaxhighlighter {max-height: 5000px !important;height:expression(this.scrollHeight > 5000 ? "5000px" : "auto");}
+.syntaxhighlighter .line {white-space: nowrap !important;}
+
+</style>
+<style>
+						a#rewards {
+							margin-right: 2px !important;
+							padding-top: 3px;
+							padding-bottom: 3px;
+							padding-left: 10px;
+							color: #333;
+							
+						}
+						
+						em.showtipex, em.showtipli {
+							position: relative;
+						}
+						em.showtipli {
+							right: calc(50% - 50px);
+						}
+						
+					</style>
+<ul class="p_pop" id="rewards_menu" style="display: none;">
+<li><a href="forum.php?mod=forumdisplay&amp;fid=8&amp;filter=specialtype&amp;specialtype=reward&amp;rewardtype=1" target="_blank" title="帮助坛友解决问题,同时争取论坛积分">挣悬赏</a></li>
+<li class="noreward"><a href="home.php?mod=space&amp;do=reward&amp;view=me&amp;flag=1" target="_blank" title="请尽快完结您的悬赏">未完结</a></li>
+<li><a href="thread-2083678-1-1.html" target="_blank" title="可按撤销规则回帖申请撤销">撤销悬赏</a></li>
+</ul>
+<div class="wp" id="wp">
+<style id="diy_style" type="text/css"></style>
+<div class="area" id="diynavtop"></div>
+<div class="bm cl" id="pt">
+<div class="z">
+<a class="nvhm" href="./" title="首页">吾爱破解 - 52pojie.cn</a><em>»</em><a href="/">网站</a> <em>›</em> <a href="forum.php?gid=1">【 软件安全 】</a> <em>›</em> <a href="forum-24-1.html">『编程语言区』</a> <em>›</em> <a href="thread-2083831-1-1.html">教学用操作系统内核代码</a>
+</div>
+</div>
+<style>
+					.dropbtn{background-color:#0099cb;color:white;padding:2px 6px;font-size:12px;border:none;cursor:pointer;}
+					.dropdown{position:relative;display:inline-block;}
+					.dropdown-content{display:none;position:absolute;background-color:#f9f9f9;min-width:80px;box-shadow:0px 8px 16px 0px rgba(0,0,0,0.2);}
+					.dropdown-content a{color:black;padding:10px;text-decoration:none;display:block;text-align:center;}
+					.dropdown-content a:hover{background-color:#d0d1f2;}
+					.dropdown:hover .dropdown-content{display:block;}
+					.dropdown:hover .dropbtn{background-color:#1b64d7;}
+				</style>
+<style id="diy_style" type="text/css"></style>
+<div class="wp">
+<div class="area" id="diy1"></div>
+</div>
+<div class="wp cl" id="ct">
+<div class="pgs mbm cl" id="pgt">
+<div class="pgt"></div>
+<span class="y pgb" id="visitedforums" onmouseover="$('visitedforums').id = 'visitedforumstmp';this.id = 'visitedforums';showMenu({'ctrlid':this.id,'pos':'34'})"><a href="forum-24-1.html">返回列表</a></span>
+<a href="javascript:;" id="newspecial" onclick="showWindow('newthread', 'forum.php?mod=post&amp;action=newthread&amp;fid=24')" onmouseover="$('newspecial').id = 'newspecialtmp';this.id = 'newspecial';showMenu({'ctrlid':this.id})" title="发新帖"><img alt="发新帖" src="../common_images/pn_post.png"/></a><a href="javascript:;" id="post_reply" onclick="showWindow('reply', 'forum.php?mod=post&amp;action=reply&amp;fid=24&amp;tid=2083831')" title="回复"><img alt="回复" src="../common_images/pn_reply.png"/></a>
+</div>
+<ul class="p_pop" id="newspecial_menu" style="display: none">
+<li><a href="forum.php?mod=post&amp;action=newthread&amp;fid=24">发表帖子</a></li><li class="poll"><a href="forum.php?mod=post&amp;action=newthread&amp;fid=24&amp;special=1">发起投票</a></li></ul>
+<div class="pl bm" id="postlist">
+<table cellpadding="0" cellspacing="0">
+<tr>
+<td class="pls ptn pbn">
+<div class="hm ptn">
+<span class="xg1">查看:</span> <span class="xi1">700</span><span class="pipe">|</span><span class="xg1">回复:</span> <span class="xi1">2</span>
+</div>
+</td>
+<td class="plc ptm pbn vwthd">
+<div class="y">
+<a href="forum.php?mod=redirect&amp;goto=nextoldset&amp;tid=2083831" title="上一主题"><img alt="上一主题" class="vm" src="../common_images/thread-prev.png"/></a>
+<a href="forum.php?mod=redirect&amp;goto=nextnewset&amp;tid=2083831" title="下一主题"><img alt="下一主题" class="vm" src="../common_images/thread-next.png"/></a>
+</div>
+<span class="xg1 side_btn">
+<a class="btn_s_close" href="javascript:;" onclick="setcookie('close_leftinfo', 1);location.reload();" title="收起左侧"><img alt="收起左侧" class="vm" src="../common_images/control_l.png"/></a>
+</span>
+<h1 class="ts">
+<a href="forum.php?mod=forumdisplay&amp;fid=24&amp;filter=typeid&amp;typeid=299">[<font color="blue">其他原创</font>]</a>
+<span id="thread_subject">教学用操作系统内核代码</span>
+</h1>
+<span class="xg1">
+<a href="thread-2083831-1-1.html" onclick="return copyThreadUrl(this)">[复制链接]</a>
+</span>
+</td>
+</tr>
+</table>
+<table cellpadding="0" cellspacing="0" class="ad">
+<tr>
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</table><div id="post_54582576"><table cellpadding="0" cellspacing="0" class="plhin res-postfirst" id="pid54582576" summary="pid54582576">
+<tr>
+<td class="pls" rowspan="2">
+<div class="pls cl favatar" id="favatar54582576">
+<div class="pi">
+<div class="authi"><a class="xw1" href="home.php?mod=space&amp;uid=1208203" rel="nofollow" target="_blank">xfgzs</a>
+</div>
+</div>
+<div class="p_pop blk bui card_gender_0" id="userinfo54582576" style="display: none; margin-top: -11px;">
+<div class="m z">
+<div id="userinfo54582576_ma"></div>
+</div>
+<div class="i y">
+<div>
+<strong><a class="xi2" href="home.php?mod=space&amp;uid=1208203" target="_blank">xfgzs</a></strong>
+<em>当前离线</em>
+</div><dt>好友</dt><dd><a class="xi2" href="home.php?mod=space&amp;uid=1208203&amp;do=friend&amp;view=me&amp;from=space" target="_blank">0</a></dd>
+<dt>阅读权限</dt><dd>10</dd>
+<span style="color:Blue;"><dt>听众</dt><dd><a class="xi2" href="home.php?mod=follow&amp;do=follower&amp;uid=1208203" target="_blank">0</a></dd>
+<dt>最后登录</dt><dd>2026-1-9</dd>
+<div class="imicn">
+<a href="home.php?mod=space&amp;uid=1208203&amp;do=profile" target="_blank" title="查看详细资料"><img alt="查看详细资料" src="../common_images/userinfo.gif"/></a>
+</div>
+<div id="avatarfeed"><span id="threadsortswait"></span></div>
+</span></div>
+</div>
+<div>
+<div class="avatar" onmouseover="showauthor(this, 'userinfo54582576')"><a class="avtm" href="home.php?mod=space&amp;uid=1208203" rel="nofollow" target="_blank"><img src="../common_images/noavatar_middle.gif"/></a></div>
+</div>
+<div class="tns xg2"><table cellpadding="0" cellspacing="0"><th><p><a class="xi2" href="home.php?mod=space&amp;uid=1208203&amp;do=thread&amp;type=thread&amp;view=me&amp;from=space">5</a></p>主题</th><th><p><a class="xi2" href="home.php?mod=space&amp;uid=1208203&amp;do=thread&amp;type=reply&amp;view=me&amp;from=space">5</a></p>回帖</th><td><p><a class="xi2" href="home.php?mod=space&amp;uid=1208203&amp;do=profile">29</a></p>积分</td></table></div>
+<p class="side-group"><em><a href="home.php?mod=spacecp&amp;ac=usergroup&amp;gid=10" target="_blank">锋芒初露</a></em></p>
+<p class="side-star"><span id="g_up54582576" onmouseover="showMenu({'ctrlid':this.id, 'pos':'12!'});"><img alt="Rank: 1" src="../common_images/star_level1.gif"/></span></p>
+<div class="tip tip_4" id="g_up54582576_menu" style="display: none;"><div class="tip_horn"></div><div class="tip_c">锋芒初露, 积分 29, 距离下一级还需 171 积分</div></div>
+<dl class="pil cl credit-list">
+<span amount="0" class="cr-digest">
+<dt>精华</dt>
+<dd>0</dd>
+</span>
+<span amount="1 点" class="cr-ext1">
+<dt>威望</dt>
+<dd>1 点</dd>
+</span>
+<span amount="7 点" class="cr-ext6">
+<dt>热心值</dt>
+<dd>7 点</dd>
+</span>
+<span amount="0 点" class="cr-ext4">
+<dt>悬赏值</dt>
+<dd>0 点</dd>
+</span>
+<span class="cr-follower">
+<dt>听众</dt>
+<dd><a class="xi2" href="home.php?mod=follow&amp;do=follower&amp;uid=1208203" target="_blank">0</a></dd>
+</span>
+<span amount="0 点" class="cr-ext3">
+<dt>贡献值</dt>
+<dd>0 点</dd>
+</span>
+<span class="cr-ext2">
+<dt>吾爱币</dt>
+<dd>372 CB</dd>
+</span>
+<span amount="0 次" class="cr-ext8">
+<dt>违规</dt>
+<dd>0 次</dd>
+</span>
+<dt>注册时间</dt>
+<dd>2019-9-8</dd>
+</dl>
+<ul class="xl xl2 o cl">
+<li class="addflw">
+<a class="xi2" href="home.php?mod=spacecp&amp;ac=follow&amp;op=add&amp;hash=7f5fdc25&amp;fuid=1208203" id="followmod_1208203" onclick="showWindow('followmod', this.href, 'get', 0);" title="收听TA">收听TA</a>
+</li>
+</ul>
+<nav class="toc toc-side relative z-1 transition--300 absolute" id="markdown_toc_54582576"></nav></div>
+</td>
+<td class="plc">
+<div class="pi">
+<div class="y" id="fj">
+<label class="z">电梯直达</label>
+<input class="px p_fre z" onkeydown="if(event.keyCode==13) {window.location=$('fj_btn').href;return false;}" onkeyup="$('fj_btn').href='forum.php?mod=redirect&amp;ptid=2083831&amp;authorid=0&amp;postno='+this.value" size="2" title="跳转到指定楼层" type="text"/>
+<a class="z" href="javascript:;" id="fj_btn" title="跳转到指定楼层"><img alt="跳转到指定楼层" class="vm" src="../common_images/fj_btn.png"/></a>
+</div>
+<strong>
+<a href="thread-2083831-1-1.html" id="postnum54582576" onclick="setCopy(this.href, '帖子地址复制成功');return false;">
+<font color="red"><b>楼主</b></font></a>
+</strong>
+<div class="pti">
+<div class="pdbt">
+</div>
+<div class="authi">
+<img class="authicn vm" id="authicon54582576" src="../common_images/online_member.gif"/>
+<span class="res-author"><a class="xi2" href="home.php?mod=space&amp;uid=1208203" target="_blank">xfgzs</a>
+</span><em id="authorposton54582576"><span class="poston">发表于</span> 2026-1-2 16:28</em>
+<span class="pipe">|</span>
+<a href="forum.php?mod=viewthread&amp;tid=2083831&amp;page=1&amp;authorid=1208203" rel="nofollow">只看该作者</a>
+<span class="none"><img alt="回帖奖励" class="vm" src="../common_images/arw_r.gif"/></span>
+<span class="pipe show">|</span><a class="show" href="forum.php?mod=viewthread&amp;tid=2083831&amp;extra=page%3D1&amp;ordertype=1" rel="nofollow">倒序浏览</a>
+</div>
+</div>
+</div><div class="pct"><style type="text/css">.pcb{margin-right:0}</style><div class="pcb">
+<div class="t_fsz">
+<table cellpadding="0" cellspacing="0"><tr><td class="t_f" id="postmessage_54582576">
+<i class="pstatus"> 本帖最后由 xfgzs 于 2026-1-2 18:30 编辑 </i><br/>
+<br/>
+这个内核包含了必要的引导程序、错误处理和保护模式设置。请注意，运行自制操作系统有风险，请在<a class="relatedlink" href="https://www.52pojie.cn/thread-661779-1-1.html" target="_blank">虚拟机</a>或专用测试硬件上测试。<br/>
+<br/>
+<font size="5"><strong>项目结构</strong></font><br/>
+<div style="padding:15px 0;"><div style="font-size:12px;">[Plain Text] <em class="viewsource" style="cursor:pointer;font-size:12px;color:#369 !important;">纯文本查看</em> <em class="copycode" style="cursor:pointer;font-size:12px;color:#369 !important;">复制代码</em></div><pre class="brush: text; gutter: true">
+
+simple_os/
+├── Makefile              # 构建配置
+├── boot.asm             # 引导加载程序
+├── kernel.c             # 内核主代码
+├── kernel.asm           # 内核汇编辅助
+├── linker.ld           # 链接脚本
+├── drivers.c           # 设备驱动
+├── include/            # 头文件目录
+│   ├── kernel.h
+│   ├── ports.h
+│   ├── vga.h
+│   └── memory.h
+└── isr.asm            # 中断处理</pre></div><br/>
+<br/>
+<font size="5"><strong>1. Makefile - 构建配置文</strong></font><br/>
+<div style="padding:15px 0;"><div style="font-size:12px;">[] <em class="viewsource" style="cursor:pointer;font-size:12px;color:#369 !important;">纯文本查看</em> <em class="copycode" style="cursor:pointer;font-size:12px;color:#369 !important;">复制代码</em></div><pre class="brush: makefile; gutter: true">
+
+# 构建配置
+CC = i686-elf-gcc
+AS = nasm
+LD = i686-elf-ld
+OBJCOPY = i686-elf-objcopy
+
+# 编译选项
+CFLAGS = -ffreestanding -O2 -Wall -Wextra -I./include -std=gnu99 -m32 -masm=intel
+ASFLAGS = -f elf32
+LDFLAGS = -m elf_i386 -T linker.ld -nostdlib
+
+# 输出文件
+KERNEL = kernel.bin
+BOOTLOADER = boot.bin
+OS_IMAGE = os.img
+
+# 源文件
+BOOT_SRC = boot.asm
+KERNEL_SRC = kernel.c kernel.asm drivers.c isr.asm
+HEADERS = include/kernel.h include/ports.h include/vga.h include/memory.h
+
+# 目标文件
+OBJS = kernel.o kernel_asm.o drivers.o isr.o
+
+# 默认目标
+all: $(OS_IMAGE)
+
+# 创建磁盘镜像
+$(OS_IMAGE): $(BOOTLOADER) $(KERNEL)
+        dd if=/dev/zero of=$(OS_IMAGE) bs=512 count=2880
+        dd if=$(BOOTLOADER) of=$(OS_IMAGE) conv=notrunc
+        dd if=$(KERNEL) of=$(OS_IMAGE) seek=1 conv=notrunc
+
+# 引导加载程序
+$(BOOTLOADER): $(BOOT_SRC)
+        $(AS) -f bin $&lt; -o $@
+
+# 内核
+$(KERNEL): $(OBJS)
+        $(LD) $(LDFLAGS) -o $@ $^
+
+# C源文件编译
+%.o: %.c $(HEADERS)
+        $(CC) $(CFLAGS) -c $&lt; -o $@
+
+# 汇编源文件编译
+%.o: %.asm
+        $(AS) $(ASFLAGS) $&lt; -o $@
+
+# 清理
+clean:
+        rm -f *.o *.bin *.img
+
+# 在QEMU中运行
+run: $(OS_IMAGE)
+        qemu-system-i386 -drive format=raw,file=$(OS_IMAGE) -serial stdio
+
+# 在QEMU中调试
+debug: $(OS_IMAGE)
+        qemu-system-i386 -drive format=raw,file=$(OS_IMAGE) -serial stdio -d int -no-reboot -no-shutdown
+
+.PHONY: all clean run debug</pre></div><br/>
+<br/>
+<font size="5"><strong>2. 引导加载程序 (boot.asm)</strong></font><br/>
+<br/>
+<div style="padding:15px 0;"><div style="font-size:12px;">[] <em class="viewsource" style="cursor:pointer;font-size:12px;color:#369 !important;">纯文本查看</em> <em class="copycode" style="cursor:pointer;font-size:12px;color:#369 !important;">复制代码</em></div><pre class="brush: nasm; gutter: true">
+
+; 引导加载程序 - 支持真实硬件
+[org 0x7C00]
+[bits 16]
+
+; 引导扇区标志
+BOOT_DRIVE db 0
+KERNEL_OFFSET equ 0x1000
+STACK_OFFSET equ 0x9000
+
+start:
+    ; 保存引导驱动器号
+    mov [BOOT_DRIVE], dl
+    
+    ; 设置栈
+    mov bp, STACK_OFFSET
+    mov sp, bp
+    
+    ; 清屏
+    mov ah, 0x00
+    mov al, 0x03  ; 文本模式 80x25
+    int 0x10
+    
+    ; 显示启动消息
+    mov si, MSG_BOOT
+    call print_string
+    
+    ; 加载内核
+    call load_kernel
+    
+    ; 检查扩展读取支持
+    call check_int13_extensions
+    
+    ; 启用A20线
+    call enable_a20
+    
+    ; 加载GDT
+    call load_gdt
+    
+    ; 切换到保护模式
+    call switch_to_protected_mode
+    
+    ; 永远不会执行到这里
+    jmp $
+
+; ==================== 16位函数 ====================
+
+; 打印字符串 (以0结尾)
+print_string:
+    pusha
+    mov ah, 0x0E
+.print_loop:
+    lodsb
+    cmp al, 0
+    je .done
+    int 0x10
+    jmp .print_loop
+.done:
+    popa
+    ret
+
+; 检查INT13扩展功能
+check_int13_extensions:
+    pusha
+    mov ah, 0x41
+    mov bx, 0x55AA
+    mov dl, [BOOT_DRIVE]
+    int 0x13
+    jc .no_extensions
+    cmp bx, 0xAA55
+    jne .no_extensions
+    
+    ; 扩展功能可用
+    mov si, MSG_EXT_OK
+    call print_string
+    popa
+    ret
+    
+.no_extensions:
+    mov si, MSG_EXT_FAIL
+    call print_string
+    jmp $  ; 停止执行
+
+; 启用A20地址线
+enable_a20:
+    pusha
+    
+    ; 方法1: 通过键盘控制器
+    call .check_a20
+    jc .method1_done
+    
+    ; 方法2: BIOS中断
+    mov ax, 0x2401
+    int 0x15
+    
+    call .check_a20
+    jc .method2_done
+    
+    ; 方法3: 快速A20门
+    in al, 0x92
+    test al, 2
+    jnz .method3_done
+    or al, 2
+    and al, 0xFE
+    out 0x92, al
+    
+.method3_done:
+.method2_done:
+.method1_done:
+    mov si, MSG_A20_OK
+    call print_string
+    popa
+    ret
+
+.check_a20:
+    push es
+    push di
+    push si
+    
+    ; 设置段寄存器检查A20
+    xor ax, ax
+    mov es, ax
+    mov di, 0x0500
+    
+    mov ax, 0xFFFF
+    mov ds, ax
+    mov si, 0x0510
+    
+    ; 保存原始值
+    mov al, [es:di]
+    push ax
+    mov al, [ds:si]
+    push ax
+    
+    ; 写入测试值
+    mov byte [es:di], 0x00
+    mov byte [ds:si], 0xFF
+    
+    ; 检查是否相同
+    mov al, [es:di]
+    cmp al, [ds:si]
+    
+    ; 恢复原始值
+    pop ax
+    mov [ds:si], al
+    pop ax
+    mov [es:di], al
+    
+    pop si
+    pop di
+    pop es
+    
+    je .a20_disabled  ; 如果相同，A20禁用
+    clc  ; 清除进位标志表示成功
+    ret
+.a20_disabled:
+    stc  ; 设置进位标志表示失败
+    ret
+
+; 加载内核到内存
+load_kernel:
+    pusha
+    mov si, MSG_LOAD_KERNEL
+    call print_string
+    
+    ; 设置目标地址
+    mov bx, KERNEL_OFFSET
+    mov es, bx
+    xor bx, bx
+    
+    ; 尝试使用扩展读取
+    mov ah, 0x42
+    mov dl, [BOOT_DRIVE]
+    mov si, DAP
+    int 0x13
+    jnc .success
+    
+    ; 扩展读取失败，使用传统方法
+    mov ah, 0x02
+    mov al, 64       ; 读取64个扇区（32KB）
+    mov ch, 0        ; 柱面0
+    mov cl, 2        ; 从扇区2开始
+    mov dh, 0        ; 磁头0
+    mov dl, [BOOT_DRIVE]
+    int 0x13
+    jnc .success
+    
+    ; 读取失败
+    mov si, MSG_DISK_ERROR
+    call print_string
+    jmp $
+    
+.success:
+    mov si, MSG_KERNEL_LOADED
+    call print_string
+    popa
+    ret
+
+; 磁盘地址包 (用于扩展读取)
+DAP:
+    db 0x10      ; 包大小
+    db 0         ; 未使用
+    dw 64        ; 扇区数
+    dd 0         ; 目标偏移
+    dd KERNEL_OFFSET &lt;&lt; 4 ; 段:偏移 -&gt; 线性地址
+    dq 1         ; 起始LBA扇区（扇区1是引导扇区）
+
+; 加载GDT
+load_gdt:
+    cli
+    lgdt [gdt_descriptor]
+    ret
+
+; 切换到保护模式
+switch_to_protected_mode:
+    cli
+    mov eax, cr0
+    or eax, 0x1
+    mov cr0, eax
+    
+    ; 远跳转到32位代码段
+    jmp CODE_SEG:protected_mode_start
+
+; ==================== 32位代码 ====================
+[bits 32]
+
+protected_mode_start:
+    ; 设置数据段
+    mov ax, DATA_SEG
+    mov ds, ax
+    mov es, ax
+    mov fs, ax
+    mov gs, ax
+    mov ss, ax
+    
+    ; 设置栈指针
+    mov esp, 0x90000
+    
+    ; 跳转到内核
+    jmp KERNEL_OFFSET
+
+; ==================== GDT ====================
+gdt_start:
+    ; 空描述符
+    dq 0
+    
+    ; 代码段描述符 (0x08)
+    dw 0xFFFF       ; 段界限 (0-15)
+    dw 0x0000       ; 基地址 (0-15)
+    db 0x00         ; 基地址 (16-23)
+    db 10011010b    ; P=1, DPL=00, S=1, Type=1010 (可执行, 可读, 非一致性)
+    db 11001111b    ; G=1, D/B=1, L=0, AVL=0, 段界限 (16-19)
+    db 0x00         ; 基地址 (24-31)
+    
+    ; 数据段描述符 (0x10)
+    dw 0xFFFF       ; 段界限
+    dw 0x0000       ; 基地址
+    db 0x00         ; 基地址
+    db 10010010b    ; P=1, DPL=00, S=1, Type=0010 (可读可写, 向上扩展)
+    db 11001111b    ; G=1, D/B=1, L=0, AVL=0
+    db 0x00         ; 基地址
+gdt_end:
+
+gdt_descriptor:
+    dw gdt_end - gdt_start - 1  ; GDT大小
+    dd gdt_start                ; GDT地址
+
+CODE_SEG equ gdt_start + 8
+DATA_SEG equ gdt_start + 16
+
+; ==================== 消息 ====================
+MSG_BOOT db "Simple OS Bootloader v1.0", 0x0D, 0x0A, 0
+MSG_LOAD_KERNEL db "Loading kernel...", 0x0D, 0x0A, 0
+MSG_KERNEL_LOADED db "Kernel loaded successfully", 0x0D, 0x0A, 0
+MSG_EXT_OK db "INT13 extensions available", 0x0D, 0x0A, 0
+MSG_EXT_FAIL db "INT13 extensions not available", 0x0D, 0x0A, 0
+MSG_A20_OK db "A20 line enabled", 0x0D, 0x0A, 0
+MSG_DISK_ERROR db "Disk read error!", 0x0D, 0x0A, 0
+
+; ==================== 引导扇区填充 ====================
+times 510-($-$$) db 0
+dw 0xAA55</pre></div><br/>
+<br/>
+<font size="5"><strong>3. 内核头文件 (include/kernel.h)</strong></font><br/>
+<br/>
+<div style="padding:15px 0;"><div style="font-size:12px;">[C] <em class="viewsource" style="cursor:pointer;font-size:12px;color:#369 !important;">纯文本查看</em> <em class="copycode" style="cursor:pointer;font-size:12px;color:#369 !important;">复制代码</em></div><pre class="brush: c; gutter: true">
+
+#ifndef KERNEL_H
+#define KERNEL_H
+
+#include &lt;stdint.h&gt;
+#include &lt;stddef.h&gt;
+#include &lt;stdbool.h&gt;
+
+// 内核版本
+#define KERNEL_VERSION "1.0.0"
+#define KERNEL_NAME "SimpleOS"
+
+// 内存布局
+#define KERNEL_START 0x00100000
+#define KERNEL_END   0x00200000
+#define MEMORY_START 0x00200000
+#define MEMORY_END   0x01000000
+
+// 错误码
+typedef enum {
+    ERR_SUCCESS = 0,
+    ERR_MEMORY_ALLOC_FAILED,
+    ERR_MEMORY_FREE_FAILED,
+    ERR_DISK_READ_FAILED,
+    ERR_DISK_WRITE_FAILED,
+    ERR_DEVICE_NOT_FOUND,
+    ERR_INVALID_PARAMETER,
+    ERR_NOT_IMPLEMENTED,
+    ERR_HARDWARE_FAILURE,
+    ERR_OUT_OF_MEMORY,
+    ERR_PERMISSION_DENIED
+} ErrorCode;
+
+// 内存管理结构
+typedef struct {
+    uint32_t total_pages;
+    uint32_t free_pages;
+    uint32_t used_pages;
+    uint32_t* bitmap;
+    uint32_t bitmap_size;
+} MemoryManager;
+
+// 进程控制块（简化版）
+typedef struct {
+    uint32_t pid;
+    uint32_t esp;
+    uint32_t ebp;
+    uint32_t eip;
+    uint32_t state;  // 0=就绪, 1=运行, 2=阻塞
+} Process;
+
+// 系统信息
+typedef struct {
+    char kernel_name[32];
+    char kernel_version[16];
+    uint32_t total_memory;
+    uint32_t free_memory;
+    uint32_t cpu_speed_mhz;
+    uint8_t cpu_vendor[13];
+    bool has_fpu;
+    bool has_mmx;
+    bool has_sse;
+} SystemInfo;
+
+// 函数声明
+void kernel_main();
+void panic(const char* message);
+void halt();
+void reboot();
+
+// 内存管理
+void* kmalloc(size_t size);
+void kfree(void* ptr);
+void* krealloc(void* ptr, size_t size);
+void* kcalloc(size_t num, size_t size);
+void memory_dump();
+
+// 系统信息
+SystemInfo* get_system_info();
+void print_system_info();
+
+#endif // KERNEL_H</pre></div><br/>
+<br/>
+<font size="5"><strong>4. 端口操作头文件 (include/ports.h)</strong></font><br/>
+<br/>
+<div style="padding:15px 0;"><div style="font-size:12px;">[C] <em class="viewsource" style="cursor:pointer;font-size:12px;color:#369 !important;">纯文本查看</em> <em class="copycode" style="cursor:pointer;font-size:12px;color:#369 !important;">复制代码</em></div><pre class="brush: c; gutter: true">
+
+#ifndef PORTS_H
+#define PORTS_H
+
+#include &lt;stdint.h&gt;
+
+// 端口读写函数
+static inline void outb(uint16_t port, uint8_t value) {
+    asm volatile ("outb %0, %1" : : "a"(value), "Nd"(port));
+}
+
+static inline uint8_t inb(uint16_t port) {
+    uint8_t ret;
+    asm volatile ("inb %1, %0" : "=a"(ret) : "Nd"(port));
+    return ret;
+}
+
+static inline void outw(uint16_t port, uint16_t value) {
+    asm volatile ("outw %0, %1" : : "a"(value), "Nd"(port));
+}
+
+static inline uint16_t inw(uint16_t port) {
+    uint16_t ret;
+    asm volatile ("inw %1, %0" : "=a"(ret) : "Nd"(port));
+    return ret;
+}
+
+static inline void outl(uint16_t port, uint32_t value) {
+    asm volatile ("outl %0, %1" : : "a"(value), "Nd"(port));
+}
+
+static inline uint32_t inl(uint16_t port) {
+    uint32_t ret;
+    asm volatile ("inl %1, %0" : "=a"(ret) : "Nd"(port));
+    return ret;
+}
+
+// 端口等待（用于慢速设备）
+static inline void io_wait(void) {
+    outb(0x80, 0);
+}
+
+// 常用端口定义
+#define PORT_PIC1_CMD     0x20
+#define PORT_PIC1_DATA    0x21
+#define PORT_PIC2_CMD     0xA0
+#define PORT_PIC2_DATA    0xA1
+#define PORT_PIT_CH0      0x40
+#define PORT_PIT_CH1      0x41
+#define PORT_PIT_CH2      0x42
+#define PORT_PIT_CMD      0x43
+#define PORT_PS2_DATA     0x60
+#define PORT_PS2_STATUS   0x64
+#define PORT_PS2_CMD      0x64
+#define PORT_VGA_CTRL     0x3D4
+#define PORT_VGA_DATA     0x3D5
+#define PORT_SERIAL1      0x3F8
+#define PORT_SERIAL2      0x2F8
+
+#endif // PORTS_H</pre></div><br/>
+<br/>
+<font size="5"><strong>5. VGA驱动头文件 (include/vga.h)</strong></font><br/>
+<br/>
+<div style="padding:15px 0;"><div style="font-size:12px;">[C] <em class="viewsource" style="cursor:pointer;font-size:12px;color:#369 !important;">纯文本查看</em> <em class="copycode" style="cursor:pointer;font-size:12px;color:#369 !important;">复制代码</em></div><pre class="brush: c; gutter: true">
+
+#ifndef VGA_H
+#define VGA_H
+
+#include &lt;stdint.h&gt;
+
+#define VGA_WIDTH  80
+#define VGA_HEIGHT 25
+
+// VGA颜色
+enum vga_color {
+    VGA_COLOR_BLACK = 0,
+    VGA_COLOR_BLUE = 1,
+    VGA_COLOR_GREEN = 2,
+    VGA_COLOR_CYAN = 3,
+    VGA_COLOR_RED = 4,
+    VGA_COLOR_MAGENTA = 5,
+    VGA_COLOR_BROWN = 6,
+    VGA_COLOR_LIGHT_GREY = 7,
+    VGA_COLOR_DARK_GREY = 8,
+    VGA_COLOR_LIGHT_BLUE = 9,
+    VGA_COLOR_LIGHT_GREEN = 10,
+    VGA_COLOR_LIGHT_CYAN = 11,
+    VGA_COLOR_LIGHT_RED = 12,
+    VGA_COLOR_LIGHT_MAGENTA = 13,
+    VGA_COLOR_LIGHT_BROWN = 14,
+    VGA_COLOR_WHITE = 15,
+};
+
+// VGA字符属性
+static inline uint8_t vga_entry_color(enum vga_color fg, enum vga_color bg) {
+    return fg | bg &lt;&lt; 4;
+}
+
+static inline uint16_t vga_entry(unsigned char uc, uint8_t color) {
+    return (uint16_t) uc | (uint16_t) color &lt;&lt; 8;
+}
+
+// VGA函数
+void vga_initialize(void);
+void vga_clear(void);
+void vga_setcolor(uint8_t color);
+void vga_putentryat(char c, uint8_t color, size_t x, size_t y);
+void vga_putchar(char c);
+void vga_write(const char* data, size_t size);
+void vga_writestring(const char* data);
+void vga_setcursor(size_t x, size_t y);
+void vga_scroll(void);
+void vga_printf(const char* format, ...);
+
+// 全局VGA缓冲区
+extern uint16_t* vga_buffer;
+
+#endif // VGA_H</pre></div><br/>
+<br/>
+<font size="5"><strong>6. 内存管理头文件 (include/memory.h)</strong></font><br/>
+<br/>
+<div style="padding:15px 0;"><div style="font-size:12px;">[C] <em class="viewsource" style="cursor:pointer;font-size:12px;color:#369 !important;">纯文本查看</em> <em class="copycode" style="cursor:pointer;font-size:12px;color:#369 !important;">复制代码</em></div><pre class="brush: c; gutter: true">
+
+#ifndef MEMORY_H
+#define MEMORY_H
+
+#include &lt;stdint.h&gt;
+#include &lt;stddef.h&gt;
+#include &lt;stdbool.h&gt;
+
+// 内存分页
+#define PAGE_SIZE 4096
+#define PAGE_DIRECTORY_INDEX(x) ((x) &gt;&gt; 22)
+#define PAGE_TABLE_INDEX(x) (((x) &gt;&gt; 12) &amp; 0x3FF)
+#define PAGE_GET_PHYSICAL_ADDRESS(x) ((x) &amp; ~0xFFF)
+
+// 内存区域类型
+typedef enum {
+    MEMORY_FREE = 0,
+    MEMORY_USED,
+    MEMORY_RESERVED,
+    MEMORY_ACPI_RECLAIMABLE,
+    MEMORY_ACPI_NVS,
+    MEMORY_BAD
+} MemoryType;
+
+// 内存区域描述符
+typedef struct {
+    uint32_t base_low;
+    uint32_t base_high;
+    uint32_t length_low;
+    uint32_t length_high;
+    uint32_t type;
+    uint32_t acpi_extended;
+} __attribute__((packed)) MemoryRegion;
+
+// 页目录项
+typedef struct {
+    uint32_t present : 1;
+    uint32_t rw : 1;
+    uint32_t user : 1;
+    uint32_t write_through : 1;
+    uint32_t cache_disable : 1;
+    uint32_t accessed : 1;
+    uint32_t dirty : 1;
+    uint32_t page_size : 1;
+    uint32_t global : 1;
+    uint32_t available : 3;
+    uint32_t page_table_base : 20;
+} __attribute__((packed)) PageDirectoryEntry;
+
+// 页表项
+typedef struct {
+    uint32_t present : 1;
+    uint32_t rw : 1;
+    uint32_t user : 1;
+    uint32_t write_through : 1;
+    uint32_t cache_disable : 1;
+    uint32_t accessed : 1;
+    uint32_t dirty : 1;
+    uint32_t pat : 1;
+    uint32_t global : 1;
+    uint32_t available : 3;
+    uint32_t page_base : 20;
+} __attribute__((packed)) PageTableEntry;
+
+// 内存统计
+typedef struct {
+    uint32_t total_memory;
+    uint32_t free_memory;
+    uint32_t used_memory;
+    uint32_t reserved_memory;
+    uint32_t kernel_memory;
+    uint32_t page_frame_count;
+    uint32_t page_frame_free;
+} MemoryStats;
+
+// 函数声明
+void memory_initialize(uint32_t memory_size);
+void* memory_allocate(size_t size);
+void memory_free(void* ptr);
+MemoryStats* memory_get_stats(void);
+void memory_dump_regions(void);
+bool memory_region_is_free(uint32_t base, uint32_t length);
+uint32_t memory_get_total(void);
+uint32_t memory_get_free(void);
+
+#endif // MEMORY_H</pre></div><br/>
+<br/>
+<font size="5"><strong>7. 内核主文件 (kernel.c)</strong></font><br/>
+<br/>
+<div style="padding:15px 0;"><div style="font-size:12px;">[C] <em class="viewsource" style="cursor:pointer;font-size:12px;color:#369 !important;">纯文本查看</em> <em class="copycode" style="cursor:pointer;font-size:12px;color:#369 !important;">复制代码</em></div><pre class="brush: c; gutter: true">
+
+#include "kernel.h"
+#include "vga.h"
+#include "ports.h"
+#include "memory.h"
+#include &lt;stdarg.h&gt;
+
+// 全局变量
+uint16_t* vga_buffer = (uint16_t*)0xB8000;
+size_t vga_row = 0;
+size_t vga_column = 0;
+uint8_t vga_color = 0;
+MemoryManager mem_manager;
+SystemInfo sys_info;
+
+// 内核入口点
+void kernel_main() {
+    // 初始化VGA
+    vga_initialize();
+    vga_writestring("SimpleOS Kernel v");
+    vga_writestring(KERNEL_VERSION);
+    vga_writestring("\n");
+    vga_writestring("==================\n\n");
+    
+    // 检测CPU
+    detect_cpu();
+    
+    // 检测内存
+    detect_memory();
+    
+    // 初始化内存管理
+    memory_initialize(sys_info.total_memory);
+    
+    // 初始化中断
+    init_interrupts();
+    
+    // 初始化设备
+    init_devices();
+    
+    // 显示系统信息
+    print_system_info();
+    
+    // 显示欢迎消息
+    vga_writestring("\nSystem initialized successfully!\n");
+    vga_writestring("Type 'help' for available commands\n");
+    vga_writestring("&gt; ");
+    
+    // 主循环
+    kernel_loop();
+}
+
+// 内核主循环
+void kernel_loop() {
+    char input_buffer[256];
+    size_t input_index = 0;
+    
+    while (1) {
+        // 检查键盘输入
+        if (keyboard_available()) {
+            char c = keyboard_read();
+            
+            if (c == '\n' || c == '\r') {
+                // 执行命令
+                input_buffer[input_index] = '\0';
+                execute_command(input_buffer);
+                
+                // 重置输入缓冲区
+                input_index = 0;
+                vga_writestring("\n&gt; ");
+            } else if (c == '\b' || c == 0x7F) {
+                // 退格
+                if (input_index &gt; 0) {
+                    input_index--;
+                    vga_putchar('\b');
+                    vga_putchar(' ');
+                    vga_putchar('\b');
+                }
+            } else if (c &gt;= 32 &amp;&amp; c &lt;= 126) {
+                // 可打印字符
+                if (input_index &lt; sizeof(input_buffer) - 1) {
+                    input_buffer[input_index++] = c;
+                    vga_putchar(c);
+                }
+            }
+        }
+        
+        // 处理其他任务
+        process_tasks();
+    }
+}
+
+// 执行命令
+void execute_command(const char* command) {
+    if (strcmp(command, "help") == 0) {
+        vga_writestring("\nAvailable commands:\n");
+        vga_writestring("  help     - Show this help\n");
+        vga_writestring("  info     - Show system information\n");
+        vga_writestring("  mem      - Show memory information\n");
+        vga_writestring("  clear    - Clear screen\n");
+        vga_writestring("  reboot   - Reboot system\n");
+        vga_writestring("  test     - Run hardware tests\n");
+    } else if (strcmp(command, "info") == 0) {
+        print_system_info();
+    } else if (strcmp(command, "mem") == 0) {
+        memory_dump();
+    } else if (strcmp(command, "clear") == 0) {
+        vga_clear();
+        vga_row = 0;
+        vga_column = 0;
+    } else if (strcmp(command, "reboot") == 0) {
+        reboot();
+    } else if (strcmp(command, "test") == 0) {
+        run_hardware_tests();
+    } else if (strcmp(command, "") == 0) {
+        // 空命令，什么都不做
+    } else {
+        vga_writestring("\nUnknown command: ");
+        vga_writestring(command);
+        vga_writestring("\nType 'help' for available commands\n");
+    }
+}
+
+// 检测CPU
+void detect_cpu() {
+    // 获取CPU厂商字符串
+    uint32_t eax, ebx, ecx, edx;
+    
+    asm volatile ("cpuid" 
+                  : "=a"(eax), "=b"(ebx), "=c"(ecx), "=d"(edx)
+                  : "a"(0));
+    
+    // 保存厂商字符串
+    *(uint32_t*)&amp;sys_info.cpu_vendor[0] = ebx;
+    *(uint32_t*)&amp;sys_info.cpu_vendor[4] = edx;
+    *(uint32_t*)&amp;sys_info.cpu_vendor[8] = ecx;
+    sys_info.cpu_vendor[12] = '\0';
+    
+    // 获取CPU特性
+    asm volatile ("cpuid"
+                  : "=a"(eax), "=d"(edx)
+                  : "a"(1));
+    
+    sys_info.has_fpu = (edx &gt;&gt; 0) &amp; 1;
+    sys_info.has_mmx = (edx &gt;&gt; 23) &amp; 1;
+    sys_info.has_sse = (edx &gt;&gt; 25) &amp; 1;
+    
+    // 估计CPU速度（简化版本）
+    sys_info.cpu_speed_mhz = 1000; // 假设1GHz
+}
+
+// 检测内存
+void detect_memory() {
+    uint32_t mem_kb = 0;
+    
+    // 使用BIOS调用获取内存大小
+    asm volatile (
+        "int $0x12\n"
+        : "=a"(mem_kb)
+        : "a"(0xE801)
+        : "ebx", "ecx", "edx"
+    );
+    
+    sys_info.total_memory = mem_kb * 1024;
+    sys_info.free_memory = sys_info.total_memory;
+    
+    // 设置内核信息
+    strcpy(sys_info.kernel_name, KERNEL_NAME);
+    strcpy(sys_info.kernel_version, KERNEL_VERSION);
+}
+
+// 初始化中断
+void init_interrupts() {
+    // 重新映射PIC
+    outb(PORT_PIC1_CMD, 0x11);  // ICW1
+    outb(PORT_PIC1_DATA, 0x20); // ICW2: 主PIC中断向量偏移
+    outb(PORT_PIC1_DATA, 0x04); // ICW3: 连接到从PIC的IRQ2
+    outb(PORT_PIC1_DATA, 0x01); // ICW4
+    
+    outb(PORT_PIC2_CMD, 0x11);  // ICW1
+    outb(PORT_PIC2_DATA, 0x28); // ICW2: 从PIC中断向量偏移
+    outb(PORT_PIC2_DATA, 0x02); // ICW3: 连接到主PIC的IRQ2
+    outb(PORT_PIC2_DATA, 0x01); // ICW4
+    
+    // 屏蔽所有中断（除了键盘）
+    outb(PORT_PIC1_DATA, 0xFD); // 允许IRQ1（键盘）
+    outb(PORT_PIC2_DATA, 0xFF); // 屏蔽所有从PIC中断
+    
+    // 加载IDT
+    load_idt();
+    
+    // 启用中断
+    asm volatile ("sti");
+    
+    vga_writestring("Interrupts initialized\n");
+}
+
+// 初始化设备
+void init_devices() {
+    // 初始化定时器
+    init_timer();
+    
+    // 初始化键盘
+    init_keyboard();
+    
+    // 初始化硬盘
+    init_disk();
+    
+    // 初始化声卡
+    init_sound();
+    
+    vga_writestring("Devices initialized\n");
+}
+
+// 运行硬件测试
+void run_hardware_tests() {
+    vga_writestring("\nRunning hardware tests...\n");
+    
+    // 测试内存
+    vga_writestring("Testing memory... ");
+    if (test_memory()) {
+        vga_writestring("PASS\n");
+    } else {
+        vga_writestring("FAIL\n");
+    }
+    
+    // 测试键盘
+    vga_writestring("Testing keyboard... ");
+    if (test_keyboard()) {
+        vga_writestring("PASS\n");
+    } else {
+        vga_writestring("FAIL\n");
+    }
+    
+    // 测试硬盘
+    vga_writestring("Testing disk... ");
+    if (test_disk()) {
+        vga_writestring("PASS\n");
+    } else {
+        vga_writestring("FAIL\n");
+    }
+    
+    vga_writestring("Hardware tests completed\n");
+}
+
+// 打印系统信息
+void print_system_info() {
+    vga_writestring("\n=== System Information ===\n");
+    
+    vga_writestring("Kernel: ");
+    vga_writestring(sys_info.kernel_name);
+    vga_writestring(" ");
+    vga_writestring(sys_info.kernel_version);
+    vga_writestring("\n");
+    
+    vga_writestring("CPU: ");
+    vga_writestring(sys_info.cpu_vendor);
+    vga_writestring("\n");
+    
+    vga_writestring("CPU Features: ");
+    if (sys_info.has_fpu) vga_writestring("FPU ");
+    if (sys_info.has_mmx) vga_writestring("MMX ");
+    if (sys_info.has_sse) vga_writestring("SSE ");
+    vga_writestring("\n");
+    
+    vga_writestring("CPU Speed: ");
+    vga_printf("%d MHz", sys_info.cpu_speed_mhz);
+    vga_writestring("\n");
+    
+    vga_writestring("Total Memory: ");
+    vga_printf("%d MB", sys_info.total_memory / (1024 * 1024));
+    vga_writestring("\n");
+    
+    vga_writestring("Free Memory: ");
+    vga_printf("%d MB", sys_info.free_memory / (1024 * 1024));
+    vga_writestring("\n");
+}
+
+// 格式化输出
+void vga_printf(const char* format, ...) {
+    va_list args;
+    va_start(args, format);
+    
+    char buffer[32];
+    char* str;
+    int num;
+    
+    while (*format) {
+        if (*format == '%') {
+            format++;
+            switch (*format) {
+                case 's':
+                    str = va_arg(args, char*);
+                    vga_writestring(str);
+                    break;
+                case 'd':
+                case 'i':
+                    num = va_arg(args, int);
+                    itoa(num, buffer, 10);
+                    vga_writestring(buffer);
+                    break;
+                case 'x':
+                case 'X':
+                    num = va_arg(args, int);
+                    itoa(num, buffer, 16);
+                    vga_writestring(buffer);
+                    break;
+                case '%':
+                    vga_putchar('%');
+                    break;
+                default:
+                    vga_putchar('%');
+                    vga_putchar(*format);
+                    break;
+            }
+        } else {
+            vga_putchar(*format);
+        }
+        format++;
+    }
+    
+    va_end(args);
+}
+
+// 整数转字符串
+void itoa(int num, char* str, int base) {
+    int i = 0;
+    int is_negative = 0;
+    
+    // 处理0
+    if (num == 0) {
+        str[i++] = '0';
+        str[i] = '\0';
+        return;
+    }
+    
+    // 处理负数（仅十进制）
+    if (num &lt; 0 &amp;&amp; base == 10) {
+        is_negative = 1;
+        num = -num;
+    }
+    
+    // 转换数字
+    while (num != 0) {
+        int rem = num % base;
+        str[i++] = (rem &gt; 9) ? (rem - 10) + 'a' : rem + '0';
+        num = num / base;
+    }
+    
+    // 添加负号
+    if (is_negative) {
+        str[i++] = '-';
+    }
+    
+    // 反转字符串
+    int start = 0;
+    int end = i - 1;
+    while (start &lt; end) {
+        char temp = str[start];
+        str[start] = str[end];
+        str[end] = temp;
+        start++;
+        end--;
+    }
+    
+    str[i] = '\0';
+}
+
+// 字符串比较
+int strcmp(const char* s1, const char* s2) {
+    while (*s1 &amp;&amp; (*s1 == *s2)) {
+        s1++;
+        s2++;
+    }
+    return *(const unsigned char*)s1 - *(const unsigned char*)s2;
+}
+
+// 字符串复制
+char* strcpy(char* dest, const char* src) {
+    char* ptr = dest;
+    while (*src) {
+        *dest++ = *src++;
+    }
+    *dest = '\0';
+    return ptr;
+}
+
+// 恐慌函数（内核错误）
+void panic(const char* message) {
+    vga_setcolor(vga_entry_color(VGA_COLOR_WHITE, VGA_COLOR_RED));
+    vga_writestring("\n\nKERNEL PANIC: ");
+    vga_writestring(message);
+    vga_writestring("\nSystem halted.\n");
+    
+    // 禁用中断
+    asm volatile ("cli");
+    
+    // 无限循环
+    while (1) {
+        asm volatile ("hlt");
+    }
+}
+
+// 重启系统
+void reboot() {
+    vga_writestring("\nRebooting system...\n");
+    
+    // 通过键盘控制器重启
+    uint8_t temp;
+    do {
+        temp = inb(PORT_PS2_STATUS);
+        if ((temp &amp; 0x02) == 0) {
+            break;
+        }
+    } while (1);
+    
+    outb(PORT_PS2_CMD, 0xFE);
+    
+    // 如果失败，尝试其他方法
+    asm volatile ("jmp 0xFFFF:0x0000");
+}
+
+// 停机
+void halt() {
+    vga_writestring("\nSystem halted.\n");
+    asm volatile ("cli");
+    while (1) {
+        asm volatile ("hlt");
+    }
+}</pre></div><br/>
+<br/>
+<font size="5"><strong>8. 内核汇编辅助文件 (kernel.asm)</strong></font><br/>
+<br/>
+<div style="padding:15px 0;"><div style="font-size:12px;">[] <em class="viewsource" style="cursor:pointer;font-size:12px;color:#369 !important;">纯文本查看</em> <em class="copycode" style="cursor:pointer;font-size:12px;color:#369 !important;">复制代码</em></div><pre class="brush: nasm; gutter: true">
+
+[bits 32]
+[global _start]
+[extern kernel_main]
+[extern load_idt]
+
+; 内核入口点
+_start:
+    ; 设置栈指针
+    mov esp, 0x90000
+    
+    ; 调用内核主函数
+    call kernel_main
+    
+    ; 如果内核主函数返回，停机
+    cli
+    hlt
+    jmp $
+
+; 全局描述符表
+[global gdt_flush]
+[extern gdt_ptr]
+
+gdt_flush:
+    lgdt [gdt_ptr]
+    mov ax, 0x10      ; 数据段选择子
+    mov ds, ax
+    mov es, ax
+    mov fs, ax
+    mov gs, ax
+    mov ss, ax
+    jmp 0x08:.flush   ; 代码段选择子
+.flush:
+    ret
+
+; 中断描述符表
+[global idt_flush]
+[extern idt_ptr]
+
+idt_flush:
+    lidt [idt_ptr]
+    ret
+
+; 启用中断
+[global enable_interrupts]
+enable_interrupts:
+    sti
+    ret
+
+; 禁用中断
+[global disable_interrupts]
+disable_interrupts:
+    cli
+    ret</pre></div><br/>
+<br/>
+<font size="5"><strong>9. 设备驱动文件 (drivers.c)</strong></font><br/>
+<br/>
+<div style="padding:15px 0;"><div style="font-size:12px;">[C] <em class="viewsource" style="cursor:pointer;font-size:12px;color:#369 !important;">纯文本查看</em> <em class="copycode" style="cursor:pointer;font-size:12px;color:#369 !important;">复制代码</em></div><pre class="brush: c; gutter: true">
+
+#include "kernel.h"
+#include "ports.h"
+#include &lt;stdbool.h&gt;
+
+// 定时器
+static volatile uint32_t timer_ticks = 0;
+
+// 键盘缓冲区
+#define KEYBOARD_BUFFER_SIZE 256
+static char keyboard_buffer[KEYBOARD_BUFFER_SIZE];
+static volatile size_t keyboard_read_pos = 0;
+static volatile size_t keyboard_write_pos = 0;
+
+// 初始化定时器
+void init_timer() {
+    // 设置PIT频率为100Hz
+    uint32_t divisor = 1193180 / 100;
+    
+    outb(PORT_PIT_CMD, 0x36);
+    outb(PORT_PIT_CH0, divisor &amp; 0xFF);
+    outb(PORT_PIT_CH0, divisor &gt;&gt; 8);
+}
+
+// 定时器中断处理
+void timer_handler() {
+    timer_ticks++;
+    
+    // 每秒钟更新一次光标闪烁
+    if (timer_ticks % 100 == 0) {
+        // 切换光标显示状态
+        static bool cursor_visible = true;
+        uint16_t cursor_pos = vga_row * VGA_WIDTH + vga_column;
+        
+        if (cursor_visible) {
+            // 隐藏光标
+            outb(PORT_VGA_CTRL, 0x0A);
+            outb(PORT_VGA_DATA, 0x20);
+        } else {
+            // 显示光标
+            outb(PORT_VGA_CTRL, 0x0A);
+            outb(PORT_VGA_DATA, 0x0E);
+            outb(PORT_VGA_CTRL, 0x0B);
+            outb(PORT_VGA_DATA, 0x0F);
+            
+            outb(PORT_VGA_CTRL, 0x0E);
+            outb(PORT_VGA_DATA, (cursor_pos &gt;&gt; 8) &amp; 0xFF);
+            outb(PORT_VGA_CTRL, 0x0F);
+            outb(PORT_VGA_DATA, cursor_pos &amp; 0xFF);
+        }
+        cursor_visible = !cursor_visible;
+    }
+    
+    // 发送EOI
+    outb(PORT_PIC1_CMD, 0x20);
+}
+
+// 获取系统滴答数
+uint32_t get_timer_ticks() {
+    return timer_ticks;
+}
+
+// 延时函数（忙等待）
+void delay_ms(uint32_t ms) {
+    uint32_t target_ticks = timer_ticks + (ms / 10);
+    while (timer_ticks &lt; target_ticks) {
+        asm volatile ("pause");
+    }
+}
+
+// 初始化键盘
+void init_keyboard() {
+    // 清空键盘缓冲区
+    keyboard_read_pos = 0;
+    keyboard_write_pos = 0;
+    
+    // 启用键盘中断
+    outb(PORT_PIC1_DATA, inb(PORT_PIC1_DATA) &amp; 0xFD);
+}
+
+// 键盘中断处理
+void keyboard_handler() {
+    uint8_t scancode = inb(PORT_PS2_DATA);
+    
+    // 仅处理按键按下事件
+    if (scancode &lt; 0x80) {
+        char key = 0;
+        
+        // 扫描码转换表
+        static const char scancode_table[] = {
+            0, 0, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 0,
+            0, 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\n',
+            0, 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', '\'', '`',
+            0, '\\', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', 0,
+            '*', 0, ' '
+        };
+        
+        if (scancode &lt; sizeof(scancode_table)) {
+            key = scancode_table[scancode];
+        }
+        
+        // 特殊键处理
+        switch (scancode) {
+            case 0x1C:  // 回车键
+                key = '\n';
+                break;
+            case 0x0E:  // 退格键
+                key = '\b';
+                break;
+            case 0x0F:  // Tab键
+                key = '\t';
+                break;
+            case 0x39:  // 空格键
+                key = ' ';
+                break;
+        }
+        
+        if (key != 0) {
+            // 添加到键盘缓冲区
+            size_t next_pos = (keyboard_write_pos + 1) % KEYBOARD_BUFFER_SIZE;
+            if (next_pos != keyboard_read_pos) {
+                keyboard_buffer[keyboard_write_pos] = key;
+                keyboard_write_pos = next_pos;
+            }
+        }
+    }
+    
+    // 发送EOI
+    outb(PORT_PIC1_CMD, 0x20);
+}
+
+// 检查键盘是否有可用数据
+bool keyboard_available() {
+    return keyboard_read_pos != keyboard_write_pos;
+}
+
+// 读取键盘数据
+char keyboard_read() {
+    while (!keyboard_available()) {
+        asm volatile ("pause");
+    }
+    
+    char key = keyboard_buffer[keyboard_read_pos];
+    keyboard_read_pos = (keyboard_read_pos + 1) % KEYBOARD_BUFFER_SIZE;
+    return key;
+}
+
+// 初始化硬盘
+void init_disk() {
+    // 等待硬盘就绪
+    uint8_t status;
+    int timeout = 10000;
+    
+    while (timeout-- &gt; 0) {
+        status = inb(0x1F7);
+        if ((status &amp; 0xC0) == 0x40) {
+            break;
+        }
+        io_wait();
+    }
+    
+    if (timeout &lt;= 0) {
+        panic("Hard disk initialization timeout");
+    }
+}
+
+// 读取硬盘扇区
+int disk_read_sectors(uint32_t lba, uint8_t sectors, void* buffer) {
+    // 等待硬盘就绪
+    int timeout = 10000;
+    while (timeout-- &gt; 0) {
+        if ((inb(0x1F7) &amp; 0xC0) == 0x40) {
+            break;
+        }
+        io_wait();
+    }
+    
+    if (timeout &lt;= 0) {
+        return ERR_DISK_READ_FAILED;
+    }
+    
+    // 发送读取命令
+    outb(0x1F1, 0x00);          // 错误寄存器
+    outb(0x1F2, sectors);       // 扇区数
+    outb(0x1F3, lba &amp; 0xFF);    // LBA低字节
+    outb(0x1F4, (lba &gt;&gt; 8) &amp; 0xFF);
+    outb(0x1F5, (lba &gt;&gt; 16) &amp; 0xFF);
+    outb(0x1F6, 0xE0 | ((lba &gt;&gt; 24) &amp; 0x0F)); // 驱动和LBA高字节
+    outb(0x1F7, 0x20);          // 读取扇区命令
+    
+    // 读取数据
+    uint16_t* ptr = (uint16_t*)buffer;
+    for (int i = 0; i &lt; sectors; i++) {
+        // 等待数据就绪
+        timeout = 10000;
+        while (timeout-- &gt; 0) {
+            uint8_t status = inb(0x1F7);
+            if (status &amp; 0x08) { // DRQ位
+                break;
+            }
+            if (status &amp; 0x01) { // 错误位
+                return ERR_DISK_READ_FAILED;
+            }
+            io_wait();
+        }
+        
+        if (timeout &lt;= 0) {
+            return ERR_DISK_READ_FAILED;
+        }
+        
+        // 读取256个字（512字节）
+        for (int j = 0; j &lt; 256; j++) {
+            *ptr++ = inw(0x1F0);
+        }
+        
+        // 等待下一个扇区
+        io_wait();
+    }
+    
+    return ERR_SUCCESS;
+}
+
+// 初始化声卡（PC扬声器）
+void init_sound() {
+    // 初始化8254定时器
+    outb(PORT_PIT_CMD, 0xB6); // 通道2，方波，二进制
+    
+    // 默认关闭扬声器
+    outb(0x61, inb(0x61) &amp; 0xFC);
+}
+
+// 播放声音
+void play_sound(uint32_t frequency) {
+    if (frequency == 0) {
+        // 关闭声音
+        outb(0x61, inb(0x61) &amp; 0xFC);
+        return;
+    }
+    
+    // 设置频率
+    uint32_t divisor = 1193180 / frequency;
+    outb(PORT_PIT_CH2, divisor &amp; 0xFF);
+    outb(PORT_PIT_CH2, divisor &gt;&gt; 8);
+    
+    // 打开扬声器
+    uint8_t tmp = inb(0x61);
+    if ((tmp &amp; 3) != 3) {
+        outb(0x61, tmp | 3);
+    }
+}
+
+// 停止声音
+void stop_sound() {
+    play_sound(0);
+}
+
+// 蜂鸣声（用于提示）
+void beep(uint32_t frequency, uint32_t duration_ms) {
+    play_sound(frequency);
+    delay_ms(duration_ms);
+    stop_sound();
+}
+
+// 测试内存
+bool test_memory() {
+    // 简单内存测试：写入和读取
+    uint32_t* test_ptr = (uint32_t*)0x01000000; // 测试16MB处
+    uint32_t test_value = 0x12345678;
+    
+    // 写入
+    *test_ptr = test_value;
+    
+    // 读取并验证
+    if (*test_ptr != test_value) {
+        return false;
+    }
+    
+    // 测试内存范围
+    test_ptr = (uint32_t*)0x02000000; // 测试32MB处
+    test_value = 0x87654321;
+    
+    *test_ptr = test_value;
+    return (*test_ptr == test_value);
+}
+
+// 测试键盘
+bool test_keyboard() {
+    // 简单的键盘存在性测试
+    // 发送自检命令
+    outb(PORT_PS2_CMD, 0xAA);
+    delay_ms(100);
+    
+    // 读取响应
+    uint8_t response = inb(PORT_PS2_DATA);
+    return (response == 0x55); // 0x55表示自检通过
+}
+
+// 测试硬盘
+bool test_disk() {
+    // 简单的硬盘存在性测试
+    // 发送识别命令
+    outb(0x1F6, 0xA0); // 主设备
+    
+    outb(0x1F7, 0xEC); // IDENTIFY命令
+    
+    // 等待响应
+    int timeout = 10000;
+    while (timeout-- &gt; 0) {
+        uint8_t status = inb(0x1F7);
+        if (status == 0) {
+            continue; // 没有设备
+        }
+        if (status &amp; 0x01) {
+            return false; // 错误
+        }
+        if (status &amp; 0x08) {
+            return true; // 设备就绪
+        }
+        io_wait();
+    }
+    
+    return false;
+}
+
+// 处理后台任务
+void process_tasks() {
+    static uint32_t last_task_time = 0;
+    
+    // 每100ms执行一次后台任务
+    if (timer_ticks - last_task_time &gt;= 10) {
+        last_task_time = timer_ticks;
+        
+        // 这里可以添加后台任务
+        // 例如：内存整理、设备状态检查等
+    }
+}</pre></div><br/>
+<br/>
+<font size="5"><strong>10. 中断处理文件 (isr.asm)</strong></font><br/>
+<br/>
+<div style="padding:15px 0;"><div style="font-size:12px;">[] <em class="viewsource" style="cursor:pointer;font-size:12px;color:#369 !important;">纯文本查看</em> <em class="copycode" style="cursor:pointer;font-size:12px;color:#369 !important;">复制代码</em></div><pre class="brush: nams; gutter: true">
+
+[bits 32]
+[global isr_install]
+[global irq_install]
+[extern isr_handler]
+[extern irq_handler]
+
+; 中断服务例程
+%macro ISR_NOERRCODE 1
+[global isr%1]
+isr%1:
+    cli
+    push byte 0      ; 错误码占位符
+    push byte %1     ; 中断号
+    jmp isr_common
+%endmacro
+
+%macro ISR_ERRCODE 1
+[global isr%1]
+isr%1:
+    cli
+    push byte %1     ; 中断号
+    jmp isr_common
+%endmacro
+
+; IRQ宏
+%macro IRQ 2
+[global irq%1]
+irq%1:
+    cli
+    push byte 0
+    push byte %2
+    jmp irq_common
+%endmacro
+
+; 中断向量
+ISR_NOERRCODE 0   ; 除零错误
+ISR_NOERRCODE 1   ; 调试异常
+ISR_NOERRCODE 2   ; 不可屏蔽中断
+ISR_NOERRCODE 3   ; 断点
+ISR_NOERRCODE 4   ; 溢出
+ISR_NOERRCODE 5   ; 越界
+ISR_NOERRCODE 6   ; 无效操作码
+ISR_NOERRCODE 7   ; 设备不可用
+ISR_ERRCODE    8   ; 双重错误
+ISR_NOERRCODE 9   ; 协处理器段溢出
+ISR_ERRCODE    10  ; 无效TSS
+ISR_ERRCODE    11  ; 段不存在
+ISR_ERRCODE    12  ; 栈错误
+ISR_ERRCODE    13  ; 一般保护错误
+ISR_ERRCODE    14  ; 页错误
+ISR_NOERRCODE 15  ; 保留
+ISR_NOERRCODE 16  ; 浮点错误
+ISR_NOERRCODE 17  ; 对齐检查
+ISR_NOERRCODE 18  ; 机器检查
+ISR_NOERRCODE 19  ; SIMD浮点异常
+ISR_NOERRCODE 20  ; 虚拟化异常
+ISR_NOERRCODE 21  ; 控制保护异常
+ISR_NOERRCODE 22  ; 保留
+ISR_NOERRCODE 23  ; 保留
+ISR_NOERRCODE 24  ; 保留
+ISR_NOERRCODE 25  ; 保留
+ISR_NOERRCODE 26  ; 保留
+ISR_NOERRCODE 27  ; 保留
+ISR_NOERRCODE 28  ; 保留
+ISR_NOERRCODE 29  ; 保留
+ISR_NOERRCODE 30  ; 安全异常
+ISR_NOERRCODE 31  ; 保留
+
+; IRQ
+IRQ 0, 32   ; 定时器
+IRQ 1, 33   ; 键盘
+IRQ 2, 34   ; 级联
+IRQ 3, 35   ; COM2
+IRQ 4, 36   ; COM1
+IRQ 5, 37   ; LPT2
+IRQ 6, 38   ; 软盘
+IRQ 7, 39   ; LPT1
+IRQ 8, 40   ; 实时钟
+IRQ 9, 41   ; 保留
+IRQ 10, 42  ; 保留
+IRQ 11, 43  ; 保留
+IRQ 12, 44  ; PS/2鼠标
+IRQ 13, 45  ; 协处理器
+IRQ 14, 46  ; 主硬盘
+IRQ 15, 47  ; 从硬盘
+
+; 公共中断处理
+isr_common:
+    ; 保存寄存器
+    pusha
+    
+    ; 保存段寄存器
+    push ds
+    push es
+    push fs
+    push gs
+    
+    ; 加载内核数据段
+    mov ax, 0x10
+    mov ds, ax
+    mov es, ax
+    mov fs, ax
+    mov gs, ax
+    
+    ; 调用C处理函数
+    push esp
+    call isr_handler
+    add esp, 4
+    
+    ; 恢复段寄存器
+    pop gs
+    pop fs
+    pop es
+    pop ds
+    
+    ; 恢复寄存器
+    popa
+    
+    ; 清理栈（错误码和中断号）
+    add esp, 8
+    
+    ; 启用中断并返回
+    sti
+    iret
+
+irq_common:
+    ; 保存寄存器
+    pusha
+    
+    ; 保存段寄存器
+    push ds
+    push es
+    push fs
+    push gs
+    
+    ; 加载内核数据段
+    mov ax, 0x10
+    mov ds, ax
+    mov es, ax
+    mov fs, ax
+    mov gs, ax
+    
+    ; 调用C处理函数
+    push esp
+    call irq_handler
+    add esp, 4
+    
+    ; 恢复段寄存器
+    pop gs
+    pop fs
+    pop es
+    pop ds
+    
+    ; 恢复寄存器
+    popa
+    
+    ; 清理栈
+    add esp, 8
+    
+    ; 启用中断并返回
+    sti
+    iret
+
+; 安装ISR
+isr_install:
+    ; 这里可以添加ISR安装代码
+    ret
+
+; 安装IRQ
+irq_install:
+    ; 这里可以添加IRQ安装代码
+    ret
+
+; 加载IDT
+[global load_idt]
+load_idt:
+    ; 创建IDT
+    call create_idt
+    
+    ; 加载IDT
+    lidt [idt_descriptor]
+    ret
+
+; 创建IDT
+create_idt:
+    ; IDT创建代码
+    ret
+
+; IDT描述符
+idt_descriptor:
+    dw 0
+    dd 0</pre></div><br/>
+<br/>
+<font size="5"><strong>11. 链接脚本 (linker.ld)</strong></font><br/>
+<br/>
+<div style="padding:15px 0;"><div style="font-size:12px;">[] <em class="viewsource" style="cursor:pointer;font-size:12px;color:#369 !important;">纯文本查看</em> <em class="copycode" style="cursor:pointer;font-size:12px;color:#369 !important;">复制代码</em></div><pre class="brush: ld; gutter: true">
+
+/* 内核链接脚本 */
+OUTPUT_FORMAT("elf32-i386")
+ENTRY(_start)
+
+SECTIONS {
+    /* 内核加载地址 */
+    . = 0x00100000;
+    
+    /* 文本段 */
+    .text : {
+        *(.text)
+        *(.rodata*)
+    }
+    
+    /* 数据段 */
+    .data : {
+        *(.data)
+    }
+    
+    /* BSS段 */
+    .bss : {
+        *(COMMON)
+        *(.bss)
+    }
+    
+    /* 内核结束符号 */
+    end = .;
+}</pre></div><br/>
+<br/>
+<font size="5"><strong>12. 构建和运行说明</strong></font><br/>
+<font size="4"><strong>环境要求<br/>
+</strong></font><font size="3">    1、交叉编译器：i686-elf-gcc<br/>
+</font><font size="3">    2、NASM汇编器<br/>
+</font><font size="3">    3、QEMU模拟器（用于测试）<br/>
+<br/>
+</font><font size="3"><strong>安装依赖（Ubuntu/Debian）</strong></font><br/>
+<div style="padding:15px 0;"><div style="font-size:12px;">[Bash shell] <em class="viewsource" style="cursor:pointer;font-size:12px;color:#369 !important;">纯文本查看</em> <em class="copycode" style="cursor:pointer;font-size:12px;color:#369 !important;">复制代码</em></div><pre class="brush: bash; gutter: true">
+
+sudo apt-get update
+sudo apt-get install -y nasm qemu-system-x86 build-essential
+sudo apt-get install -y gcc-multilib g++-multilib
+
+# 安装交叉编译器
+wget https://github.com/lordmilko/i686-elf-tools/releases/download/7.1.0/i686-elf-tools-linux.zip
+unzip i686-elf-tools-linux.zip -d /opt
+export PATH=$PATH:/opt/i686-elf/bin</pre></div><br/>
+<br/>
+<font size="3"><strong>构建步骤</strong></font><br/>
+<div style="padding:15px 0;"><div style="font-size:12px;">[] <em class="viewsource" style="cursor:pointer;font-size:12px;color:#369 !important;">纯文本查看</em> <em class="copycode" style="cursor:pointer;font-size:12px;color:#369 !important;">复制代码</em></div><pre #f1115"="" class="brush: &lt;font color=">[font=Menlo, Monaco, Consolas, &amp;quot;][size=12px]bash[/size][/font][/backcolor][/color],true]
+
+# 1. 克隆代码并进入目录
+git clone https://github.com/yourusername/simple_os.git
+cd simple_os
+
+# 2. 设置交叉编译器路径（如果不在默认路径）
+export PATH=$PATH:/path/to/i686-elf/bin
+
+# 3. 构建
+make
+
+# 4. 在QEMU中运行
+make run
+
+# 5. 调试（可选）
+make debug</pre></div><br/>
+<br/>
+<font size="3"><strong>在真实硬件上运行</strong></font><br/>
+<strong><font color="#ff0000">警告：</font></strong>在真实硬件上运行自制操作系统可能导致数据丢失或硬件损坏。<br/>
+<br/>
+1、创建一个可启动的USB驱动器：<br/>
+<div style="padding:15px 0;"><div style="font-size:12px;">[Bash shell] <em class="viewsource" style="cursor:pointer;font-size:12px;color:#369 !important;">纯文本查看</em> <em class="copycode" style="cursor:pointer;font-size:12px;color:#369 !important;">复制代码</em></div><pre class="brush: bash; gutter: true">sudo dd if=os.img of=/dev/sdX bs=4M status=progress</pre></div><br/>
+<br/>
+2、在BIOS中启用从USB启动<br/>
+<br/>
+3、确保系统有足够的内存（至少16MB）<br/>
+<br/>
+<font size="3"><strong>安全特性</strong></font><br/>
+<br/>
+1、内存保护：通过分页机制防止非法内存访问<br/>
+<br/>
+2、中断隔离：正确处理硬件中断<br/>
+<br/>
+3、错误处理：详细的错误代码和恢复机制<br/>
+<br/>
+4、硬件验证：启动时检查硬件兼容性<br/>
+<font size="3"><strong>已知限制</strong></font><br/>
+<br/>
+1、仅支持32位x86架构<br/>
+<br/>
+2、不支持多处理器<br/>
+<br/>
+3、文件系统支持有限<br/>
+<br/>
+4、不支持网络<br/>
+这个操作系统包含了完整的错误处理、硬件检测和保护措施，可以在真实硬件上运行。它展示了操作系统与CPU、内存、硬盘、显卡、声卡等硬件交互的基本原理，非常适合教学使用。</td></tr></table>
+</div>
+<div class="cm" id="comment_54582576">
+</div>
+<h3 class="psth xs1"><span class="icon_ring vm"></span>免费评分</h3>
+<dl class="rate" id="ratelog_54582576">
+<dd style="margin:0">
+<div id="post_rate_54582576"></div>
+<table class="ratl">
+<tr>
+<th class="xw1" width="120"><a href="forum.php?mod=misc&amp;action=viewratings&amp;tid=2083831&amp;pid=54582576" onclick="showWindow('viewratings', this.href)" title="查看全部评分"> 参与人数 <span class="xi1">4</span></a></th><th class="xw1" width="80">威望 <i><span class="xi1">+1</span></i></th>
+<th class="xw1" width="80">吾爱币 <i><span class="xi1">+24</span></i></th>
+<th class="xw1" width="80">热心值 <i><span class="xi1">+3</span></i></th>
+<th>
+<a class="y xi2 op" href="javascript:;" onclick="toggleRatelogCollapse('ratelog_54582576', this);">收起</a>
+<i class="txt_h">理由</i>
+</th>
+</tr>
+<tbody class="ratl_l"><tr id="rate_54582576_212618">
+<td>
+<a href="home.php?mod=space&amp;uid=212618" target="_blank"><img onerror="this.onerror=null;this.src='https://avatar.52pojie.cn/images/noavatar_small.gif'" src="../common_images/18_avatar_small.jpg"/></a> <a href="home.php?mod=space&amp;uid=212618" target="_blank">苏紫方璇</a>
+</td><td class="xi1"> + 1</td>
+<td class="xi1"> + 20</td>
+<td class="xi1"> + 1</td>
+<td class="xg1">感谢发布原创作品，吾爱破解论坛因你更精彩！</td>
+</tr>
+<tr id="rate_54582576_1240702">
+<td>
+<a href="home.php?mod=space&amp;uid=1240702" target="_blank"><img onerror="this.onerror=null;this.src='https://avatar.52pojie.cn/images/noavatar_small.gif'" src="../common_images/02_avatar_small.jpg"/></a> <a href="home.php?mod=space&amp;uid=1240702" target="_blank">ciker_li</a>
+</td><td class="xg1"></td>
+<td class="xi1"> + 2</td>
+<td class="xi1"> + 1</td>
+<td class="xg1">谢谢@Thanks！</td>
+</tr>
+<tr id="rate_54582576_2276262">
+<td>
+<a href="home.php?mod=space&amp;uid=2276262" target="_blank"><img onerror="this.onerror=null;this.src='https://avatar.52pojie.cn/images/noavatar_small.gif'" src="../common_images/62_avatar_small.jpg"/></a> <a href="home.php?mod=space&amp;uid=2276262" target="_blank">wenmingziyou</a>
+</td><td class="xg1"></td>
+<td class="xi1"> + 1</td>
+<td class="xi1"> + 1</td>
+<td class="xg1">我很赞同！</td>
+</tr>
+<tr id="rate_54582576_610526">
+<td>
+<a href="home.php?mod=space&amp;uid=610526" target="_blank"><img onerror="this.onerror=null;this.src='https://avatar.52pojie.cn/images/noavatar_small.gif'" src="../common_images/26_avatar_small.jpg"/></a> <a href="home.php?mod=space&amp;uid=610526" target="_blank">hailongxl</a>
+</td><td class="xg1"></td>
+<td class="xi1"> + 1</td>
+<td class="xg1"></td>
+<td class="xg1">热心回复！</td>
+</tr>
+</tbody>
+</table>
+<p class="ratc">
+<a class="xi2" href="forum.php?mod=misc&amp;action=viewratings&amp;tid=2083831&amp;pid=54582576" onclick="showWindow('viewratings', this.href)" title="查看全部评分">查看全部评分</a>
+</p>
+</dd>
+</dl>
+</div>
+</div>
+</td></tr>
+<tr><td class="plc plm">
+<div class="mtw mbm hm cl" id="p_btn">
+<a href="home.php?mod=spacecp&amp;ac=favorite&amp;type=thread&amp;id=2083831&amp;formhash=7f5fdc25" id="k_favorite" onclick="showWindow(this.id, this.href, 'get', 0);" onmouseover="this.title = $('favoritenumber').innerHTML + ' 人收藏'" rel="nofollow" title="收藏本帖"><i><img alt="收藏" src="../common_images/fav.gif"/>收藏<span id="favoritenumber">27</span></i></a>
+<a href="javascript:;" id="ak_rate" onclick="showWindow('rate', 'forum.php?mod=misc&amp;action=rate&amp;tid=2083831&amp;pid=54582576', 'get', -1);return false;" title="评分表立场"><i><img alt="免费评分" src="../common_images/agree.gif"/>免费评分</i></a>
+<a href="forum.php?mod=collection&amp;action=edit&amp;op=addthread&amp;tid=2083831" id="k_collect" onclick="showWindow(this.id, this.href);return false;" onmouseover="this.title = $('collectionnumber').innerHTML + ' 人淘帖'" rel="nofollow" title="淘好帖进专辑"><i><img alt="分享" src="../common_images/collection.png"/>淘帖<span id="collectionnumber" style="display:none">0</span></i></a>
+<a href="forum.php?mod=misc&amp;action=recommend&amp;do=add&amp;tid=2083831&amp;hash=7f5fdc25" id="recommend_add" onclick="ajaxmenu(this, 3000, 1, 0, '43', 'recommendupdate(1)');return false;" onmouseover="this.title = $('recommendv_add').innerHTML + ' 人有用'" rel="nofollow" title="顶一下"><i><img alt="有用" src="../common_images/rec_add.gif"/>有用<span id="recommendv_add" style="display:none">0</span></i></a>
+<a class="followp" false;="" href="" onclick='showWindow("csu_wechat_scan_qrcode","plugin.php?id=csu_wechat_scan:share&amp;tid=2083831","get",0);' return=""><i><img src="../common_images/wx.png"/>分享到朋友圈</i></a></div>
+<div class="vw50_kfc_pb"><span style="color:#008000;"><p>发帖前要善用<strong>【<a href="//www.52pojie.cn/search.php" target="_blank">论坛搜索</a>】</strong>功能，那里可能会有你要找的答案或者已经有人发布过相同内容了，请勿重复发帖。</p></span></div></td>
+</tr>
+<tr id="_postposition54582576"></tr>
+<tr>
+<td class="pls"></td>
+<td class="plc" style="overflow:visible;">
+<div class="po hin">
+<div class="pob cl">
+<em>
+<a class="cmmnt" href="forum.php?mod=misc&amp;action=comment&amp;tid=2083831&amp;pid=54582576&amp;extra=page%3D1&amp;page=1" onclick="showWindow('comment', this.href, 'get', 0)">点评</a><a class="fastre" href="forum.php?mod=post&amp;action=reply&amp;fid=24&amp;tid=2083831&amp;reppost=54582576&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)" rel="nofollow">回复</a>
+</em>
+<p>
+<a href="javascript:;" onclick="showWindow('miscreport54582576', 'misc.php?mod=report&amp;rtype=post&amp;rid=54582576&amp;tid=2083831&amp;fid=24', 'get', -1);return false;">举报</a>
+</p>
+</div>
+</div>
+</td>
+</tr>
+<tr class="ad">
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</table>
+</div><div id="post_54583870"><table cellpadding="0" cellspacing="0" class="plhin" id="pid54583870" summary="pid54583870">
+<tr>
+<td class="pls" rowspan="2">
+<div class="pls cl favatar" id="favatar54583870">
+<div class="pi">
+<div class="authi"><a class="xw1" href="home.php?mod=space&amp;uid=610526" rel="nofollow" target="_blank">hailongxl</a>
+</div>
+</div>
+<div class="p_pop blk bui card_gender_1" id="userinfo54583870" style="display: none; margin-top: -11px;">
+<div class="m z">
+<div id="userinfo54583870_ma"></div>
+</div>
+<div class="i y">
+<div>
+<strong><a class="xi2" href="home.php?mod=space&amp;uid=610526" target="_blank">hailongxl</a></strong>
+<em>当前离线</em>
+</div><dt>好友</dt><dd><a class="xi2" href="home.php?mod=space&amp;uid=610526&amp;do=friend&amp;view=me&amp;from=space" target="_blank">0</a></dd>
+<dt>阅读权限</dt><dd>10</dd>
+<span style="color:Blue;"><dt>听众</dt><dd><a class="xi2" href="home.php?mod=follow&amp;do=follower&amp;uid=610526" target="_blank">4</a></dd>
+<dt>最后登录</dt><dd>2026-1-9</dd>
+<div class="imicn">
+<a href="home.php?mod=space&amp;uid=610526&amp;do=profile" target="_blank" title="查看详细资料"><img alt="查看详细资料" src="../common_images/userinfo.gif"/></a>
+</div>
+<div id="avatarfeed"><span id="threadsortswait"></span></div>
+</span></div>
+</div>
+<div>
+<div class="avatar" onmouseover="showauthor(this, 'userinfo54583870')"><a class="avtm" href="home.php?mod=space&amp;uid=610526" rel="nofollow" target="_blank"><img src="../common_images/noavatar_middle.gif"/></a></div>
+</div>
+<div class="tns xg2"><table cellpadding="0" cellspacing="0"><th><p><a class="xi2" href="home.php?mod=space&amp;uid=610526&amp;do=thread&amp;type=thread&amp;view=me&amp;from=space">8</a></p>主题</th><th><p><a class="xi2" href="home.php?mod=space&amp;uid=610526&amp;do=thread&amp;type=reply&amp;view=me&amp;from=space">45</a></p>回帖</th><td><p><a class="xi2" href="home.php?mod=space&amp;uid=610526&amp;do=profile">45</a></p>积分</td></table></div>
+<p class="side-group"><em><a href="home.php?mod=spacecp&amp;ac=usergroup&amp;gid=10" target="_blank">锋芒初露</a></em></p>
+<p class="side-star"><span id="g_up54583870" onmouseover="showMenu({'ctrlid':this.id, 'pos':'12!'});"><img alt="Rank: 1" src="../common_images/star_level1.gif"/></span></p>
+<div class="tip tip_4" id="g_up54583870_menu" style="display: none;"><div class="tip_horn"></div><div class="tip_c">锋芒初露, 积分 45, 距离下一级还需 155 积分</div></div>
+<dl class="pil cl credit-list">
+<span amount="0" class="cr-digest">
+<dt>精华</dt>
+<dd>0</dd>
+</span>
+<span amount="0 点" class="cr-ext1">
+<dt>威望</dt>
+<dd>0 点</dd>
+</span>
+<span amount="33 点" class="cr-ext6">
+<dt>热心值</dt>
+<dd>33 点</dd>
+</span>
+<span amount="0 点" class="cr-ext4">
+<dt>悬赏值</dt>
+<dd>0 点</dd>
+</span>
+<span class="cr-follower">
+<dt>听众</dt>
+<dd><a class="xi2" href="home.php?mod=follow&amp;do=follower&amp;uid=610526" target="_blank">4</a></dd>
+</span>
+<span amount="0 点" class="cr-ext3">
+<dt>贡献值</dt>
+<dd>0 点</dd>
+</span>
+<span class="cr-ext2">
+<dt>吾爱币</dt>
+<dd>574 CB</dd>
+</span>
+<span amount="0 次" class="cr-ext8">
+<dt>违规</dt>
+<dd>0 次</dd>
+</span>
+<dt>注册时间</dt>
+<dd>2017-3-13</dd>
+</dl>
+</div>
+</td>
+<td class="plc">
+<div class="pi">
+<strong>
+<a href="forum.php?mod=redirect&amp;goto=findpost&amp;ptid=2083831&amp;pid=54583870" id="postnum54583870" onclick="setCopy(this.href, '帖子地址复制成功');return false;">
+推荐
+</a>
+</strong>
+<div class="pti">
+<div class="pdbt">
+</div>
+<div class="authi">
+<img class="authicn vm" id="authicon54583870" src="../common_images/online_member.gif"/>
+<span class="res-author"><a class="xi2" href="home.php?mod=space&amp;uid=610526" target="_blank">hailongxl</a>
+</span><em id="authorposton54583870"><span class="poston">发表于</span> 2026-1-2 22:29</em>
+<span class="pipe">|</span>
+<a href="forum.php?mod=viewthread&amp;tid=2083831&amp;page=1&amp;authorid=610526" rel="nofollow">只看该作者</a>
+</div>
+</div>
+</div><div class="pct"><div class="pcb">
+<div class="t_fsz">
+<table cellpadding="0" cellspacing="0"><tr><td class="t_f" id="postmessage_54583870">
+厉害，虽然看不懂但是深表艳羡！<img alt="" border="0" smilieid="921" src="../common_images/42.gif"/><img alt="" border="0" smilieid="921" src="../common_images/42.gif"/></td></tr></table>
+</div>
+<div class="cm" id="comment_54583870">
+</div>
+<div id="post_rate_div_54583870"></div>
+</div>
+</div>
+</td></tr>
+<tr><td class="plc plm">
+<div class="vw50_kfc_pb"><a href="https://www.52pojie.cn/thread-143136-1-1.html" target="_blank"><font color="red"> 【吾爱破解论坛总版规】 - [让你充分了解吾爱破解论坛行为规则]</font></a></div></td>
+</tr>
+<tr id="_postposition54583870"></tr>
+<tr>
+<td class="pls"></td>
+<td class="plc" style="overflow:visible;">
+<div class="po hin">
+<div class="pob cl">
+<em>
+<a class="cmmnt" href="forum.php?mod=misc&amp;action=comment&amp;tid=2083831&amp;pid=54583870&amp;extra=page%3D1&amp;page=1" onclick="showWindow('comment', this.href, 'get', 0)">点评</a><a class="fastre" href="forum.php?mod=post&amp;action=reply&amp;fid=24&amp;tid=2083831&amp;repquote=54583870&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)" rel="nofollow">回复</a>
+<a class="replyadd" href="forum.php?mod=misc&amp;action=postreview&amp;do=support&amp;tid=2083831&amp;pid=54583870&amp;hash=7f5fdc25" onclick="ajaxmenu(this, 3000, 1, 0, '43', '');return false;" onmouseover="this.title = ($('review_support_54583870').innerHTML ? $('review_support_54583870').innerHTML : 0) + ' 人 支持'">支持 <span id="review_support_54583870">1</span></a>
+</em>
+<p>
+<a href="javascript:;" onclick="showWindow('rate', 'forum.php?mod=misc&amp;action=rate&amp;tid=2083831&amp;pid=54583870', 'get', -1);return false;">免费评分</a>
+<a href="javascript:;" onclick="showWindow('miscreport54583870', 'misc.php?mod=report&amp;rtype=post&amp;rid=54583870&amp;tid=2083831&amp;fid=24', 'get', -1);return false;">举报</a>
+</p>
+</div>
+</div>
+</td>
+</tr>
+<tr class="ad">
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</table>
+</div><div id="post_54589494"><table cellpadding="0" cellspacing="0" class="plhin" id="pid54589494" summary="pid54589494">
+<tr>
+<a name="lastpost"></a><td class="pls" rowspan="2">
+<div class="pls cl favatar" id="favatar54589494">
+<div class="pi">
+<div class="authi"><a class="xw1" href="home.php?mod=space&amp;uid=2416975" rel="nofollow" target="_blank">xingjue</a>
+</div>
+</div>
+<div class="p_pop blk bui card_gender_0" id="userinfo54589494" style="display: none; margin-top: -11px;">
+<div class="m z">
+<div id="userinfo54589494_ma"></div>
+</div>
+<div class="i y">
+<div>
+<strong><a class="xi2" href="home.php?mod=space&amp;uid=2416975" target="_blank">xingjue</a></strong>
+<em>当前离线</em>
+</div><dt>好友</dt><dd><a class="xi2" href="home.php?mod=space&amp;uid=2416975&amp;do=friend&amp;view=me&amp;from=space" target="_blank">0</a></dd>
+<dt>阅读权限</dt><dd>10</dd>
+<span style="color:Blue;"><dt>听众</dt><dd><a class="xi2" href="home.php?mod=follow&amp;do=follower&amp;uid=2416975" target="_blank">0</a></dd>
+<dt>最后登录</dt><dd>2026-1-9</dd>
+<div class="imicn">
+<a href="home.php?mod=space&amp;uid=2416975&amp;do=profile" target="_blank" title="查看详细资料"><img alt="查看详细资料" src="../common_images/userinfo.gif"/></a>
+</div>
+<div id="avatarfeed"><span id="threadsortswait"></span></div>
+</span></div>
+</div>
+<div>
+<div class="avatar" onmouseover="showauthor(this, 'userinfo54589494')"><a class="avtm" href="home.php?mod=space&amp;uid=2416975" rel="nofollow" target="_blank"><img src="../common_images/noavatar_middle.gif"/></a></div>
+</div>
+<div class="tns xg2"><table cellpadding="0" cellspacing="0"><th><p><a class="xi2" href="home.php?mod=space&amp;uid=2416975&amp;do=thread&amp;type=thread&amp;view=me&amp;from=space">0</a></p>主题</th><th><p><a class="xi2" href="home.php?mod=space&amp;uid=2416975&amp;do=thread&amp;type=reply&amp;view=me&amp;from=space">8</a></p>回帖</th><td><p><a class="xi2" href="home.php?mod=space&amp;uid=2416975&amp;do=profile">1</a></p>积分</td></table></div>
+<p class="side-group"><em><a href="home.php?mod=spacecp&amp;ac=usergroup&amp;gid=10" target="_blank">锋芒初露</a></em></p>
+<p class="side-star"><span id="g_up54589494" onmouseover="showMenu({'ctrlid':this.id, 'pos':'12!'});"><img alt="Rank: 1" src="../common_images/star_level1.gif"/></span></p>
+<div class="tip tip_4" id="g_up54589494_menu" style="display: none;"><div class="tip_horn"></div><div class="tip_c">锋芒初露, 积分 1, 距离下一级还需 199 积分</div></div>
+<dl class="pil cl credit-list">
+<span amount="0" class="cr-digest">
+<dt>精华</dt>
+<dd>0</dd>
+</span>
+<span amount="0 点" class="cr-ext1">
+<dt>威望</dt>
+<dd>0 点</dd>
+</span>
+<span amount="0 点" class="cr-ext6">
+<dt>热心值</dt>
+<dd>0 点</dd>
+</span>
+<span amount="0 点" class="cr-ext4">
+<dt>悬赏值</dt>
+<dd>0 点</dd>
+</span>
+<span class="cr-follower">
+<dt>听众</dt>
+<dd><a class="xi2" href="home.php?mod=follow&amp;do=follower&amp;uid=2416975" target="_blank">0</a></dd>
+</span>
+<span amount="0 点" class="cr-ext3">
+<dt>贡献值</dt>
+<dd>0 点</dd>
+</span>
+<span class="cr-ext2">
+<dt>吾爱币</dt>
+<dd>159 CB</dd>
+</span>
+<span amount="0 次" class="cr-ext8">
+<dt>违规</dt>
+<dd>0 次</dd>
+</span>
+<dt>注册时间</dt>
+<dd>2025-7-21</dd>
+</dl>
+</div>
+</td>
+<td class="plc">
+<div class="pi">
+<strong>
+<a href="forum.php?mod=redirect&amp;goto=findpost&amp;ptid=2083831&amp;pid=54589494" id="postnum54589494" onclick="setCopy(this.href, '帖子地址复制成功');return false;">
+<em>3</em><sup>#</sup></a>
+</strong>
+<div class="pti">
+<div class="pdbt">
+</div>
+<div class="authi">
+<img class="authicn vm" id="authicon54589494" src="../common_images/online_member.gif"/>
+<span class="res-author"><a class="xi2" href="home.php?mod=space&amp;uid=2416975" target="_blank">xingjue</a>
+</span><em id="authorposton54589494"><span class="poston">发表于</span> 2026-1-4 09:06</em>
+<span class="pipe">|</span>
+<a href="forum.php?mod=viewthread&amp;tid=2083831&amp;page=1&amp;authorid=2416975" rel="nofollow">只看该作者</a>
+</div>
+</div>
+</div><div class="pct"><div class="vw50_kfc_pt"><a href="https://www.52pojie.cn/thread-602644-1-1.html" target="_blank"><font color="red">吾爱破解论坛没有任何官方QQ群，禁止留联系方式，禁止任何商业交易。</font></a></div><div class="pcb">
+<div class="t_fsz">
+<table cellpadding="0" cellspacing="0"><tr><td class="t_f" id="postmessage_54589494">
+太硬了太硬了<img alt="" border="0" smilieid="921" src="../common_images/42.gif"/></td></tr></table>
+</div>
+<div class="cm" id="comment_54589494">
+</div>
+<div id="post_rate_div_54589494"></div>
+</div>
+</div>
+</td></tr>
+<tr><td class="plc plm">
+<div class="vw50_kfc_pb"><a href="https://www.52pojie.cn/misc.php?mod=faq&amp;action=faq&amp;id=4&amp;messageid=47" target="_blank"><font color="red">如何升级？如何获得积分？积分对应解释说明！</font></a></div></td>
+</tr>
+<tr id="_postposition54589494"></tr>
+<tr>
+<td class="pls"></td>
+<td class="plc" style="overflow:visible;">
+<div class="po hin">
+<div class="pob cl">
+<em>
+<a class="cmmnt" href="forum.php?mod=misc&amp;action=comment&amp;tid=2083831&amp;pid=54589494&amp;extra=page%3D1&amp;page=1" onclick="showWindow('comment', this.href, 'get', 0)">点评</a><a class="fastre" href="forum.php?mod=post&amp;action=reply&amp;fid=24&amp;tid=2083831&amp;repquote=54589494&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)" rel="nofollow">回复</a>
+<a class="replyadd" href="forum.php?mod=misc&amp;action=postreview&amp;do=support&amp;tid=2083831&amp;pid=54589494&amp;hash=7f5fdc25" onclick="ajaxmenu(this, 3000, 1, 0, '43', '');return false;" onmouseover="this.title = ($('review_support_54589494').innerHTML ? $('review_support_54589494').innerHTML : 0) + ' 人 支持'">支持 <span id="review_support_54589494"></span></a>
+</em>
+<p>
+<a href="javascript:;" onclick="showWindow('rate', 'forum.php?mod=misc&amp;action=rate&amp;tid=2083831&amp;pid=54589494', 'get', -1);return false;">免费评分</a>
+<a href="javascript:;" onclick="showWindow('miscreport54589494', 'misc.php?mod=report&amp;rtype=post&amp;rid=54589494&amp;tid=2083831&amp;fid=24', 'get', -1);return false;">举报</a>
+</p>
+</div>
+</div>
+</td>
+</tr>
+<tr class="ad">
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</table>
+</div><div class="pl" id="postlistreply"><div class="viewthread_table" id="post_new" style="display: none"></div></div>
+</div>
+<form autocomplete="off" id="modactions" method="post" name="modactions">
+<input name="formhash" type="hidden" value="7f5fdc25"/>
+<input name="optgroup" type="hidden"/>
+<input name="operation" type="hidden"/>
+<input name="listextra" type="hidden" value="page%3D1"/>
+<input name="page" type="hidden" value="1"/>
+</form>
+<div class="pgs mtm mbm cl">
+<span class="pgb y" id="visitedforumstmp" onmouseover="$('visitedforums').id = 'visitedforumstmp';this.id = 'visitedforums';showMenu({'ctrlid':this.id,'pos':'21'})"><a href="forum-24-1.html">返回列表</a></span>
+<a href="javascript:;" id="newspecialtmp" onclick="showWindow('newthread', 'forum.php?mod=post&amp;action=newthread&amp;fid=24')" onmouseover="$('newspecial').id = 'newspecialtmp';this.id = 'newspecial';showMenu({'ctrlid':this.id})" title="发新帖"><img alt="发新帖" src="../common_images/pn_post.png"/></a>
+<a href="javascript:;" id="post_replytmp" onclick="showWindow('reply', 'forum.php?mod=post&amp;action=reply&amp;fid=24&amp;tid=2083831')" title="回复"><img alt="回复" src="../common_images/pn_reply.png"/></a>
+</div>
+<div class="area" id="diyfastposttop"></div>
+<div class="pl bm bmw" id="f_pst">
+<form action="forum.php?mod=post&amp;action=reply&amp;fid=24&amp;tid=2083831&amp;extra=page%3D1&amp;replysubmit=yes&amp;infloat=yes&amp;handlekey=fastpost" autocomplete="off" id="fastpostform" method="post" onsubmit="return fastpostvalidate(this)">
+<table cellpadding="0" cellspacing="0">
+<tr>
+<td class="pls">
+<div class="avatar avtm"><img onerror="this.onerror=null;this.src='https://avatar.52pojie.cn/images/noavatar_middle.gif'" src="../common_images/68_avatar_middle.jpg"/></div></td>
+<td class="plc">
+<span id="fastpostreturn"></span>
+<div class="cl">
+<div id="fastposteditor">
+<div class="tedt mtn">
+<div class="bar">
+<span class="y">
+<a href="forum.php?mod=post&amp;action=reply&amp;fid=24&amp;tid=2083831" onclick="return switchAdvanceMode(this.href)">高级模式</a>
+</span>
+<div class="fpd">
+<a class="fbld" href="javascript:;" onclick="seditor_insertunit('fastpost', '[b]', '[/b]');doane(event);" title="文字加粗">B</a>
+<a class="fclr" href="javascript:;" id="fastpostforecolor" onclick="showColorBox(this.id, 2, 'fastpost');doane(event);" title="设置文字颜色">Color</a>
+<a class="fmg" href="javascript:;" id="fastpostimg" onclick="seditor_menu('fastpost', 'img');doane(event);" title="图片">Image</a>
+<a class="flnk" href="javascript:;" id="fastposturl" onclick="seditor_menu('fastpost', 'url');doane(event);" title="添加链接">Link</a>
+<a class="fqt" href="javascript:;" id="fastpostquote" onclick="seditor_menu('fastpost', 'quote');doane(event);" title="引用">Quote</a>
+<a class="fcd" href="javascript:;" id="fastpostcode" onclick="seditor_menu('fastpost', 'code');doane(event);" title="代码">Code</a>
+<a class="fsml" href="javascript:;" id="fastpostsml" onclick="showMenu({'ctrlid':this.id,'evt':'click','layer':2});return false;">Smilies</a>
+<a class="fat" href="javascript:;" id="fastpostat" onclick="seditor_menu('fastpost', 'at');doane(event);" title="@朋友">@朋友</a>
+<span class="pipe z">|</span><span id="spanButtonPlaceholder">上传</span></div></div>
+<div class="area">
+<textarea class="pt" cols="80" id="fastpostmessage" name="message" onkeydown="seditor_ctlent(event, 'fastpostvalidate($(\'fastpostform\'))');" rows="6" tabindex="4"></textarea>
+</div>
+</div>
+</div>
+</div>
+<div id="seccheck_fastpost">
+</div>
+<input id="posttime" name="posttime" type="hidden" value="1767954913"/>
+<div class="upfl">
+<table border="0" cellpadding="0" cellspacing="0" id="attach_tblheader" style="display: none;">
+<tr>
+<td>点击附件文件名添加到帖子内容中</td>
+<td class="atds">描述</td>
+<td class="attv">
+阅读权限
+<img alt="Tip" class="vm" onmouseover="showTip(this)" src="../common_images/faq.gif" tip="阅读权限按由高到低排列，高于或等于选中组的用户才可以阅读，&lt;b&gt;&lt;font color=blue&gt;添加权限后请勿勾选下方的“转播给听众”功能，否则会导致帖子内容泄漏。&lt;/font&gt;&lt;/b&gt;"/>
+</td>
+<td class="attpr">吾爱币</td><td class="attc"></td>
+</tr>
+</table>
+<div class="fieldset flash" id="attachlist"></div>
+</div>
+<input name="formhash" type="hidden" value="7f5fdc25"/>
+<input name="usesig" type="hidden" value="1"/>
+<input name="subject" type="hidden" value="  "/>
+<p class="ptm pnpost">
+<a class="y" href="home.php?mod=spacecp&amp;ac=credit&amp;op=rule&amp;fid=24" target="_blank">本版积分规则</a>
+<button class="pn pnc vm" id="fastpostsubmit" name="replysubmit" onmouseover="checkpostrule('seccheck_fastpost', 'ac=reply');this.onmouseover=null" tabindex="5" type="submit" value="replysubmit"><strong>发表回复</strong></button>
+<span style="padding:0 5px; color:#f44336"><strong>警告：本版块禁止<a href="forum.php?mod=redirect&amp;goto=findpost&amp;ptid=143136&amp;pid=9180499" style="font-style: italic; text-decoration-line: underline;" target="_blank">『灌水』</a>或回复与主题无关内容，违者重罚！</strong></span>
+<label class="lb"><input class="pc" name="adddynamic" type="checkbox" value="1"/>回帖并转播</label>
+<label for="fastpostrefresh"><input class="pc" id="fastpostrefresh" type="checkbox"/>回帖后跳转到最后一页</label>
+</p>
+</td>
+</tr>
+</table>
+</form>
+</div>
+<div class="p_pop blk cl" id="visitedforums_menu" style="display: none;">
+<table cellpadding="0" cellspacing="0">
+<tr>
+<td id="v_forums">
+<h3 class="mbn pbn bbda xg1">浏览过的版块</h3>
+<ul class="xl xl1">
+<li><a href="forum-5-1.html">『脱壳破解区』</a></li><li><a href="forum-69-1.html">『Android UnPackMe◇CrackMe◇KeyGenMe◇ReverseMe』</a></li><li><a href="forum-13-1.html">『站点公告』</a></li><li><a href="forum-2-1.html">『原创发布区』</a></li></ul>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="wp mtn">
+<div class="area" id="diy3"></div>
+</div>
+</div>
+<div class="wp vw50_kfc_f"><div class="res-footer-note"><p align="left"><br/><font color="#ff0000">免责声明：<br/>吾爱破解所发布的一切破解补丁、注册机和注册信息及软件的解密分析文章仅限用于学习和研究目的；不得将上述内容用于商业或者非法用途，否则，一切后果请用户自负。本站信息来自网络，版权争议与本站无关。您必须在下载后的24个小时之内，从您的电脑中彻底删除上述内容。如果您喜欢该程序，请支持正版软件，购买注册，得到更好的正版服务。如有侵权请邮件与我们联系处理。</font></p>
+<p align="right"><font color="#ff0000" face="Comic Sans MS">Mail To:Service@52pojie.cn</font></p></div></div>
+<style type="text/css"> 
+#scrolltop {
+   display: none;
+}
+ul#navmenu ul
+{ 
+display: none; 
+position: absolute; 
+left: -233px;
+bottom: 5px;
+} 
+ul#navmenu li:hover ul ul, 
+ul#navmenu li.iehover ul ul,  { 
+display: none; 
+} 
+ul#navmenu li:hover ul, 
+ul#navmenu ul li:hover ul, 
+ul#navmenu ul ul li:hover ul, 
+ul#navmenu li.iehover ul, 
+ul#navmenu ul li.iehover ul, 
+ul#navmenu ul ul li.iehover ul { 
+display: block; 
+} 
+
+#jz52top a {margin: 6px 0;}
+
+#jz52top { z-index: 200; visibility: visible; right: 5px; }
+
+#jz52topa { visibility: hidden;}
+#jz52top, #jz52top a { border: none;}
+
+
+#jz52top { position: fixed; bottom: 70px; display: block; width: 40px; background: none repeat scroll 0% 0% transparent; border: 0px #cdcdcd solid; border-radius: 3px; border-top: 0; cursor: pointer; }
+#jz52top:hover { text-decoration: none; }
+
+#jz52top a { display: block; width: 40px; height: 40px; padding: 0; line-height: 12px; text-align: center; color: #787878; text-decoration: none; background: #f8f8f8 url('source/plugin/jz52_top/template/jz52top1.png') no-repeat 0 0; border-top: 0px #cdcdcd solid; }
+
+                a.jz52topa:hover { background-position: -40px 0px !important;}
+a.replyfast { background-position: 0 -40px !important; }
+a.replyfast:hover { background-position: -40px -40px !important;}
+a.returnlist { background-position: 0 -80px !important; }
+a.returnlist:hover { background-position: -40px -80px !important;}
+a.returnboard { background-position: -80px -240px !important; }
+a.returnboard:hover { background-position: -120px -240px !important;}
+a.jzqr { background-position: 0 -120px !important; }
+a.jzqr:hover { background-position: -40px -120px !important;}
+                a.jzwx { background-position: 0 -320px !important; }
+a.jzwx:hover { background-position: -40px -320px !important;}				
+a.jzkf { background-position: -80px 0px !important; }
+a.jzkf:hover { background-position: -120px -0px !important;}
+a.jzfx { background-position: -80px -40px !important; }
+a.jzfx:hover { background-position: -120px -40px !important;}
+.jzfxn { background: #fff !important; width: 231px !important; height: 260px !important; }
+a.jzlast { background-position: -80px -80px !important; }
+a.jzlast:hover { background-position: -120px -80px !important;}
+a.jznext { background-position: -80px -120px !important; }
+a.jznext:hover { background-position: -120px -120px !important;}	
+a.jzxyy { background-position: -80px -120px !important; }
+a.jzxyy:hover { background-position: -120px -360px !important;}			
+a.jzsct { background-position: 0px -160px !important; }
+a.jzsct:hover { background-position: -40px -160px !important;}				
+a.jzscb { background-position: -80px -160px !important; }
+a.jzscb:hover { background-position: -120px -160px !important;}				
+a.jzqqq { background-position: 0px -200px !important; }
+a.jzqqq:hover { background-position: -40px -200px !important;}	
+                a.jzsoso { background-position: -80px -320px !important; }
+a.jzsoso:hover { background-position: -120px -320px !important;}					
+a.jzwo { background-position: -80px -200px !important; }
+a.jzwo:hover { background-position: -120px -200px !important;}
+a.jzzdy { background-position: 0px -240px !important; }
+a.jzzdy:hover { background-position: -40px -240px !important;}
+a.jzfbzt { background-position: 0px -280px !important; }
+a.jzfbzt:hover { background-position: -40px -280px !important;}
+a.jzkfzx { background-position: -80px -280px !important; }
+a.jzkfzx:hover { background-position: -120px -280px !important;}
+
+
+#jzqrn { background: #fff !important; width: 231px !important; height: 260px !important; }
+#jzqrn { border: 1px solid rgb(210, 210, 210); text-align: center; }
+#jzqrn p {
+    font-size: 15px;
+    padding-bottom: 15px;
+    text-align: center;
+color: #999;
+    font-family: Microsoft YaHei;
+}
+#jzwon { background: #fff !important; width: 231px !important; height: 260px !important; }
+#jzwon { border: 1px solid rgb(210, 210, 210); }
+#jzfxn { border: 1px solid rgb(210, 210, 210); }
+#jzfxn h3 {
+    height: 23px;
+    background: none repeat scroll 0% 0% rgb(250, 250, 250);
+    border-bottom: 1px solid rgb(236, 236, 236);
+    padding: 10px 0px 0px 10px;
+}
+#jzfxn .bdsharebuttonbox { padding: 13px 0px 0px 20px; }
+#jzfxn .bdsharebuttonbox a, #jzfxn .bdsharebuttonbox .bds_more {
+    float: left;
+    font-size: 12px;
+    padding-left: 25px;
+    line-height: 16px;
+text-align: left;
+    height: 16px;
+    background: url("http://bdimg.share.baidu.com/static/api/img/share/icons_1_16.png?v=01d441d0.png") no-repeat scroll 0px 0px ;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    margin: 6px 6px 6px 0px;
+text-indent: 0;
+    overflow: hidden;
+width: 68px;
+}
+#jzfxn .bdsharebuttonbox .bds_qzone {
+    background-position: 0px -52px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_tsina {
+    background-position: 0px -104px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_tqq {
+    background-position: 0px -260px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_renren {
+    background-position: 0px -208px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_tqf {
+    background-position: 0px -364px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_tieba {
+    background-position: 0px -728px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_sqq {
+    background-position: 0px -2652px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_hi {
+    background-position: 0px -416px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_isohu {
+    background-position: 0px -3016px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_weixin {
+    background-position: 0px -1612px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_t163 {
+    background-position: 0px -832px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_tsohu {
+    background-position: 0px -520px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_baidu {
+    background-position: 0px -2600px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_qq {
+    background-position: 0px -624px !important;
+}
+#jz52top a b {
+    visibility: hidden;
+    font-weight: normal;
+}
+</style>
+<div id="jz52top">
+<span><a class="replyfast" href="forum.php?mod=post&amp;action=reply&amp;fid=24&amp;tid=2083831&amp;extra=page%3D1&amp;page=" onclick="showWindow('reply', this.href)" title="快速回复"><b>快速回复</b></a></span>
+<span><a class="jzsct" href="home.php?mod=spacecp&amp;ac=favorite&amp;type=thread&amp;id=2083831&amp;formhash=7f5fdc25" id="k_favorite" onclick="showWindow(this.id, this.href, 'get', 0);" onmouseover="this.title = $('favoritenumber').innerHTML + ' 人已收藏'" title="!fav_thread!"><b>收藏帖子</b></a></span>
+<span>
+<a class="returnlist" hidefocus="true" href="forum-24-1.html" title="返回列表"><b>返回列表</b></a>
+</span>
+<span><ul id="navmenu"> <li><a class="jzwx" href="javascript:void(0)" title="关注微信"><b>关注微信</b></a> <ul> <div id="jzqrn">
+<img alt="wx" height="228" src="../common_images/weixin.jpg" width="228"/>
+<p>微信签到每天都送论坛币！</p>
+</div> </ul></li></ul> </span>
+<span>
+<div id="goTopBtn" style="DISPLAY: none"><a class="jz52topa" title="返回顶部"><b>返回顶部</b></a></div>
+</span>
+</div>
+<div class="wp cl" id="ft">
+<div class="y" id="flk">
+<p>
+<a href="forum.php?mod=rss" target="_blank">RSS订阅</a><span class="pipe">|</span><a href="forum.php?mod=misc&amp;action=showdarkroom">小黑屋</a><span class="pipe">|</span><a href="thread-2084166-1-1.html" target="_blank">处罚记录</a><span class="pipe">|</span><a href="mailto:Service@52pojie.cn" target="_blank">联系我们</a><span class="pipe">|</span><strong><a href="https://www.52pojie.cn" target="_blank">吾爱破解 - 52pojie.cn</a></strong>
+( <a href="https://beian.miit.gov.cn/" rel="nofollow" target="_blank">京ICP备16042023号 | 京公网安备 11010502030087号</a> )</p>
+<p class="xs0">
+GMT+8, 2026-1-9 18:35<span id="debuginfo">
+</span>
+</p>
+</div>
+<div id="frt">
+<p>Powered by <strong>Discuz!</strong></p>
+<p class="xs0">Copyright © 2001-2020, Tencent Cloud.</p>
+</div></div>
+<div id="scrolltop">
+<span><a class="replyfast" href="forum.php?mod=post&amp;action=reply&amp;fid=24&amp;tid=2083831&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)" title="快速回复"><b>快速回复</b></a></span>
+<span hidefocus="true"><a class="scrolltopa" onclick="window.scrollTo('0','0')" title="返回顶部"><b>返回顶部</b></a></span>
+<span>
+<a class="returnlist" hidefocus="true" href="forum-24-1.html" title="返回列表"><b>返回列表</b></a>
+</span>
+</div>
+<script>var STYLEID = '1', STATICURL = 'https://static.52pojie.cn/static/', IMGDIR = 'https://static.52pojie.cn/static/image/common', VERHASH = 'BC3', charset = 'gbk', discuz_uid = '588268', cookiepre = 'htVC_2132_', cookiedomain = '', cookiepath = '/', showusercard = '0', attackevasive = '0', disallowfloat = 'login|newthread', creditnotice = '1|威望|点,2|吾爱币|CB,3|贡献值|点,4|悬赏值|点,5|采纳率|%,6|热心值|点,8|违规|次', defaultstyle = './template/default/style/t5', REPORTURL = 'aHR0cHM6Ly93d3cuNTJwb2ppZS5jbi90aHJlYWQtMjA4MzgzMS0xLTEuaHRtbA==', SITEURL = 'https://www.52pojie.cn/', JSPATH = 'https://static.52pojie.cn/cache/', CSSPATH = 'https://static.52pojie.cn/cache/style_', DYNAMICURL = '';</script><script src="https://static.52pojie.cn/cache/common.js?BC3"></script><script>HTMLNODE.className += ' widthauto'</script><script src="https://static.52pojie.cn/cache/forum.js?BC3"></script><script>
+initSearchmenu('scbar', '');
+</script><script>var fid = parseInt('24'), tid = parseInt('2083831');</script><script src="https://static.52pojie.cn/cache/forum_viewthread.js?BC3"></script><script>zoomstatus = parseInt(1);var imagemaxwidth = '1080';var aimgcount = new Array();</script><script>
+var postminchars = parseInt('8');
+var postmaxchars = parseInt('0');
+var disablepostctrl = parseInt('0');
+</script><script src="https://static.52pojie.cn/cache/seditor.js?BC3"></script><script reload="1">smilies_show('fastpostsmiliesdiv', 8, 'fastpost');</script><script src="https://static.52pojie.cn/cache/at.js?BC3"></script><script>
+var editorid = '';
+var ATTACHNUM = {'imageused':0,'imageunused':0,'attachused':0,'attachunused':0}, ATTACHUNUSEDAID = new Array(), IMGUNUSEDAID = new Array();
+</script><script src="https://static.52pojie.cn/cache/upload.js?BC3"></script><script>
+var upload = new SWFUpload({
+upload_url: "https://www.52pojie.cn/misc.php?mod=swfupload&action=swfupload&operation=upload&fid=24",
+post_params: {"uid" : "588268", "hash":"8350575a36dbfe0e745a2e3db224679b"},
+file_size_limit : "3072",
+file_types : "*.rar;*.7z;*.zip;*.txt;*.jpg;*.gif;*.png",
+file_types_description : "All Support Formats",
+file_upload_limit : 0,
+file_queue_limit : 0,
+swfupload_preload_handler : preLoad,
+swfupload_load_failed_handler : loadFailed,
+file_dialog_start_handler : fileDialogStart,
+file_queued_handler : fileQueued,
+file_queue_error_handler : fileQueueError,
+file_dialog_complete_handler : fileDialogComplete,
+upload_start_handler : uploadStart,
+upload_progress_handler : uploadProgress,
+upload_error_handler : uploadError,
+upload_success_handler : uploadSuccess,
+upload_complete_handler : uploadComplete,
+button_image_url : "https://static.52pojie.cn/static/image/common/uploadbutton_small.png",
+button_placeholder_id : "spanButtonPlaceholder",
+button_width: 17,
+button_height: 25,
+button_cursor:SWFUpload.CURSOR.HAND,
+button_window_mode: "transparent",
+custom_settings : {
+progressTarget : "attachlist",
+uploadSource: 'forum',
+uploadType: 'attach',
+maxSizePerDay: 52243233,
+uploadFrom: 'fastpost'
+},
+debug: false
+});
+</script><script>if(getcookie('fastpostrefresh') == 1) {$('fastpostrefresh').checked=true;}</script><script>
+$("fastpostmessage").style.background = 'url(https://static.52pojie.cn/static/image/common/bj.gif) no-repeat left top';
+
+$("fastpostmessage").onfocus = function (){
+$("fastpostmessage").style = '';
+}
+$("fastpostmessage").onblur = function (){
+if($("fastpostmessage").value == ''){
+$("fastpostmessage").style.background = 'url(https://static.52pojie.cn/static/image/common/bj.gif) no-repeat left top';
+}
+}
+
+ </script><script>
+new lazyload();
+</script><script>document.onkeyup = function(e){keyPageScroll(e, 0, 0, 'forum.php?mod=viewthread&tid=2083831&extra=page%3D1', 1);}</script><script>
+function succeedhandle_followmod(url, msg, values) {
+var fObj = $('followmod_'+values['fuid']);
+if(values['type'] == 'add') {
+fObj.innerHTML = '不收听';
+fObj.href = 'home.php?mod=spacecp&ac=follow&op=del&fuid='+values['fuid'];
+} else if(values['type'] == 'del') {
+fObj.innerHTML = '收听TA';
+fObj.href = 'home.php?mod=spacecp&ac=follow&op=add&hash=7f5fdc25&fuid='+values['fuid'];
+}
+}
+fixed_avatar([54582576,54583870,54589494], 1);
+</script><script type="text/x-mathjax-config">
+	MathJax.Hub.Config({ 
+		tex2jax: {
+			inlineMath: [["$","$"], ['\\(','\\)']],
+			processClass: "math-render",
+			ignoreClass: "pct",
+		},
+		skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code','a'],
+		showProcessingMessages: false,
+		messageStyle: "none",
+		TeX: { equationNumbers: {autoNumber: "AMS"} },
+	});
+</script><script src="https://lib.baomitu.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&amp;noContrib"></script><script>
+var mw_brush = eval({"asm":["Asm","true"],"c":["C","true"],"cpp":["C++","true"],"csharp":["C#","true"],"java":["Java","true"],"python":["Python","true"],"lua":["Lua","true"],"html":["HTML","true"],"php":["PHP","true"],"javascript":["JavaScript","true"],"css":["CSS","true"],"golang":["Golang","true"],"objc":["Objective-C","true"],"applescript":["AppleScript","true"],"actionscript3":["Actionscript3","true"],"bash":["Bash shell","true"],"coldfusion":["ColdFusion","true"],"delphi":["Delphi","true"],"diff":["Diff","true"],"erlang":["Erlang","true"],"groovy":["Groovy","true"],"javafx":["JavaFX","true"],"pascal":["Pascal","true"],"patch":["Patch","true"],"perl":["Perl","true"],"text":["Plain Text","true"],"powershell":["PowerShell","true"],"ruby":["Ruby","true"],"rails":["Ruby on Rails","true"],"sass":["Sass","true"],"scala":["Scala","true"],"scss":["Scss","true"],"shell":["Shell","true"],"sql":["SQL","true"],"vb":["Visual Basic","true"],"vbnet":["Visual Basic .NET","true"],"xhtml":["XHTML","true"],"xml":["XML","true"],"xslt":["XSLT","true"],"aauto":["AAuto","true"],"il":["IL","true"]});
+var mw_gutter = 1;
+var mw_lang_codebox = { 'select_lang': '请输入要插入的代码<br>选择语言：', 'show_gutter': '显示行号：', 'your_code': '你的代码：', 'close': '关闭', 'submit': '提交', 'cancle': '取消' };
+</script><script src="https://static.52pojie.cn/mw_syntaxhighlighter/static/js/mw_syntaxhighlighter.js?BC3"></script><script reload="1">mw_syntaxhighlighter("fastpost");</script><script src="https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shCore.js?ver=3.0.90"></script><script src="https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shAutoloader.js?ver=3.0.90"></script><script src="https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushXml.js?ver=3.0.90"></script><script>//<![CDATA[
+	SyntaxHighlighter.autoloader(
+	"applescript	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushAppleScript.js?ver=3.0.90"
+	,"as3 actionscript3	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushAS3.js?ver=3.0.90"
+	,"bash shell	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushBash.js?ver=3.0.90"
+	,"cf coldfusion	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushColdFusion.js?ver=3.0.90"
+	,"cpp c	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushCpp.js?ver=3.0.90"
+	,"c# c-sharp csharp	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushCSharp.js?ver=3.0.90"
+	,"css	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushCss.js?ver=3.0.90"
+	,"delphi pas pascal	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushDelphi.js?ver=3.0.90"
+	,"diff patch	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushDiff.js?ver=3.0.90"
+	,"erl erlang	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushErlang.js?ver=3.0.90"
+	,"groovy	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushGroovy.js?ver=3.0.90"
+	,"java	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushJava.js?ver=3.0.90"
+	,"jfx javafx	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushJavaFX.js?ver=3.0.90"
+	,"js jscript javascript	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushJScript.js?ver=3.0.90"
+	,"perl pl	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushPerl.js?ver=3.0.90"
+	,"php	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0.90"
+	,"plain text	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushPlain.js?ver=3.0.90"
+	,"ps powershell	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushPowerShell.js?ver=3.0.90"
+	,"py python	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushPython.js?ver=3.0.90"
+	,"rails ror ruby rb	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushRuby.js?ver=3.0.90"
+	,"sass scss	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushSass.js?ver=3.0.90"
+	,"scala	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushScala.js?ver=3.0.90"
+	,"sql	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushSql.js?ver=3.0.90"
+	,"vb vbnet	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushVb.js?ver=3.0.90"
+	,"xml xhtml xslt html	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushXml.js?ver=3.0.90"
+	,"objc	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushObjC.js?ver=3.0.90"
+	,"asm	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushAsm.js?ver=3.0.90"
+	,"aauto	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushAAuto.js?ver=3.0.90"
+	,"go golang	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushGo.js?ver=3.0.90"
+	,"lua	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushLua.js?ver=3.0.90"
+	,"il	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushIL.js?ver=3.0.90"
+	);
+	SyntaxHighlighter.defaults['auto-links'] = false;
+	SyntaxHighlighter.defaults['quick-code'] = true;
+	SyntaxHighlighter.defaults['title'] = '';
+	SyntaxHighlighter.defaults['class-name'] = 'notranslate';
+	SyntaxHighlighter.defaults['collapse'] = false;
+	SyntaxHighlighter.defaults['first-line'] = 1;
+	SyntaxHighlighter.defaults['gutter'] = true;
+	SyntaxHighlighter.defaults['pad-line-numbers'] = 1;
+	SyntaxHighlighter.defaults['smart-tabs'] = true;
+	SyntaxHighlighter.defaults['tab-size'] = 4;
+	SyntaxHighlighter.defaults['toolbar'] = true;
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter';
+	SyntaxHighlighter.config.strings.noBrush = "Can\'t find brush for: ";
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = "Brush wasn\'t configured for html-script option: ";
+	SyntaxHighlighter.all();
+	
+//]]></script><script>
+var mw_libversion = '3.0.90';
+var mw_lang_toolbar = {'copyed': '代码已复制到剪贴板'};
+</script><script src="https://static.52pojie.cn/mw_syntaxhighlighter/static/js/toolbar.js?BC3"></script><script async="" defer="" src="/static/js/index.min.js"></script><script src="https://static.52pojie.cn/noti/noti.js?BC3"></script><script>
+time=1767954913;
+activemode = true;
+hookCredit();
+if(activemode)ifvisible.now();
+setTimeout(function () { noti_run('&type=3_3_1&h=7f5fdc25', 10000, 180000);}, 90000);
+</script><script> 
+function goTopEx() {
+ var obj = document.getElementById("goTopBtn");
+
+ function getScrollTop() {
+ return document.documentElement.scrollTop || document.body.scrollTop;
+ }
+
+ function setScrollTop(value) {
+ if (document.documentElement.scrollTop) {
+ document.documentElement.scrollTop = value;
+ } else {
+ document.body.scrollTop = value;
+ }
+
+ }
+ window.onscroll = function() {
+ getScrollTop() > 0 ? obj.style.display = "" : obj.style.display = "none";
+ var h = document.body.scrollHeight - getScrollTop() - obj.offsetTop - obj.offsetHeight;
+ obj.style.bottom = 0 + "px";
+ if (h < 350) {
+ obj.style.bottom = 340 + "px";
+ obj.style.top = "auto";
+ }
+
+
+ }
+ obj.onclick = function() {
+ function scrollToTop() {
+ let y = getScrollTop();
+ const interval = setInterval(function() {
+ if (getScrollTop() - 5 > y) {
+ // User trying to scroll - abort
+ clearInterval(interval);
+ return;
+ }
+ y = y / 1.1;
+ setScrollTop(y);
+ if (y < 1) {
+ clearInterval(interval);
+ setScrollTop(0);
+ }
+ }, 10);
+ }
+ scrollToTop()
+ }
+}
+</script><script type="text/javascript">goTopEx();</script><script>
+var _hmt = _hmt || [];
+(function() {
+ var hm = document.createElement("script");
+ hm.src = "https://hm.baidu.com/hm.js?46d556462595ed05e05f009cdafff31a";
+ var s = document.getElementsByTagName("script")[0]; 
+ s.parentNode.insertBefore(hm, s);
+})();
+</script><script src="home.php?mod=spacecp&amp;ac=follow&amp;op=checkfeed&amp;rand=1767954913"></script><script>_attachEvent(window, 'scroll', function () { showTopLink(); });checkBlind();</script></body>
+</html>
