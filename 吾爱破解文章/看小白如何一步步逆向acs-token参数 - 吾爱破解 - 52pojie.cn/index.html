@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta content="webkit" name="renderer">
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<title>看小白如何一步步逆向acs-token参数 - 吾爱破解 - 52pojie.cn </title>
+<link href="https://www.52pojie.cn/thread-2085866-1-1.html" rel="canonical"/>
+<meta content="看小白如何一步步逆向acs-token参数" name="keywords"/>
+<meta content="本文章中所有内容仅供学习交流使用，不用于其他任何目的，严禁用于商业用途和非法用途，否则由此产生的一切后果均与作者无关！若有侵权，请联系作者删除。 目标网址：a ... " name="description"/>
+<meta content="Discuz!" name="generator"/>
+<meta content="True" name="MSSmartTagsPreventParsing"/>
+<meta content="Yes" http-equiv="MSThemeCompatible"/>
+
+<link href="/favicon.svg" rel="mask-icon"/>
+<link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="apple-touch-icon.png" rel="apple-touch-icon"/>
+<link href="apple-touch-icon.png" rel="apple-touch-icon" size="180x180"/>
+<link href="apple-touch-icon-167x167.png" rel="apple-touch-icon" size="167x167"/>
+<link href="apple-touch-icon-152x152.png" rel="apple-touch-icon" size="152x152"/><link href="https://static.52pojie.cn/cache/style_1_common.css?BC3" rel="stylesheet" type="text/css"><link href="https://static.52pojie.cn/cache/style_1_forum_viewthread.css?BC3" rel="stylesheet" type="text/css"><link href="./template/default/style/t5/style.css" id="css_extstyle" rel="stylesheet" type="text/css">
+<meta content="吾爱破解 - 52pojie.cn" name="application-name"/>
+<meta content="吾爱破解 - 52pojie.cn" name="msapplication-tooltip"/>
+<meta content="name=门户;action-uri=https://www.52pojie.cn/portal.php;icon-uri=https://static.52pojie.cn/static/image/common/portal.ico" name="msapplication-task"/>
+<meta content="name=网站;action-uri=https://www.52pojie.cn/forum.php;icon-uri=https://static.52pojie.cn/static/image/common/bbs.ico" name="msapplication-task"/>
+<link href="https://www.52pojie.cn/archiver/" rel="archives" title="吾爱破解 - 52pojie.cn">
+<link href="https://static.52pojie.cn/cache/style_1_widthauto.css?BC3" id="css_widthauto" rel="stylesheet" type="text/css">
+<link href="https://static.52pojie.cn/cache/style_1_responsive.css?BC3" id="css_responsive" rel="stylesheet" type="text/css">
+</link></link></link></link></link></link></meta></head>
+<body class="pg_viewthread" id="nv_forum" onkeydown="if(event.keyCode==27) return false;">
+<div id="append_parent"></div><div id="ajaxwaitid"></div>
+<div class="cl" id="toptb">
+<div class="wp">
+<div class="z"><a href="https://space.bilibili.com/544451485" rel="nofollow" target="_blank">官方bilibili</a><a href="thread-582852-1-1.html" style="color: red" target="_blank">Windows破解入门</a><a href="thread-408645-1-1.html" style="color: red" target="_blank">Android逆向入门</a></div>
+<div class="y">
+<a class="switchblind" href="javascript:;" id="switchblind" onclick="toggleBlind(this)" title="开启辅助访问"></a>
+<a href="thread-209287-1-1.html" target="_blank" title="修复各种访问不了论坛、访问论坛异常、验证码异常等各种问题的大杀器！">【网络诊断修复工具】</a><a class="switchwidth" href="javascript:;" id="switchwidth" onclick="widthauto(this)" title="切换到窄版">切换到窄版</a>
+<a href="javascript:;" id="sslct" onmouseover="delayShow(this, function() {showMenu({'ctrlid':'sslct','pos':'34!'})});">切换风格</a></div>
+</div>
+</div>
+<ul class="p_pop" disautofocus="true" id="myprompt_menu" style="display: none;">
+<li><a href="home.php?mod=space&amp;do=pm" id="pm_ntc" style="background-repeat: no-repeat; background-position: 0 50%;"><em class="prompt_news_0"></em>消息</a></li>
+<li><a href="home.php?mod=follow&amp;do=follower"><em class="prompt_follower_0"></em>新听众</a></li>
+<li><a href="home.php?mod=space&amp;do=notice&amp;view=mypost"><em class="notice_mypost"></em>我的帖子(<span class="rq">1</span>)</a></li>
+<li class="ignore_noticeli"><a href="javascript:;" onclick="setcookie('ignore_notice', 1);hideMenu('myprompt_menu')" title="暂不提醒"><em class="ignore_notice"></em></a></li>
+</ul>
+<div class="cl p_pop" id="sslct_menu" style="display: none;">
+<span class="sslct_btn" onclick="extstyle('./template/default/style/t1')" title="红"><i style="background:#BA350F"></i></span>
+<span class="sslct_btn" onclick="extstyle('./template/default/style/t2')" title="青"><i style="background:#429296"></i></span>
+<span class="sslct_btn" onclick="extstyle('./template/default/style/t3')" title="橙"><i style="background:#FE9500"></i></span>
+<span class="sslct_btn" onclick="extstyle('./template/default/style/t4')" title="紫"><i style="background:#9934B7"></i></span>
+<span class="sslct_btn" onclick="extstyle('./template/default/style/t5')" title="蓝"><i style="background:#0053B9"></i></span>
+</div>
+<ul class="p_pop" id="myitem_menu" style="display: none;">
+<li><a href="forum.php?mod=guide&amp;view=my">帖子</a></li>
+<li><a href="home.php?mod=space&amp;do=favorite&amp;view=me">收藏</a></li>
+<li><a href="home.php?mod=space&amp;do=friend">好友</a></li>
+</ul>
+<div class="p_pop" id="qmenu_menu" style="display: none;">
+<ul class="cl nav"><li><a href="forum.php?mod=guide" style="background-image:url(https://static.52pojie.cn/static/image/feed/guide_b.png) !important">导读</a></li>
+<li><a href="forum.php?mod=guide&amp;view=my" style="background-image:url(https://static.52pojie.cn/static/image/feed/thread_b.png) !important">帖子</a></li>
+<li><a href="home.php?mod=space&amp;do=favorite&amp;view=me" style="background-image:url(https://static.52pojie.cn/static/image/feed/favorite_b.png) !important">收藏</a></li>
+<li><a href="forum.php?mod=collection&amp;op=my" style="background-image:url(https://static.52pojie.cn/static/image/feed/collection_b.png) !important">淘帖</a></li>
+<li><a href="home.php?mod=medal" style="background-image:url(https://static.52pojie.cn/static/image/feed/medal_b.png) !important">勋章</a></li>
+<li><a href="home.php?mod=task" style="background-image:url(https://static.52pojie.cn/static/image/feed/task_b.png) !important">任务</a></li>
+<li><a href="home.php?mod=space&amp;do=friend" style="background-image:url(https://static.52pojie.cn/static/image/feed/friend_b.png) !important">好友</a></li>
+<li><a href="misc.php?mod=ranklist" style="background-image:url(https://static.52pojie.cn/static/image/feed/ranklist_b.png) !important">排行榜</a></li>
+<li><a href="home.php?mod=spacecp&amp;ac=credit&amp;op=buy" style="background-image:url(https://static.52pojie.cn/static/image/feed/money.png) !important" title="论坛币捐助充值入口。">充值</a></li>
+</ul>
+<div class="btda" id="fjump_menu"></div></div><div id="hd">
+<div class="wp">
+<div class="hdc cl"><h2><a href="./" title="吾爱破解 - 52pojie.cn"><img alt="吾爱破解 - 52pojie.cn" border="0" src="../common_images/logo.png"/></a></h2><div id="um">
+<div class="avt y"><a href="home.php?mod=space&amp;uid=588268"><img onerror="this.onerror=null;this.src='https://avatar.52pojie.cn/images/noavatar_small.gif'" src="../common_images/68_avatar_small.jpg"/></a></div>
+<p>
+<strong class="vwmy"><a href="https://github.com/jwmycz" target="_blank" style="color: #0366d6; text-decoration: none;">微信公众号：将往的爬虫逆向日记</a></strong>
+<span class="pipe">|</span><a href="connect.php?mod=config" target="_blank"><img align="absmiddle" alt="QQ绑定" class="qq_bind" src="../common_images/qq_bind_small.gif"/></a>
+<span class="pipe">|</span><a class="showmenu a" href="home.php?mod=space&amp;do=reward&amp;view=me" id="rewards" onmouseover="showMenu({'ctrlid':'rewards'})"><em class="showtipex"></em>悬赏</a><span class="pipe">|</span><a class="showmenu" href="javascript:;" id="myitem" onmouseover="showMenu({'ctrlid':'myitem'});">我的</a>
+<span class="pipe">|</span><a href="home.php?mod=spacecp">设置</a>
+<span class="pipe">|</span><a href="home.php?mod=space&amp;do=pm" id="pm_ntc">消息</a>
+<span class="pipe">|</span><a class="a showmenu new" href="home.php?mod=space&amp;do=notice" id="myprompt" onmouseover="showMenu({'ctrlid':'myprompt'});">提醒(1)</a><span id="myprompt_check"></span>
+<span class="pipe">|</span><a href="member.php?mod=logging&amp;action=logout&amp;formhash=7f5fdc25">退出</a>
+</p>
+<p>
+<img align="absmiddle" alt="" class="qq_bind" src="../common_images/wbs.png"/> <span class="pipe">|</span><a class="showmenu" href="home.php?mod=spacecp&amp;ac=credit&amp;showcredit=1" id="extcreditmenu" onmouseover="delayShow(this, showCreditmenu);">积分: 232</a>
+<span class="pipe">|</span><a class="showmenu" href="home.php?mod=spacecp&amp;ac=usergroup" id="g_upmine" onmouseover="delayShow(this, showUpgradeinfo)">用户组: 前途无量</a>
+</p>
+</div>
+</div>
+<div id="nv">
+<a href="javascript:;" id="qmenu" onmouseover="delayShow(this, function () {showMenu({'ctrlid':'qmenu','pos':'34!','ctrlclass':'a','duration':2});showForummenu(5);})">快捷导航</a>
+<ul><li id="mn_portal"><a hidefocus="true" href="portal.php" title="吾爱破解门户">门户<span>吾爱破解门户</span></a></li><li class="a" id="mn_forum"><a hidefocus="true" href="/" title="吾爱破解论坛">网站<span>吾爱破解论坛</span></a></li><li id="mn_Na063" onmouseover="showMenu({'ctrlid':this.id,'ctrlclass':'hover','duration':2})"><a hidefocus="true" href="forum.php?mod=guide&amp;view=newthread" style="color: yellow" title="吾爱破解论坛新帖导读">新帖<span>吾爱破解论坛新帖导读</span></a></li><li id="mn_forum_11"><a hidefocus="true" href="forum.php?mod=collection" title="吾爱破解文章专辑列表">专辑<span>吾爱破解文章专辑列表</span></a></li><li id="mn_home_4" onmouseover="showMenu({'ctrlid':this.id,'ctrlclass':'hover','duration':2})"><a hidefocus="true" href="home.php" title="Space">家园<span>Space</span></a></li><li id="mn_N12a7"><a hidefocus="true" href="misc.php?mod=ranklist" title="吾爱破解排行榜">排行榜<span>吾爱破解排行榜</span></a></li><li id="mn_N05be"><a hidefocus="true" href="thread-143136-1-1.html" target="_blank" title="吾爱破解论坛总版规">总版规<span>吾爱破解论坛总版规</span></a></li><li id="mn_N34c9"><a hidefocus="true" href="forum-15-1.html" target="_blank" title="吾爱破解论坛欢迎大家积极举报违规帖子!">投诉举报<span>吾爱破解论坛欢迎大家积极举报违规帖子!</span></a></li><li id="mn_Na678" onmouseover="showMenu({'ctrlid':this.id,'ctrlclass':'hover','duration':2})"><a hidefocus="true" href="https://down.52pojie.cn" style="font-weight: bold;color: yellow" target="_blank" title="爱盘，在线破解工具包，实时提供最新逆向资源！">爱盘<span>爱盘，在线破解工具包，实时提供最新逆向资源！</span></a></li><li id="mn_N0a2c"><a hidefocus="true" href="misc.php?mod=faq" title="吾爱破解论坛常见问题解答中心">帮助<span>吾爱破解论坛常见问题解答中心</span></a></li></ul>
+<a href="javascript:;" onclick="showWindow('csu_wechat_scan_scan','plugin.php?id=csu_wechat_scan:scan','get',0);return false;" style="float: right;display: inline;margin-top: 5px;margin-left: 3px;margin-right: 3px;">
+<img alt="ganzhuweixin" src="../common_images/scan.gif"/>
+</a></div>
+<ul class="p_pop h_pop" id="mn_Na063_menu" style="display: none"><li><a hidefocus="true" href="home.php?mod=follow&amp;view=follow" style="color: red" target="_blank">关注人的新帖</a></li><li><a hidefocus="true" href="forum.php?mod=guide&amp;view=tech" style="color: blue" target="_blank">技术新帖合集</a></li><li><a hidefocus="true" href="forum.php?mod=guide&amp;view=soft" style="color: green" target="_blank">最新软件合集</a></li><li><a hidefocus="true" href="forum.php?mod=forumdisplay&amp;fid=2&amp;filter=author&amp;orderby=dateline" target="_blank">原创发布新贴</a></li><li><a hidefocus="true" href="forum.php?mod=forumdisplay&amp;fid=5&amp;filter=author&amp;orderby=dateline" target="_blank">脱壳破解新帖</a></li><li><a hidefocus="true" href="forum.php?mod=forumdisplay&amp;fid=65&amp;filter=author&amp;orderby=dateline" target="_blank">移动安全新帖</a></li><li><a hidefocus="true" href="forum.php?mod=forumdisplay&amp;fid=32&amp;filter=author&amp;orderby=dateline" target="_blank">病毒分析新帖</a></li><li><a hidefocus="true" href="forum.php?mod=forumdisplay&amp;fid=59&amp;filter=author&amp;orderby=dateline" target="_blank">软件调试新贴</a></li><li><a hidefocus="true" href="forum.php?mod=forumdisplay&amp;fid=6&amp;filter=author&amp;orderby=dateline" target="_blank">动画发布新帖</a></li><li><a hidefocus="true" href="forum.php?mod=forumdisplay&amp;fid=24&amp;filter=author&amp;orderby=dateline" target="_blank">编程语言新帖</a></li></ul><ul class="p_pop h_pop" id="mn_home_4_menu" style="display: none"><li><a hidefocus="true" href="home.php?mod=spacecp&amp;ac=invite" style="font-weight: bold;color: red" title="通过购买邀请码邀请好友注册论坛">邀请好友注册</a></li></ul><div class="p_pop h_pop" id="mn_userapp_menu" style="display: none"></div><ul class="p_pop h_pop" id="mn_Na678_menu" style="display: none"><li><a hidefocus="true" href="https://down.52pojie.cn/Tools/" target="_blank">Tools</a></li><li><a hidefocus="true" href="https://down.52pojie.cn/Logo/" target="_blank">吾爱破解Logo</a></li><li><a hidefocus="true" href="https://down.52pojie.cn/Logo/Wallpaper/" target="_blank">吾爱破解桌面壁纸</a></li><li><a hidefocus="true" href="https://down.52pojie.cn/%E5%90%BE%E7%88%B1%E7%A0%B4%E8%A7%A3%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B/" target="_blank">吾爱破解视频教程</a></li><li><a hidefocus="true" href="https://down.52pojie.cn/%E5%90%BE%E7%88%B1%E7%A0%B4%E8%A7%A3%E8%AE%BA%E5%9D%9B%E7%B2%BE%E5%8D%8E%E9%9B%86/" target="_blank">吾爱破解论坛精华集</a></li><li><a hidefocus="true" href="https://down.52pojie.cn/Tools/Debuggers/" target="_blank">吾爱破解专用版Ollydbg</a></li></ul><ul class="p_pop h_pop" id="mn_Ndb2c_menu" style="display: none"><li><a hidefocus="true" href="forum.php?mod=forumdisplay&amp;fid=15&amp;filter=typeid&amp;typeid=182&amp;orderby=dateline">处理举报贴</a></li><li><a hidefocus="true" href="forum.php?mod=forumdisplay&amp;fid=72&amp;filter=author&amp;orderby=dateline">处理站务贴</a></li><li><a hidefocus="true" href="forum.php?mod=forumdisplay&amp;fid=66&amp;filter=author&amp;orderby=dateline">处理福利贴</a></li><li><a hidefocus="true" href="forum.php?mod=forumdisplay&amp;fid=10&amp;filter=author&amp;orderby=dateline">处理水区贴</a></li><li><a hidefocus="true" href="forum-23-1.html">办公区</a></li><li><a hidefocus="true" href="forum-34-1.html">证据区</a></li></ul><div class="cl" id="mu">
+</div><div class="comiis_nav">
+<ul class="nav_ico02">
+<li><a href="forum-2-1.html" target="_blank" title="吾爱破解坛友原创作品展示，包含Windows原创工具，也有Android、iOS和Mac OS程序相应的原创程序！"><font color="green">原创发布区</font></a></li>
+<li><a href="forum-16-1.html" target="_blank" title="精品软件推荐，软件交流天地，汇集众多精彩评论，热心会员每日更新。找你所需要的，给你我分享的！">精品软件区</a></li>
+<li><a href="forum-4-1.html" target="_blank" title="加密解密相关软件发布区，包含最新最全的软件加密解密相关工具，工欲善其事必先利其器！"><font color="green">逆向资源区</font></a></li>
+<li><a href="forum-10-1.html" target="_blank" title="据说人滴祖先生活在水里">水漫金山区</a></li>
+<li><a href="forum-50-1.html" target="_blank" title="你的计算机又受到病毒的侵扰使你不知所措了？不要着急，让我们一起帮助你解决问题！"><font color="green">病毒救援区</font></a></li>
+<li><a href="forum-66-1.html" target="_blank" title="福利资讯、经验分享">福利经验区</a></li>
+</ul>
+<ul class="nav_ico03">
+<li><a href="forum-5-1.html" target="_blank" title="讨论Windows软件脱壳分析、软件逆向分析、代码逆向改造、虚拟机加密分析，也包括Mac OS等其他平台程序逆向分析一切尽在此！"><font color="blue">脱壳破解区</font></a></li>
+<li><a href="forum-65-1.html" target="_blank" title="讨论Android软件脱壳分析、Android软件逆向分析、Android系统安全分析、Android软件加密分析，当然iOS等移动程序逆向分析一切尽在此！"><font color="red"><b>移动安全区</b></font></a></li>
+<li><a href="forum-32-1.html" target="_blank" title="分析研究病毒木马技术，预防病毒木马，查杀病毒木马"><font color="blue">病毒分析区</font></a></li>
+<li><a href="forum-24-1.html" target="_blank" title="学习编程探讨编程技巧，共同分享程序源代码">编程语言区</a></li>
+<li><a href="forum-6-1.html" target="_blank" title="软件脱壳、软件汉化、软件逆向相关动画教程，学习心得分享。在这里我们可以携手并进，是我们汲取知识的伟大航路！"><font color="blue">动画发布区</font></a></li>
+<li><a href="forum-41-1.html" target="_blank" title="工欲善其事 必先利其器，从这里能找到你想要的利器">安全工具区</a></li>
+</ul>
+<ul class="nav_ico01">
+<li><a href="forum-13-1.html" target="_blank" title="开放注册信息，版块调整公告，站点信息发布，会员违规处理等"><font color="red"><b>站点公告</b></font></a></li>
+<li><a href="thread-147931-1-1.html" target="_blank" title="【吾爱破解站点导航帖】 - [让你快速融入吾爱破解大家庭]">站点导航</a></li>
+<li><a href="thread-143136-1-1.html" target="_blank" title="吾爱破解站点总版规！"><font color="blue"><b>站点总版规</b></font></a></li>
+<li><a href="forum-25-1.html" target="_blank" title="会员、版主、勋章、友情链接申请，发帖前请认真阅读本版规则！本区可以匿名发帖、跟帖相应的申请！">申请专区</a></li>
+<li><a href="forum-39-1.html" target="_blank" title="此版块只允许发布招聘和求职相关信息！本区可以匿名发帖，欢迎正规公司前来发布招聘信息！"><font color="green"><b>招聘求职</b></font></a></li>
+<li><a href="thread-309877-1-1.html" target="_blank" title=" 版规速读，主要关于如何给自己加违规和如何消违规"><b>违规怎么办</b></a></li>
+</ul>
+<ul class="nav_ico04" style="width:80px;">
+<li><a href="misc.php?mod=faq" target="_blank" title="有什么问题来这里看看吧，这里有你想知道的内容！"><font color="blue"><b>站点帮助</b></font></a></li>
+<li><a href="forum-72-1.html" target="_blank" title="如果你对我们有什么意见或者建议，请在此提出">站务处理</a></li>
+</ul>
+</div>
+<div class="cl" id="scbar">
+<form action="search.php?searchsubmit=yes" autocomplete="off" id="scbar_form" method="post" onsubmit="searchFocus($('scbar_txt'))" target="_blank">
+<input id="scbar_mod" name="mod" type="hidden" value="search"/>
+<input name="formhash" type="hidden" value="7f5fdc25"/><input name="srchtype" type="hidden" value="title"/>
+<input name="srhfid" type="hidden" value="5"/>
+<input name="srhlocality" type="hidden" value="forum::viewthread"/>
+<table cellpadding="0" cellspacing="0">
+<tr>
+<td class="scbar_icon_td"></td>
+<td class="scbar_txt_td"><input autocomplete="off" id="scbar_txt" name="srchtxt" speech="" type="text" x-webkit-speech=""/></td>
+<td class="scbar_type_td"><a class="xg1" hidefocus="true" href="javascript:;" id="scbar_type" onclick="showMenu(this.id)">搜索</a></td>
+<td class="scbar_btn_td"><button class="pn pnc" id="scbar_btn" name="searchsubmit" sc="1" type="submit" value="true"><strong class="xi2">搜索</strong></button></td>
+<td class="scbar_hot_td">
+<div id="scbar_hot">
+<strong class="xw1">热搜: </strong>
+<a class="xi2" href="search.php?mod=forum&amp;srchtxt=ctf&amp;formhash=7f5fdc25&amp;searchsubmit=true&amp;source=hotsearch" sc="1" target="_blank">ctf</a>
+<a class="xi2" href="search.php?mod=forum&amp;srchtxt=%D0%C2%CA%D6&amp;formhash=7f5fdc25&amp;searchsubmit=true&amp;source=hotsearch" sc="1" target="_blank">新手</a>
+<a class="xi2" href="search.php?mod=forum&amp;srchtxt=%CD%D1%BF%C7&amp;formhash=7f5fdc25&amp;searchsubmit=true&amp;source=hotsearch" sc="1" target="_blank">脱壳</a>
+<a class="xi2" href="search.php?mod=forum&amp;srchtxt=%BD%CC%B3%CC&amp;formhash=7f5fdc25&amp;searchsubmit=true&amp;source=hotsearch" sc="1" target="_blank">教程</a>
+<a class="xi2" href="search.php?mod=forum&amp;srchtxt=Crackme&amp;formhash=7f5fdc25&amp;searchsubmit=true&amp;source=hotsearch" sc="1" target="_blank">Crackme</a>
+</div>
+</td>
+</tr>
+</table>
+</form>
+</div>
+<ul class="p_pop" id="scbar_type_menu" style="display: none;"><li><a fid="5" href="javascript:;" rel="curforum">本版</a></li><li><a class="curtype" href="javascript:;" rel="forum">帖子</a></li><li><a href="javascript:;" rel="user">用户</a></li></ul>
+</div>
+</div>
+<style>
+						a#rewards {
+							margin-right: 2px !important;
+							padding-top: 3px;
+							padding-bottom: 3px;
+							padding-left: 10px;
+							color: #333;
+							
+						}
+						
+						em.showtipex, em.showtipli {
+							position: relative;
+						}
+						em.showtipli {
+							right: calc(50% - 50px);
+						}
+						
+					</style>
+<ul class="p_pop" id="rewards_menu" style="display: none;">
+<li><a href="forum.php?mod=forumdisplay&amp;fid=8&amp;filter=specialtype&amp;specialtype=reward&amp;rewardtype=1" target="_blank" title="帮助坛友解决问题,同时争取论坛积分">挣悬赏</a></li>
+<li class="noreward"><a href="home.php?mod=space&amp;do=reward&amp;view=me&amp;flag=1" target="_blank" title="请尽快完结您的悬赏">未完结</a></li>
+<li><a href="thread-2083678-1-1.html" target="_blank" title="可按撤销规则回帖申请撤销">撤销悬赏</a></li>
+</ul>
+<div class="wp" id="wp">
+<style id="diy_style" type="text/css"></style>
+<div class="area" id="diynavtop"></div>
+<div class="bm cl" id="pt">
+<div class="z">
+<a class="nvhm" href="./" title="首页">吾爱破解 - 52pojie.cn</a><em>»</em><a href="/">网站</a> <em>›</em> <a href="forum.php?gid=1">【 软件安全 】</a> <em>›</em> <a href="forum-5-1.html">『脱壳破解区』</a> <em>›</em> <a href="thread-2085866-1-1.html">看小白如何一步步逆向acs-token参数</a>
+</div>
+</div>
+<style>
+					.dropbtn{background-color:#0099cb;color:white;padding:2px 6px;font-size:12px;border:none;cursor:pointer;}
+					.dropdown{position:relative;display:inline-block;}
+					.dropdown-content{display:none;position:absolute;background-color:#f9f9f9;min-width:80px;box-shadow:0px 8px 16px 0px rgba(0,0,0,0.2);}
+					.dropdown-content a{color:black;padding:10px;text-decoration:none;display:block;text-align:center;}
+					.dropdown-content a:hover{background-color:#d0d1f2;}
+					.dropdown:hover .dropdown-content{display:block;}
+					.dropdown:hover .dropbtn{background-color:#1b64d7;}
+				</style>
+<style id="diy_style" type="text/css"></style>
+<div class="wp">
+<div class="area" id="diy1"></div>
+</div>
+<div class="wp cl" id="ct">
+<div class="pgs mbm cl" id="pgt">
+<div class="pgt"></div>
+<span class="y pgb" id="visitedforums" onmouseover="$('visitedforums').id = 'visitedforumstmp';this.id = 'visitedforums';showMenu({'ctrlid':this.id,'pos':'34'})"><a href="forum-5-1.html">返回列表</a></span>
+<a href="javascript:;" id="newspecial" onclick="showWindow('newthread', 'forum.php?mod=post&amp;action=newthread&amp;fid=5')" onmouseover="$('newspecial').id = 'newspecialtmp';this.id = 'newspecial';showMenu({'ctrlid':this.id})" title="发新帖"><img alt="发新帖" src="../common_images/pn_post.png"/></a><a href="javascript:;" id="post_reply" onclick="showWindow('reply', 'forum.php?mod=post&amp;action=reply&amp;fid=5&amp;tid=2085866')" title="回复"><img alt="回复" src="../common_images/pn_reply.png"/></a>
+</div>
+<ul class="p_pop" id="newspecial_menu" style="display: none">
+<li><a href="forum.php?mod=post&amp;action=newthread&amp;fid=5">发表帖子</a></li><li class="poll"><a href="forum.php?mod=post&amp;action=newthread&amp;fid=5&amp;special=1">发起投票</a></li></ul>
+<div class="pl bm" id="postlist">
+<table cellpadding="0" cellspacing="0">
+<tr>
+<td class="pls ptn pbn">
+<div class="hm ptn">
+<span class="xg1">查看:</span> <span class="xi1">48</span><span class="pipe">|</span><span class="xg1">回复:</span> <span class="xi1">0</span>
+</div>
+</td>
+<td class="plc ptm pbn vwthd">
+<div class="y">
+<a href="forum.php?mod=redirect&amp;goto=nextoldset&amp;tid=2085866" title="上一主题"><img alt="上一主题" class="vm" src="../common_images/thread-prev.png"/></a>
+<a href="forum.php?mod=redirect&amp;goto=nextnewset&amp;tid=2085866" title="下一主题"><img alt="下一主题" class="vm" src="../common_images/thread-next.png"/></a>
+</div>
+<span class="xg1 side_btn">
+<a class="btn_s_close" href="javascript:;" onclick="setcookie('close_leftinfo', 1);location.reload();" title="收起左侧"><img alt="收起左侧" class="vm" src="../common_images/control_l.png"/></a>
+</span>
+<h1 class="ts">
+<a href="forum.php?mod=forumdisplay&amp;fid=5&amp;filter=typeid&amp;typeid=378">[<font color="blue">Web逆向</font>]</a>
+<span id="thread_subject">看小白如何一步步逆向acs-token参数</span>
+</h1>
+<span class="xg1">
+<a href="thread-2085866-1-1.html" onclick="return copyThreadUrl(this)">[复制链接]</a>
+</span>
+</td>
+</tr>
+</table>
+<table cellpadding="0" cellspacing="0" class="ad">
+<tr>
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</table><div id="post_54636755"><table cellpadding="0" cellspacing="0" class="plhin res-postfirst" id="pid54636755" summary="pid54636755">
+<tr>
+<a name="lastpost"></a><td class="pls" rowspan="2">
+<div class="pls cl favatar" id="favatar54636755">
+<div class="pi">
+<div class="authi"><a class="xw1" href="home.php?mod=space&amp;uid=612994" rel="nofollow" target="_blank">szh12123</a>
+</div>
+</div>
+<div class="p_pop blk bui card_gender_0" id="userinfo54636755" style="display: none; margin-top: -11px;">
+<div class="m z">
+<div id="userinfo54636755_ma"></div>
+</div>
+<div class="i y">
+<div>
+<strong><a class="xi2" href="home.php?mod=space&amp;uid=612994" target="_blank">szh12123</a></strong>
+<em>当前离线</em>
+</div><dt>好友</dt><dd><a class="xi2" href="home.php?mod=space&amp;uid=612994&amp;do=friend&amp;view=me&amp;from=space" target="_blank">0</a></dd>
+<dt>阅读权限</dt><dd>10</dd>
+<span style="color:Blue;"><dt>听众</dt><dd><a class="xi2" href="home.php?mod=follow&amp;do=follower&amp;uid=612994" target="_blank">3</a></dd>
+<dt>最后登录</dt><dd>2026-1-12</dd>
+<div class="imicn">
+<a href="home.php?mod=space&amp;uid=612994&amp;do=profile" target="_blank" title="查看详细资料"><img alt="查看详细资料" src="../common_images/userinfo.gif"/></a>
+</div>
+<div id="avatarfeed"><span id="threadsortswait"></span></div>
+</span></div>
+</div>
+<div>
+<div class="avatar" onmouseover="showauthor(this, 'userinfo54636755')"><a class="avtm" href="home.php?mod=space&amp;uid=612994" rel="nofollow" target="_blank"><img src="../common_images/noavatar_middle.gif"/></a></div>
+</div>
+<div class="tns xg2"><table cellpadding="0" cellspacing="0"><th><p><a class="xi2" href="home.php?mod=space&amp;uid=612994&amp;do=thread&amp;type=thread&amp;view=me&amp;from=space">13</a></p>主题</th><th><p><a class="xi2" href="home.php?mod=space&amp;uid=612994&amp;do=thread&amp;type=reply&amp;view=me&amp;from=space">72</a></p>回帖</th><td><p><a class="xi2" href="home.php?mod=space&amp;uid=612994&amp;do=profile">83</a></p>积分</td></table></div>
+<p class="side-group"><em><a href="home.php?mod=spacecp&amp;ac=usergroup&amp;gid=10" target="_blank">锋芒初露</a></em></p>
+<p class="side-star"><span id="g_up54636755" onmouseover="showMenu({'ctrlid':this.id, 'pos':'12!'});"><img alt="Rank: 1" src="../common_images/star_level1.gif"/></span></p>
+<div class="tip tip_4" id="g_up54636755_menu" style="display: none;"><div class="tip_horn"></div><div class="tip_c">锋芒初露, 积分 83, 距离下一级还需 117 积分</div></div>
+<dl class="pil cl credit-list">
+<span amount="0" class="cr-digest">
+<dt>精华</dt>
+<dd>0</dd>
+</span>
+<span amount="1 点" class="cr-ext1">
+<dt>威望</dt>
+<dd>1 点</dd>
+</span>
+<span amount="45 点" class="cr-ext6">
+<dt>热心值</dt>
+<dd>45 点</dd>
+</span>
+<span amount="0 点" class="cr-ext4">
+<dt>悬赏值</dt>
+<dd>0 点</dd>
+</span>
+<span class="cr-follower">
+<dt>听众</dt>
+<dd><a class="xi2" href="home.php?mod=follow&amp;do=follower&amp;uid=612994" target="_blank">3</a></dd>
+</span>
+<span amount="0 点" class="cr-ext3">
+<dt>贡献值</dt>
+<dd>0 点</dd>
+</span>
+<span class="cr-ext2">
+<dt>吾爱币</dt>
+<dd>1020 CB</dd>
+</span>
+<span amount="0 次" class="cr-ext8">
+<dt>违规</dt>
+<dd>0 次</dd>
+</span>
+<dt>注册时间</dt>
+<dd>2017-3-13</dd>
+</dl>
+<ul class="xl xl2 o cl">
+<li class="addflw">
+<a class="xi2" href="home.php?mod=spacecp&amp;ac=follow&amp;op=add&amp;hash=7f5fdc25&amp;fuid=612994" id="followmod_612994" onclick="showWindow('followmod', this.href, 'get', 0);" title="收听TA">收听TA</a>
+</li>
+</ul>
+<nav class="toc toc-side relative z-1 transition--300 absolute" id="markdown_toc_54636755"></nav></div>
+</td>
+<td class="plc">
+<div class="pi">
+<div class="y" id="fj">
+<label class="z">电梯直达</label>
+<input class="px p_fre z" onkeydown="if(event.keyCode==13) {window.location=$('fj_btn').href;return false;}" onkeyup="$('fj_btn').href='forum.php?mod=redirect&amp;ptid=2085866&amp;authorid=0&amp;postno='+this.value" size="2" title="跳转到指定楼层" type="text"/>
+<a class="z" href="javascript:;" id="fj_btn" title="跳转到指定楼层"><img alt="跳转到指定楼层" class="vm" src="../common_images/fj_btn.png"/></a>
+</div>
+<strong>
+<a href="thread-2085866-1-1.html" id="postnum54636755" onclick="setCopy(this.href, '帖子地址复制成功');return false;">
+<font color="red"><b>楼主</b></font></a>
+</strong>
+<div class="pti">
+<div class="pdbt">
+</div>
+<div class="authi">
+<img class="authicn vm" id="authicon54636755" src="../common_images/online_member.gif"/>
+<span class="res-author"><a class="xi2" href="home.php?mod=space&amp;uid=612994" target="_blank">szh12123</a>
+</span><em id="authorposton54636755"><span class="poston">发表于</span> 2026-1-12 00:45</em>
+<span class="pipe">|</span>
+<a href="forum.php?mod=viewthread&amp;tid=2085866&amp;page=1&amp;authorid=612994" rel="nofollow">只看该作者</a>
+<span class="none"><img alt="回帖奖励" class="vm" src="../common_images/arw_r.gif"/></span>
+<span class="pipe show">|</span><a class="show" href="forum.php?mod=viewthread&amp;tid=2085866&amp;extra=page%3D1&amp;ordertype=1" rel="nofollow">倒序浏览</a>
+</div>
+</div>
+</div><div class="pct"><style type="text/css">.pcb{margin-right:0}</style><div class="pcb">
+<div class="t_fsz">
+<table cellpadding="0" cellspacing="0"><tr><td class="t_f" id="postmessage_54636755">
+<i class="pstatus"> 本帖最后由 szh12123 于 2026-1-12 00:54 编辑 </i><br/>
+<br/>
+<font face="微软雅黑"><strong>本文章中所有内容仅供学习交流使用</strong><strong>，</strong><strong>不用于其他任何目的，严禁用于商业用途和非法用途，否则由此产生的一切后果均与作者无关！若有侵权，请联系作者删除。</strong></font><strong><font face="微软雅黑"> </font></strong><br/>
+<br/>
+<font face="微软雅黑">目标网址：</font><font face="微软雅黑">aHR0cHM6Ly9ndXNoaXRvbmcuYmFpZHUuY29tLw==</font><font face="微软雅黑"> </font><br/>
+<br/>
+<font face="微软雅黑">最近有点无聊，就随便找了个网站玩了下逆向，找到headers中有个关键参数acs-token，一时没忍住就研究了下生成逻辑，主要是有点python基础，但java还没咋学过，属于又菜又爱玩，最后居然分析出来了；现在把分析思路整理一下交流学习，因为非专业纯爱好，如有不足还请指教；</font><font face="微软雅黑"><br/>
+</font><br/>
+<font face="微软雅黑">一、先说结论，至于这些参数是如何得到的，这个后面讲；</font><br/>
+<font face="微软雅黑"><br/>
+<font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">目标参数：</font></font></font><font face="微软雅黑"><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">acs-token:1768XXXXX6745_1768XXXXX 8101_GFl7CP…</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">省略</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">…zx23Z0=</font></font></font><br/>
+<font face="微软雅黑"><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">分析结果：</font></font></font><font face="微软雅黑"><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">acs-token: “</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">动态时间戳</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">(</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">两小时一更换</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">)” + “_” + “</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">当前时间戳</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">” + “_” + “AES</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">加密</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">”</font></font></font><br/>
+<font face="微软雅黑"><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">AES</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">加密：</font></font></font><br/>
+<font face="微软雅黑"><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">key</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">值：</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">16</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">位动态值</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">(</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">两小时一更换</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">)</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">；</font></font></font><br/>
+<font face="微软雅黑"><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">iv</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">值：</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">16</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">位固定值；</font></font></font><br/>
+<font face="微软雅黑"><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">加密模式：</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">CBC</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">；</font></font></font><br/>
+<font face="微软雅黑"><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">数据明文：</font></font></font><br/>
+<font style="color:rgb(31, 31, 31)"><font style="font-size:9pt"><font face="微软雅黑">{"0":"61889XXXXX5217","ua":"Mozilla/5.0XXXXX537.36","url":"https://XXXXX.com/","platform":"Win32","d1":"","clientTs":1768XXXXX 5218,"version":"1.0.2.1","extra":"","odkp":0}</font></font></font><br/>
+<font face="微软雅黑">其中：</font><br/>
+<font face="微软雅黑">"0"：由随机数拼接时间戳后七位；</font><br/>
+<font face="微软雅黑">"url"：<font style="color:rgb(31, 31, 31)"><font style="font-size:9pt"> referer</font></font>网址<font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">；</font></font></font><br/>
+<font face="微软雅黑">"<font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">clientTs</font></font>"：<font style="color:rgb(31, 31, 31)"><font style="font-size:9pt"> </font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">当前时间戳，与</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">acs-token</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">当前时间戳相同</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">；</font></font></font><br/>
+<font face="微软雅黑">其他都是固定值；</font><br/>
+<font face="微软雅黑"><br/>
+</font><font face="微软雅黑">二、接下来就是一步步分析的过程，包括试错：</font><br/>
+<br/>
+<font face="微软雅黑">首先直接搜索acs-token，就发现了赋值代码；</font><br/>
+<ignore_js_op>
+<img aid="2826574" class="zoom" id="aimg_2826574" inpost="1" src="../common_images/003549s99961iqexpivvgv.png" width="398"/>
+<div class="tip tip_4 aimg_tip" disautofocus="true" id="aimg_2826574_menu" style="position: absolute; display: none">
+<div class="xs0">
+<p><strong>1.png</strong> <em class="xg1">(13.95 KB, 下载次数: 0)</em></p>
+<p>
+<a href="forum.php?mod=attachment&amp;aid=MjgyNjU3NHw4NDZkMGZmN3wxNzY4MTY0NTIzfDU4ODI2OHwyMDg1ODY2&amp;nothumb=yes" target="_blank">下载附件</a>
+</p>
+<p class="xg1 y">2026-1-12 00:35 上传</p>
+</div>
+<div class="tip_horn"></div>
+</div>
+</ignore_js_op>
+<font face="微软雅黑"> </font><br/>
+<br/>
+<font face="微软雅黑">然后找到getParisAcessToken()方法，给几个方法都打上断点，几轮运行最后发现getSign()生成的sign是最后的密文；</font><br/>
+<ignore_js_op>
+<img aid="2826575" class="zoom" id="aimg_2826575" inpost="1" src="../common_images/003552nldndejlkvnevw27.png" width="610"/>
+<div class="tip tip_4 aimg_tip" disautofocus="true" id="aimg_2826575_menu" style="position: absolute; display: none">
+<div class="xs0">
+<p><strong>2.png</strong> <em class="xg1">(27.83 KB, 下载次数: 0)</em></p>
+<p>
+<a href="forum.php?mod=attachment&amp;aid=MjgyNjU3NXw2ZjhlOWEzZHwxNzY4MTY0NTIzfDU4ODI2OHwyMDg1ODY2&amp;nothumb=yes" target="_blank">下载附件</a>
+</p>
+<p class="xg1 y">2026-1-12 00:35 上传</p>
+</div>
+<div class="tip_horn"></div>
+</div>
+</ignore_js_op>
+<font face="微软雅黑"><br/>
+</font><br/>
+<font face="微软雅黑">然后使用单步调试和跳过函数，跟到了这里，发现他一直在循环，S不断+1，s=9之后他就跳出去了，然后这里的文件名是acs-2108.js，果断猜测就是acs-token生成的位置，</font><br/>
+<ignore_js_op>
+<img aid="2826576" class="zoom" id="aimg_2826576" inpost="1" src="../common_images/003554erz8vm1b7zrb8rgb.png" width="469"/>
+<div class="tip tip_4 aimg_tip" disautofocus="true" id="aimg_2826576_menu" style="position: absolute; display: none">
+<div class="xs0">
+<p><strong>3.png</strong> <em class="xg1">(15.36 KB, 下载次数: 0)</em></p>
+<p>
+<a href="forum.php?mod=attachment&amp;aid=MjgyNjU3NnwwOWI5YmEzMHwxNzY4MTY0NTIzfDU4ODI2OHwyMDg1ODY2&amp;nothumb=yes" target="_blank">下载附件</a>
+</p>
+<p class="xg1 y">2026-1-12 00:35 上传</p>
+</div>
+<div class="tip_horn"></div>
+</div>
+</ignore_js_op>
+<font face="微软雅黑"><br/>
+</font><br/>
+<font face="微软雅黑">所以我在s=9时开始单步调试，结果发现他又回到了上面所示的地方，打开调用堆栈然后发现他是个嵌套，</font><br/>
+<ignore_js_op>
+<img aid="2826577" class="zoom" id="aimg_2826577" inpost="1" src="../common_images/003556uvjozjinkfvkchfg.png" width="213"/>
+<div class="tip tip_4 aimg_tip" disautofocus="true" id="aimg_2826577_menu" style="position: absolute; display: none">
+<div class="xs0">
+<p><strong>4.png</strong> <em class="xg1">(16.82 KB, 下载次数: 0)</em></p>
+<p>
+<a href="forum.php?mod=attachment&amp;aid=MjgyNjU3N3wxMGNjZTI3NnwxNzY4MTY0NTIzfDU4ODI2OHwyMDg1ODY2&amp;nothumb=yes" target="_blank">下载附件</a>
+</p>
+<p class="xg1 y">2026-1-12 00:35 上传</p>
+</div>
+<div class="tip_horn"></div>
+</div>
+</ignore_js_op>
+<br/>
+<br/>
+<font face="微软雅黑">好家伙，这样一步一步跟不得跟到天荒地老；果断放弃，另谋出路，想到加密的关键词encrypt，</font><font face="微软雅黑">搜索之后发现一个有点像加密参数的方法，</font><br/>
+<ignore_js_op>
+<img aid="2826578" class="zoom" id="aimg_2826578" inpost="1" src="../common_images/003558t34yreez4nfozq2r.png" width="406"/>
+<div class="tip tip_4 aimg_tip" disautofocus="true" id="aimg_2826578_menu" style="position: absolute; display: none">
+<div class="xs0">
+<p><strong>5.png</strong> <em class="xg1">(13.92 KB, 下载次数: 0)</em></p>
+<p>
+<a href="forum.php?mod=attachment&amp;aid=MjgyNjU3OHxmYmI0OWZkYXwxNzY4MTY0NTIzfDU4ODI2OHwyMDg1ODY2&amp;nothumb=yes" target="_blank">下载附件</a>
+</p>
+<p class="xg1 y">2026-1-12 00:35 上传</p>
+</div>
+<div class="tip_horn"></div>
+</div>
+</ignore_js_op>
+<br/>
+<br/>
+<font face="微软雅黑">但是没有基础知识所以看不懂意思，所以咨询了AI，AI告诉我这是AES加密函数的实现，还把每个参数的意思都翻译出来了，确认这就是创建加密的地方，然后在末尾打上断点，得到了每个参数的值，</font><br/>
+<ignore_js_op>
+<img aid="2826579" class="zoom" id="aimg_2826579" inpost="1" src="../common_images/003600oypdtytsb35slby6.png" width="650"/>
+<div class="tip tip_4 aimg_tip" disautofocus="true" id="aimg_2826579_menu" style="position: absolute; display: none">
+<div class="xs0">
+<p><strong>6.png</strong> <em class="xg1">(24.7 KB, 下载次数: 0)</em></p>
+<p>
+<a href="forum.php?mod=attachment&amp;aid=MjgyNjU3OXw0YzQ4OGFiNHwxNzY4MTY0NTIzfDU4ODI2OHwyMDg1ODY2&amp;nothumb=yes" target="_blank">下载附件</a>
+</p>
+<p class="xg1 y">2026-1-12 00:36 上传</p>
+</div>
+<div class="tip_horn"></div>
+</div>
+</ignore_js_op>
+<br/>
+<br/>
+<font face="微软雅黑">发现ciphertext、key、iv都是数组，很奇怪，想到可能是加密，又咨询了AI，AI告诉我这是 CryptoJS 的 WordArray 对象，表示加密后的字节数据，然后还贴心的写了个转换成字符串的方法，key和iv还原后都是16位的字符串，ciphertext没有解出来，只留下了一串很长的base64，其他几个参数看不太懂就先没管了；随便看了眼这时的调用堆栈，</font><br/>
+<ignore_js_op>
+<img aid="2826580" class="zoom" id="aimg_2826580" inpost="1" src="../common_images/003603qf4yez66q6zbd3az.png" width="181"/>
+<div class="tip tip_4 aimg_tip" disautofocus="true" id="aimg_2826580_menu" style="position: absolute; display: none">
+<div class="xs0">
+<p><strong>7.png</strong> <em class="xg1">(19.94 KB, 下载次数: 0)</em></p>
+<p>
+<a href="forum.php?mod=attachment&amp;aid=MjgyNjU4MHxmODdmMjQxN3wxNzY4MTY0NTIzfDU4ODI2OHwyMDg1ODY2&amp;nothumb=yes" target="_blank">下载附件</a>
+</p>
+<p class="xg1 y">2026-1-12 00:36 上传</p>
+</div>
+<div class="tip_horn"></div>
+</div>
+</ignore_js_op>
+<br/>
+<br/>
+<font face="微软雅黑">幸好之前及时放弃，不然得跟到啥时候；</font><font face="微软雅黑">然后单步之后到了这里，</font><br/>
+<ignore_js_op>
+<img aid="2826581" class="zoom" id="aimg_2826581" inpost="1" src="../common_images/003605gqzxfnlryyqnaqqx.png" width="615"/>
+<div class="tip tip_4 aimg_tip" disautofocus="true" id="aimg_2826581_menu" style="position: absolute; display: none">
+<div class="xs0">
+<p><strong>8.png</strong> <em class="xg1">(13.95 KB, 下载次数: 0)</em></p>
+<p>
+<a href="forum.php?mod=attachment&amp;aid=MjgyNjU4MXw5ZDE5MzU3NHwxNzY4MTY0NTIzfDU4ODI2OHwyMDg1ODY2&amp;nothumb=yes" target="_blank">下载附件</a>
+</p>
+<p class="xg1 y">2026-1-12 00:36 上传</p>
+</div>
+<div class="tip_horn"></div>
+</div>
+</ignore_js_op>
+<br/>
+<br/>
+<font face="微软雅黑">这不就是明牌了吗，e是明文，t是key，n是iv还有mode啥的，虽然不知道为啥就变成这样了；然后继续单步，发现他又到了这里，我这里使用跳过，找到一个可疑的数据，有点像加密后的数据，然后又跟明文在一起，后面不小心跳出去了（当然过程中有很多次这样的不小心，才一步步逼近关键位置），发现确实就是acs-token时间戳后面跟着的密文，</font><br/>
+<ignore_js_op>
+<img aid="2826582" class="zoom" id="aimg_2826582" inpost="1" src="../common_images/003607zr2f798sfqkus9lu.png" width="545"/>
+<div class="tip tip_4 aimg_tip" disautofocus="true" id="aimg_2826582_menu" style="position: absolute; display: none">
+<div class="xs0">
+<p><strong>9.png</strong> <em class="xg1">(16.61 KB, 下载次数: 0)</em></p>
+<p>
+<a href="forum.php?mod=attachment&amp;aid=MjgyNjU4Mnw4NGM2MjJiNnwxNzY4MTY0NTIzfDU4ODI2OHwyMDg1ODY2&amp;nothumb=yes" target="_blank">下载附件</a>
+</p>
+<p class="xg1 y">2026-1-12 00:36 上传</p>
+</div>
+<div class="tip_horn"></div>
+</div>
+</ignore_js_op>
+<br/>
+<br/>
+<font face="微软雅黑">现在我手里有了key、iv、密文，我就咨询AI通过三种参数进行解密，AI给了我一个尝试AES各种模式的解密代码，最后成功还原为明文，并且知道了是CBC模式，</font><font face="微软雅黑">继续跟到这里的话，会发现他的拼接过程，将前两个时间戳和AES密文拼接，并且还能看到key和iv，</font><br/>
+<ignore_js_op>
+<img aid="2826583" class="zoom" id="aimg_2826583" inpost="1" src="../common_images/003609q622fu4ouju2pjfp.png" width="677"/>
+<div class="tip tip_4 aimg_tip" disautofocus="true" id="aimg_2826583_menu" style="position: absolute; display: none">
+<div class="xs0">
+<p><strong>10.png</strong> <em class="xg1">(49.58 KB, 下载次数: 0)</em></p>
+<p>
+<a href="forum.php?mod=attachment&amp;aid=MjgyNjU4M3wyZWI0NThkNHwxNzY4MTY0NTIzfDU4ODI2OHwyMDg1ODY2&amp;nothumb=yes" target="_blank">下载附件</a>
+</p>
+<p class="xg1 y">2026-1-12 00:36 上传</p>
+</div>
+<div class="tip_horn"></div>
+</div>
+</ignore_js_op>
+<font face="微软雅黑"> </font><br/>
+<br/>
+<font face="微软雅黑">接下来就是研究明文的结构了，</font><br/>
+<font style="color:rgb(31, 31, 31)"><font style="font-size:9pt"><font face="微软雅黑">{"0":"61889XXXXX5217","ua":"Mozilla/5.0XXXXX537.36","url":"https://XXXXX.com/","platform":"Win32","d1":"","clientTs":1768XXXXX 5218,"version":"1.0.2.1","extra":"","odkp":0}</font></font></font><br/>
+<font face="微软雅黑">在多次获取明文的过程中，发现"0"的值是变化的，暂时没有看出规律；<font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">"clientTs"</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">值也是变化的，但一眼时间戳，验证一下就是当前时间，没啥好说的；其他都是固定值；</font></font></font><br/>
+<font face="微软雅黑"><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">经过之前多次调试发现的规律，他总是在</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">M-c.M-n-V</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">几个方法中循环，于是我就认真看了这几个方法的运行流程，结果就是先是</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">c.M()</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">定义了个</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">a</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">是数组，</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">s</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">赋值关键数据，然后运行</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">n()</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">，</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">n()</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">中主要是运行</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">V()</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">，</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">s.s</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">加</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">1</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">就是将</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">a</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">中数值遍历完，然后看到了</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">V()</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">，里面就是一系列操作然后把数据返回到</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">s</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">里面；最开始我以为是搞的啥加密算法，里面一抹多代码，后来</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">AI</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">告诉我是<a class="relatedlink" href="https://www.52pojie.cn/thread-661779-1-1.html" target="_blank">虚拟机</a></font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt"> (VM) </font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">的指令执行器；原来就是把</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">a</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">里面的指令数组执行一遍；</font></font></font>
+<ignore_js_op>
+<img aid="2826584" class="zoom" id="aimg_2826584" inpost="1" src="../common_images/003611kn29nyv5us5ptr5r.png" width="440"/>
+<div class="tip tip_4 aimg_tip" disautofocus="true" id="aimg_2826584_menu" style="position: absolute; display: none">
+<div class="xs0">
+<p><strong>11.png</strong> <em class="xg1">(117.73 KB, 下载次数: 0)</em></p>
+<p>
+<a href="forum.php?mod=attachment&amp;aid=MjgyNjU4NHw2NWJhYzQyMHwxNzY4MTY0NTIzfDU4ODI2OHwyMDg1ODY2&amp;nothumb=yes" target="_blank">下载附件</a>
+</p>
+<p class="xg1 y">2026-1-12 00:36 上传</p>
+</div>
+<div class="tip_horn"></div>
+</div>
+</ignore_js_op>
+<br/>
+<br/>
+<font face="微软雅黑"><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">接着我们来找</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">"0"</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">参数的生成位置，我发现</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">V()</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">中很多都是</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">n.g</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">结尾，而</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">n</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">就是之前的</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">s</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">；所以我开始查看每次循环的</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">s</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">中的值，发现他都是</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">s.g</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">和</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">s.h</font></font><font style="color:rgb(31, 31, 31)"><font style="font-size:9pt">值的更新，</font></font>结果在这里看到了这个，</font><br/>
+<font style="color:rgb(31, 31, 31)"><font style="font-size:9pt"><font face="微软雅黑"> </font></font></font>
+<ignore_js_op>
+<img aid="2826585" class="zoom" id="aimg_2826585" inpost="1" src="../common_images/003613wzxdrxx4p7z6sttd.png" width="573"/>
+<div class="tip tip_4 aimg_tip" disautofocus="true" id="aimg_2826585_menu" style="position: absolute; display: none">
+<div class="xs0">
+<p><strong>12.png</strong> <em class="xg1">(28.12 KB, 下载次数: 0)</em></p>
+<p>
+<a href="forum.php?mod=attachment&amp;aid=MjgyNjU4NXw3M2YzNmNhZXwxNzY4MTY0NTIzfDU4ODI2OHwyMDg1ODY2&amp;nothumb=yes" target="_blank">下载附件</a>
+</p>
+<p class="xg1 y">2026-1-12 00:36 上传</p>
+</div>
+<div class="tip_horn"></div>
+</div>
+</ignore_js_op>
+<font face="微软雅黑"><br/>
+</font><br/>
+<font face="微软雅黑">g中的值是h1和h3拼接后的值，g又刚好就是"0"的值，所以在s等于27的时候执行的代码就是拼接，那就重新调试跟着s=27的代码走一遍（后来发现直接查看a中序号27时的数组，接着查看V()中对应的case也是一样的），找到了拼接代码，</font><br/>
+<ignore_js_op>
+<img aid="2826586" class="zoom" id="aimg_2826586" inpost="1" src="../common_images/003616rik5o7giihg55n33.png" width="272"/>
+<div class="tip tip_4 aimg_tip" disautofocus="true" id="aimg_2826586_menu" style="position: absolute; display: none">
+<div class="xs0">
+<p><strong>13.png</strong> <em class="xg1">(11.62 KB, 下载次数: 0)</em></p>
+<p>
+<a href="forum.php?mod=attachment&amp;aid=MjgyNjU4NnwxZjUxMjcxYXwxNzY4MTY0NTIzfDU4ODI2OHwyMDg1ODY2&amp;nothumb=yes" target="_blank">下载附件</a>
+</p>
+<p class="xg1 y">2026-1-12 00:36 上传</p>
+</div>
+<div class="tip_horn"></div>
+</div>
+</ignore_js_op>
+<br/>
+<br/>
+<font face="微软雅黑">然后往前回溯就找到了h1和h3是如何生成的，从s=0开始到s=27就是生成"0"参数值的全过程，其实从s=0开始直接看s.g和s.h的值就能猜到是如何运算的，都不用去看代码，</font><br/>
+<ignore_js_op>
+<img aid="2826587" class="zoom" id="aimg_2826587" inpost="1" src="../common_images/003618tk5v628czq23qgx6.png" width="1080"/>
+<div class="tip tip_4 aimg_tip" disautofocus="true" id="aimg_2826587_menu" style="position: absolute; display: none">
+<div class="xs0">
+<p><strong>14.png</strong> <em class="xg1">(194.1 KB, 下载次数: 0)</em></p>
+<p>
+<a href="forum.php?mod=attachment&amp;aid=MjgyNjU4N3xmMzMwYzI2ZHwxNzY4MTY0NTIzfDU4ODI2OHwyMDg1ODY2&amp;nothumb=yes" target="_blank">下载附件</a>
+</p>
+<p class="xg1 y">2026-1-12 00:36 上传</p>
+</div>
+<div class="tip_horn"></div>
+</div>
+</ignore_js_op>
+<br/>
+<br/>
+<font face="微软雅黑">先是创建一个随机数，截取序号2开始的字符串，再创建一个时间戳毫秒为单位，截取序号6开始的字符串，最后拼在一起；</font><br/>
+<font face="微软雅黑">至此AES明文解析完成，试着加密解密一下，完全一致； </font><br/>
+<br/>
+<font face="微软雅黑"> </font><font face="微软雅黑">接着还是上面的方法不断查看s的值和调用堆栈找到了key创建的过程，同时还理解了一些数组代码的操作，比如[8,3]就是把3赋值到当前值，[64,4]就是列表序号4的值减去当前值，[3,4]就是把当前值赋值给列表序号4的值；</font><br/>
+<font face="微软雅黑">总结就是现有一个16位的列表数值，每个数经过减法和异或运算，生成了新的数值，再由新的数值(chr)转换为对应的字符串，到这里生成逻辑就清楚了，</font><br/>
+<font face="微软雅黑">key_list= [(init_list <i> - i - temp) ^ i for i in range(len(init_list))]</i></font><br/>
+<font face="微软雅黑">key =''.join([chr(i) for i in key_list])</font><br/>
+<font face="微软雅黑">其中temp是一个两小时更新的动态值，init_list是最初的列表值，也会更新，位置和为啥是两小时更新马上就会讲了；</font><font face="微软雅黑"><br/>
+</font><br/>
+<font face="微软雅黑">接下来本应该直接找最初的16位列表值，结果我去找动态时间戳去了，导致我踩了个坑浪费了很多时间，我在不断回溯调试查看S的过程中，发现他是直接从列表中提取出来的，并没有找到生成过程，并且在不断查看调用堆栈的时候，发现这个参数一直都在，只是隐藏的比较深，</font><br/>
+<font face="微软雅黑"> </font>
+<ignore_js_op>
+<img aid="2826588" class="zoom" id="aimg_2826588" inpost="1" src="../common_images/003620mt9ttc9xq9nnthsb.png" width="576"/>
+<div class="tip tip_4 aimg_tip" disautofocus="true" id="aimg_2826588_menu" style="position: absolute; display: none">
+<div class="xs0">
+<p><strong>15.png</strong> <em class="xg1">(35.52 KB, 下载次数: 0)</em></p>
+<p>
+<a href="forum.php?mod=attachment&amp;aid=MjgyNjU4OHxmYjBlYWUwY3wxNzY4MTY0NTIzfDU4ODI2OHwyMDg1ODY2&amp;nothumb=yes" target="_blank">下载附件</a>
+</p>
+<p class="xg1 y">2026-1-12 00:36 上传</p>
+</div>
+<div class="tip_horn"></div>
+</div>
+</ignore_js_op>
+<br/>
+<br/>
+<font face="微软雅黑">以至于我从最开始的M()都找到了参数的路径：M()-[[Scopes]]-0-n-i-r-M()-[[Scopes]]-0-n-i-m，因为在s的循环步骤里面呆了很久，所以大概知道了他的调用步骤，还有就是阅读下面这个方法，得到了启示，</font><br/>
+<ignore_js_op>
+<img aid="2826589" class="zoom" id="aimg_2826589" inpost="1" src="../common_images/003622tvvp40r0e907rp9e.png" width="416"/>
+<div class="tip tip_4 aimg_tip" disautofocus="true" id="aimg_2826589_menu" style="position: absolute; display: none">
+<div class="xs0">
+<p><strong>16.png</strong> <em class="xg1">(13.82 KB, 下载次数: 0)</em></p>
+<p>
+<a href="forum.php?mod=attachment&amp;aid=MjgyNjU4OXw4Y2ZlYmFlMnwxNzY4MTY0NTIzfDU4ODI2OHwyMDg1ODY2&amp;nothumb=yes" target="_blank">下载附件</a>
+</p>
+<p class="xg1 y">2026-1-12 00:36 上传</p>
+</div>
+<div class="tip_horn"></div>
+</div>
+</ignore_js_op>
+<br/>
+<br/>
+<font face="微软雅黑">这里花了很多时间，虽然最终找到了位置但是没啥用，因为他本身就存在了，于是乎我直接搜了这个时间戳，找到了关键代码，key和iv都在里面，不过是用数组的形式，包括其他一些固定参数(我觉得无关紧要就没一个一个找了)，</font><br/>
+<ignore_js_op>
+<img aid="2826590" class="zoom" id="aimg_2826590" inpost="1" src="../common_images/003624r23xzvv4vlx6muyx.png" width="637"/>
+<div class="tip tip_4 aimg_tip" disautofocus="true" id="aimg_2826590_menu" style="position: absolute; display: none">
+<div class="xs0">
+<p><strong>17.png</strong> <em class="xg1">(3.2 KB, 下载次数: 0)</em></p>
+<p>
+<a href="forum.php?mod=attachment&amp;aid=MjgyNjU5MHw0ODIxMDFkNHwxNzY4MTY0NTIzfDU4ODI2OHwyMDg1ODY2&amp;nothumb=yes" target="_blank">下载附件</a>
+</p>
+<p class="xg1 y">2026-1-12 00:36 上传</p>
+</div>
+<div class="tip_horn"></div>
+</div>
+</ignore_js_op>
+<br/>
+<br/>
+<font face="微软雅黑">原始key列表数值共16位：</font><br/>
+<ignore_js_op>
+<img aid="2826591" class="zoom" id="aimg_2826591" inpost="1" src="../common_images/003626jg3ge3v992f2me7a.png" width="613"/>
+<div class="tip tip_4 aimg_tip" disautofocus="true" id="aimg_2826591_menu" style="position: absolute; display: none">
+<div class="xs0">
+<p><strong>18.png</strong> <em class="xg1">(11.96 KB, 下载次数: 0)</em></p>
+<p>
+<a href="forum.php?mod=attachment&amp;aid=MjgyNjU5MXxhMGI5NjkyZXwxNzY4MTY0NTIzfDU4ODI2OHwyMDg1ODY2&amp;nothumb=yes" target="_blank">下载附件</a>
+</p>
+<p class="xg1 y">2026-1-12 00:36 上传</p>
+</div>
+<div class="tip_horn"></div>
+</div>
+</ignore_js_op>
+<br/>
+<br/>
+<font face="微软雅黑">iv固定值共16位：</font><br/>
+<ignore_js_op>
+<img aid="2826592" class="zoom" id="aimg_2826592" inpost="1" src="../common_images/003628thrmke6v03m36tqq.png" width="623"/>
+<div class="tip tip_4 aimg_tip" disautofocus="true" id="aimg_2826592_menu" style="position: absolute; display: none">
+<div class="xs0">
+<p><strong>19.png</strong> <em class="xg1">(12.52 KB, 下载次数: 0)</em></p>
+<p>
+<a href="forum.php?mod=attachment&amp;aid=MjgyNjU5MnxjOGZiZTZmN3wxNzY4MTY0NTIzfDU4ODI2OHwyMDg1ODY2&amp;nothumb=yes" target="_blank">下载附件</a>
+</p>
+<p class="xg1 y">2026-1-12 00:36 上传</p>
+</div>
+<div class="tip_horn"></div>
+</div>
+</ignore_js_op>
+<font face="微软雅黑"><br/>
+</font><br/>
+<font face="微软雅黑">至于为啥我发现是两小时一更新，因为我第二天发现解不出来了，一搜索发现原来的key值变了，我将两个js文件用Beyond一对比，发现确实有些微小差别，</font><br/>
+<ignore_js_op>
+<img aid="2826593" class="zoom" id="aimg_2826593" inpost="1" src="../common_images/003631vvin3tq5hsunn4iz.png" width="1080"/>
+<div class="tip tip_4 aimg_tip" disautofocus="true" id="aimg_2826593_menu" style="position: absolute; display: none">
+<div class="xs0">
+<p><strong>20.png</strong> <em class="xg1">(88.01 KB, 下载次数: 0)</em></p>
+<p>
+<a href="forum.php?mod=attachment&amp;aid=MjgyNjU5M3w4YzkzOGUwMXwxNzY4MTY0NTIzfDU4ODI2OHwyMDg1ODY2&amp;nothumb=yes" target="_blank">下载附件</a>
+</p>
+<p class="xg1 y">2026-1-12 00:36 上传</p>
+</div>
+<div class="tip_horn"></div>
+</div>
+</ignore_js_op>
+<font face="微软雅黑"><br/>
+</font><br/>
+<font face="微软雅黑">然后我把目光放在了acs-2108.js?_=245575网址的参数上面，起初不知道是啥意义，跑了一遍也没发现在哪加的这个参数，问了AI他告诉我是因为浏览器会缓存文件，如果不加就默认之前的文件，数据就不会更新，也不知道是不是运气好，我用时间戳一除，整数部分刚好是7200，再一对比前后不同文件的参数变化，这不就是2小时吗；但我还是耐心去找了代码，这里也花了不少时间去一步一步跟，看他在哪一步发送了网址，结果是在过程中发现生成了clientCacheTTL: 120这样一个参数，但结果又没有这个参数，让我产生了怀疑，最终发现了关键代码，这个120就表示的是分钟数：</font><br/>
+<ignore_js_op>
+<img aid="2826594" class="zoom" id="aimg_2826594" inpost="1" src="../common_images/003633hq90t45pt0pqjqg4.png" width="426"/>
+<div class="tip tip_4 aimg_tip" disautofocus="true" id="aimg_2826594_menu" style="position: absolute; display: none">
+<div class="xs0">
+<p><strong>21.png</strong> <em class="xg1">(10.98 KB, 下载次数: 0)</em></p>
+<p>
+<a href="forum.php?mod=attachment&amp;aid=MjgyNjU5NHwyMWI1OGJkNnwxNzY4MTY0NTIzfDU4ODI2OHwyMDg1ODY2&amp;nothumb=yes" target="_blank">下载附件</a>
+</p>
+<p class="xg1 y">2026-1-12 00:36 上传</p>
+</div>
+<div class="tip_horn"></div>
+</div>
+</ignore_js_op>
+<font face="微软雅黑"><br/>
+</font><br/>
+<font face="微软雅黑">这样只需简单正则即可提取最新的数据列表，然后每个参数的相对位置又是固定的，这样就可以把动态时间戳、动态key、iv都提取出来，将上面的各个成果合在一起，就完成了整个加密过程，然后这里我又踩了个小坑，我发现生成的acs-token对不上，然后检查一遍参数都是相同的，最后锁定在AES明文字符串中，我发现python的字典转字符串有空格，而本身其实是没有的，于是AI给了我下面的代码去除空格，</font><br/>
+<font face="微软雅黑">json.dumps(params,separators=(',',':'),ensure_ascii=False)</font><br/>
+<font face="微软雅黑">最终运行之后完美符合，分析结束。</font><font face="微软雅黑"> </font></td></tr></table>
+</div>
+<div class="cm" id="comment_54636755">
+</div>
+<div id="post_rate_div_54636755"></div>
+</div>
+</div>
+</td></tr>
+<tr><td class="plc plm">
+<div class="mtw mbm hm cl" id="p_btn">
+<a href="home.php?mod=spacecp&amp;ac=favorite&amp;type=thread&amp;id=2085866&amp;formhash=7f5fdc25" id="k_favorite" onclick="showWindow(this.id, this.href, 'get', 0);" onmouseover="this.title = $('favoritenumber').innerHTML + ' 人收藏'" rel="nofollow" title="收藏本帖"><i><img alt="收藏" src="../common_images/fav.gif"/>收藏<span id="favoritenumber" style="display:none">0</span></i></a>
+<a href="javascript:;" id="ak_rate" onclick="showWindow('rate', 'forum.php?mod=misc&amp;action=rate&amp;tid=2085866&amp;pid=54636755', 'get', -1);return false;" title="评分表立场"><i><img alt="免费评分" src="../common_images/agree.gif"/>免费评分</i></a>
+<a href="forum.php?mod=collection&amp;action=edit&amp;op=addthread&amp;tid=2085866" id="k_collect" onclick="showWindow(this.id, this.href);return false;" onmouseover="this.title = $('collectionnumber').innerHTML + ' 人淘帖'" rel="nofollow" title="淘好帖进专辑"><i><img alt="分享" src="../common_images/collection.png"/>淘帖<span id="collectionnumber" style="display:none">0</span></i></a>
+<a href="forum.php?mod=misc&amp;action=recommend&amp;do=add&amp;tid=2085866&amp;hash=7f5fdc25" id="recommend_add" onclick="ajaxmenu(this, 3000, 1, 0, '43', 'recommendupdate(1)');return false;" onmouseover="this.title = $('recommendv_add').innerHTML + ' 人有用'" rel="nofollow" title="顶一下"><i><img alt="有用" src="../common_images/rec_add.gif"/>有用<span id="recommendv_add" style="display:none">0</span></i></a>
+<a class="followp" false;="" href="" onclick='showWindow("csu_wechat_scan_qrcode","plugin.php?id=csu_wechat_scan:share&amp;tid=2085866","get",0);' return=""><i><img src="../common_images/wx.png"/>分享到朋友圈</i></a></div>
+<div class="vw50_kfc_pb"><span style="color:#008000;"><p>发帖前要善用<strong>【<a href="//www.52pojie.cn/search.php" target="_blank">论坛搜索</a>】</strong>功能，那里可能会有你要找的答案或者已经有人发布过相同内容了，请勿重复发帖。</p></span></div></td>
+</tr>
+<tr id="_postposition54636755"></tr>
+<tr>
+<td class="pls"></td>
+<td class="plc" style="overflow:visible;">
+<div class="po hin">
+<div class="pob cl">
+<em>
+<a class="cmmnt" href="forum.php?mod=misc&amp;action=comment&amp;tid=2085866&amp;pid=54636755&amp;extra=page%3D1&amp;page=1" onclick="showWindow('comment', this.href, 'get', 0)">点评</a><a class="fastre" href="forum.php?mod=post&amp;action=reply&amp;fid=5&amp;tid=2085866&amp;reppost=54636755&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)" rel="nofollow">回复</a>
+</em>
+<p>
+<a href="javascript:;" onclick="showWindow('miscreport54636755', 'misc.php?mod=report&amp;rtype=post&amp;rid=54636755&amp;tid=2085866&amp;fid=5', 'get', -1);return false;">举报</a>
+</p>
+</div>
+</div>
+</td>
+</tr>
+<tr class="ad">
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</table>
+</div><div class="pl" id="postlistreply"><div class="viewthread_table" id="post_new" style="display: none"></div></div>
+</div>
+<form autocomplete="off" id="modactions" method="post" name="modactions">
+<input name="formhash" type="hidden" value="7f5fdc25"/>
+<input name="optgroup" type="hidden"/>
+<input name="operation" type="hidden"/>
+<input name="listextra" type="hidden" value="page%3D1"/>
+<input name="page" type="hidden" value="1"/>
+</form>
+<div class="pgs mtm mbm cl">
+<span class="pgb y" id="visitedforumstmp" onmouseover="$('visitedforums').id = 'visitedforumstmp';this.id = 'visitedforums';showMenu({'ctrlid':this.id,'pos':'21'})"><a href="forum-5-1.html">返回列表</a></span>
+<a href="javascript:;" id="newspecialtmp" onclick="showWindow('newthread', 'forum.php?mod=post&amp;action=newthread&amp;fid=5')" onmouseover="$('newspecial').id = 'newspecialtmp';this.id = 'newspecial';showMenu({'ctrlid':this.id})" title="发新帖"><img alt="发新帖" src="../common_images/pn_post.png"/></a>
+<a href="javascript:;" id="post_replytmp" onclick="showWindow('reply', 'forum.php?mod=post&amp;action=reply&amp;fid=5&amp;tid=2085866')" title="回复"><img alt="回复" src="../common_images/pn_reply.png"/></a>
+</div>
+<div class="area" id="diyfastposttop"></div>
+<div class="pl bm bmw" id="f_pst">
+<form action="forum.php?mod=post&amp;action=reply&amp;fid=5&amp;tid=2085866&amp;extra=page%3D1&amp;replysubmit=yes&amp;infloat=yes&amp;handlekey=fastpost" autocomplete="off" id="fastpostform" method="post" onsubmit="return fastpostvalidate(this)">
+<table cellpadding="0" cellspacing="0">
+<tr>
+<td class="pls">
+<div class="avatar avtm"><img onerror="this.onerror=null;this.src='https://avatar.52pojie.cn/images/noavatar_middle.gif'" src="../common_images/68_avatar_middle.jpg"/></div></td>
+<td class="plc">
+<span id="fastpostreturn"></span>
+<div class="cl">
+<div id="fastposteditor">
+<div class="tedt mtn">
+<div class="bar">
+<span class="y">
+<a href="forum.php?mod=post&amp;action=reply&amp;fid=5&amp;tid=2085866" onclick="return switchAdvanceMode(this.href)">高级模式</a>
+</span>
+<div class="fpd">
+<a class="fbld" href="javascript:;" onclick="seditor_insertunit('fastpost', '[b]', '[/b]');doane(event);" title="文字加粗">B</a>
+<a class="fclr" href="javascript:;" id="fastpostforecolor" onclick="showColorBox(this.id, 2, 'fastpost');doane(event);" title="设置文字颜色">Color</a>
+<a class="fmg" href="javascript:;" id="fastpostimg" onclick="seditor_menu('fastpost', 'img');doane(event);" title="图片">Image</a>
+<a class="flnk" href="javascript:;" id="fastposturl" onclick="seditor_menu('fastpost', 'url');doane(event);" title="添加链接">Link</a>
+<a class="fqt" href="javascript:;" id="fastpostquote" onclick="seditor_menu('fastpost', 'quote');doane(event);" title="引用">Quote</a>
+<a class="fcd" href="javascript:;" id="fastpostcode" onclick="seditor_menu('fastpost', 'code');doane(event);" title="代码">Code</a>
+<a class="fsml" href="javascript:;" id="fastpostsml" onclick="showMenu({'ctrlid':this.id,'evt':'click','layer':2});return false;">Smilies</a>
+<a class="fat" href="javascript:;" id="fastpostat" onclick="seditor_menu('fastpost', 'at');doane(event);" title="@朋友">@朋友</a>
+<span class="pipe z">|</span><span id="spanButtonPlaceholder">上传</span></div></div>
+<div class="area">
+<textarea class="pt" cols="80" id="fastpostmessage" name="message" onkeydown="seditor_ctlent(event, 'fastpostvalidate($(\'fastpostform\'))');" rows="6" tabindex="4"></textarea>
+</div>
+</div>
+</div>
+</div>
+<div id="seccheck_fastpost">
+</div>
+<input id="posttime" name="posttime" type="hidden" value="1768164523"/>
+<div class="upfl">
+<table border="0" cellpadding="0" cellspacing="0" id="attach_tblheader" style="display: none;">
+<tr>
+<td>点击附件文件名添加到帖子内容中</td>
+<td class="atds">描述</td>
+<td class="attv">
+阅读权限
+<img alt="Tip" class="vm" onmouseover="showTip(this)" src="../common_images/faq.gif" tip="阅读权限按由高到低排列，高于或等于选中组的用户才可以阅读，&lt;b&gt;&lt;font color=blue&gt;添加权限后请勿勾选下方的“转播给听众”功能，否则会导致帖子内容泄漏。&lt;/font&gt;&lt;/b&gt;"/>
+</td>
+<td class="attpr">吾爱币</td><td class="attc"></td>
+</tr>
+</table>
+<div class="fieldset flash" id="attachlist"></div>
+</div>
+<input name="formhash" type="hidden" value="7f5fdc25"/>
+<input name="usesig" type="hidden" value="1"/>
+<input name="subject" type="hidden" value="  "/>
+<p class="ptm pnpost">
+<a class="y" href="home.php?mod=spacecp&amp;ac=credit&amp;op=rule&amp;fid=5" target="_blank">本版积分规则</a>
+<button class="pn pnc vm" id="fastpostsubmit" name="replysubmit" onmouseover="checkpostrule('seccheck_fastpost', 'ac=reply');this.onmouseover=null" tabindex="5" type="submit" value="replysubmit"><strong>发表回复</strong></button>
+<span style="padding:0 5px; color:#f44336"><strong>警告：本版块禁止<a href="forum.php?mod=redirect&amp;goto=findpost&amp;ptid=143136&amp;pid=9180499" style="font-style: italic; text-decoration-line: underline;" target="_blank">『灌水』</a>或回复与主题无关内容，违者重罚！</strong></span>
+<label class="lb"><input class="pc" name="adddynamic" type="checkbox" value="1"/>回帖并转播</label>
+<label for="fastpostrefresh"><input class="pc" id="fastpostrefresh" type="checkbox"/>回帖后跳转到最后一页</label>
+</p>
+</td>
+</tr>
+</table>
+</form>
+</div>
+<div class="p_pop blk cl" id="visitedforums_menu" style="display: none;">
+<table cellpadding="0" cellspacing="0">
+<tr>
+<td id="v_forums">
+<h3 class="mbn pbn bbda xg1">浏览过的版块</h3>
+<ul class="xl xl1">
+<li><a href="forum-69-1.html">『Android UnPackMe◇CrackMe◇KeyGenMe◇ReverseMe』</a></li><li><a href="forum-13-1.html">『站点公告』</a></li><li><a href="forum-24-1.html">『编程语言区』</a></li><li><a href="forum-2-1.html">『原创发布区』</a></li></ul>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="wp mtn">
+<div class="area" id="diy3"></div>
+</div>
+</div>
+<div class="wp vw50_kfc_f"><div class="res-footer-note"><p align="left"><br/><font color="#ff0000">免责声明：<br/>吾爱破解所发布的一切破解补丁、注册机和注册信息及软件的解密分析文章仅限用于学习和研究目的；不得将上述内容用于商业或者非法用途，否则，一切后果请用户自负。本站信息来自网络，版权争议与本站无关。您必须在下载后的24个小时之内，从您的电脑中彻底删除上述内容。如果您喜欢该程序，请支持正版软件，购买注册，得到更好的正版服务。如有侵权请邮件与我们联系处理。</font></p>
+<p align="right"><font color="#ff0000" face="Comic Sans MS">Mail To:Service@52pojie.cn</font></p></div></div>
+<style type="text/css"> 
+#scrolltop {
+   display: none;
+}
+ul#navmenu ul
+{ 
+display: none; 
+position: absolute; 
+left: -233px;
+bottom: 5px;
+} 
+ul#navmenu li:hover ul ul, 
+ul#navmenu li.iehover ul ul,  { 
+display: none; 
+} 
+ul#navmenu li:hover ul, 
+ul#navmenu ul li:hover ul, 
+ul#navmenu ul ul li:hover ul, 
+ul#navmenu li.iehover ul, 
+ul#navmenu ul li.iehover ul, 
+ul#navmenu ul ul li.iehover ul { 
+display: block; 
+} 
+
+#jz52top a {margin: 6px 0;}
+
+#jz52top { z-index: 200; visibility: visible; right: 5px; }
+
+#jz52topa { visibility: hidden;}
+#jz52top, #jz52top a { border: none;}
+
+
+#jz52top { position: fixed; bottom: 70px; display: block; width: 40px; background: none repeat scroll 0% 0% transparent; border: 0px #cdcdcd solid; border-radius: 3px; border-top: 0; cursor: pointer; }
+#jz52top:hover { text-decoration: none; }
+
+#jz52top a { display: block; width: 40px; height: 40px; padding: 0; line-height: 12px; text-align: center; color: #787878; text-decoration: none; background: #f8f8f8 url('source/plugin/jz52_top/template/jz52top1.png') no-repeat 0 0; border-top: 0px #cdcdcd solid; }
+
+                a.jz52topa:hover { background-position: -40px 0px !important;}
+a.replyfast { background-position: 0 -40px !important; }
+a.replyfast:hover { background-position: -40px -40px !important;}
+a.returnlist { background-position: 0 -80px !important; }
+a.returnlist:hover { background-position: -40px -80px !important;}
+a.returnboard { background-position: -80px -240px !important; }
+a.returnboard:hover { background-position: -120px -240px !important;}
+a.jzqr { background-position: 0 -120px !important; }
+a.jzqr:hover { background-position: -40px -120px !important;}
+                a.jzwx { background-position: 0 -320px !important; }
+a.jzwx:hover { background-position: -40px -320px !important;}				
+a.jzkf { background-position: -80px 0px !important; }
+a.jzkf:hover { background-position: -120px -0px !important;}
+a.jzfx { background-position: -80px -40px !important; }
+a.jzfx:hover { background-position: -120px -40px !important;}
+.jzfxn { background: #fff !important; width: 231px !important; height: 260px !important; }
+a.jzlast { background-position: -80px -80px !important; }
+a.jzlast:hover { background-position: -120px -80px !important;}
+a.jznext { background-position: -80px -120px !important; }
+a.jznext:hover { background-position: -120px -120px !important;}	
+a.jzxyy { background-position: -80px -120px !important; }
+a.jzxyy:hover { background-position: -120px -360px !important;}			
+a.jzsct { background-position: 0px -160px !important; }
+a.jzsct:hover { background-position: -40px -160px !important;}				
+a.jzscb { background-position: -80px -160px !important; }
+a.jzscb:hover { background-position: -120px -160px !important;}				
+a.jzqqq { background-position: 0px -200px !important; }
+a.jzqqq:hover { background-position: -40px -200px !important;}	
+                a.jzsoso { background-position: -80px -320px !important; }
+a.jzsoso:hover { background-position: -120px -320px !important;}					
+a.jzwo { background-position: -80px -200px !important; }
+a.jzwo:hover { background-position: -120px -200px !important;}
+a.jzzdy { background-position: 0px -240px !important; }
+a.jzzdy:hover { background-position: -40px -240px !important;}
+a.jzfbzt { background-position: 0px -280px !important; }
+a.jzfbzt:hover { background-position: -40px -280px !important;}
+a.jzkfzx { background-position: -80px -280px !important; }
+a.jzkfzx:hover { background-position: -120px -280px !important;}
+
+
+#jzqrn { background: #fff !important; width: 231px !important; height: 260px !important; }
+#jzqrn { border: 1px solid rgb(210, 210, 210); text-align: center; }
+#jzqrn p {
+    font-size: 15px;
+    padding-bottom: 15px;
+    text-align: center;
+color: #999;
+    font-family: Microsoft YaHei;
+}
+#jzwon { background: #fff !important; width: 231px !important; height: 260px !important; }
+#jzwon { border: 1px solid rgb(210, 210, 210); }
+#jzfxn { border: 1px solid rgb(210, 210, 210); }
+#jzfxn h3 {
+    height: 23px;
+    background: none repeat scroll 0% 0% rgb(250, 250, 250);
+    border-bottom: 1px solid rgb(236, 236, 236);
+    padding: 10px 0px 0px 10px;
+}
+#jzfxn .bdsharebuttonbox { padding: 13px 0px 0px 20px; }
+#jzfxn .bdsharebuttonbox a, #jzfxn .bdsharebuttonbox .bds_more {
+    float: left;
+    font-size: 12px;
+    padding-left: 25px;
+    line-height: 16px;
+text-align: left;
+    height: 16px;
+    background: url("http://bdimg.share.baidu.com/static/api/img/share/icons_1_16.png?v=01d441d0.png") no-repeat scroll 0px 0px ;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    margin: 6px 6px 6px 0px;
+text-indent: 0;
+    overflow: hidden;
+width: 68px;
+}
+#jzfxn .bdsharebuttonbox .bds_qzone {
+    background-position: 0px -52px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_tsina {
+    background-position: 0px -104px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_tqq {
+    background-position: 0px -260px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_renren {
+    background-position: 0px -208px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_tqf {
+    background-position: 0px -364px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_tieba {
+    background-position: 0px -728px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_sqq {
+    background-position: 0px -2652px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_hi {
+    background-position: 0px -416px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_isohu {
+    background-position: 0px -3016px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_weixin {
+    background-position: 0px -1612px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_t163 {
+    background-position: 0px -832px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_tsohu {
+    background-position: 0px -520px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_baidu {
+    background-position: 0px -2600px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_qq {
+    background-position: 0px -624px !important;
+}
+#jz52top a b {
+    visibility: hidden;
+    font-weight: normal;
+}
+</style>
+<div id="jz52top">
+<span><a class="replyfast" href="forum.php?mod=post&amp;action=reply&amp;fid=5&amp;tid=2085866&amp;extra=page%3D1&amp;page=" onclick="showWindow('reply', this.href)" title="快速回复"><b>快速回复</b></a></span>
+<span><a class="jzsct" href="home.php?mod=spacecp&amp;ac=favorite&amp;type=thread&amp;id=2085866&amp;formhash=7f5fdc25" id="k_favorite" onclick="showWindow(this.id, this.href, 'get', 0);" onmouseover="this.title = $('favoritenumber').innerHTML + ' 人已收藏'" title="!fav_thread!"><b>收藏帖子</b></a></span>
+<span>
+<a class="returnlist" hidefocus="true" href="forum-5-1.html" title="返回列表"><b>返回列表</b></a>
+</span>
+<span><ul id="navmenu"> <li><a class="jzwx" href="javascript:void(0)" title="关注微信"><b>关注微信</b></a> <ul> <div id="jzqrn">
+<img alt="wx" height="228" src="../common_images/weixin.jpg" width="228"/>
+<p>微信签到每天都送论坛币！</p>
+</div> </ul></li></ul> </span>
+<span>
+<div id="goTopBtn" style="DISPLAY: none"><a class="jz52topa" title="返回顶部"><b>返回顶部</b></a></div>
+</span>
+</div>
+<div class="wp cl" id="ft">
+<div class="y" id="flk">
+<p>
+<a href="forum.php?mod=rss" target="_blank">RSS订阅</a><span class="pipe">|</span><a href="forum.php?mod=misc&amp;action=showdarkroom">小黑屋</a><span class="pipe">|</span><a href="thread-2084166-1-1.html" target="_blank">处罚记录</a><span class="pipe">|</span><a href="mailto:Service@52pojie.cn" target="_blank">联系我们</a><span class="pipe">|</span><strong><a href="https://www.52pojie.cn" target="_blank">吾爱破解 - 52pojie.cn</a></strong>
+( <a href="https://beian.miit.gov.cn/" rel="nofollow" target="_blank">京ICP备16042023号 | 京公网安备 11010502030087号</a> )</p>
+<p class="xs0">
+GMT+8, 2026-1-12 04:48<span id="debuginfo">
+</span>
+</p>
+</div>
+<div id="frt">
+<p>Powered by <strong>Discuz!</strong></p>
+<p class="xs0">Copyright © 2001-2020, Tencent Cloud.</p>
+</div></div>
+<div id="scrolltop">
+<span><a class="replyfast" href="forum.php?mod=post&amp;action=reply&amp;fid=5&amp;tid=2085866&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)" title="快速回复"><b>快速回复</b></a></span>
+<span hidefocus="true"><a class="scrolltopa" onclick="window.scrollTo('0','0')" title="返回顶部"><b>返回顶部</b></a></span>
+<span>
+<a class="returnlist" hidefocus="true" href="forum-5-1.html" title="返回列表"><b>返回列表</b></a>
+</span>
+</div>
+<script>var STYLEID = '1', STATICURL = 'https://static.52pojie.cn/static/', IMGDIR = 'https://static.52pojie.cn/static/image/common', VERHASH = 'BC3', charset = 'gbk', discuz_uid = '588268', cookiepre = 'htVC_2132_', cookiedomain = '', cookiepath = '/', showusercard = '0', attackevasive = '0', disallowfloat = 'login|newthread', creditnotice = '1|威望|点,2|吾爱币|CB,3|贡献值|点,4|悬赏值|点,5|采纳率|%,6|热心值|点,8|违规|次', defaultstyle = './template/default/style/t5', REPORTURL = 'aHR0cHM6Ly93d3cuNTJwb2ppZS5jbi90aHJlYWQtMjA4NTg2Ni0xLTEuaHRtbA==', SITEURL = 'https://www.52pojie.cn/', JSPATH = 'https://static.52pojie.cn/cache/', CSSPATH = 'https://static.52pojie.cn/cache/style_', DYNAMICURL = '';</script><script src="https://static.52pojie.cn/cache/common.js?BC3"></script><script>HTMLNODE.className += ' widthauto'</script><script src="https://static.52pojie.cn/cache/forum.js?BC3"></script><script language="javascript">delayShow($('myprompt'), function() {showMenu({'ctrlid':'myprompt','duration':3})});</script><script>
+initSearchmenu('scbar', '');
+</script><script>var fid = parseInt('5'), tid = parseInt('2085866');</script><script src="https://static.52pojie.cn/cache/forum_viewthread.js?BC3"></script><script>zoomstatus = parseInt(1);var imagemaxwidth = '1080';var aimgcount = new Array();</script><script reload="1">
+aimgcount[54636755] = ['2826574','2826575','2826576','2826577','2826578','2826579','2826580','2826581','2826582','2826583','2826584','2826585','2826586','2826587','2826588','2826589','2826590','2826591','2826592','2826593','2826594'];
+attachimggroup(54636755);
+var aimgfid = 0;
+</script><script>
+var postminchars = parseInt('8');
+var postmaxchars = parseInt('0');
+var disablepostctrl = parseInt('0');
+</script><script src="https://static.52pojie.cn/cache/seditor.js?BC3"></script><script reload="1">smilies_show('fastpostsmiliesdiv', 8, 'fastpost');</script><script src="https://static.52pojie.cn/cache/at.js?BC3"></script><script>
+var editorid = '';
+var ATTACHNUM = {'imageused':0,'imageunused':0,'attachused':0,'attachunused':0}, ATTACHUNUSEDAID = new Array(), IMGUNUSEDAID = new Array();
+</script><script src="https://static.52pojie.cn/cache/upload.js?BC3"></script><script>
+var upload = new SWFUpload({
+upload_url: "https://www.52pojie.cn/misc.php?mod=swfupload&action=swfupload&operation=upload&fid=5",
+post_params: {"uid" : "588268", "hash":"8350575a36dbfe0e745a2e3db224679b"},
+file_size_limit : "3072",
+file_types : "*.rar;*.7z;*.zip;*.txt;*.jpg;*.gif;*.png",
+file_types_description : "All Support Formats",
+file_upload_limit : 0,
+file_queue_limit : 0,
+swfupload_preload_handler : preLoad,
+swfupload_load_failed_handler : loadFailed,
+file_dialog_start_handler : fileDialogStart,
+file_queued_handler : fileQueued,
+file_queue_error_handler : fileQueueError,
+file_dialog_complete_handler : fileDialogComplete,
+upload_start_handler : uploadStart,
+upload_progress_handler : uploadProgress,
+upload_error_handler : uploadError,
+upload_success_handler : uploadSuccess,
+upload_complete_handler : uploadComplete,
+button_image_url : "https://static.52pojie.cn/static/image/common/uploadbutton_small.png",
+button_placeholder_id : "spanButtonPlaceholder",
+button_width: 17,
+button_height: 25,
+button_cursor:SWFUpload.CURSOR.HAND,
+button_window_mode: "transparent",
+custom_settings : {
+progressTarget : "attachlist",
+uploadSource: 'forum',
+uploadType: 'attach',
+maxSizePerDay: 52428800,
+uploadFrom: 'fastpost'
+},
+debug: false
+});
+</script><script>if(getcookie('fastpostrefresh') == 1) {$('fastpostrefresh').checked=true;}</script><script>
+$("fastpostmessage").style.background = 'url(https://static.52pojie.cn/static/image/common/bj.gif) no-repeat left top';
+
+$("fastpostmessage").onfocus = function (){
+$("fastpostmessage").style = '';
+}
+$("fastpostmessage").onblur = function (){
+if($("fastpostmessage").value == ''){
+$("fastpostmessage").style.background = 'url(https://static.52pojie.cn/static/image/common/bj.gif) no-repeat left top';
+}
+}
+
+ </script><script>
+new lazyload();
+</script><script>document.onkeyup = function(e){keyPageScroll(e, 0, 0, 'forum.php?mod=viewthread&tid=2085866&extra=page%3D1', 1);}</script><script>
+function succeedhandle_followmod(url, msg, values) {
+var fObj = $('followmod_'+values['fuid']);
+if(values['type'] == 'add') {
+fObj.innerHTML = '不收听';
+fObj.href = 'home.php?mod=spacecp&ac=follow&op=del&fuid='+values['fuid'];
+} else if(values['type'] == 'del') {
+fObj.innerHTML = '收听TA';
+fObj.href = 'home.php?mod=spacecp&ac=follow&op=add&hash=7f5fdc25&fuid='+values['fuid'];
+}
+}
+fixed_avatar([54636755], 1);
+</script><script type="text/x-mathjax-config">
+	MathJax.Hub.Config({ 
+		tex2jax: {
+			inlineMath: [["$","$"], ['\\(','\\)']],
+			processClass: "math-render",
+			ignoreClass: "pct",
+		},
+		skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code','a'],
+		showProcessingMessages: false,
+		messageStyle: "none",
+		TeX: { equationNumbers: {autoNumber: "AMS"} },
+	});
+</script><script src="https://lib.baomitu.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&amp;noContrib"></script><script>
+var mw_brush = eval({"asm":["Asm","true"],"c":["C","true"],"cpp":["C++","true"],"csharp":["C#","true"],"java":["Java","true"],"python":["Python","true"],"lua":["Lua","true"],"html":["HTML","true"],"php":["PHP","true"],"javascript":["JavaScript","true"],"css":["CSS","true"],"golang":["Golang","true"],"objc":["Objective-C","true"],"applescript":["AppleScript","true"],"actionscript3":["Actionscript3","true"],"bash":["Bash shell","true"],"coldfusion":["ColdFusion","true"],"delphi":["Delphi","true"],"diff":["Diff","true"],"erlang":["Erlang","true"],"groovy":["Groovy","true"],"javafx":["JavaFX","true"],"pascal":["Pascal","true"],"patch":["Patch","true"],"perl":["Perl","true"],"text":["Plain Text","true"],"powershell":["PowerShell","true"],"ruby":["Ruby","true"],"rails":["Ruby on Rails","true"],"sass":["Sass","true"],"scala":["Scala","true"],"scss":["Scss","true"],"shell":["Shell","true"],"sql":["SQL","true"],"vb":["Visual Basic","true"],"vbnet":["Visual Basic .NET","true"],"xhtml":["XHTML","true"],"xml":["XML","true"],"xslt":["XSLT","true"],"aauto":["AAuto","true"],"il":["IL","true"]});
+var mw_gutter = 1;
+var mw_lang_codebox = { 'select_lang': '请输入要插入的代码<br>选择语言：', 'show_gutter': '显示行号：', 'your_code': '你的代码：', 'close': '关闭', 'submit': '提交', 'cancle': '取消' };
+</script><script src="https://static.52pojie.cn/mw_syntaxhighlighter/static/js/mw_syntaxhighlighter.js?BC3"></script><script reload="1">mw_syntaxhighlighter("fastpost");</script><script async="" defer="" src="/static/js/index.min.js"></script><script src="https://static.52pojie.cn/noti/noti.js?BC3"></script><script>
+time=1768164523;
+activemode = true;
+hookCredit();
+if(activemode)ifvisible.now();
+setTimeout(function () { noti_run('&type=3_3_1&h=7f5fdc25', 10000, 180000);}, 100);
+</script><script> 
+function goTopEx() {
+ var obj = document.getElementById("goTopBtn");
+
+ function getScrollTop() {
+ return document.documentElement.scrollTop || document.body.scrollTop;
+ }
+
+ function setScrollTop(value) {
+ if (document.documentElement.scrollTop) {
+ document.documentElement.scrollTop = value;
+ } else {
+ document.body.scrollTop = value;
+ }
+
+ }
+ window.onscroll = function() {
+ getScrollTop() > 0 ? obj.style.display = "" : obj.style.display = "none";
+ var h = document.body.scrollHeight - getScrollTop() - obj.offsetTop - obj.offsetHeight;
+ obj.style.bottom = 0 + "px";
+ if (h < 350) {
+ obj.style.bottom = 340 + "px";
+ obj.style.top = "auto";
+ }
+
+
+ }
+ obj.onclick = function() {
+ function scrollToTop() {
+ let y = getScrollTop();
+ const interval = setInterval(function() {
+ if (getScrollTop() - 5 > y) {
+ // User trying to scroll - abort
+ clearInterval(interval);
+ return;
+ }
+ y = y / 1.1;
+ setScrollTop(y);
+ if (y < 1) {
+ clearInterval(interval);
+ setScrollTop(0);
+ }
+ }, 10);
+ }
+ scrollToTop()
+ }
+}
+</script><script type="text/javascript">goTopEx();</script><script>
+var _hmt = _hmt || [];
+(function() {
+ var hm = document.createElement("script");
+ hm.src = "https://hm.baidu.com/hm.js?46d556462595ed05e05f009cdafff31a";
+ var s = document.getElementsByTagName("script")[0]; 
+ s.parentNode.insertBefore(hm, s);
+})();
+</script><script src="home.php?mod=spacecp&amp;ac=follow&amp;op=checkfeed&amp;rand=1768164523"></script><script>noticeTitle();</script><script>_attachEvent(window, 'scroll', function () { showTopLink(); });checkBlind();</script></body>
+</html>
