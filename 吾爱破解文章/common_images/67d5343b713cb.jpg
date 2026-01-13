@@ -1,0 +1,2287 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--<< Header Area >>-->
+
+<head>
+    <!-- ========== Meta Tags ========== -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content=" Qzency">
+    <!-- ======== Page title ============ -->
+    <meta property="og:image" content="/LOGO.png" />
+    <title>将盾CDN加速防御服务-DDoS防御_安全加速_高防IP_高防CDN_WAF_清风云业务</title>
+    <meta name="keywords" content="将盾CDN,免费CDN,海外CDN,将盾安全CDN,将盾安全,网站加速,网站DDOS防御,网站CC防御,">
+    <meta name="description" content="将盾安全 SCDN为企业打造集分布式 DDoS 防护、CC 防护、WAF
+    BOT 行为分析为一体的安全加速解决方案。提供用户行为洞见，实现数据和运营决策联动，驱动云上业务稳定安全持续增长。">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <!--<< All Min Css >>-->
+    <link rel="stylesheet" href="assets/css/all.min.css">
+    <!--<< Animate.css >>-->
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <!--<< Magnific Popup.css >>-->
+    <link rel="stylesheet" href="assets/css/magnific-popup.css">
+    <!--<< MeanMenu.css >>-->
+    <link rel="stylesheet" href="assets/css/meanmenu.css">
+    <!--<< Swiper Bundle.css >>-->
+    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+    <!--<< Nice Select.css >>-->
+    <link rel="stylesheet" href="assets/css/nice-select.css">
+    <link rel="stylesheet" href="assets/css/main.css">
+</head>
+
+<body>
+
+
+
+
+
+<!-- 注册送体验金弹窗（直接放body里） -->
+<style>
+/* 弹窗核心样式 */
+#bonusModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6); /* 加深遮罩层，提升层次感 */
+  z-index: 9999;
+  display: flex; /* 默认强制显示 */
+  align-items: center;
+  justify-content: center;
+  font-family: "Microsoft YaHei", Arial, sans-serif;
+  backdrop-filter: blur(2px); /* 轻微模糊背景，突出弹窗 */
+  animation: modalFadeIn 0.3s ease; /* 弹窗淡入动画 */
+}
+
+/* 关键：移动端（屏幕宽度≤768px）隐藏弹窗 */
+@media (max-width: 768px) {
+  #bonusModal {
+    display: none !important; /* !important 确保覆盖其他样式 */
+    opacity: 0 !important;
+    pointer-events: none !important; /* 防止点击穿透 */
+  }
+}
+
+/* 淡入动画 */
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+#bonusCard {
+  width: 90%;
+  max-width: 380px;
+  background: white;
+  border-radius: 16px; /* 更大圆角，更现代 */
+  padding: 30px 25px 25px; /* 调整内边距，顶部更宽松 */
+  position: relative;
+  box-sizing: border-box;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15); /* 增加阴影，提升立体感 */
+  transform: translateY(0);
+  animation: cardSlideUp 0.4s ease; /* 卡片上滑动画 */
+}
+
+/* 卡片上滑动画 */
+@keyframes cardSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#closeBonus {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  border: none;
+  background: #f5f5f5; /* 增加背景色，更易点击 */
+  font-size: 18px;
+  cursor: pointer;
+  color: #666;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  padding: 0;
+  border-radius: 50%; /* 圆形关闭按钮 */
+  transition: all 0.2s ease;
+}
+
+#closeBonus:hover {
+  color: #333;
+  background: #eee; /* hover效果优化 */
+}
+
+.bonus-title {
+  text-align: center;
+  font-size: 24px; /* 加大标题 */
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: #222;
+  line-height: 1.2;
+}
+
+.bonus-desc {
+  text-align: center;
+  color: #777;
+  font-size: 15px;
+  margin: 0 0 30px 0; /* 调整间距 */
+  line-height: 1.4;
+}
+
+/* 金额区域优化 */
+.bonus-amount-wrap {
+  display: flex;
+  justify-content: center; /* 居中显示，更突出金额 */
+  align-items: center;
+  margin: 0 0 25px 0;
+  padding: 20px;
+  background: #fff8f0; /* 增加背景色，突出金额区域 */
+  border-radius: 12px;
+  border: 1px solid #ffe8cc;
+}
+
+.bonus-amount-label {
+  font-size: 16px;
+  color: #666;
+  margin-right: 10px; /* 增加间距 */
+}
+
+.bonus-amount {
+  font-size: 36px; /* 加大金额 */
+  color: #FF6B00;
+  font-weight: 700;
+  letter-spacing: 1px;
+  position: relative;
+}
+
+/* 金额装饰效果 */
+.bonus-amount::before {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #FF6B00, transparent);
+  opacity: 0.6;
+}
+
+.bonus-rule {
+  font-size: 14px;
+  color: #666;
+  margin: 0 0 30px 0; /* 调整间距 */
+  line-height: 1.8;
+  padding: 0 10px; /* 增加左右内边距 */
+}
+
+.bonus-rule p {
+  margin: 8px 0;
+  display: flex;
+  align-items: flex-start; /* 图标对齐优化 */
+}
+
+.bonus-rule p::before {
+  content: "✅";
+  margin-right: 10px;
+  font-size: 14px;
+  margin-top: 2px; /* 图标垂直居中 */
+}
+
+.bonus-btn {
+  display: block;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  border-radius: 10px; /* 按钮圆角优化 */
+  text-decoration: none;
+  margin: 8px 0;
+  font-size: 17px;
+  box-sizing: border-box;
+  font-weight: 500;
+  transition: all 0.2s ease; /* 按钮过渡动画 */
+  border: none;
+  cursor: pointer;
+}
+
+.btn-get {
+  background: #FF6B00;
+  color: white;
+  box-shadow: 0 4px 12px rgba(255, 107, 0, 0.3); /* 按钮阴影 */
+}
+
+.btn-get:hover {
+  background: #e86000;
+  transform: translateY(-1px); /* hover上移效果 */
+  box-shadow: 0 6px 16px rgba(255, 107, 0, 0.4);
+}
+
+.btn-get:active {
+  transform: translateY(0); /* 点击回弹 */
+}
+
+.btn-login {
+  background: #f8f8f8;
+  color: #333;
+  border: 1px solid #e0e0e0;
+}
+
+.btn-login:hover {
+  background: #f0f0f0;
+  border-color: #d0d0d0;
+}
+
+.bonus-tips {
+  font-size: 12px; /* 调整字体大小 */
+  color: #999;
+  text-align: center;
+  margin-top: 20px;
+  line-height: 1.6;
+  padding: 0 15px;
+}
+
+/* 永久关闭选项样式 */
+.forever-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px; /* 调整间距 */
+  font-size: 13px;
+  color: #666;
+}
+
+.forever-close input {
+  margin-right: 8px;
+  cursor: pointer;
+  width: 14px;
+  height: 14px; /* 统一复选框大小 */
+}
+
+.forever-close label {
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.forever-close label:hover {
+  color: #FF6B00; /* hover变色 */
+}
+
+/* 响应式优化（仅针对PC端小屏幕，移动端已隐藏） */
+@media (min-width: 769px) and (max-width: 992px) {
+  #bonusCard {
+    padding: 25px 20px 20px;
+  }
+  
+  .bonus-title {
+    font-size: 22px;
+  }
+  
+  .bonus-amount {
+    font-size: 32px;
+  }
+}
+</style>
+
+<div id="bonusModal">
+  <div id="bonusCard">
+    <button id="closeBonus">×</button>
+    <h3 class="bonus-title">注册即送10元体验金</h3>
+    <p class="bonus-desc">新用户专享福利，立即注册体验</p>
+    
+    <!-- 优化后的金额区域 -->
+    <div class="bonus-amount-wrap">
+      <span class="bonus-amount-label">体验金</span>
+      <div class="bonus-amount">¥10.00</div>
+    </div>
+    
+    <div class="bonus-rule">
+      <p>新用户注册即可领取</p>
+      <p>无门槛使用，无限制有效期</p>
+      <p>可直接购买产品套餐</p>
+    </div>
+    
+    <a href="https://v2.1k4.cn/#/register" class="bonus-btn btn-get">立即试用领取</a>
+    <a href="https://v2.1k4.cn/#/login" class="bonus-btn btn-login">已有账号，立即登录</a>
+    
+    <!-- 新增永久关闭选项 -->
+    <div class="forever-close">
+      <input type="checkbox" id="foreverCloseCheck">
+      <label for="foreverCloseCheck">永久关闭此弹窗</label>
+    </div>
+    
+    <p class="bonus-tips">点击"立即注册领取"即表示同意《用户协议》和《隐私政策》</p>
+  </div>
+</div>
+
+<script>
+// 关闭弹窗功能
+const modal = document.getElementById('bonusModal');
+const closeBtn = document.getElementById('closeBonus');
+const foreverCloseCheck = document.getElementById('foreverCloseCheck');
+
+// 新增：判断是否为移动端（屏幕宽度≤768px）
+function isMobile() {
+  return window.innerWidth <= 768 || /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+// 设置永久关闭Cookie
+function setForeverCloseCookie() {
+  // 设置有效期为1年（365天），可根据需求调整
+  document.cookie = "bonusForeverClose=1; max-age=31536000; path=/; SameSite=Lax";
+}
+
+// 读取Cookie
+function getCookie(name) {
+  const cookies = document.cookie.split('; ');
+  for (let cookie of cookies) {
+    const [cookieName, cookieValue] = cookie.split('=');
+    if (cookieName === name) return cookieValue;
+  }
+  return null;
+}
+
+// 关闭弹窗（增加动画效果）
+function closeModal() {
+  // 添加淡出动画
+  modal.style.opacity = '0';
+  modal.style.transition = 'opacity 0.3s ease';
+  
+  // 动画结束后隐藏
+  setTimeout(() => {
+    modal.style.display = 'none';
+  }, 300);
+  
+  // 如果勾选了永久关闭，则设置Cookie
+  if (foreverCloseCheck.checked) {
+    setForeverCloseCookie();
+  }
+}
+
+// 绑定关闭按钮事件
+closeBtn.onclick = closeModal;
+
+// 点击遮罩层关闭
+modal.onclick = function(e) {
+  if (e.target === modal) closeModal();
+};
+
+// ESC键关闭
+document.addEventListener('keydown', function(e) {
+  // 移动端不响应ESC键
+  if (!isMobile() && e.key === 'Escape' && modal.style.display !== 'none') {
+    closeModal();
+  }
+});
+
+// 阻止卡片内部点击冒泡到遮罩层
+document.getElementById('bonusCard').addEventListener('click', function(e) {
+  e.stopPropagation();
+});
+
+// 页面加载时检查：移动端直接隐藏，PC端按原有逻辑
+window.addEventListener('load', function() {
+  // 核心：移动端直接隐藏弹窗
+  if (isMobile()) {
+    modal.style.display = 'none';
+    modal.style.opacity = '0';
+    return; // 移动端直接退出，不执行后续逻辑
+  }
+  
+  // PC端原有逻辑：仅当检测到永久关闭Cookie时才隐藏弹窗
+  // 修复原代码Cookie名称拼写错误（bonusForeverClo11se → bonusForeverClose）
+  if (getCookie('bonusForeverClose') === '1') {
+    modal.style.display = 'none';
+  } else {
+    // 强制显示弹窗（确保每次打开都显示）
+    modal.style.display = 'flex';
+    modal.style.opacity = '1';
+  }
+});
+
+// 优化按钮点击体验（防止重复点击）
+const btnGet = document.querySelector('.btn-get');
+const btnLogin = document.querySelector('.btn-login');
+
+// 仅PC端绑定按钮点击事件
+if (!isMobile()) {
+  btnGet.addEventListener('click', function() {
+    this.style.pointerEvents = 'none';
+    this.style.opacity = '0.8';
+    setTimeout(() => {
+      this.style.pointerEvents = 'auto';
+      this.style.opacity = '1';
+    }, 1000);
+  });
+
+  btnLogin.addEventListener('click', function() {
+    this.style.pointerEvents = 'none';
+    this.style.opacity = '0.8';
+    setTimeout(() => {
+      this.style.pointerEvents = 'auto';
+      this.style.opacity = '1';
+    }, 1000);
+  });
+}
+</script>
+
+
+
+
+
+
+<!-- 轻量版资源重试脚本（无性能损耗） -->
+<script>
+  // 极简配置（仅保留核心重试，无多余校验）
+  const retryConfig = {
+    maxRetry: 3,        // 最多重试3次
+    retryDelay: 500     // 重试间隔缩短为500ms（更快响应）
+  };
+  const retryMap = new Map(); // 仅记录重试次数，无多余逻辑
+
+  // 核心重试函数（极简版）
+  function retryResource(el, type) {
+    const src = el.href || el.src;
+    if (!src || retryMap.get(src) >= retryConfig.maxRetry) {
+      retryMap.delete(src);
+      return; // 无地址/超次数直接退出
+    }
+    retryMap.set(src, (retryMap.get(src) || 0) + 1);
+    
+    // 仅必要日志（减少控制台开销）
+    console.warn(`[重试] ${type}: ${src} (${retryMap.get(src)}/${retryConfig.maxRetry})`);
+    
+    // 延迟重试（仅替换地址，不复制多余属性）
+    setTimeout(() => {
+      const newSrc = src.includes('?') ? `${src}&_t=${Date.now()}` : `${src}?_t=${Date.now()}`;
+      if (type === 'css') el.href = newSrc; // 直接改地址，不重建标签（性能提升）
+      else el.src = newSrc;
+    }, retryConfig.retryDelay);
+  }
+
+  // 初始化（仅绑定错误事件，无遍历/校验）
+  window.addEventListener('DOMContentLoaded', () => {
+    // 仅绑定错误事件，无多余操作
+    document.querySelectorAll('link[rel="stylesheet"]').forEach(link => {
+      link.onerror = () => retryResource(link, 'css');
+    });
+    document.querySelectorAll('script[src]').forEach(script => {
+      script.onerror = () => retryResource(script, 'js');
+    });
+  });
+</script>
+
+
+
+
+
+
+
+    <!-- Back To Top start -->
+    <button id="back-top" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Offcanvas Area Start -->
+    <div class="fix-area">
+        <div class="offcanvas__info">
+            <div class="offcanvas__wrapper">
+                <div class="offcanvas__content">
+                    <div class="offcanvas__top mb-5 d-flex justify-content-between align-items-center">
+                        <div class="offcanvas__logo">
+                            <a href="index.html">
+                                <img src="/V2/logo.png" alt="logo-img">
+                            </a>
+                        </div>
+                        <div class="offcanvas__close">
+                            <button>
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <p class="text d-none d-xl-block">
+                        Nullam dignissim, ante scelerisque the is euismod fermentum odio sem semper the is erat, a
+                        feugiat leo urna eget eros. Duis Aenean a imperdiet risus.
+                    </p>
+                    <div class="mobile-menu fix mb-3"></div>
+                    <div class="offcanvas__contact">
+                        <h4>联系我们</h4>
+                        <ul>
+
+
+                            <li class="d-flex align-items-center">
+                                <div class="offcanvas__contact-icon mr-15">
+                                    <i class="fab fa-qq"></i>
+                                </div>
+                                <div class="offcanvas__contact-text">
+                                    <a href="">1340236383</a>
+                                </div>
+                            </li>
+                                                        <li class="d-flex align-items-center">
+                                <div class="offcanvas__contact-icon mr-15">
+                                    <i class="fal fa-envelope"></i>
+                                </div>
+                                <div class="offcanvas__contact-text">
+                                    <a href="cdn-cgi/l/email-protection#60090e060f200518010d100c054e030f0d"><span
+                                            class="mailto:info@example.com"><span class="__cf_email__" data-cfemail="70191e161f301508111d001c155e131f1d">15555888744@163.com</span></span></a>
+                                </div>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <div class="offcanvas__contact-icon mr-15">
+                                    <i class="fal fa-clock"></i>
+                                </div>
+                                <div class="offcanvas__contact-text">
+                                    <a target="_blank" href="#">工作时间早上9:00-2:00</a>
+                                </div>
+                            </li>
+                            <li class="d-flex align-items-center">
+                                <div class="offcanvas__contact-icon">
+                                    <i class="fal fa-map-marker-alt"></i>
+                                </div>
+                                <div class="offcanvas__contact-text">
+                                    <a target="_blank" href="#">深圳市南山区粤海街道科技园社区科智西路科苑西23栋北284号</a>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="header-button mt-4">
+                            <a href="contact.html" class="theme-btn text-center">
+                                Get A Quote
+                            </a>
+                        </div>
+                        <div class="social-icon d-flex align-items-center">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="offcanvas__overlay"></div>
+
+    <!-- Header Section Start      header-sticky  - -->
+    <header id="去除跟随" class="header-1">
+        <div class="container-fluid">
+            <div class="mega-menu-wrapper">
+                <div class="header-main">
+                    <div class="logo">
+                        <a href="index.html" class="header-logo">
+    <img src="https://wmimg.com/i/818/2025/09/68c566232b2a1.png" alt="logo-img" style="width: 175px;">
+</a>
+                    </div>
+                    <div class="mean__menu-wrapper">
+                        <div class="main-menu">
+                            <nav id="mobile-menu">
+                                <ul>
+                                  
+                                    <li>
+                                        <a href="#CP">产品详情</a>
+                                    </li>
+                                    <li>
+                                        <a href="#GN">功能概要</a>
+                                    </li>
+                                    <li>
+                                        <a href="#lx">联系客服</a>
+                                    </li>
+                                    <li>
+                                        <a href="/waf/">技术论坛</a>
+                                    </li>
+
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                    <div class="header-right d-flex justify-content-end align-items-center">
+                        <div class="header-button">
+                            <a href="https://v2.1k4.cn/#/login" class="login-btn">
+                                <i class="fas fa-user"></i> 登 录
+                            </a>
+                            <a href="https://v2.1k4.cn/#/register" class="theme-btn header-btn">立即加入 <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                        <div class="header__hamburger d-xl-none my-auto">
+                            <div class="sidebar__toggle">
+                                <i class="fas fa-bars"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section Start -->
+    <section class="hero-section hero-1 bg-cover" style="background-image: url('https://b70e84104ba50d31c176104c1787b86c.dlied1.cdntips.net/download.nature.qq.com/SnsShare/lengxi/1765440456_68d3cc6bb6268.png');">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="title-anim"> <span>将 盾 高 防 C D N 专 业 服 务</span> </h1>
+                <p class="wow fadeInUp" data-wow-delay=".3s">为企业打造集分布式 DDoS 防护、CC 防护、WAF<br>
+BOT 行为分析为一体的安全加速解决方案。提供用户行为洞见，实现数据和运营决策联动，驱动云上业务稳定安全持续增长。</p>
+                <ul class="review-box wow fadeInUp" data-wow-delay=".2s">
+                    <li>
+                        <i class="fa-sharp fa-solid fa-circle-check"></i>
+                        <span>
+                            <b>10,000+</b>
+                            站长选择
+                        </span>
+                    </li>
+                    <li>
+                        <i class="fa-sharp fa-solid fa-circle-check"></i>
+                        <span>
+                             <b>30+</b>
+                            智能防御策略
+                        </span>
+                    </li>
+                     <li>
+                        <i class="fa-sharp fa-solid fa-circle-check"></i>
+                        <span>
+                            IPV4/V6
+                            <b>300+</b>
+                            节点IP
+                            
+                            
+                        </span>
+                    </li>
+                    <li>
+                        <i class="fa-sharp fa-solid fa-circle-check"></i>
+                        <span>
+                            已防御
+                            <b>100,000+</b>
+                            防御攻击
+                        </span>
+                    </li>
+                </ul>
+<div class="hero-button">
+                    <a href="https://v2.1k4.cn/#/register" class="theme-btn wow fadeInUp" data-wow-delay=".3s">立即注册 <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://v2.1k4.cn/#/login"
+                        class="theme-btn style-2  wow fadeInUp" >
+                        登录控制台 <i ></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="dashboard-section section-padding pb-0">        
+            <div class="dashboard-image img-custom-anim-left ">
+                <img src="/se.png" alt="img">
+            </div>
+        </div> 
+   </section>
+
+    <!-- Brand Section Start -->
+    <div class="brand-section fix section-padding">
+        <div class="container">
+            <h5 class="brand-title wow fadeInUp" data-wow-delay=".3s">
+已覆盖B2B、快消、IDC、资源技术论坛、支付接口和站长服务工具等领域 <b>Jiang Dun</b></h5>
+            <div class="mycustom-marque style-border">
+                <div class="left-shape"></div>
+                <div class="right-shape"></div>
+                <div class="scrolling-wrap style-2">
+                    <div class="comm">
+                        <div class="text-center"><img src="/qfy.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://www.bt.cn/static/new/images/logo_03.svg" alt="img" width="168"></div>
+                        <div class="text-center"><img src="/t2.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="/jy.jpg" alt="img" width="168"></div>
+                          
+                        <div class="text-center"><img src="https://csstools.chinaz.com/tools/images/public/logos/logo-index.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="/zdir.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://cdn.ipip.net/loveapp/ipip/www_v2/theme/img/ipip_com.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://cdn.73faka.cn/18/a5ae9ee9d2552c19af35aa7b822d78.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://www.onenav.top/images/onenav_150.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://uixun.com/wp-content/uploads/2024/06/%E7%94%BB%E6%9D%BF-1-1-1.svg" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://cdn.dusays.com/logo.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://www.xp.cn/images/xp-title.svg" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://cdn.ipip.net/loveapp/ipip/www_v2/theme/img/ipip_com.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://cdn.ipip.net/loveapp/ipip/www/theme/images/partner/kongzhong.png" alt="img" width="168"></div>
+                        </div>
+                        
+                       
+                        <div class="comm">
+                        <div class="text-center"><img src="/qfy.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://www.bt.cn/static/new/images/logo_03.svg" alt="img" width="168"></div>
+                        <div class="text-center"><img src="/t2.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="/jy.jpg" alt="img" width="168"></div>
+                          
+                        <div class="text-center"><img src="https://csstools.chinaz.com/tools/images/public/logos/logo-index.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="/zdir.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://cdn.ipip.net/loveapp/ipip/www_v2/theme/img/ipip_com.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://cdn.73faka.cn/18/a5ae9ee9d2552c19af35aa7b822d78.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://www.onenav.top/images/onenav_150.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://uixun.com/wp-content/uploads/2024/06/%E7%94%BB%E6%9D%BF-1-1-1.svg" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://cdn.dusays.com/logo.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://www.xp.cn/images/xp-title.svg" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://cdn.ipip.net/loveapp/ipip/www_v2/theme/img/ipip_com.png" alt="img" width="168"></div>
+                         <div class="text-center"><img src="https://cdn.ipip.net/loveapp/ipip/www/theme/images/partner/kongzhong.png" alt="img" width="168"></div>
+                        
+                        
+                    </div>
+                    
+                     <div class="comm">
+                        <div class="text-center"><img src="/qfy.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://www.bt.cn/static/new/images/logo_03.svg" alt="img" width="168"></div>
+                        <div class="text-center"><img src="/t2.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="/jy.jpg" alt="img" width="168"></div>
+                          
+                        <div class="text-center"><img src="https://csstools.chinaz.com/tools/images/public/logos/logo-index.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="/zdir.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://cdn.ipip.net/loveapp/ipip/www_v2/theme/img/ipip_com.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://cdn.73faka.cn/18/a5ae9ee9d2552c19af35aa7b822d78.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://www.onenav.top/images/onenav_150.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://uixun.com/wp-content/uploads/2024/06/%E7%94%BB%E6%9D%BF-1-1-1.svg" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://cdn.dusays.com/logo.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://www.xp.cn/images/xp-title.svg" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://cdn.ipip.net/loveapp/ipip/www_v2/theme/img/ipip_com.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://cdn.ipip.net/loveapp/ipip/www/theme/images/partner/kongzhong.png" alt="img" width="168"></div> 
+                       
+                        
+                    </div>
+                    
+                     <div class="comm">
+                        <div class="text-center"><img src="/qfy.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://www.bt.cn/static/new/images/logo_03.svg" alt="img" width="168"></div>
+                        <div class="text-center"><img src="/t2.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="/jy.jpg" alt="img" width="168"></div>
+                          
+                        <div class="text-center"><img src="https://csstools.chinaz.com/tools/images/public/logos/logo-index.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="/zdir.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://cdn.ipip.net/loveapp/ipip/www_v2/theme/img/ipip_com.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://cdn.73faka.cn/18/a5ae9ee9d2552c19af35aa7b822d78.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://www.onenav.top/images/onenav_150.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://uixun.com/wp-content/uploads/2024/06/%E7%94%BB%E6%9D%BF-1-1-1.svg" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://cdn.dusays.com/logo.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://www.xp.cn/images/xp-title.svg" alt="img" width="168"></div>
+                         <div class="text-center"><img src="https://cdn.ipip.net/loveapp/ipip/www_v2/theme/img/ipip_com.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://cdn.ipip.net/loveapp/ipip/www/theme/images/partner/kongzhong.png" alt="img" width="168"></div>
+                        
+                        
+                    </div>
+                     <div class="comm">
+                        <div class="text-center"><img src="/qfy.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://www.bt.cn/static/new/images/logo_03.svg" alt="img" width="168"></div>
+                        <div class="text-center"><img src="/t2.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="/jy.jpg" alt="img" width="168"></div>
+                          
+                        <div class="text-center"><img src="https://csstools.chinaz.com/tools/images/public/logos/logo-index.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="/zdir.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://cdn.ipip.net/loveapp/ipip/www_v2/theme/img/ipip_com.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://cdn.73faka.cn/18/a5ae9ee9d2552c19af35aa7b822d78.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://www.onenav.top/images/onenav_150.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://uixun.com/wp-content/uploads/2024/06/%E7%94%BB%E6%9D%BF-1-1-1.svg" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://cdn.dusays.com/logo.png" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://www.xp.cn/images/xp-title.svg" alt="img" width="168"></div>
+                        <div class="text-center"><img src="https://cdn.ipip.net/loveapp/ipip/www_v2/theme/img/ipip_com.png" alt="img" width="168"></div>
+                        
+                         
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <style>
+/* 移除点击时的蓝色背景和轮廓 */
+.service-box-items {
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent !important; /* 移除移动端点击高亮 */
+}
+
+.service-box-items:focus,
+.service-box-items:active {
+  outline: none !important;
+  box-shadow: none !important;
+  background-color: transparent !important;
+}
+
+/* 优化卡片悬停效果（可选） */
+.service-box-items:hover {
+  transform: translateY(-5px);
+  transition: all 0.3s ease;
+}
+
+/* 替换默认焦点样式为更美观的效果 */
+.service-box-items:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0,123,255,0.3);
+}
+    </style>
+<section class="service-section style-1 fix section-padding pt-0" style="background-image: url('assets/img/service/bg.png');">
+  <div class="container">
+    <!-- 标题部分 -->
+    <div class="section-title text-center">
+      <div class="sub-text justify-content-center wow fadeInUp">
+        <img src="assets/img/star.png" alt="star icon">
+        <h6>Function Outline</h6>
+        <img src="assets/img/star.png" alt="star icon">
+      </div>
+      <h2 id='GN' class="title-anim">功能概要</h2>
+      <p class="mt-3 wow fadeInUp" data-wow-delay=".3s">
+        高级 WAF 提供海内外高精度防护，支持 CC/URL 规则及攻击预警；CDN 多节点加速，含缓存/压缩/实时同步，优化带宽并动态负载均衡。
+      </p>
+    </div>
+
+    <!-- 服务卡片网格 -->
+    <div class="row">
+      <!-- 卡片1 - 受攻击通知 -->
+      <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s">
+        <div class="service-box-items" tabindex="0">
+          <div class="decorations">
+            <img class="item-shape" src="assets/img/service/item-shape.png" alt="decoration">
+            <img class="item-shape-2" src="assets/img/service/item-shape-2.png" alt="decoration">
+          </div>
+          <div class="icon">
+            <img src="assets/img/icon/01.svg" alt="attack notification icon">
+          </div>
+          <div class="content">
+            <h3><a href="service-details.html" class="no-focus-style">受攻击通知</a></h3>
+            <p>当网站遭遇网络攻击时，系统将实时触发多维度警报机制，通过邮件、短信等多渠道即时推送详细攻击报告</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 卡片2 - 高级WAF -->
+      <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".2s">
+        <div class="service-box-items" tabindex="0">
+          <div class="decorations">
+            <img class="item-shape" src="assets/img/service/item-shape.png" alt="decoration">
+            <img class="item-shape-2" src="assets/img/service/item-shape-2.png" alt="decoration">
+          </div>
+          <div class="icon">
+            <img src="assets/img/icon/13.png" alt="WAF icon">
+          </div>
+          <div class="content">
+            <h3><a href="service-details.html" class="no-focus-style">高级WAF</a></h3>
+            <p>结合智能行为分析引擎，对 CC 攻击进行毫秒级拦截响应。支持基于 URL 的深度防护策略等多重防护机制</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 卡片3 - CDN加速 -->
+      <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".2s">
+        <div class="service-box-items" tabindex="0">
+          <div class="decorations">
+            <img class="item-shape" src="assets/img/service/item-shape.png" alt="decoration">
+            <img class="item-shape-2" src="assets/img/service/item-shape-2.png" alt="decoration">
+          </div>
+          <div class="icon">
+            <img src="assets/img/icon/11.png" alt="CDN icon">
+          </div>
+          <div class="content">
+            <h3><a href="service-details.html" class="no-focus-style">网站CDN加速</a></h3>
+            <p>分布式节点集群支持多运营商线路，采用智能分片回源技术，结合多级缓存策略及动态负载均衡，显著提升访问效率并节省带宽。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 卡片4 - 数据统计与分析 -->
+      <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".2s">
+        <div class="service-box-items" tabindex="0">
+          <div class="decorations">
+            <img class="item-shape" src="assets/img/service/item-shape.png" alt="decoration">
+            <img class="item-shape-2" src="assets/img/service/item-shape-2.png" alt="decoration">
+          </div>
+          <div class="icon">
+            <img src="assets/img/icon/14.png" alt="CDN icon">
+          </div>
+          <div class="content">
+            <h3><a href="service-details.html" class="no-focus-style">数据统计与分析</a></h3>
+            <p>支持网站对缓存内容进行实时更新，CDN 能快速同步更新到各个节点，确保用户在第一时间获取到最新内容。</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 卡片5 - 带宽优化 -->
+      <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".2s">
+        <div class="service-box-items" tabindex="0">
+          <div class="decorations">
+            <img class="item-shape" src="assets/img/service/item-shape.png" alt="decoration">
+            <img class="item-shape-2" src="assets/img/service/item-shape-2.png" alt="decoration">
+          </div>
+          <div class="icon">
+            <img src="assets/img/icon/12.png" alt="CDN icon">
+          </div>
+          <div class="content">
+            <h3><a href="service-details.html" class="no-focus-style">带宽优化</a></h3>
+            <p>CDN 减少了用户对源服务器的直接访问，降低了源服务器的带宽消耗。通过节点缓存和就近分发，缓解网络拥塞。</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 卡片6 - 负载均衡 -->
+      <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".2s">
+        <div class="service-box-items" tabindex="0">
+          <div class="decorations">
+            <img class="item-shape" src="assets/img/service/item-shape.png" alt="decoration">
+            <img class="item-shape-2" src="assets/img/service/item-shape-2.png" alt="decoration">
+          </div>
+          <div class="icon">
+            <img src="assets/img/icon/10.png" alt="CDN icon">
+          </div>
+          <div class="content">
+            <h3><a href="service-details.html" class="no-focus-style">负载均衡</a></h3>
+            <p>各个节点服务器上，根据实时负载情况和网络状况，CDN 动态调整请求分发，确保整个系统高效稳定运行。</p>
+          </div>
+        </div>
+      </div>      
+    </div>
+  </div>
+</section>
+
+    <!-- Project Section Start -->
+    <section class="project-section style-1 fix section-padding">
+        <div class="container">
+            <div class="section-title text-center mb-78">
+                <div class="sub-text justify-content-center wow fadeInUp">
+                    <img src="assets/img/star.png" alt="img">
+                  
+                </div>
+                <h2 class="title-anim">智能攻击数据分析 - 助力企业安全上云</h2>
+                <p class="mt-3 wow fadeInUp" data-wow-delay=".3s">
+                    将盾安全cdn为企业打造集分布式 DDoS 防护、CC 防护、WAF 防护、BOT 行为分析为一体的安全加速解决方案。
+                </p>
+            </div>
+            <div class="project-main-wrapper">
+                <div class="project-wrapper">
+                    <div class="project-content">
+                        <span class="wow fadeInUp">01.</span>
+                        <h3 class="wow fadeInUp" data-wow-delay=".3s"><a href="project-details.html">URL级CC防御</a></h3>
+                        <p class="wow fadeInUp" data-wow-delay=".3s">独家功能，目前市面上CDN基本没见过提供这个能力<br>
+1、只对被攻击的URL（非整站）进行人机验证，有效拦截恶意流量<br>
+2、只影响被攻击的URL，针对性拦截，用户体验更好<br>
+
+</p>
+                        
+                    </div>
+                    <div class="project-thumb img-custom-anim-right">
+                        <img src="https://wmimg.com/i/818/2025/09/68c566c378069.png" alt="img">
+                    </div>
+                </div>
+                <div class="project-wrapper style-padding style-2">
+                    <div class="project-thumb img-custom-anim-left">
+                        <img src="https://wmimg.com/i/818/2025/09/68c5671cb2a3d.png" alt="img">
+                    </div>
+                    <div class="project-content">
+                        <span class="wow fadeInUp">02.</span>
+                        <h3 class="wow fadeInUp" data-wow-delay=".3s"><a href="project-details.html">将盾CDN 防御基本原理</a>
+                        </h3>
+                        <p class="wow fadeInUp" data-wow-delay=".2s">基础服务支撑域名解析与监控，快速 CDN 实现内容分发加速；高防 IP 应对攻击，自动切换并净化回源流量；URL 级 CC 防御精准拦截恶意流量，兼顾安全防护与用户体验。</p>
+                      
+                    </div>
+                </div>
+                <div class="project-wrapper style-3">
+                    <div class="project-content">
+                        <span class="wow fadeInUp">03.</span>
+                        <h3 class="wow fadeInUp" data-wow-delay=".3s"><a href="project-details.html">DNS调度与监控切换</a></h3>
+                        <p class="wow fadeInUp" data-wow-delay=".2s">目前将盾cdn 可通过DNS供应商进行调度与宕机切换。<br>
+1、可自组线路，为每个区域分配对应的最优节点（DNS能力）<br>
+2、可自行部署监控节点，为每个线路分配不一样的监控节点<br>
+3、自愈能力高，为每个IP配置备用IP，故障自动切换到备用IP</p>
+                      
+                    </div>
+                    <div class="project-thumb img-custom-anim-right">
+                        <img src="https://wmimg.com/i/818/2025/09/68c566c378135.png" alt="img">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+
+
+    <section class="pricing-section section-padding fix">
+        <div class="container">
+            <div class="section-title text-center mb-80">
+                <div id='CP' class="sub-text justify-content-center">
+                    <i class="fas fa-star fa-2x" style="color: #ffc107;"></i>
+                </div>
+                <h2 class="title-anim">产 品 价 格</h2>
+                
+                <p class="mt-3">
+                    CCNAME方式分钟级接入防护，全球低延迟，提供高可用网站CDN加速服务。高防 IP 应对攻击，自动切换并净化回源流量；URL 级 CC 防御精准拦截恶意流量，兼顾安全防护与用户体验。
+                </p>
+            </div>
+            
+            <ul class="nav" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a href="#Yearly" data-bs-toggle="tab" class="nav-link active" aria-selected="true" role="tab">
+                        大陆套餐
+                    </a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a href="#Monthly" data-bs-toggle="tab" class="nav-link" aria-selected="false" role="tab"
+                        tabindex="-1">
+                        海外套餐
+                    </a>
+                </li>
+                 <li class="nav-item" role="presentation">
+                    <a href="#anliang" data-bs-toggle="tab" class="nav-link" aria-selected="false" role="tab"
+                        tabindex="-1">
+                        按量套餐
+                    </a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a href="#exclusive" data-bs-toggle="tab" class="nav-link" aria-selected="false" role="tab"
+                        tabindex="-1">
+                        独享套餐
+                    </a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a href="#free" data-bs-toggle="tab" class="nav-link" aria-selected="false" role="tab"
+                        tabindex="-1">
+                        免费套餐
+                    </a>
+                </li>
+            </ul>
+        <div class="tab-content">
+            <div id="Yearly" class="tab-pane fade show active" role="tabpanel">
+                <!-- 大陆套餐内容保持不变 -->
+                <div class="row">
+                    <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s">
+                        <div class="pricing-card-item">
+                            
+                            <div class="pricing-header">
+                                <div class="pricing-shape">
+                                    <img src="assets/img/pricing-shape.png" alt="img">
+                                </div>
+                                <h3>LV1畅享版</h3>
+                                <div class="pricing-text">
+                                    <h2>￥6.8</h2>
+                                    <div class="price">
+                                        <span><del>￥36.8</del>Off</span>
+                                        <p>Monthly billing</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pricing-list">
+                                <h4>套餐介绍:</h4>
+                                <ul>
+                                    <li><i class="fa-solid fa-check"></i>访问速度：优秀</li>
+                                    <li><i class="fa-solid fa-check"></i>流量限制：100Gb</li>
+                                    <li><i class="fa-solid fa-check"></i>站点绑定：5个</li>
+                                    <li><i class="fa-solid fa-check"></i>赠送子站：10个</li>
+                                    <li><i class="fa-solid fa-check"></i>https支持：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>高级WAF：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>Websocket：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>独家URL级别CC防御：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>访问速度：优秀</li>
+                                    <li><i class="fa-solid fa-check"></i>泛解析：支持</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".2s">
+                        <div class="pricing-card-item style-2">
+                            
+                            <div class="pricing-header">
+                                <div class="pricing-shape">
+                                    <img src="assets/img/pricing-shape.png" alt="img">
+                                </div>
+                                <h3>LV2尊享版</h3>
+                                <div class="pricing-text">
+                                    <h2>￥12</h2>
+                                    <div class="price">
+                                        <span><del>￥58.00</del>Off</span>
+                                        <p>Monthly billing</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pricing-list">
+                                <h4>套餐介绍:</h4>
+                                <ul>
+                                    <li><i class="fa-solid fa-check"></i>访问速度：优秀</li>
+                                    <li><i class="fa-solid fa-check"></i>流量限制：200Gb</li>
+                                    <li><i class="fa-solid fa-check"></i>站点绑定：10个</li>
+                                    <li><i class="fa-solid fa-check"></i>赠送子站：15个</li>
+                                    <li><i class="fa-solid fa-check"></i>https支持：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>高级WAF：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>Websocket：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>独家URL级别CC防御：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>访问速度：优秀</li>
+                                    <li><i class="fa-solid fa-check"></i>泛解析：支持</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".2s">
+                        <div class="pricing-card-item style-3">
+                            <div class="tag">
+                                <img src="assets/img/tag.png" alt="img">
+                            </div>
+                            <div class="pricing-header">
+                                <div class="pricing-shape">
+                                    <img src="assets/img/pricing-shape.png" alt="img">
+                                </div>
+                                <h3>LV3旗舰版</h3>
+                                <div class="pricing-text">
+                                    <h2>￥28</h2>
+                                    <div class="price">
+                                        <span><del>￥85.99</del>Off</span>
+                                        <p>Monthly billing</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pricing-list">
+                                <h4>套餐介绍:</h4>
+                                <ul>
+                                    <li><i class="fa-solid fa-check"></i>访问速度：优秀</li>
+                                    <li><i class="fa-solid fa-check"></i>流量限制：500Gb</li>
+                                    <li><i class="fa-solid fa-check"></i>站点绑定：15个</li>
+                                    <li><i class="fa-solid fa-check"></i>赠送子站：30个</li>
+                                    <li><i class="fa-solid fa-check"></i>https支持：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>高级WAF：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>Websocket：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>独家URL级别CC防御：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>访问速度：优秀</li>
+                                    <li><i class="fa-solid fa-check"></i>泛解析：支持</li>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".2s">
+                        <div class="pricing-card-item style-4">
+                            <div class="pricing-header">
+                                <div class="pricing-shape">
+                                    <img src="assets/img/pricing-shape.png" alt="img">
+                                </div>
+                                <h3>LV4至尊版</h3>
+                                <div class="pricing-text">
+                                    <h2>￥42</h2>
+                                    <div class="price">
+                                        <span><del>￥85.99</del>Off</span>
+                                        <p>Monthly billing</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pricing-list">
+                                <h4>套餐介绍:</h4>
+                                <ul>
+                                    <li><i class="fa-solid fa-check"></i>访问速度：优秀</li>
+                                    <li><i class="fa-solid fa-check"></i>流量限制：1000Gb</li>
+                                    <li><i class="fa-solid fa-check"></i>站点绑定：30个</li>
+                                    <li><i class="fa-solid fa-check"></i>赠送子站：60个</li>
+                                    <li><i class="fa-solid fa-check"></i>https支持：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>高级WAF：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>Websocket：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>独家URL级别CC防御：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>访问速度：优秀</li>
+                                    <li><i class="fa-solid fa-check"></i>泛解析：支持</li>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".2s">
+                        <div class="pricing-card-item style-5">
+                            <div class="pricing-header">
+                                <div class="pricing-shape">
+                                    <img src="assets/img/pricing-shape.png" alt="img">
+                                </div>
+                                <h3>企业定制</h3>
+                                <div class="pricing-text">
+                                    <h2>咨询</h2>
+                                    <div class="price">
+                                        <span>客服电话/微信：</span>
+                                        <p>15555888744</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pricing-list">
+                                <h4>套餐介绍:</h4>
+                                <ul>
+                                    <li><i class="fa-solid fa-check"></i>访问速度：优秀</li>
+                                    <li><i class="fa-solid fa-check"></i>流量限制：无限制</li>
+                                    <li><i class="fa-solid fa-check"></i>站点绑定：无限制</li>
+                                    <li><i class="fa-solid fa-check"></i>赠送子站：无限制</li>
+                                    <li><i class="fa-solid fa-check"></i>https支持：无限制</li>
+                                    <li><i class="fa-solid fa-check"></i>高级WAF：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>Websocket：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>独家URL级别CC防御：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>访问速度：优秀</li>
+                                    <li><i class="fa-solid fa-check"></i>泛解析：支持</li>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="Monthly" class="tab-pane fade" role="tabpanel">
+                <!-- 海外套餐内容保持不变 -->
+                <div class="row">
+                    <div class="col-xl-4 col-lg-6 col-md-6">
+                        <div class="pricing-card-item">
+                            <div class="pricing-header">
+                                <div class="pricing-shape">
+                                    <img src="assets/img/pricing-shape.png" alt="img">
+                                </div>
+                                <h3>LV1畅享版</h3>
+                                <div class="pricing-text">
+                                    <h2>￥10</h2>
+                                    <div class="price">
+                                        <span><del>￥36.8</del>Off</span>
+                                        <p>Monthly billing</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pricing-list">
+                                <h4>套餐介绍:</h4>
+                                <ul>
+                                    <li><i class="fa-solid fa-check"></i>访问速度：优秀</li>
+                                    <li><i class="fa-solid fa-check"></i>流量限制：100Gb</li>
+                                    <li><i class="fa-solid fa-check"></i>站点绑定：5个</li>
+                                    <li><i class="fa-solid fa-check"></i>赠送子站：10个</li>
+                                    <li><i class="fa-solid fa-check"></i>https支持：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>高级WAF：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>Websocket：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>独家URL级别CC防御：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>访问速度：优秀</li>
+                                    <li><i class="fa-solid fa-check"></i>泛解析：支持</li>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-6">
+                        <div class="pricing-card-item style-2">
+                            <div class="tag">
+                                <img src="assets/img/tag.png" alt="img">
+                            </div>
+                            <div class="pricing-header">
+                                
+                                <h3>LV2尊享版</h3>
+                                <div class="pricing-text">
+                                    <h2>￥15</h2>
+                                    <div class="price">
+                                        <span><del>￥36.8</del>Off</span>
+                                        <p>Monthly billing</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pricing-list">
+                                <h4>套餐介绍:</h4>
+                                <ul>
+                                    <li><i class="fa-solid fa-check"></i>访问速度：优秀</li>
+                                    <li><i class="fa-solid fa-check"></i>流量限制：200Gb</li>
+                                    <li><i class="fa-solid fa-check"></i>站点绑定：10个</li>
+                                    <li><i class="fa-solid fa-check"></i>赠送子站：15个</li>
+                                    <li><i class="fa-solid fa-check"></i>https支持：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>高级WAF：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>Websocket：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>独家URL级别CC防御：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>访问速度：优秀</li>
+                                    <li><i class="fa-solid fa-check"></i>泛解析：支持</li>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-6">
+                        <div class="pricing-card-item style-3">
+                            <div class="pricing-header">
+                                <div class="pricing-shape">
+                                    <img src="assets/img/pricing-shape.png" alt="img">
+                                </div>
+                                <h3>LV3旗舰版</h3>
+                                <div class="pricing-text">
+                                    <h2>￥35</h2>
+                                    <div class="price">
+                                        <span><del>￥85.99</del>Off</span>
+                                        <p>Monthly billing</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pricing-list">
+                                <h4>套餐介绍:</h4>
+                                <ul>
+                                    <li><i class="fa-solid fa-check"></i>访问速度：优秀</li>
+                                    <li><i class="fa-solid fa-check"></i>流量限制：500Gb</li>
+                                    <li><i class="fa-solid fa-check"></i>站点绑定：15个</li>
+                                    <li><i class="fa-solid fa-check"></i>赠送子站：30个</li>
+                                    <li><i class="fa-solid fa-check"></i>https支持：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>高级WAF：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>Websocket：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>独家URL级别CC防御：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>访问速度：优秀</li>
+                                    <li><i class="fa-solid fa-check"></i>泛解析：支持</li>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".2s">
+                        <div class="pricing-card-item style-4">
+                            <div class="pricing-header">
+                                <div class="pricing-shape">
+                                    <img src="assets/img/pricing-shape.png" alt="img">
+                                </div>
+                                <h3>LV4至尊版</h3>
+                                <div class="pricing-text">
+                                    <h2>￥55</h2>
+                                    <div class="price">
+                                        <span><del>￥105.99</del>Off</span>
+                                        <p>Monthly billing</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pricing-list">
+                                <h4>套餐介绍:</h4>
+                                <ul>
+                                    <li><i class="fa-solid fa-check"></i>访问速度：优秀</li>
+                                    <li><i class="fa-solid fa-check"></i>流量限制：1000Gb</li>
+                                    <li><i class="fa-solid fa-check"></i>站点绑定：30个</li>
+                                    <li><i class="fa-solid fa-check"></i>赠送子站：60个</li>
+                                    <li><i class="fa-solid fa-check"></i>https支持：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>高级WAF：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>Websocket：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>独家URL级别CC防御：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>访问速度：优秀</li>
+                                    <li><i class="fa-solid fa-check"></i>泛解析：支持</li>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xl-4 col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".2s">
+                        <div class="pricing-card-item style-5">
+                            <div class="pricing-header">
+                                <div class="pricing-shape">
+                                    <img src="assets/img/pricing-shape.png" alt="img">
+                                </div>
+                                <h3>企业定制</h3>
+                                <div class="pricing-text">
+                                    <h2>咨询</h2>
+                                    <div class="price">
+                                        <span>客服电话/微信：</span>
+                                        <p>15555888744</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pricing-list">
+                                <h4>套餐介绍:</h4>
+                                <ul>
+                                    <li><i class="fa-solid fa-check"></i>访问速度：优秀</li>
+                                    <li><i class="fa-solid fa-check"></i>流量限制：无限制</li>
+                                    <li><i class="fa-solid fa-check"></i>站点绑定：无限制</li>
+                                    <li><i class="fa-solid fa-check"></i>赠送子站：无限制</li>
+                                    <li><i class="fa-solid fa-check"></i>https支持：无限制</li>
+                                    <li><i class="fa-solid fa-check"></i>高级WAF：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>Websocket：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>独家URL级别CC防御：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>访问速度：优秀</li>
+                                    <li><i class="fa-solid fa-check"></i>泛解析：支持</li>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="anliang" class="tab-pane fade" role="tabpanel">
+                <!-- 按量套餐内容保持不变 -->
+                <div class="row">
+                    <div class="col-xl-4 col-lg-6 col-md-6">
+                        <div class="pricing-card-item">
+                            <div class="tag">
+                                <img src="assets/img/tag.png" alt="img">
+                            </div>
+                            <div class="pricing-header">
+                                <div class="pricing-shape">
+                                    <img src="assets/img/pricing-shape.png" alt="img">
+                                </div>
+                                <h3>大陆按量套餐</h3>
+                                <div class="pricing-text">
+                                    <h2>￥1</h2>
+                                    <div class="price">
+                                        <span>首选推荐实惠</span>
+                                        <p>流量低至0.05￥/G</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pricing-list">
+                                <h4>套餐介绍:</h4>
+                                <ul>
+                                    <li><i class="fa-solid fa-check"></i>访问速度：优秀</li>
+                                    <li><i class="fa-solid fa-check"></i>每月流量：5Gb</li>
+                                    <li><i class="fa-solid fa-check"></i>流量包：低至0.05元每Gb</li>
+                                    <li><i class="fa-solid fa-check"></i>站点绑定：3个（可增加）</li>
+                                    <li><i class="fa-solid fa-check"></i>赠送子站：6个（可增加）</li>
+                                    <li><i class="fa-solid fa-check"></i>https支持：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>高级WAF：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>Websocket：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>独家URL级别CC防御：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>访问速度：优秀</li>
+                                    <li><i class="fa-solid fa-check"></i>泛解析：支持</li>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-6">
+                        <div class="pricing-card-item style-2">
+                            
+                            <div class="pricing-header">
+                                <div class="pricing-shape">
+                                    <img src="assets/img/pricing-shape.png" alt="img">
+                                </div>
+                                <h3>海外按量套餐</h3>
+                                <div class="pricing-text">
+                                    <h2>￥1</h2>
+                                    <div class="price">
+                                        <span>首选推荐实惠</span>
+                                        <p>流量低至0.05￥/G</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pricing-list">
+                                <h4>套餐介绍:</h4>
+                                <ul>
+                                    <li><i class="fa-solid fa-check"></i>访问速度：优秀</li>
+                                    <li><i class="fa-solid fa-check"></i>每月流量：5Gb</li>
+                                    <li><i class="fa-solid fa-check"></i>流量包：低至0.05元每Gb</li>
+                                    <li><i class="fa-solid fa-check"></i>站点绑定：3个（可增加）</li>
+                                    <li><i class="fa-solid fa-check"></i>赠送子站：6个（可增加）</li>
+                                    <li><i class="fa-solid fa-check"></i>https支持：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>高级WAF：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>Websocket：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>独家URL级别CC防御：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>访问速度：优秀</li>
+                                    <li><i class="fa-solid fa-check"></i>泛解析：支持</li>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-6">
+                        <div class="">
+                            <div class="pricing-header">
+                                <div class="pricing-shape">
+                                    <img src="assets/img/pricing-shape.png" alt="img">
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="free" class="tab-pane fade" role="tabpanel">
+                <!-- 免费套餐内容保持不变 -->
+                <div class="row">
+                    <div class="col-xl-4 col-lg-6 col-md-6">
+                        <div class="pricing-card-item">
+                            <div class="tag">
+                                <img src="assets/img/tag.png" alt="img">
+                            </div>
+                            <div class="pricing-header">
+                                <div class="pricing-shape">
+                                    <img src="assets/img/pricing-shape.png" alt="img">
+                                </div>
+                                <h3>大陆免费套餐</h3>
+                                <div class="pricing-text">
+                                    <h2>￥0</h2>
+                                    <div class="price">
+                                        <span>Free</span>
+                                        <p>大陆轻量免费体验</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pricing-list">
+                                <h4>套餐介绍:</h4>
+                                <ul>
+                                    <li><i class="fa-solid fa-check"></i>访问速度：优秀</li>
+                                    <li><i class="fa-solid fa-check"></i>每月流量：10Gb</li>
+                                    <li><i class="fa-solid fa-check"></i>流量包：不可新增</li>
+                                    <li><i class="fa-solid fa-check"></i>站点绑定：2个（可增加）</li>
+                                    <li><i class="fa-solid fa-check"></i>赠送子站：2个（可增加）</li>
+                                    <li><i class="fa-solid fa-check"></i>https支持：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>高级WAF：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>Websocket：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>独家URL级别CC防御：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>访问速度：优秀</li>
+                                    <li><i class="fa-solid fa-check"></i>泛解析：支持</li>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-6">
+                        <div class="pricing-card-item style-2">
+                            
+                            <div class="pricing-header">
+                                <div class="pricing-shape">
+                                    <img src="assets/img/pricing-shape.png" alt="img">
+                                </div>
+                                <h3>海外免费套餐</h3>
+                                <div class="pricing-text">
+                                    <h2>￥0</h2>
+                                    <div class="price">
+                                        <span>Free</span>
+                                        <p>大陆轻量免费体验</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pricing-list">
+                                <h4>套餐介绍:</h4>
+                                <ul>
+                                    <li><i class="fa-solid fa-check"></i>访问速度：优秀</li>
+                                    <li><i class="fa-solid fa-check"></i>每月流量：5Gb</li>
+                                    <li><i class="fa-solid fa-check"></i>流量包：不可新增</li>
+                                    <li><i class="fa-solid fa-check"></i>站点绑定：2个（可增加）</li>
+                                    <li><i class="fa-solid fa-check"></i>赠送子站：2个（可增加）</li>
+                                    <li><i class="fa-solid fa-check"></i>https支持：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>高级WAF：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>Websocket：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>独家URL级别CC防御：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>访问速度：优秀</li>
+                                    <li><i class="fa-solid fa-check"></i>泛解析：支持</li>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-6">
+                        <div class="">
+                            <div class="pricing-header">
+                                <div class="pricing-shape">
+                                    <img src="assets/img/pricing-shape.png" alt="img">
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 新增独享套餐内容 -->
+            <div id="exclusive" class="tab-pane fade" role="tabpanel">
+                <div class="row">
+                    <div class="col-xl-4 col-lg-6 col-md-6">
+                        <div class="pricing-card-item">
+                            <div class="tag">
+                                <img src="assets/img/tag.png" alt="img">
+                            </div>
+                            <div class="pricing-header">
+                                <div class="pricing-shape">
+                                    <img src="assets/img/pricing-shape.png" alt="img">
+                                </div>
+                                <h3>大陆独享节点</h3>
+                                <div class="pricing-text">
+                                    <h2>￥350</h2>
+                                    <div class="price">
+                                        <span><del>￥480</del>Off</span>
+                                        <p>Monthly billing</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pricing-list">
+                                <h4>套餐介绍:</h4>
+                                <ul>
+                                    <li><i class="fa-solid fa-check"></i>访问速度：极速</li>
+                                    <li><i class="fa-solid fa-check"></i>流量限制：无限制</li>
+                                    <li><i class="fa-solid fa-check"></i>站点绑定：无限制</li>
+                                    <li><i class="fa-solid fa-check"></i>赠送子站：无限制</li>
+                                    <li><i class="fa-solid fa-check"></i>https支持：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>高级WAF：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>Websocket：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>独家URL级别CC防御：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>访问速度：极速</li>
+                                    <li><i class="fa-solid fa-check"></i>泛解析：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>独享IP资源：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>专属技术支持：支持</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-6">
+                        <div class="pricing-card-item style-2">
+                            <div class="tag">
+                                <img src="assets/img/tag.png" alt="img">
+                            </div>
+                            <div class="pricing-header">
+                                <div class="pricing-shape">
+                                    <img src="assets/img/pricing-shape.png" alt="img">
+                                </div>
+                                <h3>海外独享节点</h3>
+                                <div class="pricing-text">
+                                    <h2>￥380</h2>
+                                    <div class="price">
+                                        <span><del>￥560</del>Off</span>
+                                        <p>Monthly billing</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pricing-list">
+                                <h4>套餐介绍:</h4>
+                                <ul>
+                                    <li><i class="fa-solid fa-check"></i>访问速度：极速</li>
+                                    <li><i class="fa-solid fa-check"></i>流量限制：无限制</li>
+                                    <li><i class="fa-solid fa-check"></i>站点绑定：无限制</li>
+                                    <li><i class="fa-solid fa-check"></i>赠送子站：无限制</li>
+                                    <li><i class="fa-solid fa-check"></i>https支持：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>高级WAF：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>Websocket：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>独家URL级别CC防御：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>访问速度：极速</li>
+                                    <li><i class="fa-solid fa-check"></i>泛解析：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>独享IP资源：支持</li>
+                                    <li><i class="fa-solid fa-check"></i>专属技术支持：支持</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                
+                
+                
+                
+                
+            </div>
+
+            <div class="pricing-button text-center wow fadeInUp" data-wow-delay=".3s">
+                <a href="https://client.1k4.cn/#/product/index" class="theme-btn border-btn text-center">了解产品<i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-section bg-cover section-padding pb-0"
+        style="background-image: url('https://download.nature.qq.com/SnsShare/lengxi/1765553513_4d64503c_footer-bg.jpg');">
+        <div class="container">
+            <div class="footer-cta-content pb-80">
+                <h2 id='lx' class="title-anim">尝试免费探索7天</h2>
+                <p>极 致 性 价 比 网 站 网 络 安 全 防 护 服 务</p>
+                <div class="project-button mt-40">
+                    <a href="https://v2.1k4.cn/#/login" class="theme-btn">登录控制台 <i class="fas fa-user"></i> </a>
+                    <a href="https://v2.1k4.cn/#/register" class="theme-btn style-2">立即注册 <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="footer-widgets-wrapper">
+                <div class="row">
+                    <div class="col-xl-4 col-lg-4 col-md-6">
+                        <div class="single-footer-widget">
+                            <div class="widget-head">
+                                <a href="index.html">
+                                    <img src="/V2/logo.png" alt="img">
+                                </a>
+                            </div>
+                            <div class="footer-content">
+                                <p> 将盾安全cdn为企业打造集分布式 DDoS 防护、CC 防护、WAF 防护、BOT 行为分析为一体的安全加速解决方案。<br>
+                                    
+                                     </p>
+                                <div class="social-icon d-flex align-items-center">
+                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-4 col-md-6 ps-lg-5">
+                        <div class="single-footer-widget">
+                            <div class="widget-head">
+                                <h3>功能概要</h3>
+                            </div>
+                            <ul class="list-area">
+                                <li>
+                                    <a >
+                                       高级WAF
+                                    </a>
+                                </li>
+                                <li>
+                                    <a >
+                                       受攻击通知
+                                    </a>
+                                </li>
+                                <li>
+                                    <a >
+                                        网站CDN加速
+                                    </a>
+                                </li>
+                                <li>
+                                    <a >
+                                        带宽优化
+                                    </a>
+                                </li>
+                                <li>
+                                    <a >
+                                        端口转发
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-lg-4 col-md-6 ps-lg-4">
+                        <div class="single-footer-widget">
+                            <div class="widget-head">
+                                <h3>联系我们</h3>
+                            </div>
+                            <ul class="list-area">
+                                <li>
+                                    <a >
+                                       QQ交流群：432991912
+                                    </a>
+                                </li>
+                                <li>
+                                    <a >
+                                        微信：15555888744
+                                    </a>
+                                </li>
+                                <li>
+                                    <a >
+                                        电话：15555888744
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        QQ客服：1340236383
+                                    </a>
+                                </li>
+                                <li>
+                                    <a>
+                                        QQ客服：3099174340
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-xl-2 col-lg-4 col-md-6 ps-lg-1">
+                        <div class="single-footer-widget">
+                            <div class="widget-head">
+                                <h3>友情链接</h3>
+                            </div>
+                            <ul class="list-area">
+                                <li>
+                                    <a href="https://www.qfyidc.com/">
+                                        清风云计算
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.xnepay.cn/">
+                                        昔年易支付
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.ipip.net/">
+                                        IPIP
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.langhai.net/">
+                                        浪海导航
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="https://www.92wuyou.cn/">
+                                        无忧技术
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-contact-info">
+                <div class="icon-items">
+                    <div class="icon">
+                        <i class="fa-sharp fa-solid fa-phone-volume"></i>
+                    </div>
+                    <h5><a href="">086-15555-888-744</a></h5>
+                </div>
+                <div class="icon-items">
+                    <div class="icon">
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+                    <h5><a >15555888744@163.com</a></h5>
+                </div>
+                <div class="icon-items">
+                    <div class="icon">
+                        <i class="fa-sharp fa-solid fa-location-dot"></i>
+                    </div>
+                    <h5>
+                        <a>深圳市南山区粤海街道科技园</a>
+                    </h5>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-wrapper">
+                    <p class="text-center">
+                        <div class="info-copyright" style="font-size: 12px; text-align: center;">
+    <a class="filing-itme" style="display: inline-block; margin: 0 5px;">
+        <img class="filing-icon" src="https://download.nature.qq.com/SnsShare/lengxi/1765553677_ee38017c_1 (1).png" 
+             style="width: 20px; height: 20px; vertical-align: middle;">
+        <span class="filing-title">深圳市清风云科技有限公司(社会统一信用代码: 91440300MADW3LUG5B)</span>
+    </a>
+    <a class="filing-itme" href="https://beian.miit.gov.cn/" target="_blank" style="display: inline-block; margin: 0 5px;">
+        <img class="filing-icon" src="/img/2.png" 
+             style="width: 20px; height: 20px; vertical-align: middle;">
+        <span class="filing-title">工信部备案: 粤ICP备2024305339号</span>
+    </a><br>
+    <a class="filing-itme" href="https://tsm.miit.gov.cn/dxxzsp/xkz/xkzgl/resource/qiyesearch.jsp?num=%25E6%25B7%25B1%25E5%259C%25B3%25E5%25B8%2582%25E6%25B8%2585%25E9%25A3%258E%25E4%25BA%2591%25E7%25A7%2591%25E6%258A%2580%25E6%259C%2589%25E9%2599%2590%25E5%2585%25AC%25E5%258F%25B8&type=xuke"  target="_blank" style="display: inline-block; margin: 0 5px;">
+        <img class="filing-icon" src="/img/3.png" 
+             style="width: 20px; height: 20px; vertical-align: middle;">
+        <span class="filing-title">增值电信业务经营许可IDC/ISP/CDN证号B1-20242970</span>
+    </a>
+     <a class="filing-itme" href="https://szwljb.sz.gov.cn/" target="_blank" style="display: inline-block; margin: 0 5px;">
+        <img class="filing-icon" src="/img/7.png" 
+             style="width: 20px; height: 20px; vertical-align: middle;">
+        <span class="filing-title">深圳市互联网违法和不良信息举报中心</span>
+    </a>
+    <!--<a class="filing-itme" href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030002004716" 
+       target="_blank" style="display: inline-block; margin: 0 5px;">
+        <img class="filing-icon" src="https://qfyidc.com//themes/web/www/static/picture/gongan.png" 
+             style="width: 20px; height: 20px; vertical-align: middle;">
+        <span class="filing-title">粤公网安备44030002004716号</span>
+    </a>
+    -->
+    
+    <br>
+    <a class="filing-itme" style="display: inline-block; margin: 0 5px;">
+        <img class="filing-icon" src="/img/2.png" 
+             style="width: 20px; height: 20px; vertical-align: middle;">
+        <span class="filing-title">投诉举报机制的途径: 邮箱a15555607606@163.com</span>
+    </a>
+    <a class="filing-itme" href="https://www.12377.cn/" target="_blank" style="display: inline-block; margin: 0 5px;">
+        <img class="filing-icon" src="/img/6.png" 
+             style="width: 20px; height: 20px; vertical-align: middle;">
+        <span class="filing-title">网上有害信息举报专区</span>
+    </a><br>
+   
+</div>
+                    
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+
+
+
+    <!--<< 以下侧边导航 >>-->
+
+
+<style>
+    /* 侧边栏样式 - 现代风格重设计 */
+    .float-sidebar {
+        position: fixed;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
+        background-color: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-radius: 12px;
+        padding: 15px 0;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1px solid rgba(230, 230, 230, 0.8);
+    }
+
+    .float-sidebar:hover {
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        transform: translateY(-50%) scale(1.02);
+    }
+
+    .sidebar-item {
+        width: 100%;
+        padding: 14px 18px;
+        margin: 3px 0;
+        text-align: center;
+        color: #333;
+        cursor: pointer;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .sidebar-item::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 100%;
+        background-color: rgba(24, 144, 255, 0.1);
+        transition: width 0.3s ease;
+    }
+
+    .sidebar-item:hover::after {
+        width: 100%;
+    }
+
+    .sidebar-item:hover {
+        color: #1890ff;
+        transform: translateX(-4px);
+    }
+
+    .sidebar-item i {
+        font-size: 22px;
+        margin-bottom: 6px;
+        transition: transform 0.3s ease;
+    }
+
+    .sidebar-item:hover i {
+        transform: scale(1.15);
+    }
+
+    .sidebar-item span {
+        font-size: 13px;
+        white-space: nowrap;
+        font-weight: 500;
+        letter-spacing: 0.3px;
+    }
+
+    /* 弹窗样式优化 */
+    .sidebar-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 10000;
+        justify-content: center;
+        align-items: center;
+        backdrop-filter: blur(4px);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .sidebar-modal.active {
+        opacity: 1;
+    }
+
+    .modal-content {
+        background-color: white;
+        padding: 30px;
+        border-radius: 16px;
+        width: 340px;
+        max-width: 90%;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        transform: translateY(20px) scale(0.95);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* 联系我们弹窗特有装饰 */
+    #contact-modal .modal-content {
+        border-top: 4px solid #1890ff;
+    }
+
+    #contact-modal .modal-content::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #1890ff, #40a9ff, #69b1ff, #91c7ff);
+        border-radius: 4px 4px 0 0;
+    }
+
+    .sidebar-modal.active .modal-content {
+        transform: translateY(0) scale(1);
+    }
+
+    .qrcode-img {
+        width: 200px;
+        height: 200px;
+        margin: 20px auto;
+        border: 1px solid #eee;
+        border-radius: 8px;
+        padding: 10px;
+        background-color: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .close-btn {
+        background-color: #1890ff;
+        color: white;
+        border: none;
+        padding: 10px 24px;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-top: 15px;
+        font-size: 15px;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        box-shadow: 0 2px 5px rgba(24, 144, 255, 0.3);
+    }
+
+    .close-btn:hover {
+        background-color: #096dd9;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(24, 144, 255, 0.4);
+    }
+
+    .modal-content h3 {
+        margin-top: 0;
+        color: #222;
+        font-size: 19px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid #f0f0f0;
+        margin-bottom: 20px;
+    }
+
+    .modal-content h3 i {
+        color: #1890ff;
+        font-size: 22px;
+    }
+
+    /* 联系信息样式优化 */
+    .contact-info {
+        display: flex;
+        align-items: center;
+        background-color: #f7faff;
+        border-radius: 10px;
+        padding: 12px 15px;
+        margin: 10px 0;
+        text-align: left;
+        transition: transform 0.2s ease;
+    }
+
+    .contact-info:hover {
+        transform: translateX(5px);
+    }
+
+    .contact-info i {
+        width: 30px;
+        height: 30px;
+        background-color: rgba(24, 144, 255, 0.1);
+        color: #1890ff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 15px;
+        flex-shrink: 0;
+    }
+
+    .contact-info p {
+        margin: 0;
+        color: #555;
+        line-height: 1.5;
+    }
+
+    /* 响应式调整 - 手机端不显示侧边栏 */
+    @media (max-width: 768px) {
+        .float-sidebar {
+            display: none !important;
+        }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .float-sidebar {
+            right: 10px;
+        }
+        
+        .sidebar-item {
+            padding: 12px 15px;
+        }
+        
+        .sidebar-item i {
+            font-size: 20px;
+        }
+        
+        .sidebar-item span {
+            font-size: 12px;
+        }
+    }
+</style>
+
+<!-- Font Awesome 图标库 -->
+<link rel="stylesheet" href="\assets\css\all.miin.css">
+
+<!-- 侧边栏 -->
+<div class="float-sidebar">
+    <div class="sidebar-item" id="sb-contact">
+        <i class="fas fa-envelope"></i>
+        <span>联系我们</span>
+    </div>
+    <div class="sidebar-item" id="sb-wechat">
+        <i class="fab fa-weixin"></i>
+        <span>微信联系</span>
+    </div>
+    <div class="sidebar-item" id="sb-qq">
+        <i class="fab fa-qq"></i>
+        <span>QQ交流群</span>
+    </div>
+    <div class="sidebar-item" id="sb-share">
+        <i class="fas fa-share-alt"></i>
+        <span>分享本页</span>
+    </div>
+</div>
+
+<!-- 联系我们弹窗 -->
+<div class="sidebar-modal" id="contact-modal">
+    <div class="modal-content">
+        <h3><i class="fas fa-envelope"></i> 联系我们</h3>
+        
+        <div class="contact-info">
+            <i class="fab fa-qq"></i>
+            <p>QQ：1340236383</p>
+        </div>
+        
+        <div class="contact-info">
+            <i class="fas fa-mobile-alt"></i>
+            <p>微信/电话: 15555-888-744</p>
+        </div>
+        
+        <div class="contact-info">
+            <i class="fas fa-envelope"></i>
+            <p>邮箱: 15555888744@163.com</p>
+        </div>
+        
+        <button class="close-btn" id="close-contact">关闭</button>
+    </div>
+</div>
+
+<!-- 微信二维码弹窗 -->
+<div class="sidebar-modal" id="wechat-modal">
+    <div class="modal-content">
+        <h3><i class="fab fa-weixin"></i> 添加微信</h3>
+        <img class="qrcode-img" src="https://download.nature.qq.com/SnsShare/lengxi/1765553382_0587367d_6c19fc004df61d38173bd9160563f43.jpg" alt="微信二维码">
+        <p>扫描二维码添加微信</p>
+        <button class="close-btn" id="close-wechat">关闭</button>
+    </div>
+</div>
+
+<script>
+    // 辅助函数：显示弹窗
+    function showModal(modalId) {
+        const modal = document.getElementById(modalId);
+        modal.style.display = 'flex';
+        // 触发重绘后添加active类以启动动画
+        setTimeout(() => {
+            modal.classList.add('active');
+        }, 10);
+    }
+    
+    // 辅助函数：隐藏弹窗
+    function hideModal(modalId) {
+        const modal = document.getElementById(modalId);
+        modal.classList.remove('active');
+        // 动画结束后隐藏
+        setTimeout(() => {
+            modal.style.display = 'none';
+        }, 300);
+    }
+
+    // 联系我们
+    document.getElementById('sb-contact').addEventListener('click', function() {
+        showModal('contact-modal');
+    });
+    
+    // 微信二维码
+    document.getElementById('sb-wechat').addEventListener('click', function() {
+        showModal('wechat-modal');
+    });
+    
+    // QQ群跳转
+    document.getElementById('sb-qq').addEventListener('click', function() {
+        window.open('https://qm.qq.com/cgi-bin/qm/qr?k=d9dFFV7n57yVHNx7Ne3iWwIdRKRwNls_&jump_from=webapi&authKey=YCIfKLmSWWtDZmQXx9PXBZZGD/vHEvLOVR0yov3IfVNa5ulNwnnuponT0LqULOQh', '_blank');
+    });
+    
+    // 分享功能 - 仅保留复制链接功能
+    document.getElementById('sb-share').addEventListener('click', function() {
+        const shareItem = this;
+        const originalIcon = shareItem.querySelector('i').className;
+        const originalText = shareItem.querySelector('span').textContent;
+        
+        // 执行复制链接操作
+        const input = document.createElement('input');
+        input.value = window.location.href;
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand('copy');
+        document.body.removeChild(input);
+        
+        // 显示复制成功提示
+        shareItem.querySelector('i').className = 'fas fa-check';
+        shareItem.querySelector('span').textContent = '已复制链接';
+        shareItem.style.color = '#52c41a'; // 成功绿色
+        
+        // 2秒后恢复原始状态
+        setTimeout(() => {
+            shareItem.querySelector('i').className = originalIcon;
+            shareItem.querySelector('span').textContent = originalText;
+            shareItem.style.color = ''; // 恢复默认颜色
+        }, 2000);
+    });
+    
+    // 关闭按钮
+    document.getElementById('close-contact').addEventListener('click', function() {
+        hideModal('contact-modal');
+    });
+    
+    document.getElementById('close-wechat').addEventListener('click', function() {
+        hideModal('wechat-modal');
+    });
+    
+    // 点击外部关闭
+    window.addEventListener('click', function(e) {
+        if (e.target.classList.contains('sidebar-modal')) {
+            hideModal(e.target.id);
+        }
+    });
+    
+    // 按ESC键关闭弹窗
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const activeModals = document.querySelectorAll('.sidebar-modal.active');
+            activeModals.forEach(modal => {
+                hideModal(modal.id);
+            });
+        }
+    });
+</script>
+
+
+
+
+
+
+    <!--<< 以上侧边导航 >>-->
+
+
+
+    <!--<< All JS Plugins >>-->
+    <script src="assets/js/jquery-3.7.1.min.js"></script>
+    <!--<< Viewport Js >>-->
+    <script src="assets/js/viewport.jquery.js"></script>
+    <!--<< Bootstrap Js >>-->
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <!--<< Gsap Js >>-->
+    <script src="assets/js/gsap.js"></script>
+    <!--<< Gsap Scroll Trigger Js >>-->
+    <script src="assets/js/gsap-scroll-trigger.js"></script>
+    <!--<< Gsap Split Text Js >>-->
+    <script src="assets/js/gsap-split-text.js"></script>
+    <!--<< Nice Select Js >>-->
+    <script src="assets/js/jquery.nice-select.min.js"></script>
+    <!--<< Waypoints Js >>-->
+    <script src="assets/js/jquery.waypoints.js"></script>
+    <!--<< Counterup Js >>-->
+    <script src="assets/js/jquery.counterup.min.js"></script>
+    <!--<< Swiper Slider Js >>-->
+    <script src="assets/js/swiper-bundle.min.js"></script>
+    <!--<< MeanMenu Js >>-->
+    <script src="assets/js/jquery.meanmenu.min.js"></script>
+    <!--<< Magnific Popup Js >>-->
+    <script src="assets/js/jquery.magnific-popup.min.js"></script>
+    <!--<< Wow Animation Js >>-->
+    <script src="assets/js/wow.min.js"></script>
+    <!--<< Main.js >>-->
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
