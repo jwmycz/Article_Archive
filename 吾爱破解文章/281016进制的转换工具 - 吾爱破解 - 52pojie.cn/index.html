@@ -1,0 +1,2332 @@
+ <!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<meta content="webkit" name="renderer">
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<title>2|8|10|16进制的转换工具 - 吾爱破解 - 52pojie.cn </title>
+<link href="https://www.52pojie.cn/thread-2086258-1-1.html" rel="canonical"/>
+<meta content="2|8|10|16进制的转换工具" name="keywords"/>
+<meta content='哈喽！友友们，小弟这次来分享一个简单实用的命令行进制转换工具，支持二进制、八进制、十进制、十六进制之间的相互转换代码如下：[md]```"""进制转 ... ' name="description"/>
+<meta content="Discuz!" name="generator"/>
+<meta content="True" name="MSSmartTagsPreventParsing"/>
+<meta content="Yes" http-equiv="MSThemeCompatible"/>
+
+<link href="/favicon.svg" rel="mask-icon"/>
+<link href="/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="apple-touch-icon.png" rel="apple-touch-icon"/>
+<link href="apple-touch-icon.png" rel="apple-touch-icon" size="180x180"/>
+<link href="apple-touch-icon-167x167.png" rel="apple-touch-icon" size="167x167"/>
+<link href="apple-touch-icon-152x152.png" rel="apple-touch-icon" size="152x152"/><link href="https://static.52pojie.cn/cache/style_1_common.css?q9b" rel="stylesheet" type="text/css"><link href="https://static.52pojie.cn/cache/style_1_forum_viewthread.css?q9b" rel="stylesheet" type="text/css"><link href="./template/default/style/t5/style.css" id="css_extstyle" rel="stylesheet" type="text/css">
+<meta content="吾爱破解 - 52pojie.cn" name="application-name"/>
+<meta content="吾爱破解 - 52pojie.cn" name="msapplication-tooltip"/>
+<meta content="name=门户;action-uri=https://www.52pojie.cn/portal.php;icon-uri=https://static.52pojie.cn/static/image/common/portal.ico" name="msapplication-task"/>
+<meta content="name=网站;action-uri=https://www.52pojie.cn/forum.php;icon-uri=https://static.52pojie.cn/static/image/common/bbs.ico" name="msapplication-task"/>
+<link href="https://www.52pojie.cn/archiver/" rel="archives" title="吾爱破解 - 52pojie.cn">
+<link href="https://static.52pojie.cn/cache/style_1_widthauto.css?q9b" id="css_widthauto" rel="stylesheet" type="text/css">
+<link href="https://static.52pojie.cn/cache/style_1_responsive.css?q9b" id="css_responsive" rel="stylesheet" type="text/css">
+</link></link></link></link></link></link></meta></head>
+<body class="pg_viewthread" id="nv_forum" onkeydown="if(event.keyCode==27) return false;">
+<div id="append_parent"></div><div id="ajaxwaitid"></div>
+<div class="cl" id="toptb">
+<div class="wp">
+<div class="z"><a href="https://space.bilibili.com/544451485" rel="nofollow" target="_blank">官方bilibili</a><a href="thread-582852-1-1.html" style="color: red" target="_blank">Windows破解入门</a><a href="thread-408645-1-1.html" style="color: red" target="_blank">Android逆向入门</a></div>
+<div class="y">
+<a class="switchblind" href="javascript:;" id="switchblind" onclick="toggleBlind(this)" title="开启辅助访问"></a>
+<a href="thread-209287-1-1.html" target="_blank" title="修复各种访问不了论坛、访问论坛异常、验证码异常等各种问题的大杀器！">【网络诊断修复工具】</a><a class="switchwidth" href="javascript:;" id="switchwidth" onclick="widthauto(this)" title="切换到窄版">切换到窄版</a>
+<a href="javascript:;" id="sslct" onmouseover="delayShow(this, function() {showMenu({'ctrlid':'sslct','pos':'34!'})});">切换风格</a></div>
+</div>
+</div>
+<ul class="p_pop" disautofocus="true" id="myprompt_menu" style="display: none;">
+<li><a href="home.php?mod=space&amp;do=pm" id="pm_ntc" style="background-repeat: no-repeat; background-position: 0 50%;"><em class="prompt_news_0"></em>消息</a></li>
+<li><a href="home.php?mod=follow&amp;do=follower"><em class="prompt_follower_0"></em>新听众</a></li>
+<li><a href="home.php?mod=space&amp;do=notice&amp;view=mypost"><em class="notice_mypost"></em>我的帖子(<span class="rq">1</span>)</a></li>
+<li class="ignore_noticeli"><a href="javascript:;" onclick="setcookie('ignore_notice', 1);hideMenu('myprompt_menu')" title="暂不提醒"><em class="ignore_notice"></em></a></li>
+</ul>
+<div class="cl p_pop" id="sslct_menu" style="display: none;">
+<span class="sslct_btn" onclick="extstyle('./template/default/style/t1')" title="红"><i style="background:#BA350F"></i></span>
+<span class="sslct_btn" onclick="extstyle('./template/default/style/t2')" title="青"><i style="background:#429296"></i></span>
+<span class="sslct_btn" onclick="extstyle('./template/default/style/t3')" title="橙"><i style="background:#FE9500"></i></span>
+<span class="sslct_btn" onclick="extstyle('./template/default/style/t4')" title="紫"><i style="background:#9934B7"></i></span>
+<span class="sslct_btn" onclick="extstyle('./template/default/style/t5')" title="蓝"><i style="background:#0053B9"></i></span>
+</div>
+<ul class="p_pop" id="myitem_menu" style="display: none;">
+<li><a href="forum.php?mod=guide&amp;view=my">帖子</a></li>
+<li><a href="home.php?mod=space&amp;do=favorite&amp;view=me">收藏</a></li>
+<li><a href="home.php?mod=space&amp;do=friend">好友</a></li>
+</ul>
+<div class="p_pop" id="qmenu_menu" style="display: none;">
+<ul class="cl nav"><li><a href="forum.php?mod=guide" style="background-image:url(https://static.52pojie.cn/static/image/feed/guide_b.png) !important">导读</a></li>
+<li><a href="forum.php?mod=guide&amp;view=my" style="background-image:url(https://static.52pojie.cn/static/image/feed/thread_b.png) !important">帖子</a></li>
+<li><a href="home.php?mod=space&amp;do=favorite&amp;view=me" style="background-image:url(https://static.52pojie.cn/static/image/feed/favorite_b.png) !important">收藏</a></li>
+<li><a href="forum.php?mod=collection&amp;op=my" style="background-image:url(https://static.52pojie.cn/static/image/feed/collection_b.png) !important">淘帖</a></li>
+<li><a href="home.php?mod=medal" style="background-image:url(https://static.52pojie.cn/static/image/feed/medal_b.png) !important">勋章</a></li>
+<li><a href="home.php?mod=task" style="background-image:url(https://static.52pojie.cn/static/image/feed/task_b.png) !important">任务</a></li>
+<li><a href="home.php?mod=space&amp;do=friend" style="background-image:url(https://static.52pojie.cn/static/image/feed/friend_b.png) !important">好友</a></li>
+<li><a href="misc.php?mod=ranklist" style="background-image:url(https://static.52pojie.cn/static/image/feed/ranklist_b.png) !important">排行榜</a></li>
+<li><a href="home.php?mod=spacecp&amp;ac=credit&amp;op=buy" style="background-image:url(https://static.52pojie.cn/static/image/feed/money.png) !important" title="论坛币捐助充值入口。">充值</a></li>
+</ul>
+<div class="btda" id="fjump_menu"></div></div><div id="hd">
+<div class="wp">
+<div class="hdc cl"><h2><a href="./" title="吾爱破解 - 52pojie.cn"><img alt="吾爱破解 - 52pojie.cn" border="0" src="../common_images/logo.png"/></a></h2><div id="um">
+<div class="avt y"><a href="home.php?mod=space&amp;uid=588268"><img onerror="this.onerror=null;this.src='https://avatar.52pojie.cn/images/noavatar_small.gif'" src="../common_images/68_avatar_small.jpg"/></a></div>
+<p>
+<strong class="vwmy"><a href="https://github.com/jwmycz" target="_blank" style="color: #0366d6; text-decoration: none;">微信公众号：将往的爬虫逆向日记</a></strong>
+<span class="pipe">|</span><a href="connect.php?mod=config" target="_blank"><img align="absmiddle" alt="QQ绑定" class="qq_bind" src="../common_images/qq_bind_small.gif"/></a>
+<span class="pipe">|</span><a class="showmenu a" href="home.php?mod=space&amp;do=reward&amp;view=me" id="rewards" onmouseover="showMenu({'ctrlid':'rewards'})"><em class="showtipex"></em>悬赏</a><span class="pipe">|</span><a class="showmenu" href="javascript:;" id="myitem" onmouseover="showMenu({'ctrlid':'myitem'});">我的</a>
+<span class="pipe">|</span><a href="home.php?mod=spacecp">设置</a>
+<span class="pipe">|</span><a href="home.php?mod=space&amp;do=pm" id="pm_ntc">消息</a>
+<span class="pipe">|</span><a class="a showmenu new" href="home.php?mod=space&amp;do=notice" id="myprompt" onmouseover="showMenu({'ctrlid':'myprompt'});">提醒(1)</a><span id="myprompt_check"></span>
+<span class="pipe">|</span><a href="member.php?mod=logging&amp;action=logout&amp;formhash=7f5fdc25">退出</a>
+</p>
+<p>
+<img align="absmiddle" alt="" class="qq_bind" src="../common_images/wbs.png"/> <span class="pipe">|</span><a class="showmenu" href="home.php?mod=spacecp&amp;ac=credit&amp;showcredit=1" id="extcreditmenu" onmouseover="delayShow(this, showCreditmenu);">积分: 233</a>
+<span class="pipe">|</span><a class="showmenu" href="home.php?mod=spacecp&amp;ac=usergroup" id="g_upmine" onmouseover="delayShow(this, showUpgradeinfo)">用户组: 前途无量</a>
+</p>
+</div>
+</div>
+<div id="nv">
+<a href="javascript:;" id="qmenu" onmouseover="delayShow(this, function () {showMenu({'ctrlid':'qmenu','pos':'34!','ctrlclass':'a','duration':2});showForummenu(24);})">快捷导航</a>
+<ul><li id="mn_portal"><a hidefocus="true" href="portal.php" title="吾爱破解门户">门户<span>吾爱破解门户</span></a></li><li class="a" id="mn_forum"><a hidefocus="true" href="/" title="吾爱破解论坛">网站<span>吾爱破解论坛</span></a></li><li id="mn_Na063" onmouseover="showMenu({'ctrlid':this.id,'ctrlclass':'hover','duration':2})"><a hidefocus="true" href="forum.php?mod=guide&amp;view=newthread" style="color: yellow" title="吾爱破解论坛新帖导读">新帖<span>吾爱破解论坛新帖导读</span></a></li><li id="mn_forum_11"><a hidefocus="true" href="forum.php?mod=collection" title="吾爱破解文章专辑列表">专辑<span>吾爱破解文章专辑列表</span></a></li><li id="mn_home_4" onmouseover="showMenu({'ctrlid':this.id,'ctrlclass':'hover','duration':2})"><a hidefocus="true" href="home.php" title="Space">家园<span>Space</span></a></li><li id="mn_N12a7"><a hidefocus="true" href="misc.php?mod=ranklist" title="吾爱破解排行榜">排行榜<span>吾爱破解排行榜</span></a></li><li id="mn_N05be"><a hidefocus="true" href="thread-143136-1-1.html" target="_blank" title="吾爱破解论坛总版规">总版规<span>吾爱破解论坛总版规</span></a></li><li id="mn_N34c9"><a hidefocus="true" href="forum-15-1.html" target="_blank" title="吾爱破解论坛欢迎大家积极举报违规帖子!">投诉举报<span>吾爱破解论坛欢迎大家积极举报违规帖子!</span></a></li><li id="mn_Na678" onmouseover="showMenu({'ctrlid':this.id,'ctrlclass':'hover','duration':2})"><a hidefocus="true" href="https://down.52pojie.cn" style="font-weight: bold;color: yellow" target="_blank" title="爱盘，在线破解工具包，实时提供最新逆向资源！">爱盘<span>爱盘，在线破解工具包，实时提供最新逆向资源！</span></a></li><li id="mn_N0a2c"><a hidefocus="true" href="misc.php?mod=faq" title="吾爱破解论坛常见问题解答中心">帮助<span>吾爱破解论坛常见问题解答中心</span></a></li></ul>
+<a href="javascript:;" onclick="showWindow('csu_wechat_scan_scan','plugin.php?id=csu_wechat_scan:scan','get',0);return false;" style="float: right;display: inline;margin-top: 5px;margin-left: 3px;margin-right: 3px;">
+<img alt="ganzhuweixin" src="../common_images/scan.gif"/>
+</a></div>
+<ul class="p_pop h_pop" id="mn_Na063_menu" style="display: none"><li><a hidefocus="true" href="home.php?mod=follow&amp;view=follow" style="color: red" target="_blank">关注人的新帖</a></li><li><a hidefocus="true" href="forum.php?mod=guide&amp;view=tech" style="color: blue" target="_blank">技术新帖合集</a></li><li><a hidefocus="true" href="forum.php?mod=guide&amp;view=soft" style="color: green" target="_blank">最新软件合集</a></li><li><a hidefocus="true" href="forum.php?mod=forumdisplay&amp;fid=2&amp;filter=author&amp;orderby=dateline" target="_blank">原创发布新贴</a></li><li><a hidefocus="true" href="forum.php?mod=forumdisplay&amp;fid=5&amp;filter=author&amp;orderby=dateline" target="_blank">脱壳破解新帖</a></li><li><a hidefocus="true" href="forum.php?mod=forumdisplay&amp;fid=65&amp;filter=author&amp;orderby=dateline" target="_blank">移动安全新帖</a></li><li><a hidefocus="true" href="forum.php?mod=forumdisplay&amp;fid=32&amp;filter=author&amp;orderby=dateline" target="_blank">病毒分析新帖</a></li><li><a hidefocus="true" href="forum.php?mod=forumdisplay&amp;fid=59&amp;filter=author&amp;orderby=dateline" target="_blank">软件调试新贴</a></li><li><a hidefocus="true" href="forum.php?mod=forumdisplay&amp;fid=6&amp;filter=author&amp;orderby=dateline" target="_blank">动画发布新帖</a></li><li><a hidefocus="true" href="forum.php?mod=forumdisplay&amp;fid=24&amp;filter=author&amp;orderby=dateline" target="_blank">编程语言新帖</a></li></ul><ul class="p_pop h_pop" id="mn_home_4_menu" style="display: none"><li><a hidefocus="true" href="home.php?mod=spacecp&amp;ac=invite" style="font-weight: bold;color: red" title="通过购买邀请码邀请好友注册论坛">邀请好友注册</a></li></ul><div class="p_pop h_pop" id="mn_userapp_menu" style="display: none"></div><ul class="p_pop h_pop" id="mn_Na678_menu" style="display: none"><li><a hidefocus="true" href="https://down.52pojie.cn/Tools/" target="_blank">Tools</a></li><li><a hidefocus="true" href="https://down.52pojie.cn/Logo/" target="_blank">吾爱破解Logo</a></li><li><a hidefocus="true" href="https://down.52pojie.cn/Logo/Wallpaper/" target="_blank">吾爱破解桌面壁纸</a></li><li><a hidefocus="true" href="https://down.52pojie.cn/%E5%90%BE%E7%88%B1%E7%A0%B4%E8%A7%A3%E8%A7%86%E9%A2%91%E6%95%99%E7%A8%8B/" target="_blank">吾爱破解视频教程</a></li><li><a hidefocus="true" href="https://down.52pojie.cn/%E5%90%BE%E7%88%B1%E7%A0%B4%E8%A7%A3%E8%AE%BA%E5%9D%9B%E7%B2%BE%E5%8D%8E%E9%9B%86/" target="_blank">吾爱破解论坛精华集</a></li><li><a hidefocus="true" href="https://down.52pojie.cn/Tools/Debuggers/" target="_blank">吾爱破解专用版Ollydbg</a></li></ul><ul class="p_pop h_pop" id="mn_Ndb2c_menu" style="display: none"><li><a hidefocus="true" href="forum.php?mod=forumdisplay&amp;fid=15&amp;filter=typeid&amp;typeid=182&amp;orderby=dateline">处理举报贴</a></li><li><a hidefocus="true" href="forum.php?mod=forumdisplay&amp;fid=72&amp;filter=author&amp;orderby=dateline">处理站务贴</a></li><li><a hidefocus="true" href="forum.php?mod=forumdisplay&amp;fid=66&amp;filter=author&amp;orderby=dateline">处理福利贴</a></li><li><a hidefocus="true" href="forum.php?mod=forumdisplay&amp;fid=10&amp;filter=author&amp;orderby=dateline">处理水区贴</a></li><li><a hidefocus="true" href="forum-23-1.html">办公区</a></li><li><a hidefocus="true" href="forum-34-1.html">证据区</a></li></ul><div class="cl" id="mu">
+</div><div class="comiis_nav">
+<ul class="nav_ico02">
+<li><a href="forum-2-1.html" target="_blank" title="吾爱破解坛友原创作品展示，包含Windows原创工具，也有Android、iOS和Mac OS程序相应的原创程序！"><font color="green">原创发布区</font></a></li>
+<li><a href="forum-16-1.html" target="_blank" title="精品软件推荐，软件交流天地，汇集众多精彩评论，热心会员每日更新。找你所需要的，给你我分享的！">精品软件区</a></li>
+<li><a href="forum-4-1.html" target="_blank" title="加密解密相关软件发布区，包含最新最全的软件加密解密相关工具，工欲善其事必先利其器！"><font color="green">逆向资源区</font></a></li>
+<li><a href="forum-10-1.html" target="_blank" title="据说人滴祖先生活在水里">水漫金山区</a></li>
+<li><a href="forum-50-1.html" target="_blank" title="你的计算机又受到病毒的侵扰使你不知所措了？不要着急，让我们一起帮助你解决问题！"><font color="green">病毒救援区</font></a></li>
+<li><a href="forum-66-1.html" target="_blank" title="福利资讯、经验分享">福利经验区</a></li>
+</ul>
+<ul class="nav_ico03">
+<li><a href="forum-5-1.html" target="_blank" title="讨论Windows软件脱壳分析、软件逆向分析、代码逆向改造、虚拟机加密分析，也包括Mac OS等其他平台程序逆向分析一切尽在此！"><font color="blue">脱壳破解区</font></a></li>
+<li><a href="forum-65-1.html" target="_blank" title="讨论Android软件脱壳分析、Android软件逆向分析、Android系统安全分析、Android软件加密分析，当然iOS等移动程序逆向分析一切尽在此！"><font color="red"><b>移动安全区</b></font></a></li>
+<li><a href="forum-32-1.html" target="_blank" title="分析研究病毒木马技术，预防病毒木马，查杀病毒木马"><font color="blue">病毒分析区</font></a></li>
+<li><a href="forum-24-1.html" target="_blank" title="学习编程探讨编程技巧，共同分享程序源代码">编程语言区</a></li>
+<li><a href="forum-6-1.html" target="_blank" title="软件脱壳、软件汉化、软件逆向相关动画教程，学习心得分享。在这里我们可以携手并进，是我们汲取知识的伟大航路！"><font color="blue">动画发布区</font></a></li>
+<li><a href="forum-41-1.html" target="_blank" title="工欲善其事 必先利其器，从这里能找到你想要的利器">安全工具区</a></li>
+</ul>
+<ul class="nav_ico01">
+<li><a href="forum-13-1.html" target="_blank" title="开放注册信息，版块调整公告，站点信息发布，会员违规处理等"><font color="red"><b>站点公告</b></font></a></li>
+<li><a href="thread-147931-1-1.html" target="_blank" title="【吾爱破解站点导航帖】 - [让你快速融入吾爱破解大家庭]">站点导航</a></li>
+<li><a href="thread-143136-1-1.html" target="_blank" title="吾爱破解站点总版规！"><font color="blue"><b>站点总版规</b></font></a></li>
+<li><a href="forum-25-1.html" target="_blank" title="会员、版主、勋章、友情链接申请，发帖前请认真阅读本版规则！本区可以匿名发帖、跟帖相应的申请！">申请专区</a></li>
+<li><a href="forum-39-1.html" target="_blank" title="此版块只允许发布招聘和求职相关信息！本区可以匿名发帖，欢迎正规公司前来发布招聘信息！"><font color="green"><b>招聘求职</b></font></a></li>
+<li><a href="thread-309877-1-1.html" target="_blank" title=" 版规速读，主要关于如何给自己加违规和如何消违规"><b>违规怎么办</b></a></li>
+</ul>
+<ul class="nav_ico04" style="width:80px;">
+<li><a href="misc.php?mod=faq" target="_blank" title="有什么问题来这里看看吧，这里有你想知道的内容！"><font color="blue"><b>站点帮助</b></font></a></li>
+<li><a href="forum-72-1.html" target="_blank" title="如果你对我们有什么意见或者建议，请在此提出">站务处理</a></li>
+</ul>
+</div>
+<div class="cl" id="scbar">
+<form action="search.php?searchsubmit=yes" autocomplete="off" id="scbar_form" method="post" onsubmit="searchFocus($('scbar_txt'))" target="_blank">
+<input id="scbar_mod" name="mod" type="hidden" value="search"/>
+<input name="formhash" type="hidden" value="7f5fdc25"/><input name="srchtype" type="hidden" value="title"/>
+<input name="srhfid" type="hidden" value="24"/>
+<input name="srhlocality" type="hidden" value="forum::viewthread"/>
+<table cellpadding="0" cellspacing="0">
+<tr>
+<td class="scbar_icon_td"></td>
+<td class="scbar_txt_td"><input autocomplete="off" id="scbar_txt" name="srchtxt" speech="" type="text" x-webkit-speech=""/></td>
+<td class="scbar_type_td"><a class="xg1" hidefocus="true" href="javascript:;" id="scbar_type" onclick="showMenu(this.id)">搜索</a></td>
+<td class="scbar_btn_td"><button class="pn pnc" id="scbar_btn" name="searchsubmit" sc="1" type="submit" value="true"><strong class="xi2">搜索</strong></button></td>
+<td class="scbar_hot_td">
+<div id="scbar_hot">
+<strong class="xw1">热搜: </strong>
+<a class="xi2" href="search.php?mod=forum&amp;srchtxt=ctf&amp;formhash=7f5fdc25&amp;searchsubmit=true&amp;source=hotsearch" sc="1" target="_blank">ctf</a>
+<a class="xi2" href="search.php?mod=forum&amp;srchtxt=%D0%C2%CA%D6&amp;formhash=7f5fdc25&amp;searchsubmit=true&amp;source=hotsearch" sc="1" target="_blank">新手</a>
+<a class="xi2" href="search.php?mod=forum&amp;srchtxt=%CD%D1%BF%C7&amp;formhash=7f5fdc25&amp;searchsubmit=true&amp;source=hotsearch" sc="1" target="_blank">脱壳</a>
+<a class="xi2" href="search.php?mod=forum&amp;srchtxt=%BD%CC%B3%CC&amp;formhash=7f5fdc25&amp;searchsubmit=true&amp;source=hotsearch" sc="1" target="_blank">教程</a>
+<a class="xi2" href="search.php?mod=forum&amp;srchtxt=Crackme&amp;formhash=7f5fdc25&amp;searchsubmit=true&amp;source=hotsearch" sc="1" target="_blank">Crackme</a>
+</div>
+</td>
+</tr>
+</table>
+</form>
+</div>
+<ul class="p_pop" id="scbar_type_menu" style="display: none;"><li><a fid="24" href="javascript:;" rel="curforum">本版</a></li><li><a class="curtype" href="javascript:;" rel="forum">帖子</a></li><li><a href="javascript:;" rel="user">用户</a></li></ul>
+</div>
+</div>
+<link href="https://static.52pojie.cn/highlight/ir-black.min.css" rel="stylesheet"/><link href="source/plugin/zxsq_code/css/code.css" rel="stylesheet"/><link href="https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.css" rel="stylesheet"/><link href="https://static.52pojie.cn/highlight/markdown.min.css" rel="stylesheet"><div id="zxsq-markdown-code-tools" style="display:none"><span class="show">显示代码</span><span class="hide">隐藏代码</span><span class="copy">复制代码</span><span class="copysucc">代码已复制到剪贴板</span></div><style type="text/css">
+@import url('https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/styles/shCore.css?ver=3.0.90');
+@import url('https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/styles/shCoreRDark.css?ver=3.0.90');
+@import url('https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/styles/shThemeRDark.css?ver=3.0.90');
+@import url('https://static.52pojie.cn/mw_syntaxhighlighter/static/css/mw_syntaxhighlighter.css?ver=3.0.90');
+.syntaxhighlighter {max-height: 5000px !important;height:expression(this.scrollHeight > 5000 ? "5000px" : "auto");}
+.syntaxhighlighter .line {white-space: nowrap !important;}
+
+</style>
+<style>
+						a#rewards {
+							margin-right: 2px !important;
+							padding-top: 3px;
+							padding-bottom: 3px;
+							padding-left: 10px;
+							color: #333;
+							
+						}
+						
+						em.showtipex, em.showtipli {
+							position: relative;
+						}
+						em.showtipli {
+							right: calc(50% - 50px);
+						}
+						
+					</style>
+<ul class="p_pop" id="rewards_menu" style="display: none;">
+<li><a href="forum.php?mod=forumdisplay&amp;fid=8&amp;filter=specialtype&amp;specialtype=reward&amp;rewardtype=1" target="_blank" title="帮助坛友解决问题,同时争取论坛积分">挣悬赏</a></li>
+<li class="noreward"><a href="home.php?mod=space&amp;do=reward&amp;view=me&amp;flag=1" target="_blank" title="请尽快完结您的悬赏">未完结</a></li>
+<li><a href="thread-2083678-1-1.html" target="_blank" title="可按撤销规则回帖申请撤销">撤销悬赏</a></li>
+</ul>
+<div class="wp" id="wp">
+<style id="diy_style" type="text/css"></style>
+<div class="area" id="diynavtop"></div>
+<div class="bm cl" id="pt">
+<div class="z">
+<a class="nvhm" href="./" title="首页">吾爱破解 - 52pojie.cn</a><em>»</em><a href="/">网站</a> <em>›</em> <a href="forum.php?gid=1">【 软件安全 】</a> <em>›</em> <a href="forum-24-1.html">『编程语言区』</a> <em>›</em> <a href="thread-2086258-1-1.html">2|8|10|16进制的转换工具</a>
+</div>
+</div>
+<style>
+					.dropbtn{background-color:#0099cb;color:white;padding:2px 6px;font-size:12px;border:none;cursor:pointer;}
+					.dropdown{position:relative;display:inline-block;}
+					.dropdown-content{display:none;position:absolute;background-color:#f9f9f9;min-width:80px;box-shadow:0px 8px 16px 0px rgba(0,0,0,0.2);}
+					.dropdown-content a{color:black;padding:10px;text-decoration:none;display:block;text-align:center;}
+					.dropdown-content a:hover{background-color:#d0d1f2;}
+					.dropdown:hover .dropdown-content{display:block;}
+					.dropdown:hover .dropbtn{background-color:#1b64d7;}
+				</style>
+<style id="diy_style" type="text/css"></style>
+<div class="wp">
+<div class="area" id="diy1"></div>
+</div>
+<div class="wp cl" id="ct">
+<div class="pgs mbm cl" id="pgt">
+<div class="pgt"></div>
+<span class="y pgb" id="visitedforums" onmouseover="$('visitedforums').id = 'visitedforumstmp';this.id = 'visitedforums';showMenu({'ctrlid':this.id,'pos':'34'})"><a href="forum-24-1.html">返回列表</a></span>
+<a href="javascript:;" id="newspecial" onclick="showWindow('newthread', 'forum.php?mod=post&amp;action=newthread&amp;fid=24')" onmouseover="$('newspecial').id = 'newspecialtmp';this.id = 'newspecial';showMenu({'ctrlid':this.id})" title="发新帖"><img alt="发新帖" src="../common_images/pn_post.png"/></a><a href="javascript:;" id="post_reply" onclick="showWindow('reply', 'forum.php?mod=post&amp;action=reply&amp;fid=24&amp;tid=2086258')" title="回复"><img alt="回复" src="../common_images/pn_reply.png"/></a>
+</div>
+<ul class="p_pop" id="newspecial_menu" style="display: none">
+<li><a href="forum.php?mod=post&amp;action=newthread&amp;fid=24">发表帖子</a></li><li class="poll"><a href="forum.php?mod=post&amp;action=newthread&amp;fid=24&amp;special=1">发起投票</a></li></ul>
+<div class="pl bm" id="postlist">
+<table cellpadding="0" cellspacing="0">
+<tr>
+<td class="pls ptn pbn">
+<div class="hm ptn">
+<span class="xg1">查看:</span> <span class="xi1">210</span><span class="pipe">|</span><span class="xg1">回复:</span> <span class="xi1">7</span>
+</div>
+</td>
+<td class="plc ptm pbn vwthd">
+<div class="y">
+<a href="forum.php?mod=redirect&amp;goto=nextoldset&amp;tid=2086258" title="上一主题"><img alt="上一主题" class="vm" src="../common_images/thread-prev.png"/></a>
+<a href="forum.php?mod=redirect&amp;goto=nextnewset&amp;tid=2086258" title="下一主题"><img alt="下一主题" class="vm" src="../common_images/thread-next.png"/></a>
+</div>
+<span class="xg1 side_btn">
+<a class="btn_s_close" href="javascript:;" onclick="setcookie('close_leftinfo', 1);location.reload();" title="收起左侧"><img alt="收起左侧" class="vm" src="../common_images/control_l.png"/></a>
+</span>
+<h1 class="ts">
+<a href="forum.php?mod=forumdisplay&amp;fid=24&amp;filter=typeid&amp;typeid=29">[Python 转载]</a>
+<span id="thread_subject">2|8|10|16进制的转换工具</span>
+</h1>
+<span class="xg1">
+<a href="thread-2086258-1-1.html" onclick="return copyThreadUrl(this)">[复制链接]</a>
+</span>
+</td>
+</tr>
+</table>
+<table cellpadding="0" cellspacing="0" class="ad">
+<tr>
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</table><div id="post_54646802"><table cellpadding="0" cellspacing="0" class="plhin res-postfirst" id="pid54646802" summary="pid54646802">
+<tr>
+<td class="pls" rowspan="2">
+<div class="pls cl favatar" id="favatar54646802">
+<div class="pi">
+<div class="authi"><a class="xw1" href="home.php?mod=space&amp;uid=2288396" rel="nofollow" target="_blank">MrJin</a>
+</div>
+</div>
+<div class="p_pop blk bui card_gender_0" id="userinfo54646802" style="display: none; margin-top: -11px;">
+<div class="m z">
+<div id="userinfo54646802_ma"></div>
+</div>
+<div class="i y">
+<div>
+<strong><a class="xi2" href="home.php?mod=space&amp;uid=2288396" target="_blank">MrJin</a></strong>
+<em>当前在线</em>
+</div><dt>好友</dt><dd><a class="xi2" href="home.php?mod=space&amp;uid=2288396&amp;do=friend&amp;view=me&amp;from=space" target="_blank">0</a></dd>
+<dt>阅读权限</dt><dd>10</dd>
+<span style="color:Blue;"><dt>听众</dt><dd><a class="xi2" href="home.php?mod=follow&amp;do=follower&amp;uid=2288396" target="_blank">0</a></dd>
+<dt>最后登录</dt><dd>2026-1-13</dd>
+<div class="imicn">
+<a href="http://" rel="nofollow noopener" target="_blank" title="查看个人网站"><img alt="查看个人网站" src="../common_images/forumlink.gif"/></a><a href="home.php?mod=space&amp;uid=2288396&amp;do=profile" target="_blank" title="查看详细资料"><img alt="查看详细资料" src="../common_images/userinfo.gif"/></a>
+</div>
+<div id="avatarfeed"><span id="threadsortswait"></span></div>
+</span></div>
+</div>
+<div>
+<div class="avatar" onmouseover="showauthor(this, 'userinfo54646802')"><a class="avtm" href="home.php?mod=space&amp;uid=2288396" rel="nofollow" target="_blank"><img src="../common_images/noavatar_middle.gif"/></a></div>
+</div>
+<div class="tns xg2"><table cellpadding="0" cellspacing="0"><th><p><a class="xi2" href="home.php?mod=space&amp;uid=2288396&amp;do=thread&amp;type=thread&amp;view=me&amp;from=space">13</a></p>主题</th><th><p><a class="xi2" href="home.php?mod=space&amp;uid=2288396&amp;do=thread&amp;type=reply&amp;view=me&amp;from=space">870</a></p>回帖</th><td><p><a class="xi2" href="home.php?mod=space&amp;uid=2288396&amp;do=profile">105</a></p>积分</td></table></div>
+<p class="side-group"><em><a href="home.php?mod=spacecp&amp;ac=usergroup&amp;gid=10" target="_blank">锋芒初露</a></em></p>
+<p class="side-star"><span id="g_up54646802" onmouseover="showMenu({'ctrlid':this.id, 'pos':'12!'});"><img alt="Rank: 1" src="../common_images/star_level1.gif"/></span></p>
+<div class="tip tip_4" id="g_up54646802_menu" style="display: none;"><div class="tip_horn"></div><div class="tip_c">锋芒初露, 积分 105, 距离下一级还需 95 积分</div></div>
+<dl class="pil cl credit-list">
+<span amount="0" class="cr-digest">
+<dt>精华</dt>
+<dd>0</dd>
+</span>
+<span amount="0 点" class="cr-ext1">
+<dt>威望</dt>
+<dd>0 点</dd>
+</span>
+<span amount="14 点" class="cr-ext6">
+<dt>热心值</dt>
+<dd>14 点</dd>
+</span>
+<span amount="0 点" class="cr-ext4">
+<dt>悬赏值</dt>
+<dd>0 点</dd>
+</span>
+<span class="cr-follower">
+<dt>听众</dt>
+<dd><a class="xi2" href="home.php?mod=follow&amp;do=follower&amp;uid=2288396" target="_blank">0</a></dd>
+</span>
+<span amount="0 点" class="cr-ext3">
+<dt>贡献值</dt>
+<dd>0 点</dd>
+</span>
+<span class="cr-ext2">
+<dt>吾爱币</dt>
+<dd>1730 CB</dd>
+</span>
+<span amount="0 次" class="cr-ext8">
+<dt>违规</dt>
+<dd>0 次</dd>
+</span>
+<dt>注册时间</dt>
+<dd>2024-8-29</dd>
+</dl>
+<ul class="xl xl2 o cl">
+<li class="addflw">
+<a class="xi2" href="home.php?mod=spacecp&amp;ac=follow&amp;op=add&amp;hash=7f5fdc25&amp;fuid=2288396" id="followmod_2288396" onclick="showWindow('followmod', this.href, 'get', 0);" title="收听TA">收听TA</a>
+</li>
+</ul>
+<nav class="toc toc-side relative z-1 transition--300 absolute" id="markdown_toc_54646802"></nav></div>
+</td>
+<td class="plc">
+<div class="pi">
+<div class="y" id="fj">
+<label class="z">电梯直达</label>
+<input class="px p_fre z" onkeydown="if(event.keyCode==13) {window.location=$('fj_btn').href;return false;}" onkeyup="$('fj_btn').href='forum.php?mod=redirect&amp;ptid=2086258&amp;authorid=0&amp;postno='+this.value" size="2" title="跳转到指定楼层" type="text"/>
+<a class="z" href="javascript:;" id="fj_btn" title="跳转到指定楼层"><img alt="跳转到指定楼层" class="vm" src="../common_images/fj_btn.png"/></a>
+</div>
+<strong>
+<a href="thread-2086258-1-1.html" id="postnum54646802" onclick="setCopy(this.href, '帖子地址复制成功');return false;">
+<font color="red"><b>楼主</b></font></a>
+</strong>
+<div class="pti">
+<div class="pdbt">
+</div>
+<div class="authi">
+<img class="authicn vm" id="authicon54646802" src="../common_images/online_member.gif"/>
+<span class="res-author"><a class="xi2" href="home.php?mod=space&amp;uid=2288396" target="_blank">MrJin</a>
+</span><em id="authorposton54646802"><span class="poston">发表于</span> 2026-1-13 16:50</em>
+<span class="pipe">|</span>
+<a href="forum.php?mod=viewthread&amp;tid=2086258&amp;page=1&amp;authorid=2288396" rel="nofollow">只看该作者</a>
+<span class="none"><img alt="回帖奖励" class="vm" src="../common_images/arw_r.gif"/></span>
+<span class="pipe show">|</span><a class="show" href="forum.php?mod=viewthread&amp;tid=2086258&amp;extra=page%3D1&amp;ordertype=1" rel="nofollow">倒序浏览</a>
+</div>
+</div>
+</div><div class="pct"><style type="text/css">.pcb{margin-right:0}</style><div class="pcb">
+<div class="t_fsz">
+<table cellpadding="0" cellspacing="0"><tr><td class="t_f" id="postmessage_54646802">
+<font color="#1f2328"><font face="-apple-system, BlinkMacSystemFont, &amp;quot;"><font style="font-size:16px">哈喽！友友们，小弟这次来分享一个简单实用的命令行进制转换工具，支持二进制、八进制、十进制、十六进制之间的相互转换</font></font></font>{:1_918:}<br/>
+<br/>
+<strong>代码如下：<br/>
+</strong><br/> <div class="parsedown-markdown"><pre><code>"""
+进制转换工具 v1.0
+支持2/8/10/16进制互转，带历史记录持久化
+作者：@HJY
+"""
+
+import os
+import json
+import tkinter as tk
+from tkinter import ttk, messagebox
+from datetime import datetime
+from typing import Dict, Any, List, Optional
+
+class BaseConverter:
+    """进制转换核心处理类"""
+    BASE_NAMES = {2: "二进制", 8: "八进制", 10: "十进制", 16: "十六进制"}
+    BASE_PREFIXES = {2: "0b", 8: "0o", 10: "", 16: "0x"}
+
+    def __init__(self):
+        self.max_history = 10
+        self.history_path = os.path.join(os.path.expanduser("~"), ".base_converter_history.json")
+        self.history = self._load_history()
+
+    def validate_input(self, value: str, base: int) -&gt; bool:
+        """验证输入是否符合指定进制格式"""
+        if not value or value.isspace():
+            return False
+
+        raw_value = self._strip_prefix(value, base)
+        try:
+            int(raw_value, base)
+            return True
+        except ValueError:
+            return False
+
+    def _strip_prefix(self, value: str, base: int) -&gt; str:
+        """移除进制前缀"""
+        val = value.lower().strip()
+        prefix_map = {2: "0b", 8: "0o", 16: "0x"}
+
+        if base in prefix_map and val.startswith(prefix_map[base]):
+            return val[2:]
+        return val
+
+    def convert(self, value: str, from_base: int) -&gt; Optional[Dict[int, str]]:
+        """执行进制转换，返回其他进制结果"""
+        if not self.validate_input(value, from_base):
+            return None
+
+        raw_value = self._strip_prefix(value, from_base)
+        try:
+            dec_val = int(raw_value, from_base)
+            results = {
+                2: bin(dec_val)[2:],
+                8: oct(dec_val)[2:],
+                10: str(dec_val),
+                16: hex(dec_val)[2:].upper()
+            }
+            self._append_history(from_base, raw_value, dec_val)
+            return results
+        except Exception as e:
+            print(f"转换失败: {str(e)}")
+            return None
+
+    def _append_history(self, from_base: int, input_val: str, dec_val: int) -&gt; None:
+        """追加转换记录到历史（去重+限制数量）"""
+        # 去重逻辑
+        for item in self.history:
+            if item["from_base"] == from_base and item["input_value"] == input_val:
+                return
+
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        history_item = {
+            "from_base": from_base,
+            "from_base_name": self.BASE_NAMES[from_base],
+            "input_value": input_val,
+            "results": {
+                2: bin(dec_val)[2:],
+                8: oct(dec_val)[2:],
+                10: str(dec_val),
+                16: hex(dec_val)[2:].upper()
+            },
+            "timestamp": timestamp
+        }
+
+        self.history.insert(0, history_item)
+        self.history = self.history[:self.max_history]
+        self._save_history()
+
+    def _load_history(self) -&gt; List[Dict[str, Any]]:
+        """加载本地历史记录"""
+        if not os.path.exists(self.history_path):
+            return []
+
+        try:
+            with open(self.history_path, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except (json.JSONDecodeError, IOError, PermissionError) as e:
+            print(f"历史记录加载失败: {e}")
+            return []
+
+    def _save_history(self) -&gt; None:
+        """保存历史记录到本地文件"""
+        try:
+            with open(self.history_path, 'w', encoding='utf-8') as f:
+                json.dump(self.history, f, ensure_ascii=False, indent=2)
+        except (IOError, PermissionError) as e:
+            print(f"历史记录保存失败: {e}")
+
+    def clear_history(self) -&gt; None:
+        """清空所有历史记录"""
+        self.history = []
+        self._save_history()
+
+    def get_history(self) -&gt; List[Dict[str, Any]]:
+        """获取所有历史记录"""
+        return self.history
+
+class BaseConverterGUI:
+    """图形界面类 - 与HTML界面风格一致"""
+    def __init__(self, root):
+        self.root = root
+        self.root.title("进制转换工具 v1.0")
+        self.root.geometry("600x450")
+        self.root.resizable(False, False)
+
+        # 初始化转换器
+        self.converter = BaseConverter()
+
+        # 设置界面样式
+        self._setup_style()
+
+        # 构建界面布局
+        self._create_widgets()
+
+    def _setup_style(self):
+        """设置界面样式（简洁大方）"""
+        self.root.configure(bg="#f0f0f0")
+        self.style = ttk.Style()
+        self.style.configure("TLabel", font=("Microsoft YaHei", 10), background="#f0f0f0")
+        self.style.configure("TButton", font=("Microsoft YaHei", 10), padding=5)
+        self.style.configure("TCombobox", font=("Microsoft YaHei", 10))
+
+    def _create_widgets(self):
+        """创建所有界面组件"""
+        # 标题区域
+        title_label = tk.Label(
+            self.root,
+            text="进制转换工具",
+            font=("Microsoft YaHei", 16, "bold"),
+            bg="#f0f0f0",
+            fg="#333333"
+        )
+        title_label.pack(pady=10)
+
+        # 输入区域框架
+        input_frame = tk.Frame(self.root, bg="#f0f0f0")
+        input_frame.pack(pady=5, padx=20, fill=tk.X)
+
+        # 源进制选择
+        self.base_var = tk.StringVar(value="十进制")
+        base_label = tk.Label(input_frame, text="源进制：", bg="#f0f0f0", font=("Microsoft YaHei", 10))
+        base_label.grid(row=0, column=0, padx=5, sticky=tk.W)
+
+        base_combobox = ttk.Combobox(
+            input_frame,
+            textvariable=self.base_var,
+            values=["二进制", "八进制", "十进制", "十六进制"],
+            state="readonly",
+            width=10
+        )
+        base_combobox.grid(row=0, column=1, padx=5)
+
+        # 输入框
+        self.input_entry = tk.Entry(
+            input_frame,
+            font=("Microsoft YaHei", 10),
+            width=30,
+            relief=tk.SOLID,
+            bd=1
+        )
+        self.input_entry.grid(row=0, column=2, padx=5)
+        self.input_entry.bind("&lt;Return&gt;", lambda e: self._on_convert())  # 回车触发转换
+
+        # 转换按钮
+        convert_btn = tk.Button(
+            input_frame,
+            text="转换",
+            font=("Microsoft YaHei", 10),
+            bg="#4CAF50",
+            fg="white",
+            relief=tk.FLAT,
+            padx=15,
+            command=self._on_convert
+        )
+        convert_btn.grid(row=0, column=3, padx=5)
+
+        # 结果展示区域框架
+        result_frame = tk.Frame(self.root, bg="#f0f0f0")
+        result_frame.pack(pady=10, padx=20, fill=tk.X)
+
+        # 结果标签和输出框
+        self.result_entries = {}
+        bases = [("二进制", 2), ("八进制", 8), ("十进制", 10), ("十六进制", 16)]
+
+        for idx, (name, base) in enumerate(bases):
+            # 行布局：标签 + 输出框
+            label = tk.Label(result_frame, text=f"{name}：", bg="#f0f0f0", font=("Microsoft YaHei", 10))
+            label.grid(row=idx, column=0, padx=5, pady=3, sticky=tk.W)
+
+            entry = tk.Entry(
+                result_frame,
+                font=("Microsoft YaHei", 10),
+                width=50,
+                relief=tk.SOLID,
+                bd=1,
+                state="readonly"
+            )
+            entry.grid(row=idx, column=1, padx=5, pady=3, sticky=tk.W)
+            self.result_entries[base] = entry
+
+        # 功能按钮区域
+        btn_frame = tk.Frame(self.root, bg="#f0f0f0")
+        btn_frame.pack(pady=15)
+
+        # 清空按钮
+        clear_btn = tk.Button(
+            btn_frame,
+            text="清空输入",
+            font=("Microsoft YaHei", 10),
+            bg="#f44336",
+            fg="white",
+            relief=tk.FLAT,
+            padx=15,
+            pady=5,
+            command=self._on_clear
+        )
+        clear_btn.grid(row=0, column=0, padx=8)
+
+        # 历史记录按钮
+        history_btn = tk.Button(
+            btn_frame,
+            text="历史记录",
+            font=("Microsoft YaHei", 10),
+            bg="#2196F3",
+            fg="white",
+            relief=tk.FLAT,
+            padx=15,
+            pady=5,
+            command=self._show_history
+        )
+        history_btn.grid(row=0, column=1, padx=8)
+
+        # 清除历史按钮
+        clear_history_btn = tk.Button(
+            btn_frame,
+            text="清除历史",
+            font=("Microsoft YaHei", 10),
+            bg="#FF9800",
+            fg="white",
+            relief=tk.FLAT,
+            padx=15,
+            pady=5,
+            command=self._clear_history
+        )
+        clear_history_btn.grid(row=0, column=2, padx=8)
+
+    def _get_selected_base(self) -&gt; int:
+        """获取选中的源进制对应的数值"""
+        base_name = self.base_var.get()
+        for base, name in self.converter.BASE_NAMES.items():
+            if name == base_name:
+                return base
+        return 10  # 默认十进制
+
+    def _on_convert(self):
+        """转换按钮点击事件"""
+        input_value = self.input_entry.get().strip()
+        if not input_value:
+            messagebox.showwarning("提示", "请输入要转换的数值！")
+            return
+
+        from_base = self._get_selected_base()
+
+        # 验证并转换
+        if not self.converter.validate_input(input_value, from_base):
+            messagebox.showerror("错误", f"输入的不是有效的{self.converter.BASE_NAMES[from_base]}数值！")
+            return
+
+        results = self.converter.convert(input_value, from_base)
+        if results:
+            # 更新结果框
+            for base, entry in self.result_entries.items():
+                entry.config(state="normal")
+                entry.delete(0, tk.END)
+                # 源进制显示带前缀，其他进制正常显示
+                prefix = self.converter.BASE_PREFIXES[base] if base == from_base else ""
+                entry.insert(0, f"{prefix}{results[base]}")
+                entry.config(state="readonly")
+
+    def _on_clear(self):
+        """清空输入按钮点击事件"""
+        self.input_entry.delete(0, tk.END)
+        # 清空结果框
+        for entry in self.result_entries.values():
+            entry.config(state="normal")
+            entry.delete(0, tk.END)
+            entry.config(state="readonly")
+
+    def _show_history(self):
+        """显示历史记录弹窗"""
+        history = self.converter.get_history()
+        if not history:
+            messagebox.showinfo("历史记录", "暂无转换记录！")
+            return
+
+        # 创建历史记录窗口
+        history_win = tk.Toplevel(self.root)
+        history_win.title("历史记录")
+        history_win.geometry("550x400")
+        history_win.resizable(False, False)
+        history_win.configure(bg="#f0f0f0")
+
+        # 创建滚动文本框
+        text = tk.Text(
+            history_win,
+            font=("Microsoft YaHei", 9),
+            wrap=tk.WORD,
+            relief=tk.SOLID,
+            bd=1
+        )
+        scrollbar = ttk.Scrollbar(history_win, orient=tk.VERTICAL, command=text.yview)
+        text.configure(yscrollcommand=scrollbar.set)
+
+        text.pack(side=tk.LEFT, fill=tk.BOTH, expand=True, padx=10, pady=10)
+        scrollbar.pack(side=tk.RIGHT, fill=tk.Y, padx=(0, 10), pady=10)
+
+        # 填充历史记录
+        text.insert(tk.END, "=== 进制转换历史记录 ===\n\n")
+        for idx, item in enumerate(history, 1):
+            text.insert(tk.END, f"[{idx}] {item['timestamp']}\n")
+            text.insert(tk.END, f"源进制：{item['from_base_name']} | 输入值：{item['input_value']}\n")
+            text.insert(tk.END, "转换结果：\n")
+            for base, val in item['results'].items():
+                base_name = self.converter.BASE_NAMES[base]
+                prefix = self.converter.BASE_PREFIXES[base]
+                text.insert(tk.END, f"  - {base_name}：{prefix}{val}\n")
+            text.insert(tk.END, "-" * 40 + "\n\n")
+
+        # 设置为只读
+        text.config(state="readonly")
+
+    def _clear_history(self):
+        """清除历史记录按钮点击事件"""
+        if messagebox.askyesno("确认", "是否确定清空所有转换历史记录？"):
+            self.converter.clear_history()
+            messagebox.showinfo("提示", "历史记录已清空！")
+
+def main():
+    """程序入口"""
+    try:
+        root = tk.Tk()
+        app = BaseConverterGUI(root)
+        root.mainloop()
+    except Exception as e:
+        messagebox.showerror("错误", f"程序运行出错：{str(e)}")
+
+if __name__ == "__main__":
+    main()</code></pre></div>
+<div class="parsedown-markdown-end_FLAG_ZXSQ" style="display:none"></div><br/>
+<br/>
+<strong><font size="4">功能特点</font></strong><br/>
+<ul><li>支持二进制(2)、八进制(8)、十进制(10)和十六进制(16)之间的相互转换<li>自动验证输入格式，确保输入符合指定进制<li>支持带前缀输入（如0b、0o、0x）<li>历史记录功能，自动保存最近10次转换记录<li>从历史记录加载转换结果<li>清除历史记录功能<li>详细的帮助信息<br/>
+</li></li></li></li></li></li></li></ul><br/>
+<br/>
+<font size="4"><strong>使用方法</strong></font><br/>
+<strong><font size="3">1.</font></strong><font size="3">确保已安装Python 3.6或更高版本，在命令行中运行：<div class="parsedown-markdown"><pre><code>python base_converter.py</code></pre></div>
+<div class="parsedown-markdown-end_FLAG_ZXSQ" style="display:none"></div></font><br/>
+<font size="3">按照程序提示进行操作；</font><br/>
+<font size="3"><br/>
+</font><br/>
+<font size="3"><strong>2.</strong>直接打开进制转换工具。</font><br/>
+<font size="3">工具链接：<font style="color:rgb(63, 63, 63)"><font style="background-color:rgb(194, 236, 178)"><font face="Arial, 微软雅黑, 宋体, 新宋体, sans-serif">https://wwass.lanzoub.com/iEhJ03g0tbxi </font></font></font><font style="color:rgb(63, 63, 63)"><font style="background-color:rgb(194, 236, 178)"><font face="Arial, 微软雅黑, 宋体, 新宋体, sans-serif">密码:52pj</font></font></font></font><br/>
+<font size="3"><font style="color:rgb(63, 63, 63)"><font style="background-color:rgb(194, 236, 178)"><font face="Arial, 微软雅黑, 宋体, 新宋体, sans-serif"><br/>
+</font></font></font></font><br/>
+<strong><font size="4"><font color="#ff0000">使用效果</font></font></strong><br/>
+<ignore_js_op>
+<img aid="2826941" class="zoom" id="aimg_2826941" inpost="1" src="../common_images/164329ulakcko6r0ljczod.png" width="616"/>
+<div class="tip tip_4 aimg_tip" disautofocus="true" id="aimg_2826941_menu" style="position: absolute; display: none">
+<div class="xs0">
+<p><strong>1 (4).png</strong> <em class="xg1">(33.69 KB, 下载次数: 0)</em></p>
+<p>
+<a href="forum.php?mod=attachment&amp;aid=MjgyNjk0MXxkZmU1M2YyMnwxNzY4MzA1MTMyfDU4ODI2OHwyMDg2MjU4&amp;nothumb=yes" target="_blank">下载附件</a>
+</p>
+<p>工具界面</p>
+<p class="xg1 y">2026-1-13 16:43 上传</p>
+</div>
+<div class="tip_horn"></div>
+</div>
+</ignore_js_op>
+<ignore_js_op>
+<img aid="2826937" class="zoom" id="aimg_2826937" inpost="1" src="../common_images/164320pjfwzpqf8wra91z7.png" width="616"/>
+<div class="tip tip_4 aimg_tip" disautofocus="true" id="aimg_2826937_menu" style="position: absolute; display: none">
+<div class="xs0">
+<p><strong>1 (6).png</strong> <em class="xg1">(33.48 KB, 下载次数: 0)</em></p>
+<p>
+<a href="forum.php?mod=attachment&amp;aid=MjgyNjkzN3wzYmYxNmNiM3wxNzY4MzA1MTMyfDU4ODI2OHwyMDg2MjU4&amp;nothumb=yes" target="_blank">下载附件</a>
+</p>
+<p>转换结果1</p>
+<p class="xg1 y">2026-1-13 16:43 上传</p>
+</div>
+<div class="tip_horn"></div>
+</div>
+</ignore_js_op>
+<ignore_js_op>
+<img aid="2826939" class="zoom" id="aimg_2826939" inpost="1" src="../common_images/164324j9cz0zcq0xooqr74.png" width="616"/>
+<div class="tip tip_4 aimg_tip" disautofocus="true" id="aimg_2826939_menu" style="position: absolute; display: none">
+<div class="xs0">
+<p><strong>1 (2).png</strong> <em class="xg1">(32.97 KB, 下载次数: 0)</em></p>
+<p>
+<a href="forum.php?mod=attachment&amp;aid=MjgyNjkzOXxlNjdlYWU4ZXwxNzY4MzA1MTMyfDU4ODI2OHwyMDg2MjU4&amp;nothumb=yes" target="_blank">下载附件</a>
+</p>
+<p>转换结果2</p>
+<p class="xg1 y">2026-1-13 16:43 上传</p>
+</div>
+<div class="tip_horn"></div>
+</div>
+</ignore_js_op>
+<ignore_js_op>
+<img aid="2826940" class="zoom" id="aimg_2826940" inpost="1" src="../common_images/164326r96ppv8l8wfl8btu.png" width="616"/>
+<div class="tip tip_4 aimg_tip" disautofocus="true" id="aimg_2826940_menu" style="position: absolute; display: none">
+<div class="xs0">
+<p><strong>1 (3).png</strong> <em class="xg1">(33.74 KB, 下载次数: 0)</em></p>
+<p>
+<a href="forum.php?mod=attachment&amp;aid=MjgyNjk0MHxkMzlmMTVlY3wxNzY4MzA1MTMyfDU4ODI2OHwyMDg2MjU4&amp;nothumb=yes" target="_blank">下载附件</a>
+</p>
+<p>转换结果3</p>
+<p class="xg1 y">2026-1-13 16:43 上传</p>
+</div>
+<div class="tip_horn"></div>
+</div>
+</ignore_js_op>
+<ignore_js_op>
+<img aid="2826938" class="zoom" id="aimg_2826938" inpost="1" src="../common_images/164322lxnci5uvn6vntupi.png" width="566"/>
+<div class="tip tip_4 aimg_tip" disautofocus="true" id="aimg_2826938_menu" style="position: absolute; display: none">
+<div class="xs0">
+<p><strong>1 (1).png</strong> <em class="xg1">(29.24 KB, 下载次数: 0)</em></p>
+<p>
+<a href="forum.php?mod=attachment&amp;aid=MjgyNjkzOHw5NTQyZTUwNnwxNzY4MzA1MTMyfDU4ODI2OHwyMDg2MjU4&amp;nothumb=yes" target="_blank">下载附件</a>
+</p>
+<p>历史查询</p>
+<p class="xg1 y">2026-1-13 16:43 上传</p>
+</div>
+<div class="tip_horn"></div>
+</div>
+</ignore_js_op>
+</td></tr></table>
+<div class="pattl">
+<ignore_js_op>
+<dl class="tattl attm">
+<dt></dt>
+<dd>
+<p class="mbn">
+<a class="xw1" href="forum.php?mod=attachment&amp;aid=MjgyNjk0MnxhOGFmZTJiN3wxNzY4MzA1MTMyfDU4ODI2OHwyMDg2MjU4&amp;nothumb=yes" id="aid2826942" onmouseover="showMenu({'ctrlid':this.id,'pos':'12'})" target="_blank">1 (5).png</a>
+<em class="xg1">(32.96 KB, 下载次数: 0)</em>
+</p>
+<div class="tip tip_4" disautofocus="true" id="aid2826942_menu" style="display: none">
+<div>
+<p>
+<a href="forum.php?mod=attachment&amp;aid=MjgyNjk0MnxhOGFmZTJiN3wxNzY4MzA1MTMyfDU4ODI2OHwyMDg2MjU4&amp;nothumb=yes" target="_blank">下载附件</a>
+</p>
+<p>
+<span class="y">2026-1-13 16:43 上传</span>
+<a href="javascript:;" onclick="imageRotate('aimg_2826942', 1)"><img class="vm" src="../common_images/rleft.gif"/></a>
+<a href="javascript:;" onclick="imageRotate('aimg_2826942', 2)"><img class="vm" src="../common_images/rright.gif"/></a>
+</p>
+</div>
+<div class="tip_horn"></div>
+</div>
+<p class="mbn">
+</p>
+<p class="mbn xg2">转换结果4</p>
+<div class="mbn savephotop">
+<img aid="2826942" alt="转换结果4" class="zoom" id="aimg_2826942" src="../common_images/164331gn1syksk784zlnlz.png" title="转换结果4" w="616" width="616"/>
+</div>
+</dd>
+</dl>
+</ignore_js_op>
+</div>
+</div>
+<div class="cm" id="comment_54646802">
+</div>
+<div id="post_rate_div_54646802"></div>
+</div>
+</div>
+</td></tr>
+<tr><td class="plc plm">
+<div class="mtw mbm hm cl" id="p_btn">
+<a href="home.php?mod=spacecp&amp;ac=favorite&amp;type=thread&amp;id=2086258&amp;formhash=7f5fdc25" id="k_favorite" onclick="showWindow(this.id, this.href, 'get', 0);" onmouseover="this.title = $('favoritenumber').innerHTML + ' 人收藏'" rel="nofollow" title="收藏本帖"><i><img alt="收藏" src="../common_images/fav.gif"/>收藏<span id="favoritenumber">7</span></i></a>
+<a href="javascript:;" id="ak_rate" onclick="showWindow('rate', 'forum.php?mod=misc&amp;action=rate&amp;tid=2086258&amp;pid=54646802', 'get', -1);return false;" title="评分表立场"><i><img alt="免费评分" src="../common_images/agree.gif"/>免费评分</i></a>
+<a href="forum.php?mod=collection&amp;action=edit&amp;op=addthread&amp;tid=2086258" id="k_collect" onclick="showWindow(this.id, this.href);return false;" onmouseover="this.title = $('collectionnumber').innerHTML + ' 人淘帖'" rel="nofollow" title="淘好帖进专辑"><i><img alt="分享" src="../common_images/collection.png"/>淘帖<span id="collectionnumber" style="display:none">0</span></i></a>
+<a href="forum.php?mod=misc&amp;action=recommend&amp;do=add&amp;tid=2086258&amp;hash=7f5fdc25" id="recommend_add" onclick="ajaxmenu(this, 3000, 1, 0, '43', 'recommendupdate(1)');return false;" onmouseover="this.title = $('recommendv_add').innerHTML + ' 人有用'" rel="nofollow" title="顶一下"><i><img alt="有用" src="../common_images/rec_add.gif"/>有用<span id="recommendv_add" style="display:none">0</span></i></a>
+<a class="followp" false;="" href="" onclick='showWindow("csu_wechat_scan_qrcode","plugin.php?id=csu_wechat_scan:share&amp;tid=2086258","get",0);' return=""><i><img src="../common_images/wx.png"/>分享到朋友圈</i></a>
+<a href="plugin.php?id=nds_votekick:nds_votekickcp&amp;tid=2086258" id="k_votekickt" onclick="showWindow(this.id, this.href, 'get', 0);" onmouseover="this.title ='还差6票'"> <i><img alt="踢垃圾帖" src="../common_images/recyclebin.gif">踢垃圾帖<span id="votes">0</span>⁄<span id="votemax">6</span> </img></i></a>
+</div>
+<div class="sign" style="max-height:200px;maxHeightIE:200px;">个人签名正在努力加载中。。。</div>
+<div class="vw50_kfc_pb"><span style="color:#008000;"><p>发帖前要善用<strong>【<a href="//www.52pojie.cn/search.php" target="_blank">论坛搜索</a>】</strong>功能，那里可能会有你要找的答案或者已经有人发布过相同内容了，请勿重复发帖。</p></span></div></td>
+</tr>
+<tr id="_postposition54646802"></tr>
+<tr>
+<td class="pls"></td>
+<td class="plc" style="overflow:visible;">
+<div class="po hin">
+<div class="pob cl">
+<em>
+<a class="cmmnt" href="forum.php?mod=misc&amp;action=comment&amp;tid=2086258&amp;pid=54646802&amp;extra=page%3D1&amp;page=1" onclick="showWindow('comment', this.href, 'get', 0)">点评</a><a class="fastre" href="forum.php?mod=post&amp;action=reply&amp;fid=24&amp;tid=2086258&amp;reppost=54646802&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)" rel="nofollow">回复</a>
+</em>
+<p>
+<a href="javascript:;" onclick="showWindow('miscreport54646802', 'misc.php?mod=report&amp;rtype=post&amp;rid=54646802&amp;tid=2086258&amp;fid=24', 'get', -1);return false;">举报</a>
+</p>
+</div>
+</div>
+</td>
+</tr>
+<tr class="ad">
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</table>
+</div><div id="post_54646828"><table cellpadding="0" cellspacing="0" class="plhin" id="pid54646828" summary="pid54646828">
+<tr>
+<td class="pls" rowspan="2">
+<div class="pls cl favatar" id="favatar54646828">
+<div class="pi">
+<div class="authi"><a class="xw1" href="home.php?mod=space&amp;uid=617550" rel="nofollow" target="_blank">housecall</a>
+</div>
+</div>
+<div class="p_pop blk bui card_gender_0" id="userinfo54646828" style="display: none; margin-top: -11px;">
+<div class="m z">
+<div id="userinfo54646828_ma"></div>
+</div>
+<div class="i y">
+<div>
+<strong><a class="xi2" href="home.php?mod=space&amp;uid=617550" target="_blank">housecall</a></strong>
+<em>当前在线</em>
+</div><dt>好友</dt><dd><a class="xi2" href="home.php?mod=space&amp;uid=617550&amp;do=friend&amp;view=me&amp;from=space" target="_blank">0</a></dd>
+<dt>阅读权限</dt><dd>10</dd>
+<span style="color:Blue;"><dt>听众</dt><dd><a class="xi2" href="home.php?mod=follow&amp;do=follower&amp;uid=617550" target="_blank">1</a></dd>
+<dt>最后登录</dt><dd>2026-1-13</dd>
+<div class="imicn">
+<a href="home.php?mod=space&amp;uid=617550&amp;do=profile" target="_blank" title="查看详细资料"><img alt="查看详细资料" src="../common_images/userinfo.gif"/></a>
+</div>
+<div id="avatarfeed"><span id="threadsortswait"></span></div>
+</span></div>
+</div>
+<div>
+<div class="avatar" onmouseover="showauthor(this, 'userinfo54646828')"><a class="avtm" href="home.php?mod=space&amp;uid=617550" rel="nofollow" target="_blank"><img src="../common_images/noavatar_middle.gif"/></a></div>
+</div>
+<div class="tns xg2"><table cellpadding="0" cellspacing="0"><th><p><a class="xi2" href="home.php?mod=space&amp;uid=617550&amp;do=thread&amp;type=thread&amp;view=me&amp;from=space">0</a></p>主题</th><th><p><a class="xi2" href="home.php?mod=space&amp;uid=617550&amp;do=thread&amp;type=reply&amp;view=me&amp;from=space">218</a></p>回帖</th><td><p><a class="xi2" href="home.php?mod=space&amp;uid=617550&amp;do=profile">22</a></p>积分</td></table></div>
+<p class="side-group"><em><a href="home.php?mod=spacecp&amp;ac=usergroup&amp;gid=10" target="_blank">锋芒初露</a></em></p>
+<p class="side-star"><span id="g_up54646828" onmouseover="showMenu({'ctrlid':this.id, 'pos':'12!'});"><img alt="Rank: 1" src="../common_images/star_level1.gif"/></span></p>
+<div class="tip tip_4" id="g_up54646828_menu" style="display: none;"><div class="tip_horn"></div><div class="tip_c">锋芒初露, 积分 22, 距离下一级还需 178 积分</div></div>
+<dl class="pil cl credit-list">
+<span amount="0" class="cr-digest">
+<dt>精华</dt>
+<dd>0</dd>
+</span>
+<span amount="0 点" class="cr-ext1">
+<dt>威望</dt>
+<dd>0 点</dd>
+</span>
+<span amount="0 点" class="cr-ext6">
+<dt>热心值</dt>
+<dd>0 点</dd>
+</span>
+<span amount="0 点" class="cr-ext4">
+<dt>悬赏值</dt>
+<dd>0 点</dd>
+</span>
+<span class="cr-follower">
+<dt>听众</dt>
+<dd><a class="xi2" href="home.php?mod=follow&amp;do=follower&amp;uid=617550" target="_blank">1</a></dd>
+</span>
+<span amount="0 点" class="cr-ext3">
+<dt>贡献值</dt>
+<dd>0 点</dd>
+</span>
+<span class="cr-ext2">
+<dt>吾爱币</dt>
+<dd>4018 CB</dd>
+</span>
+<span amount="0 次" class="cr-ext8">
+<dt>违规</dt>
+<dd>0 次</dd>
+</span>
+<dt>注册时间</dt>
+<dd>2017-3-13</dd>
+</dl>
+</div>
+</td>
+<td class="plc">
+<div class="pi">
+<strong>
+<a href="forum.php?mod=redirect&amp;goto=findpost&amp;ptid=2086258&amp;pid=54646828" id="postnum54646828" onclick="setCopy(this.href, '帖子地址复制成功');return false;">
+<font color="red"><b>沙发</b></font></a>
+</strong>
+<div class="pti">
+<div class="pdbt">
+</div>
+<div class="authi">
+<img class="authicn vm" id="authicon54646828" src="../common_images/online_member.gif"/>
+<span class="res-author"><a class="xi2" href="home.php?mod=space&amp;uid=617550" target="_blank">housecall</a>
+</span><em id="authorposton54646828"><span class="poston">发表于</span> 2026-1-13 16:55</em>
+<span class="pipe">|</span>
+<a href="forum.php?mod=viewthread&amp;tid=2086258&amp;page=1&amp;authorid=617550" rel="nofollow">只看该作者</a>
+</div>
+</div>
+</div><div class="pct"><div class="pcb">
+<div class="t_fsz">
+<table cellpadding="0" cellspacing="0"><tr><td class="t_f" id="postmessage_54646828">
+多谢楼主的分享</td></tr></table>
+</div>
+<div class="cm" id="comment_54646828">
+</div>
+<div id="post_rate_div_54646828"></div>
+</div>
+</div>
+</td></tr>
+<tr><td class="plc plm">
+<div class="vw50_kfc_pb"><a href="https://www.52pojie.cn/thread-143136-1-1.html" target="_blank"><font color="red"> 【吾爱破解论坛总版规】 - [让你充分了解吾爱破解论坛行为规则]</font></a></div></td>
+</tr>
+<tr id="_postposition54646828"></tr>
+<tr>
+<td class="pls"></td>
+<td class="plc" style="overflow:visible;">
+<div class="po hin">
+<div class="pob cl">
+<em>
+<a class="cmmnt" href="forum.php?mod=misc&amp;action=comment&amp;tid=2086258&amp;pid=54646828&amp;extra=page%3D1&amp;page=1" onclick="showWindow('comment', this.href, 'get', 0)">点评</a><a class="fastre" href="forum.php?mod=post&amp;action=reply&amp;fid=24&amp;tid=2086258&amp;repquote=54646828&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)" rel="nofollow">回复</a>
+<a class="replyadd" href="forum.php?mod=misc&amp;action=postreview&amp;do=support&amp;tid=2086258&amp;pid=54646828&amp;hash=7f5fdc25" onclick="ajaxmenu(this, 3000, 1, 0, '43', '');return false;" onmouseover="this.title = ($('review_support_54646828').innerHTML ? $('review_support_54646828').innerHTML : 0) + ' 人 支持'">支持 <span id="review_support_54646828"></span></a>
+</em>
+<p>
+<a href="javascript:;" onclick="showWindow('rate', 'forum.php?mod=misc&amp;action=rate&amp;tid=2086258&amp;pid=54646828', 'get', -1);return false;">免费评分</a>
+<a href="javascript:;" onclick="showWindow('miscreport54646828', 'misc.php?mod=report&amp;rtype=post&amp;rid=54646828&amp;tid=2086258&amp;fid=24', 'get', -1);return false;">举报</a>
+</p>
+</div>
+</div>
+</td>
+</tr>
+<tr class="ad">
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</table>
+</div><div id="post_54646876"><table cellpadding="0" cellspacing="0" class="plhin" id="pid54646876" summary="pid54646876">
+<tr>
+<td class="pls" rowspan="2">
+<div class="pls cl favatar" id="favatar54646876">
+<div class="pi">
+<div class="authi"><a class="xw1" href="home.php?mod=space&amp;uid=1230108" rel="nofollow" target="_blank">doglove</a>
+</div>
+</div>
+<div class="p_pop blk bui card_gender_0" id="userinfo54646876" style="display: none; margin-top: -11px;">
+<div class="m z">
+<div id="userinfo54646876_ma"></div>
+</div>
+<div class="i y">
+<div>
+<strong><a class="xi2" href="home.php?mod=space&amp;uid=1230108" target="_blank">doglove</a></strong>
+<em>当前在线</em>
+</div><dt>好友</dt><dd><a class="xi2" href="home.php?mod=space&amp;uid=1230108&amp;do=friend&amp;view=me&amp;from=space" target="_blank">4</a></dd>
+<dt>阅读权限</dt><dd>20</dd>
+<span style="color:Blue;"><dt>听众</dt><dd><a class="xi2" href="home.php?mod=follow&amp;do=follower&amp;uid=1230108" target="_blank">10</a></dd>
+<dt>最后登录</dt><dd>2026-1-13</dd>
+<div class="imicn">
+<a href="home.php?mod=space&amp;uid=1230108&amp;do=profile" target="_blank" title="查看详细资料"><img alt="查看详细资料" src="../common_images/userinfo.gif"/></a>
+</div>
+<div id="avatarfeed"><span id="threadsortswait"></span></div>
+</span></div>
+</div>
+<div>
+<div class="avatar" onmouseover="showauthor(this, 'userinfo54646876')"><a class="avtm" href="home.php?mod=space&amp;uid=1230108" rel="nofollow" target="_blank"><img onerror="this.onerror=null;this.src='https://avatar.52pojie.cn/images/noavatar_middle.gif'" src="../common_images/08_avatar_middle.jpg"/></a></div>
+</div>
+<div class="tns xg2"><table cellpadding="0" cellspacing="0"><th><p><a class="xi2" href="home.php?mod=space&amp;uid=1230108&amp;do=thread&amp;type=thread&amp;view=me&amp;from=space">4</a></p>主题</th><th><p><a class="xi2" href="home.php?mod=space&amp;uid=1230108&amp;do=thread&amp;type=reply&amp;view=me&amp;from=space">332</a></p>回帖</th><td><p><a class="xi2" href="home.php?mod=space&amp;uid=1230108&amp;do=profile">359</a></p>积分</td></table></div>
+<p class="side-group"><em><a href="home.php?mod=spacecp&amp;ac=usergroup&amp;gid=11" target="_blank">前途无量</a></em></p>
+<p class="side-star"><span id="g_up54646876" onmouseover="showMenu({'ctrlid':this.id, 'pos':'12!'});"><img alt="Rank: 3" src="../common_images/star_level2.gif"/><img alt="Rank: 3" src="../common_images/star_level1.gif"/></span></p>
+<div class="tip tip_4" id="g_up54646876_menu" style="display: none;"><div class="tip_horn"></div><div class="tip_c">前途无量, 积分 359, 距离下一级还需 41 积分</div></div>
+<dl class="pil cl credit-list">
+<span amount="0" class="cr-digest">
+<dt>精华</dt>
+<dd>0</dd>
+</span>
+<span amount="0 点" class="cr-ext1">
+<dt>威望</dt>
+<dd>0 点</dd>
+</span>
+<span amount="271 点" class="cr-ext6">
+<dt>热心值</dt>
+<dd>271 点</dd>
+</span>
+<span amount="0 点" class="cr-ext4">
+<dt>悬赏值</dt>
+<dd>0 点</dd>
+</span>
+<span class="cr-follower">
+<dt>听众</dt>
+<dd><a class="xi2" href="home.php?mod=follow&amp;do=follower&amp;uid=1230108" target="_blank">10</a></dd>
+</span>
+<span amount="0 点" class="cr-ext3">
+<dt>贡献值</dt>
+<dd>0 点</dd>
+</span>
+<span class="cr-ext2">
+<dt>吾爱币</dt>
+<dd>3043 CB</dd>
+</span>
+<span amount="0 次" class="cr-ext8">
+<dt>违规</dt>
+<dd>0 次</dd>
+</span>
+<dt>注册时间</dt>
+<dd>2019-11-11</dd>
+</dl>
+<ul class="xl xl2 o cl">
+<li class="addflw">
+<a class="xi2" href="home.php?mod=spacecp&amp;ac=follow&amp;op=add&amp;hash=7f5fdc25&amp;fuid=1230108" id="followmod_1230108" onclick="showWindow('followmod', this.href, 'get', 0);" title="收听TA">收听TA</a>
+</li>
+</ul>
+</div>
+</td>
+<td class="plc">
+<div class="pi">
+<strong>
+<a href="forum.php?mod=redirect&amp;goto=findpost&amp;ptid=2086258&amp;pid=54646876" id="postnum54646876" onclick="setCopy(this.href, '帖子地址复制成功');return false;">
+<em>3</em><sup>#</sup></a>
+</strong>
+<div class="pti">
+<div class="pdbt">
+</div>
+<div class="authi">
+<img class="authicn vm" id="authicon54646876" src="../common_images/online_member.gif"/>
+<span class="res-author"><a class="xi2" href="home.php?mod=space&amp;uid=1230108" target="_blank">doglove</a>
+</span><em id="authorposton54646876"><span class="poston">发表于</span> 2026-1-13 17:03</em>
+<span class="pipe">|</span>
+<a href="forum.php?mod=viewthread&amp;tid=2086258&amp;page=1&amp;authorid=1230108" rel="nofollow">只看该作者</a>
+</div>
+</div>
+</div><div class="pct"><div class="vw50_kfc_pt"><a href="https://www.52pojie.cn/thread-602644-1-1.html" target="_blank"><font color="red">吾爱破解论坛没有任何官方QQ群，禁止留联系方式，禁止任何商业交易。</font></a></div><div class="pcb">
+<div class="t_fsz">
+<table cellpadding="0" cellspacing="0"><tr><td class="t_f" id="postmessage_54646876">
+感谢分享，多谢，偶尔用四进制，如果有四进制，就更好了。</td></tr></table>
+</div>
+<div class="cm" id="comment_54646876">
+</div>
+<div id="post_rate_div_54646876"></div>
+</div>
+</div>
+</td></tr>
+<tr><td class="plc plm">
+<div class="vw50_kfc_pb"><a href="https://www.52pojie.cn/misc.php?mod=faq&amp;action=faq&amp;id=4&amp;messageid=47" target="_blank"><font color="red">如何升级？如何获得积分？积分对应解释说明！</font></a></div></td>
+</tr>
+<tr id="_postposition54646876"></tr>
+<tr>
+<td class="pls"></td>
+<td class="plc" style="overflow:visible;">
+<div class="po hin">
+<div class="pob cl">
+<em>
+<a class="cmmnt" href="forum.php?mod=misc&amp;action=comment&amp;tid=2086258&amp;pid=54646876&amp;extra=page%3D1&amp;page=1" onclick="showWindow('comment', this.href, 'get', 0)">点评</a><a class="fastre" href="forum.php?mod=post&amp;action=reply&amp;fid=24&amp;tid=2086258&amp;repquote=54646876&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)" rel="nofollow">回复</a>
+<a class="replyadd" href="forum.php?mod=misc&amp;action=postreview&amp;do=support&amp;tid=2086258&amp;pid=54646876&amp;hash=7f5fdc25" onclick="ajaxmenu(this, 3000, 1, 0, '43', '');return false;" onmouseover="this.title = ($('review_support_54646876').innerHTML ? $('review_support_54646876').innerHTML : 0) + ' 人 支持'">支持 <span id="review_support_54646876"></span></a>
+</em>
+<p>
+<a href="javascript:;" onclick="showWindow('rate', 'forum.php?mod=misc&amp;action=rate&amp;tid=2086258&amp;pid=54646876', 'get', -1);return false;">免费评分</a>
+<a href="javascript:;" onclick="showWindow('miscreport54646876', 'misc.php?mod=report&amp;rtype=post&amp;rid=54646876&amp;tid=2086258&amp;fid=24', 'get', -1);return false;">举报</a>
+</p>
+</div>
+</div>
+</td>
+</tr>
+<tr class="ad">
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</table>
+</div><div id="post_54646935"><table cellpadding="0" cellspacing="0" class="plhin" id="pid54646935" summary="pid54646935">
+<tr>
+<td class="pls" rowspan="2">
+<div class="pls cl favatar" id="favatar54646935">
+<div class="pi">
+<div class="authi"><a class="xw1" href="home.php?mod=space&amp;uid=896101" rel="nofollow" target="_blank">kickbirds</a>
+</div>
+</div>
+<div class="p_pop blk bui card_gender_0" id="userinfo54646935" style="display: none; margin-top: -11px;">
+<div class="m z">
+<div id="userinfo54646935_ma"></div>
+</div>
+<div class="i y">
+<div>
+<strong><a class="xi2" href="home.php?mod=space&amp;uid=896101" target="_blank">kickbirds</a></strong>
+<em>当前在线</em>
+</div><dt>好友</dt><dd><a class="xi2" href="home.php?mod=space&amp;uid=896101&amp;do=friend&amp;view=me&amp;from=space" target="_blank">1</a></dd>
+<dt>阅读权限</dt><dd>10</dd>
+<span style="color:Blue;"><dt>听众</dt><dd><a class="xi2" href="home.php?mod=follow&amp;do=follower&amp;uid=896101" target="_blank">3</a></dd>
+<dt>最后登录</dt><dd>2026-1-13</dd>
+<div class="imicn">
+<a href="home.php?mod=space&amp;uid=896101&amp;do=profile" target="_blank" title="查看详细资料"><img alt="查看详细资料" src="../common_images/userinfo.gif"/></a>
+</div>
+<div id="avatarfeed"><span id="threadsortswait"></span></div>
+</span></div>
+</div>
+<div>
+<div class="avatar" onmouseover="showauthor(this, 'userinfo54646935')"><a class="avtm" href="home.php?mod=space&amp;uid=896101" rel="nofollow" target="_blank"><img src="../common_images/noavatar_middle.gif"/></a></div>
+</div>
+<div class="tns xg2"><table cellpadding="0" cellspacing="0"><th><p><a class="xi2" href="home.php?mod=space&amp;uid=896101&amp;do=thread&amp;type=thread&amp;view=me&amp;from=space">26</a></p>主题</th><th><p><a class="xi2" href="home.php?mod=space&amp;uid=896101&amp;do=thread&amp;type=reply&amp;view=me&amp;from=space">638</a></p>回帖</th><td><p><a class="xi2" href="home.php?mod=space&amp;uid=896101&amp;do=profile">104</a></p>积分</td></table></div>
+<p class="side-group"><em><a href="home.php?mod=spacecp&amp;ac=usergroup&amp;gid=10" target="_blank">锋芒初露</a></em></p>
+<p class="side-star"><span id="g_up54646935" onmouseover="showMenu({'ctrlid':this.id, 'pos':'12!'});"><img alt="Rank: 1" src="../common_images/star_level1.gif"/></span></p>
+<div class="tip tip_4" id="g_up54646935_menu" style="display: none;"><div class="tip_horn"></div><div class="tip_c">锋芒初露, 积分 104, 距离下一级还需 96 积分</div></div>
+<dl class="pil cl credit-list">
+<span amount="0" class="cr-digest">
+<dt>精华</dt>
+<dd>0</dd>
+</span>
+<span amount="0 点" class="cr-ext1">
+<dt>威望</dt>
+<dd>0 点</dd>
+</span>
+<span amount="31 点" class="cr-ext6">
+<dt>热心值</dt>
+<dd>31 点</dd>
+</span>
+<span amount="0 点" class="cr-ext4">
+<dt>悬赏值</dt>
+<dd>0 点</dd>
+</span>
+<span class="cr-follower">
+<dt>听众</dt>
+<dd><a class="xi2" href="home.php?mod=follow&amp;do=follower&amp;uid=896101" target="_blank">3</a></dd>
+</span>
+<span amount="0 点" class="cr-ext3">
+<dt>贡献值</dt>
+<dd>0 点</dd>
+</span>
+<span class="cr-ext2">
+<dt>吾爱币</dt>
+<dd>1475 CB</dd>
+</span>
+<span amount="0 次" class="cr-ext8">
+<dt>违规</dt>
+<dd>0 次</dd>
+</span>
+<dt>注册时间</dt>
+<dd>2018-7-21</dd>
+</dl>
+</div>
+</td>
+<td class="plc">
+<div class="pi">
+<strong>
+<a href="forum.php?mod=redirect&amp;goto=findpost&amp;ptid=2086258&amp;pid=54646935" id="postnum54646935" onclick="setCopy(this.href, '帖子地址复制成功');return false;">
+<em>4</em><sup>#</sup></a>
+</strong>
+<div class="pti">
+<div class="pdbt">
+</div>
+<div class="authi">
+<img class="authicn vm" id="authicon54646935" src="../common_images/online_member.gif"/>
+<span class="res-author"><a class="xi2" href="home.php?mod=space&amp;uid=896101" target="_blank">kickbirds</a>
+</span><em id="authorposton54646935"><span class="poston">发表于</span> 2026-1-13 17:16</em>
+<span class="pipe">|</span>
+<a href="forum.php?mod=viewthread&amp;tid=2086258&amp;page=1&amp;authorid=896101" rel="nofollow">只看该作者</a>
+</div>
+</div>
+</div><div class="pct"><div class="vw50_kfc_pt"><a href="https://www.52pojie.cn/misc.php?mod=faq" target="_blank"><font color="blue">《站点帮助文档》有什么问题来这里看看吧，这里有你想知道的内容！</font></a></div><div class="pcb">
+<div class="t_fsz">
+<table cellpadding="0" cellspacing="0"><tr><td class="t_f" id="postmessage_54646935">
+能增加相应进制加减吗</td></tr></table>
+</div>
+<div class="cm" id="comment_54646935">
+</div>
+<div id="post_rate_div_54646935"></div>
+</div>
+</div>
+</td></tr>
+<tr><td class="plc plm">
+<div class="sign" style="max-height:200px;maxHeightIE:200px;"><img alt="" border="0" class="zoom" id="aimg_i9K21" onclick="zoom(this, this.src, 0, 0, 0)" onload="thumbImg(this)" onmouseover="img_onmouseoverfunc(this)" src="">https://vkceyugu.cdn.bspapp.com/VKCEYUGU-6f00c918-7a62-47b5-8e8a-9578acfb171c/2a7a94bc-823a-4d6c-bfef-e5b15004e295.gif</img><br/>
+https://tool.lu/netcard</div>
+<div class="vw50_kfc_pb"><a href="thread-61079-1-1.html" target="_blank"><font color="red">呼吁大家发布原创作品添加吾爱破解论坛标识！</font></a></div></td>
+</tr>
+<tr id="_postposition54646935"></tr>
+<tr>
+<td class="pls"></td>
+<td class="plc" style="overflow:visible;">
+<div class="po hin">
+<div class="pob cl">
+<em>
+<a class="cmmnt" href="forum.php?mod=misc&amp;action=comment&amp;tid=2086258&amp;pid=54646935&amp;extra=page%3D1&amp;page=1" onclick="showWindow('comment', this.href, 'get', 0)">点评</a><a class="fastre" href="forum.php?mod=post&amp;action=reply&amp;fid=24&amp;tid=2086258&amp;repquote=54646935&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)" rel="nofollow">回复</a>
+<a class="replyadd" href="forum.php?mod=misc&amp;action=postreview&amp;do=support&amp;tid=2086258&amp;pid=54646935&amp;hash=7f5fdc25" onclick="ajaxmenu(this, 3000, 1, 0, '43', '');return false;" onmouseover="this.title = ($('review_support_54646935').innerHTML ? $('review_support_54646935').innerHTML : 0) + ' 人 支持'">支持 <span id="review_support_54646935"></span></a>
+</em>
+<p>
+<a href="javascript:;" onclick="showWindow('rate', 'forum.php?mod=misc&amp;action=rate&amp;tid=2086258&amp;pid=54646935', 'get', -1);return false;">免费评分</a>
+<a href="javascript:;" onclick="showWindow('miscreport54646935', 'misc.php?mod=report&amp;rtype=post&amp;rid=54646935&amp;tid=2086258&amp;fid=24', 'get', -1);return false;">举报</a>
+</p>
+</div>
+</div>
+</td>
+</tr>
+<tr class="ad">
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</table>
+</div><div id="post_54647201"><table cellpadding="0" cellspacing="0" class="plhin" id="pid54647201" summary="pid54647201">
+<tr>
+<td class="pls" rowspan="2">
+<div class="pls cl favatar" id="favatar54647201">
+<div class="pi">
+<div class="authi"><a class="xw1" href="home.php?mod=space&amp;uid=1672697" rel="nofollow" target="_blank">w-c-f5522</a>
+</div>
+</div>
+<div class="p_pop blk bui card_gender_0" id="userinfo54647201" style="display: none; margin-top: -11px;">
+<div class="m z">
+<div id="userinfo54647201_ma"></div>
+</div>
+<div class="i y">
+<div>
+<strong><a class="xi2" href="home.php?mod=space&amp;uid=1672697" target="_blank">w-c-f5522</a></strong>
+<em>当前在线</em>
+</div><dt>好友</dt><dd><a class="xi2" href="home.php?mod=space&amp;uid=1672697&amp;do=friend&amp;view=me&amp;from=space" target="_blank">0</a></dd>
+<dt>阅读权限</dt><dd>10</dd>
+<span style="color:Blue;"><dt>听众</dt><dd><a class="xi2" href="home.php?mod=follow&amp;do=follower&amp;uid=1672697" target="_blank">0</a></dd>
+<dt>最后登录</dt><dd>2026-1-13</dd>
+<div class="imicn">
+<a href="home.php?mod=space&amp;uid=1672697&amp;do=profile" target="_blank" title="查看详细资料"><img alt="查看详细资料" src="../common_images/userinfo.gif"/></a>
+</div>
+<div id="avatarfeed"><span id="threadsortswait"></span></div>
+</span></div>
+</div>
+<div>
+<div class="avatar" onmouseover="showauthor(this, 'userinfo54647201')"><a class="avtm" href="home.php?mod=space&amp;uid=1672697" rel="nofollow" target="_blank"><img src="../common_images/noavatar_middle.gif"/></a></div>
+</div>
+<div class="tns xg2"><table cellpadding="0" cellspacing="0"><th><p><a class="xi2" href="home.php?mod=space&amp;uid=1672697&amp;do=thread&amp;type=thread&amp;view=me&amp;from=space">0</a></p>主题</th><th><p><a class="xi2" href="home.php?mod=space&amp;uid=1672697&amp;do=thread&amp;type=reply&amp;view=me&amp;from=space">482</a></p>回帖</th><td><p><a class="xi2" href="home.php?mod=space&amp;uid=1672697&amp;do=profile">49</a></p>积分</td></table></div>
+<p class="side-group"><em><a href="home.php?mod=spacecp&amp;ac=usergroup&amp;gid=10" target="_blank">锋芒初露</a></em></p>
+<p class="side-star"><span id="g_up54647201" onmouseover="showMenu({'ctrlid':this.id, 'pos':'12!'});"><img alt="Rank: 1" src="../common_images/star_level1.gif"/></span></p>
+<div class="tip tip_4" id="g_up54647201_menu" style="display: none;"><div class="tip_horn"></div><div class="tip_c">锋芒初露, 积分 49, 距离下一级还需 151 积分</div></div>
+<dl class="pil cl credit-list">
+<span amount="0" class="cr-digest">
+<dt>精华</dt>
+<dd>0</dd>
+</span>
+<span amount="0 点" class="cr-ext1">
+<dt>威望</dt>
+<dd>0 点</dd>
+</span>
+<span amount="1 点" class="cr-ext6">
+<dt>热心值</dt>
+<dd>1 点</dd>
+</span>
+<span amount="0 点" class="cr-ext4">
+<dt>悬赏值</dt>
+<dd>0 点</dd>
+</span>
+<span class="cr-follower">
+<dt>听众</dt>
+<dd><a class="xi2" href="home.php?mod=follow&amp;do=follower&amp;uid=1672697" target="_blank">0</a></dd>
+</span>
+<span amount="0 点" class="cr-ext3">
+<dt>贡献值</dt>
+<dd>0 点</dd>
+</span>
+<span class="cr-ext2">
+<dt>吾爱币</dt>
+<dd>3336 CB</dd>
+</span>
+<span amount="0 次" class="cr-ext8">
+<dt>违规</dt>
+<dd>0 次</dd>
+</span>
+<dt>注册时间</dt>
+<dd>2021-3-13</dd>
+</dl>
+</div>
+</td>
+<td class="plc">
+<div class="pi">
+<strong>
+<a href="forum.php?mod=redirect&amp;goto=findpost&amp;ptid=2086258&amp;pid=54647201" id="postnum54647201" onclick="setCopy(this.href, '帖子地址复制成功');return false;">
+<em>5</em><sup>#</sup></a>
+</strong>
+<div class="pti">
+<div class="pdbt">
+</div>
+<div class="authi">
+<img class="authicn vm" id="authicon54647201" src="../common_images/online_member.gif"/>
+<span class="res-author"><a class="xi2" href="home.php?mod=space&amp;uid=1672697" target="_blank">w-c-f5522</a>
+</span><em id="authorposton54647201"><span class="poston">发表于</span> 2026-1-13 17:51</em>
+<span class="pipe">|</span>
+<a href="forum.php?mod=viewthread&amp;tid=2086258&amp;page=1&amp;authorid=1672697" rel="nofollow">只看该作者</a>
+</div>
+</div>
+</div><div class="pct"><div class="pcb">
+<div class="t_fsz">
+<table cellpadding="0" cellspacing="0"><tr><td class="t_f" id="postmessage_54647201">
+有点意思 , 感谢分享好工具.</td></tr></table>
+</div>
+<div class="cm" id="comment_54647201">
+</div>
+<div id="post_rate_div_54647201"></div>
+</div>
+</div>
+</td></tr>
+<tr><td class="plc plm">
+<div class="vw50_kfc_pb"><a href="https://www.52pojie.cn/thread-69716-1-1.html" target="_blank"><font color="red">如何快速判断一个文件是否为病毒！</font></a></div></td>
+</tr>
+<tr id="_postposition54647201"></tr>
+<tr>
+<td class="pls"></td>
+<td class="plc" style="overflow:visible;">
+<div class="po hin">
+<div class="pob cl">
+<em>
+<a class="cmmnt" href="forum.php?mod=misc&amp;action=comment&amp;tid=2086258&amp;pid=54647201&amp;extra=page%3D1&amp;page=1" onclick="showWindow('comment', this.href, 'get', 0)">点评</a><a class="fastre" href="forum.php?mod=post&amp;action=reply&amp;fid=24&amp;tid=2086258&amp;repquote=54647201&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)" rel="nofollow">回复</a>
+<a class="replyadd" href="forum.php?mod=misc&amp;action=postreview&amp;do=support&amp;tid=2086258&amp;pid=54647201&amp;hash=7f5fdc25" onclick="ajaxmenu(this, 3000, 1, 0, '43', '');return false;" onmouseover="this.title = ($('review_support_54647201').innerHTML ? $('review_support_54647201').innerHTML : 0) + ' 人 支持'">支持 <span id="review_support_54647201"></span></a>
+</em>
+<p>
+<a href="javascript:;" onclick="showWindow('rate', 'forum.php?mod=misc&amp;action=rate&amp;tid=2086258&amp;pid=54647201', 'get', -1);return false;">免费评分</a>
+<a href="javascript:;" onclick="showWindow('miscreport54647201', 'misc.php?mod=report&amp;rtype=post&amp;rid=54647201&amp;tid=2086258&amp;fid=24', 'get', -1);return false;">举报</a>
+</p>
+</div>
+</div>
+</td>
+</tr>
+<tr class="ad">
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</table>
+</div><div id="post_54647478"><table cellpadding="0" cellspacing="0" class="plhin" id="pid54647478" summary="pid54647478">
+<tr>
+<td class="pls" rowspan="2">
+<div class="pls cl favatar" id="favatar54647478">
+<div class="pi">
+<div class="authi"><a class="xw1" href="home.php?mod=space&amp;uid=2414887" rel="nofollow" target="_blank">a2025</a>
+</div>
+</div>
+<div class="p_pop blk bui card_gender_0" id="userinfo54647478" style="display: none; margin-top: -11px;">
+<div class="m z">
+<div id="userinfo54647478_ma"></div>
+</div>
+<div class="i y">
+<div>
+<strong><a class="xi2" href="home.php?mod=space&amp;uid=2414887" target="_blank">a2025</a></strong>
+<em>当前在线</em>
+</div><dt>好友</dt><dd><a class="xi2" href="home.php?mod=space&amp;uid=2414887&amp;do=friend&amp;view=me&amp;from=space" target="_blank">0</a></dd>
+<dt>阅读权限</dt><dd>10</dd>
+<span style="color:Blue;"><dt>听众</dt><dd><a class="xi2" href="home.php?mod=follow&amp;do=follower&amp;uid=2414887" target="_blank">0</a></dd>
+<dt>最后登录</dt><dd>2026-1-13</dd>
+<div class="imicn">
+<a href="home.php?mod=space&amp;uid=2414887&amp;do=profile" target="_blank" title="查看详细资料"><img alt="查看详细资料" src="../common_images/userinfo.gif"/></a>
+</div>
+<div id="avatarfeed"><span id="threadsortswait"></span></div>
+</span></div>
+</div>
+<div>
+<div class="avatar" onmouseover="showauthor(this, 'userinfo54647478')"><a class="avtm" href="home.php?mod=space&amp;uid=2414887" rel="nofollow" target="_blank"><img src="../common_images/noavatar_middle.gif"/></a></div>
+</div>
+<div class="tns xg2"><table cellpadding="0" cellspacing="0"><th><p><a class="xi2" href="home.php?mod=space&amp;uid=2414887&amp;do=thread&amp;type=thread&amp;view=me&amp;from=space">0</a></p>主题</th><th><p><a class="xi2" href="home.php?mod=space&amp;uid=2414887&amp;do=thread&amp;type=reply&amp;view=me&amp;from=space">31</a></p>回帖</th><td><p><a class="xi2" href="home.php?mod=space&amp;uid=2414887&amp;do=profile">6</a></p>积分</td></table></div>
+<p class="side-group"><em><a href="home.php?mod=spacecp&amp;ac=usergroup&amp;gid=10" target="_blank">锋芒初露</a></em></p>
+<p class="side-star"><span id="g_up54647478" onmouseover="showMenu({'ctrlid':this.id, 'pos':'12!'});"><img alt="Rank: 1" src="../common_images/star_level1.gif"/></span></p>
+<div class="tip tip_4" id="g_up54647478_menu" style="display: none;"><div class="tip_horn"></div><div class="tip_c">锋芒初露, 积分 6, 距离下一级还需 194 积分</div></div>
+<dl class="pil cl credit-list">
+<span amount="0" class="cr-digest">
+<dt>精华</dt>
+<dd>0</dd>
+</span>
+<span amount="0 点" class="cr-ext1">
+<dt>威望</dt>
+<dd>0 点</dd>
+</span>
+<span amount="2 点" class="cr-ext6">
+<dt>热心值</dt>
+<dd>2 点</dd>
+</span>
+<span amount="0 点" class="cr-ext4">
+<dt>悬赏值</dt>
+<dd>0 点</dd>
+</span>
+<span class="cr-follower">
+<dt>听众</dt>
+<dd><a class="xi2" href="home.php?mod=follow&amp;do=follower&amp;uid=2414887" target="_blank">0</a></dd>
+</span>
+<span amount="0 点" class="cr-ext3">
+<dt>贡献值</dt>
+<dd>0 点</dd>
+</span>
+<span class="cr-ext2">
+<dt>吾爱币</dt>
+<dd>225 CB</dd>
+</span>
+<span amount="0 次" class="cr-ext8">
+<dt>违规</dt>
+<dd>0 次</dd>
+</span>
+<dt>注册时间</dt>
+<dd>2025-7-21</dd>
+</dl>
+</div>
+</td>
+<td class="plc">
+<div class="pi">
+<strong>
+<a href="forum.php?mod=redirect&amp;goto=findpost&amp;ptid=2086258&amp;pid=54647478" id="postnum54647478" onclick="setCopy(this.href, '帖子地址复制成功');return false;">
+<em>6</em><sup>#</sup></a>
+</strong>
+<div class="pti">
+<div class="pdbt">
+</div>
+<div class="authi">
+<img class="authicn vm" id="authicon54647478" src="../common_images/online_member.gif"/>
+<span class="res-author"><a class="xi2" href="home.php?mod=space&amp;uid=2414887" target="_blank">a2025</a>
+</span><em id="authorposton54647478"><span class="poston">发表于</span> 2026-1-13 18:50</em>
+<span class="pipe">|</span>
+<a href="forum.php?mod=viewthread&amp;tid=2086258&amp;page=1&amp;authorid=2414887" rel="nofollow">只看该作者</a>
+</div>
+</div>
+</div><div class="pct"><div class="pcb">
+<div class="t_fsz">
+<table cellpadding="0" cellspacing="0"><tr><td class="t_f" id="postmessage_54647478">
+<div class="quote"><blockquote><font size="2"><a href="https://www.52pojie.cn/forum.php?mod=redirect&amp;goto=findpost&amp;pid=54646876&amp;ptid=2086258" target="_blank"><font color="#999999">doglove 发表于 2026-1-13 17:03</font></a></font><br/>
+感谢分享，多谢，偶尔用四进制，如果有四进制，就更好了。</blockquote></div><br/>
+给你的四进制的转换。前几天无聊写的。你想用的话，可以试试：<br/>
+<div style="padding:15px 0;"><div style="font-size:12px;">[Python] <em class="viewsource" style="cursor:pointer;font-size:12px;color:#369 !important;">纯文本查看</em> <em class="copycode" style="cursor:pointer;font-size:12px;color:#369 !important;">复制代码</em></div><pre class="brush: python; gutter: true">def to_base(dst_base: int, src_base: int, src_data: str) -&gt; str:
+    """
+    dst_base: 目标进制(2-62)
+    src_base: 来源进制(2-62)
+    src_data: 来源字符串
+    Returns:
+        目标进制的字符串(如果明确指明了正负号, 就保留正负号, 例如'-0')
+    Raises:
+        ValueError: 如果进制超出范围或数据无效
+    """
+    digits62: str = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+    sign: str = ''
+    if len(src_data) and (src_data[0] in '-+'):
+        sign, src_data = src_data[0], src_data[1:]
+    cache: list[str] = []
+    num: int = 0
+    src_data: str = src_data.upper() if src_base &lt;= 36 else src_data
+    for char in src_data:
+        index: int = digits62.find(char)
+        if index == -1 or src_base &lt;= index:
+            raise ValueError(f"无效字符:'{char}'")
+        num = num * src_base + index
+    while 0 &lt; num:
+        num, remainder = divmod(num, dst_base)
+        cache.append(digits62[remainder])
+    if not cache and len(src_data):
+        cache.append(str(0))
+    if sign:  # if sign == '-':  # 要显示正负值,
+        cache.append(sign)
+    return ''.join(reversed(cache))
+
+
+if __name__ == '__main__':
+    src_base: int = int(input("请输入来源进制(2~62)："))
+    src_data: str = input("请输入来源字符串：")
+    dst_base: int = int(input("请输入目标进制(2~62)："))
+    dst_data: str = to_base(dst_base, src_base, src_data)
+    print(f'[{src_base}]进制的[{src_data}]是[{dst_base}]进制的[{dst_data}]')
+</pre></div></td></tr></table>
+</div>
+<div class="cm" id="comment_54647478">
+</div>
+<div id="post_rate_div_54647478"></div>
+</div>
+</div>
+</td></tr>
+<tr><td class="plc plm">
+</td>
+</tr>
+<tr id="_postposition54647478"></tr>
+<tr>
+<td class="pls"></td>
+<td class="plc" style="overflow:visible;">
+<div class="po hin">
+<div class="pob cl">
+<em>
+<a class="cmmnt" href="forum.php?mod=misc&amp;action=comment&amp;tid=2086258&amp;pid=54647478&amp;extra=page%3D1&amp;page=1" onclick="showWindow('comment', this.href, 'get', 0)">点评</a><a class="fastre" href="forum.php?mod=post&amp;action=reply&amp;fid=24&amp;tid=2086258&amp;repquote=54647478&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)" rel="nofollow">回复</a>
+<a class="replyadd" href="forum.php?mod=misc&amp;action=postreview&amp;do=support&amp;tid=2086258&amp;pid=54647478&amp;hash=7f5fdc25" onclick="ajaxmenu(this, 3000, 1, 0, '43', '');return false;" onmouseover="this.title = ($('review_support_54647478').innerHTML ? $('review_support_54647478').innerHTML : 0) + ' 人 支持'">支持 <span id="review_support_54647478"></span></a>
+</em>
+<p>
+<a href="javascript:;" onclick="showWindow('rate', 'forum.php?mod=misc&amp;action=rate&amp;tid=2086258&amp;pid=54647478', 'get', -1);return false;">免费评分</a>
+<a href="javascript:;" onclick="showWindow('miscreport54647478', 'misc.php?mod=report&amp;rtype=post&amp;rid=54647478&amp;tid=2086258&amp;fid=24', 'get', -1);return false;">举报</a>
+</p>
+</div>
+</div>
+</td>
+</tr>
+<tr class="ad">
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</table>
+</div><div id="post_54647537"><table cellpadding="0" cellspacing="0" class="plhin" id="pid54647537" summary="pid54647537">
+<tr>
+<td class="pls" rowspan="2">
+<div class="pls cl favatar" id="favatar54647537">
+<div class="pi">
+<div class="authi"><a class="xw1" href="home.php?mod=space&amp;uid=1181549" rel="nofollow" target="_blank">chishingchan</a>
+</div>
+</div>
+<div class="p_pop blk bui card_gender_0" id="userinfo54647537" style="display: none; margin-top: -11px;">
+<div class="m z">
+<div id="userinfo54647537_ma"></div>
+</div>
+<div class="i y">
+<div>
+<strong><a class="xi2" href="home.php?mod=space&amp;uid=1181549" target="_blank">chishingchan</a></strong>
+<em>当前在线</em>
+</div><dt>好友</dt><dd><a class="xi2" href="home.php?mod=space&amp;uid=1181549&amp;do=friend&amp;view=me&amp;from=space" target="_blank">0</a></dd>
+<dt>阅读权限</dt><dd>30</dd>
+<span style="color:Blue;"><dt>听众</dt><dd><a class="xi2" href="home.php?mod=follow&amp;do=follower&amp;uid=1181549" target="_blank">67</a></dd>
+<dt>最后登录</dt><dd>2026-1-13</dd>
+<div class="imicn">
+<a href="home.php?mod=space&amp;uid=1181549&amp;do=profile" target="_blank" title="查看详细资料"><img alt="查看详细资料" src="../common_images/userinfo.gif"/></a>
+</div>
+<div id="avatarfeed"><span id="threadsortswait"></span></div>
+</span></div>
+</div>
+<div>
+<div class="avatar" onmouseover="showauthor(this, 'userinfo54647537')"><a class="avtm" href="home.php?mod=space&amp;uid=1181549" rel="nofollow" target="_blank"><img onerror="this.onerror=null;this.src='https://avatar.52pojie.cn/images/noavatar_middle.gif'" src="../common_images/49_avatar_middle.jpg"/></a></div>
+</div>
+<div class="tns xg2"><table cellpadding="0" cellspacing="0"><th><p><a class="xi2" href="home.php?mod=space&amp;uid=1181549&amp;do=thread&amp;type=thread&amp;view=me&amp;from=space">74</a></p>主题</th><th><p><a class="xi2" href="home.php?mod=space&amp;uid=1181549&amp;do=thread&amp;type=reply&amp;view=me&amp;from=space">962</a></p>回帖</th><td><p><a class="xi2" href="home.php?mod=space&amp;uid=1181549&amp;do=profile">998</a></p>积分</td></table></div>
+<p class="side-group"><em><a href="home.php?mod=spacecp&amp;ac=usergroup&amp;gid=13" target="_blank">凤毛麟角</a></em></p>
+<p class="side-star"><span id="g_up54647537" onmouseover="showMenu({'ctrlid':this.id, 'pos':'12!'});"><img alt="Rank: 5" src="../common_images/star_level3.gif"/><img alt="Rank: 5" src="../common_images/star_level1.gif"/></span></p>
+<div class="tip tip_4" id="g_up54647537_menu" style="display: none;"><div class="tip_horn"></div><div class="tip_c">凤毛麟角, 积分 998, 距离下一级还需 1002 积分</div></div>
+<p class="xg1"><a href="thread-2002246-1-1.html" target="_blank"><img alt="2024优秀会员" height="55" src="../common_images/2024hy.gif" title="2024优秀会员" width="130"/></a></p>
+<dl class="pil cl credit-list">
+<span amount="0" class="cr-digest">
+<dt>精华</dt>
+<dd>0</dd>
+</span>
+<span amount="0 点" class="cr-ext1">
+<dt>威望</dt>
+<dd>0 点</dd>
+</span>
+<span amount="738 点" class="cr-ext6">
+<dt>热心值</dt>
+<dd>738 点</dd>
+</span>
+<span amount="0 点" class="cr-ext4">
+<dt>悬赏值</dt>
+<dd>0 点</dd>
+</span>
+<span class="cr-follower">
+<dt>听众</dt>
+<dd><a class="xi2" href="home.php?mod=follow&amp;do=follower&amp;uid=1181549" target="_blank">67</a></dd>
+</span>
+<span amount="6 点" class="cr-ext3">
+<dt>贡献值</dt>
+<dd>6 点</dd>
+</span>
+<span class="cr-ext2">
+<dt>吾爱币</dt>
+<dd>6501 CB</dd>
+</span>
+<span amount="0 次" class="cr-ext8">
+<dt>违规</dt>
+<dd>0 次</dd>
+</span>
+<dt>注册时间</dt>
+<dd>2019-7-21</dd>
+</dl>
+<ul class="xl xl2 o cl">
+<li class="addflw">
+<a class="xi2" href="home.php?mod=spacecp&amp;ac=follow&amp;op=add&amp;hash=7f5fdc25&amp;fuid=1181549" id="followmod_1181549" onclick="showWindow('followmod', this.href, 'get', 0);" title="收听TA">收听TA</a>
+</li>
+</ul>
+</div>
+</td>
+<td class="plc">
+<div class="pi">
+<strong>
+<a href="forum.php?mod=redirect&amp;goto=findpost&amp;ptid=2086258&amp;pid=54647537" id="postnum54647537" onclick="setCopy(this.href, '帖子地址复制成功');return false;">
+<em>7</em><sup>#</sup></a>
+</strong>
+<div class="pti">
+<div class="pdbt">
+</div>
+<div class="authi">
+<img class="authicn vm" id="authicon54647537" src="../common_images/online_member.gif"/>
+<span class="res-author"><a class="xi2" href="home.php?mod=space&amp;uid=1181549" target="_blank">chishingchan</a>
+</span><em id="authorposton54647537"><span class="poston">发表于</span> 2026-1-13 19:06</em>
+<span class="pipe">|</span>
+<a href="forum.php?mod=viewthread&amp;tid=2086258&amp;page=1&amp;authorid=1181549" rel="nofollow">只看该作者</a>
+</div>
+</div>
+</div><div class="pct"><div class="pcb">
+<div class="t_fsz">
+<table cellpadding="0" cellspacing="0"><tr><td class="t_f" id="postmessage_54647537">
+除了十与十六，其它进制都很少用！</td></tr></table>
+</div>
+<div class="cm" id="comment_54647537">
+</div>
+<div id="post_rate_div_54647537"></div>
+</div>
+</div>
+</td></tr>
+<tr><td class="plc plm">
+</td>
+</tr>
+<tr id="_postposition54647537"></tr>
+<tr>
+<td class="pls"></td>
+<td class="plc" style="overflow:visible;">
+<div class="po hin">
+<div class="pob cl">
+<em>
+<a class="cmmnt" href="forum.php?mod=misc&amp;action=comment&amp;tid=2086258&amp;pid=54647537&amp;extra=page%3D1&amp;page=1" onclick="showWindow('comment', this.href, 'get', 0)">点评</a><a class="fastre" href="forum.php?mod=post&amp;action=reply&amp;fid=24&amp;tid=2086258&amp;repquote=54647537&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)" rel="nofollow">回复</a>
+<a class="replyadd" href="forum.php?mod=misc&amp;action=postreview&amp;do=support&amp;tid=2086258&amp;pid=54647537&amp;hash=7f5fdc25" onclick="ajaxmenu(this, 3000, 1, 0, '43', '');return false;" onmouseover="this.title = ($('review_support_54647537').innerHTML ? $('review_support_54647537').innerHTML : 0) + ' 人 支持'">支持 <span id="review_support_54647537"></span></a>
+</em>
+<p>
+<a href="javascript:;" onclick="showWindow('rate', 'forum.php?mod=misc&amp;action=rate&amp;tid=2086258&amp;pid=54647537', 'get', -1);return false;">免费评分</a>
+<a href="javascript:;" onclick="showWindow('miscreport54647537', 'misc.php?mod=report&amp;rtype=post&amp;rid=54647537&amp;tid=2086258&amp;fid=24', 'get', -1);return false;">举报</a>
+</p>
+</div>
+</div>
+</td>
+</tr>
+<tr class="ad">
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</table>
+</div><div id="post_54647577"><table cellpadding="0" cellspacing="0" class="plhin" id="pid54647577" summary="pid54647577">
+<tr>
+<a name="lastpost"></a><td class="pls" rowspan="2">
+<div class="pls cl favatar" id="favatar54647577">
+<div class="pi">
+<div class="authi"><a class="xw1" href="home.php?mod=space&amp;uid=821887" rel="nofollow" target="_blank">sxlh2311</a>
+</div>
+</div>
+<div class="p_pop blk bui card_gender_0" id="userinfo54647577" style="display: none; margin-top: -11px;">
+<div class="m z">
+<div id="userinfo54647577_ma"></div>
+</div>
+<div class="i y">
+<div>
+<strong><a class="xi2" href="home.php?mod=space&amp;uid=821887" target="_blank">sxlh2311</a></strong>
+<em>当前在线</em>
+</div><dt>好友</dt><dd><a class="xi2" href="home.php?mod=space&amp;uid=821887&amp;do=friend&amp;view=me&amp;from=space" target="_blank">0</a></dd>
+<dt>阅读权限</dt><dd>10</dd>
+<span style="color:Blue;"><dt>听众</dt><dd><a class="xi2" href="home.php?mod=follow&amp;do=follower&amp;uid=821887" target="_blank">0</a></dd>
+<dt>最后登录</dt><dd>2026-1-13</dd>
+<div class="imicn">
+<a href="http://" rel="nofollow noopener" target="_blank" title="查看个人网站"><img alt="查看个人网站" src="../common_images/forumlink.gif"/></a><a href="home.php?mod=space&amp;uid=821887&amp;do=profile" target="_blank" title="查看详细资料"><img alt="查看详细资料" src="../common_images/userinfo.gif"/></a>
+</div>
+<div id="avatarfeed"><span id="threadsortswait"></span></div>
+</span></div>
+</div>
+<div>
+<div class="avatar" onmouseover="showauthor(this, 'userinfo54647577')"><a class="avtm" href="home.php?mod=space&amp;uid=821887" rel="nofollow" target="_blank"><img src="../common_images/noavatar_middle.gif"/></a></div>
+</div>
+<div class="tns xg2"><table cellpadding="0" cellspacing="0"><th><p><a class="xi2" href="home.php?mod=space&amp;uid=821887&amp;do=thread&amp;type=thread&amp;view=me&amp;from=space">0</a></p>主题</th><th><p><a class="xi2" href="home.php?mod=space&amp;uid=821887&amp;do=thread&amp;type=reply&amp;view=me&amp;from=space">1072</a></p>回帖</th><td><p><a class="xi2" href="home.php?mod=space&amp;uid=821887&amp;do=profile">112</a></p>积分</td></table></div>
+<p class="side-group"><em><a href="home.php?mod=spacecp&amp;ac=usergroup&amp;gid=10" target="_blank">锋芒初露</a></em></p>
+<p class="side-star"><span id="g_up54647577" onmouseover="showMenu({'ctrlid':this.id, 'pos':'12!'});"><img alt="Rank: 1" src="../common_images/star_level1.gif"/></span></p>
+<div class="tip tip_4" id="g_up54647577_menu" style="display: none;"><div class="tip_horn"></div><div class="tip_c">锋芒初露, 积分 112, 距离下一级还需 88 积分</div></div>
+<dl class="pil cl credit-list">
+<span amount="0" class="cr-digest">
+<dt>精华</dt>
+<dd>0</dd>
+</span>
+<span amount="0 点" class="cr-ext1">
+<dt>威望</dt>
+<dd>0 点</dd>
+</span>
+<span amount="4 点" class="cr-ext6">
+<dt>热心值</dt>
+<dd>4 点</dd>
+</span>
+<span amount="0 点" class="cr-ext4">
+<dt>悬赏值</dt>
+<dd>0 点</dd>
+</span>
+<span class="cr-follower">
+<dt>听众</dt>
+<dd><a class="xi2" href="home.php?mod=follow&amp;do=follower&amp;uid=821887" target="_blank">0</a></dd>
+</span>
+<span amount="0 点" class="cr-ext3">
+<dt>贡献值</dt>
+<dd>0 点</dd>
+</span>
+<span class="cr-ext2">
+<dt>吾爱币</dt>
+<dd>3627 CB</dd>
+</span>
+<span amount="0 次" class="cr-ext8">
+<dt>违规</dt>
+<dd>0 次</dd>
+</span>
+<dt>注册时间</dt>
+<dd>2018-3-13</dd>
+</dl>
+</div>
+</td>
+<td class="plc">
+<div class="pi">
+<strong>
+<a href="forum.php?mod=redirect&amp;goto=findpost&amp;ptid=2086258&amp;pid=54647577" id="postnum54647577" onclick="setCopy(this.href, '帖子地址复制成功');return false;">
+<em>8</em><sup>#</sup></a>
+</strong>
+<div class="pti">
+<div class="pdbt">
+</div>
+<div class="authi">
+<img class="authicn vm" id="authicon54647577" src="../common_images/online_member.gif"/>
+<span class="res-author"><a class="xi2" href="home.php?mod=space&amp;uid=821887" target="_blank">sxlh2311</a>
+</span><em id="authorposton54647577"><span class="poston">发表于</span> 2026-1-13 19:14</em>
+<span class="pipe">|</span>
+<a href="forum.php?mod=viewthread&amp;tid=2086258&amp;page=1&amp;authorid=821887" rel="nofollow">只看该作者</a>
+</div>
+</div>
+</div><div class="pct"><div class="pcb">
+<div class="t_fsz">
+<table cellpadding="0" cellspacing="0"><tr><td class="t_f" id="postmessage_54647577">
+小巧，好用呢，感谢分享</td></tr></table>
+</div>
+<div class="cm" id="comment_54647577">
+</div>
+<div id="post_rate_div_54647577"></div>
+</div>
+</div>
+</td></tr>
+<tr><td class="plc plm">
+<div class="sign" style="max-height:200px;maxHeightIE:200px;">鱼跃此时海，花开彼岸天。</div>
+</td>
+</tr>
+<tr id="_postposition54647577"></tr>
+<tr>
+<td class="pls"></td>
+<td class="plc" style="overflow:visible;">
+<div class="po hin">
+<div class="pob cl">
+<em>
+<a class="cmmnt" href="forum.php?mod=misc&amp;action=comment&amp;tid=2086258&amp;pid=54647577&amp;extra=page%3D1&amp;page=1" onclick="showWindow('comment', this.href, 'get', 0)">点评</a><a class="fastre" href="forum.php?mod=post&amp;action=reply&amp;fid=24&amp;tid=2086258&amp;repquote=54647577&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)" rel="nofollow">回复</a>
+<a class="replyadd" href="forum.php?mod=misc&amp;action=postreview&amp;do=support&amp;tid=2086258&amp;pid=54647577&amp;hash=7f5fdc25" onclick="ajaxmenu(this, 3000, 1, 0, '43', '');return false;" onmouseover="this.title = ($('review_support_54647577').innerHTML ? $('review_support_54647577').innerHTML : 0) + ' 人 支持'">支持 <span id="review_support_54647577"></span></a>
+</em>
+<p>
+<a href="javascript:;" onclick="showWindow('rate', 'forum.php?mod=misc&amp;action=rate&amp;tid=2086258&amp;pid=54647577', 'get', -1);return false;">免费评分</a>
+<a href="javascript:;" onclick="showWindow('miscreport54647577', 'misc.php?mod=report&amp;rtype=post&amp;rid=54647577&amp;tid=2086258&amp;fid=24', 'get', -1);return false;">举报</a>
+</p>
+</div>
+</div>
+</td>
+</tr>
+<tr class="ad">
+<td class="pls">
+</td>
+<td class="plc">
+</td>
+</tr>
+</table>
+</div><div class="pl" id="postlistreply"><div class="viewthread_table" id="post_new" style="display: none"></div></div>
+</div>
+<form autocomplete="off" id="modactions" method="post" name="modactions">
+<input name="formhash" type="hidden" value="7f5fdc25"/>
+<input name="optgroup" type="hidden"/>
+<input name="operation" type="hidden"/>
+<input name="listextra" type="hidden" value="page%3D1"/>
+<input name="page" type="hidden" value="1"/>
+</form>
+<div class="pgs mtm mbm cl">
+<span class="pgb y" id="visitedforumstmp" onmouseover="$('visitedforums').id = 'visitedforumstmp';this.id = 'visitedforums';showMenu({'ctrlid':this.id,'pos':'21'})"><a href="forum-24-1.html">返回列表</a></span>
+<a href="javascript:;" id="newspecialtmp" onclick="showWindow('newthread', 'forum.php?mod=post&amp;action=newthread&amp;fid=24')" onmouseover="$('newspecial').id = 'newspecialtmp';this.id = 'newspecial';showMenu({'ctrlid':this.id})" title="发新帖"><img alt="发新帖" src="../common_images/pn_post.png"/></a>
+<a href="javascript:;" id="post_replytmp" onclick="showWindow('reply', 'forum.php?mod=post&amp;action=reply&amp;fid=24&amp;tid=2086258')" title="回复"><img alt="回复" src="../common_images/pn_reply.png"/></a>
+</div>
+<div class="area" id="diyfastposttop"></div>
+<div class="pl bm bmw" id="f_pst">
+<form action="forum.php?mod=post&amp;action=reply&amp;fid=24&amp;tid=2086258&amp;extra=page%3D1&amp;replysubmit=yes&amp;infloat=yes&amp;handlekey=fastpost" autocomplete="off" id="fastpostform" method="post" onsubmit="return fastpostvalidate(this)">
+<table cellpadding="0" cellspacing="0">
+<tr>
+<td class="pls">
+<div class="avatar avtm"><img onerror="this.onerror=null;this.src='https://avatar.52pojie.cn/images/noavatar_middle.gif'" src="../common_images/68_avatar_middle.jpg"/></div></td>
+<td class="plc">
+<span id="fastpostreturn"></span>
+<div class="cl">
+<div id="fastposteditor">
+<div class="tedt mtn">
+<div class="bar">
+<span class="y">
+<a href="forum.php?mod=post&amp;action=reply&amp;fid=24&amp;tid=2086258" onclick="return switchAdvanceMode(this.href)">高级模式</a>
+</span>
+<div class="fpd">
+<a class="fbld" href="javascript:;" onclick="seditor_insertunit('fastpost', '[b]', '[/b]');doane(event);" title="文字加粗">B</a>
+<a class="fclr" href="javascript:;" id="fastpostforecolor" onclick="showColorBox(this.id, 2, 'fastpost');doane(event);" title="设置文字颜色">Color</a>
+<a class="fmg" href="javascript:;" id="fastpostimg" onclick="seditor_menu('fastpost', 'img');doane(event);" title="图片">Image</a>
+<a class="flnk" href="javascript:;" id="fastposturl" onclick="seditor_menu('fastpost', 'url');doane(event);" title="添加链接">Link</a>
+<a class="fqt" href="javascript:;" id="fastpostquote" onclick="seditor_menu('fastpost', 'quote');doane(event);" title="引用">Quote</a>
+<a class="fcd" href="javascript:;" id="fastpostcode" onclick="seditor_menu('fastpost', 'code');doane(event);" title="代码">Code</a>
+<a class="fsml" href="javascript:;" id="fastpostsml" onclick="showMenu({'ctrlid':this.id,'evt':'click','layer':2});return false;">Smilies</a>
+<a class="fat" href="javascript:;" id="fastpostat" onclick="seditor_menu('fastpost', 'at');doane(event);" title="@朋友">@朋友</a>
+<span class="pipe z">|</span><span id="spanButtonPlaceholder">上传</span></div></div>
+<div class="area">
+<textarea class="pt" cols="80" id="fastpostmessage" name="message" onkeydown="seditor_ctlent(event, 'fastpostvalidate($(\'fastpostform\'))');" rows="6" tabindex="4"></textarea>
+</div>
+</div>
+</div>
+</div>
+<div id="seccheck_fastpost">
+</div>
+<input id="posttime" name="posttime" type="hidden" value="1768305132"/>
+<div class="upfl">
+<table border="0" cellpadding="0" cellspacing="0" id="attach_tblheader" style="display: none;">
+<tr>
+<td>点击附件文件名添加到帖子内容中</td>
+<td class="atds">描述</td>
+<td class="attv">
+阅读权限
+<img alt="Tip" class="vm" onmouseover="showTip(this)" src="../common_images/faq.gif" tip="阅读权限按由高到低排列，高于或等于选中组的用户才可以阅读，&lt;b&gt;&lt;font color=blue&gt;添加权限后请勿勾选下方的“转播给听众”功能，否则会导致帖子内容泄漏。&lt;/font&gt;&lt;/b&gt;"/>
+</td>
+<td class="attpr">吾爱币</td><td class="attc"></td>
+</tr>
+</table>
+<div class="fieldset flash" id="attachlist"></div>
+</div>
+<input name="formhash" type="hidden" value="7f5fdc25"/>
+<input name="usesig" type="hidden" value="1"/>
+<input name="subject" type="hidden" value="  "/>
+<p class="ptm pnpost">
+<a class="y" href="home.php?mod=spacecp&amp;ac=credit&amp;op=rule&amp;fid=24" target="_blank">本版积分规则</a>
+<button class="pn pnc vm" id="fastpostsubmit" name="replysubmit" onmouseover="checkpostrule('seccheck_fastpost', 'ac=reply');this.onmouseover=null" tabindex="5" type="submit" value="replysubmit"><strong>发表回复</strong></button>
+<span style="padding:0 5px; color:#f44336"><strong>警告：本版块禁止<a href="forum.php?mod=redirect&amp;goto=findpost&amp;ptid=143136&amp;pid=9180499" style="font-style: italic; text-decoration-line: underline;" target="_blank">『灌水』</a>或回复与主题无关内容，违者重罚！</strong></span>
+<label class="lb"><input class="pc" name="adddynamic" type="checkbox" value="1"/>回帖并转播</label>
+<label for="fastpostrefresh"><input class="pc" id="fastpostrefresh" type="checkbox"/>回帖后跳转到最后一页</label>
+</p>
+</td>
+</tr>
+</table>
+</form>
+</div>
+<div class="p_pop blk cl" id="visitedforums_menu" style="display: none;">
+<table cellpadding="0" cellspacing="0">
+<tr>
+<td id="v_forums">
+<h3 class="mbn pbn bbda xg1">浏览过的版块</h3>
+<ul class="xl xl1">
+<li><a href="forum-5-1.html">『脱壳破解区』</a></li><li><a href="forum-69-1.html">『Android UnPackMe◇CrackMe◇KeyGenMe◇ReverseMe』</a></li><li><a href="forum-13-1.html">『站点公告』</a></li><li><a href="forum-2-1.html">『原创发布区』</a></li></ul>
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="wp mtn">
+<div class="area" id="diy3"></div>
+</div>
+</div>
+<div class="wp vw50_kfc_f"><div class="res-footer-note"><p align="left"><br/><font color="#ff0000">免责声明：<br/>吾爱破解所发布的一切破解补丁、注册机和注册信息及软件的解密分析文章仅限用于学习和研究目的；不得将上述内容用于商业或者非法用途，否则，一切后果请用户自负。本站信息来自网络，版权争议与本站无关。您必须在下载后的24个小时之内，从您的电脑中彻底删除上述内容。如果您喜欢该程序，请支持正版软件，购买注册，得到更好的正版服务。如有侵权请邮件与我们联系处理。</font></p>
+<p align="right"><font color="#ff0000" face="Comic Sans MS">Mail To:Service@52pojie.cn</font></p></div></div>
+<style type="text/css"> 
+#scrolltop {
+   display: none;
+}
+ul#navmenu ul
+{ 
+display: none; 
+position: absolute; 
+left: -233px;
+bottom: 5px;
+} 
+ul#navmenu li:hover ul ul, 
+ul#navmenu li.iehover ul ul,  { 
+display: none; 
+} 
+ul#navmenu li:hover ul, 
+ul#navmenu ul li:hover ul, 
+ul#navmenu ul ul li:hover ul, 
+ul#navmenu li.iehover ul, 
+ul#navmenu ul li.iehover ul, 
+ul#navmenu ul ul li.iehover ul { 
+display: block; 
+} 
+
+#jz52top a {margin: 6px 0;}
+
+#jz52top { z-index: 200; visibility: visible; right: 5px; }
+
+#jz52topa { visibility: hidden;}
+#jz52top, #jz52top a { border: none;}
+
+
+#jz52top { position: fixed; bottom: 70px; display: block; width: 40px; background: none repeat scroll 0% 0% transparent; border: 0px #cdcdcd solid; border-radius: 3px; border-top: 0; cursor: pointer; }
+#jz52top:hover { text-decoration: none; }
+
+#jz52top a { display: block; width: 40px; height: 40px; padding: 0; line-height: 12px; text-align: center; color: #787878; text-decoration: none; background: #f8f8f8 url('source/plugin/jz52_top/template/jz52top1.png') no-repeat 0 0; border-top: 0px #cdcdcd solid; }
+
+                a.jz52topa:hover { background-position: -40px 0px !important;}
+a.replyfast { background-position: 0 -40px !important; }
+a.replyfast:hover { background-position: -40px -40px !important;}
+a.returnlist { background-position: 0 -80px !important; }
+a.returnlist:hover { background-position: -40px -80px !important;}
+a.returnboard { background-position: -80px -240px !important; }
+a.returnboard:hover { background-position: -120px -240px !important;}
+a.jzqr { background-position: 0 -120px !important; }
+a.jzqr:hover { background-position: -40px -120px !important;}
+                a.jzwx { background-position: 0 -320px !important; }
+a.jzwx:hover { background-position: -40px -320px !important;}				
+a.jzkf { background-position: -80px 0px !important; }
+a.jzkf:hover { background-position: -120px -0px !important;}
+a.jzfx { background-position: -80px -40px !important; }
+a.jzfx:hover { background-position: -120px -40px !important;}
+.jzfxn { background: #fff !important; width: 231px !important; height: 260px !important; }
+a.jzlast { background-position: -80px -80px !important; }
+a.jzlast:hover { background-position: -120px -80px !important;}
+a.jznext { background-position: -80px -120px !important; }
+a.jznext:hover { background-position: -120px -120px !important;}	
+a.jzxyy { background-position: -80px -120px !important; }
+a.jzxyy:hover { background-position: -120px -360px !important;}			
+a.jzsct { background-position: 0px -160px !important; }
+a.jzsct:hover { background-position: -40px -160px !important;}				
+a.jzscb { background-position: -80px -160px !important; }
+a.jzscb:hover { background-position: -120px -160px !important;}				
+a.jzqqq { background-position: 0px -200px !important; }
+a.jzqqq:hover { background-position: -40px -200px !important;}	
+                a.jzsoso { background-position: -80px -320px !important; }
+a.jzsoso:hover { background-position: -120px -320px !important;}					
+a.jzwo { background-position: -80px -200px !important; }
+a.jzwo:hover { background-position: -120px -200px !important;}
+a.jzzdy { background-position: 0px -240px !important; }
+a.jzzdy:hover { background-position: -40px -240px !important;}
+a.jzfbzt { background-position: 0px -280px !important; }
+a.jzfbzt:hover { background-position: -40px -280px !important;}
+a.jzkfzx { background-position: -80px -280px !important; }
+a.jzkfzx:hover { background-position: -120px -280px !important;}
+
+
+#jzqrn { background: #fff !important; width: 231px !important; height: 260px !important; }
+#jzqrn { border: 1px solid rgb(210, 210, 210); text-align: center; }
+#jzqrn p {
+    font-size: 15px;
+    padding-bottom: 15px;
+    text-align: center;
+color: #999;
+    font-family: Microsoft YaHei;
+}
+#jzwon { background: #fff !important; width: 231px !important; height: 260px !important; }
+#jzwon { border: 1px solid rgb(210, 210, 210); }
+#jzfxn { border: 1px solid rgb(210, 210, 210); }
+#jzfxn h3 {
+    height: 23px;
+    background: none repeat scroll 0% 0% rgb(250, 250, 250);
+    border-bottom: 1px solid rgb(236, 236, 236);
+    padding: 10px 0px 0px 10px;
+}
+#jzfxn .bdsharebuttonbox { padding: 13px 0px 0px 20px; }
+#jzfxn .bdsharebuttonbox a, #jzfxn .bdsharebuttonbox .bds_more {
+    float: left;
+    font-size: 12px;
+    padding-left: 25px;
+    line-height: 16px;
+text-align: left;
+    height: 16px;
+    background: url("http://bdimg.share.baidu.com/static/api/img/share/icons_1_16.png?v=01d441d0.png") no-repeat scroll 0px 0px ;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    margin: 6px 6px 6px 0px;
+text-indent: 0;
+    overflow: hidden;
+width: 68px;
+}
+#jzfxn .bdsharebuttonbox .bds_qzone {
+    background-position: 0px -52px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_tsina {
+    background-position: 0px -104px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_tqq {
+    background-position: 0px -260px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_renren {
+    background-position: 0px -208px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_tqf {
+    background-position: 0px -364px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_tieba {
+    background-position: 0px -728px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_sqq {
+    background-position: 0px -2652px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_hi {
+    background-position: 0px -416px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_isohu {
+    background-position: 0px -3016px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_weixin {
+    background-position: 0px -1612px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_t163 {
+    background-position: 0px -832px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_tsohu {
+    background-position: 0px -520px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_baidu {
+    background-position: 0px -2600px !important;
+}
+#jzfxn .bdsharebuttonbox .bds_qq {
+    background-position: 0px -624px !important;
+}
+#jz52top a b {
+    visibility: hidden;
+    font-weight: normal;
+}
+</style>
+<div id="jz52top">
+<span><a class="replyfast" href="forum.php?mod=post&amp;action=reply&amp;fid=24&amp;tid=2086258&amp;extra=page%3D1&amp;page=" onclick="showWindow('reply', this.href)" title="快速回复"><b>快速回复</b></a></span>
+<span><a class="jzsct" href="home.php?mod=spacecp&amp;ac=favorite&amp;type=thread&amp;id=2086258&amp;formhash=7f5fdc25" id="k_favorite" onclick="showWindow(this.id, this.href, 'get', 0);" onmouseover="this.title = $('favoritenumber').innerHTML + ' 人已收藏'" title="!fav_thread!"><b>收藏帖子</b></a></span>
+<span>
+<a class="returnlist" hidefocus="true" href="forum-24-1.html" title="返回列表"><b>返回列表</b></a>
+</span>
+<span><ul id="navmenu"> <li><a class="jzwx" href="javascript:void(0)" title="关注微信"><b>关注微信</b></a> <ul> <div id="jzqrn">
+<img alt="wx" height="228" src="../common_images/weixin.jpg" width="228"/>
+<p>微信签到每天都送论坛币！</p>
+</div> </ul></li></ul> </span>
+<span>
+<div id="goTopBtn" style="DISPLAY: none"><a class="jz52topa" title="返回顶部"><b>返回顶部</b></a></div>
+</span>
+</div>
+<div class="wp cl" id="ft">
+<div class="y" id="flk">
+<p>
+<a href="forum.php?mod=rss" target="_blank">RSS订阅</a><span class="pipe">|</span><a href="forum.php?mod=misc&amp;action=showdarkroom">小黑屋</a><span class="pipe">|</span><a href="thread-2084166-1-1.html" target="_blank">处罚记录</a><span class="pipe">|</span><a href="mailto:Service@52pojie.cn" target="_blank">联系我们</a><span class="pipe">|</span><strong><a href="https://www.52pojie.cn" target="_blank">吾爱破解 - 52pojie.cn</a></strong>
+( <a href="https://beian.miit.gov.cn/" rel="nofollow" target="_blank">京ICP备16042023号 | 京公网安备 11010502030087号</a> )</p>
+<p class="xs0">
+GMT+8, 2026-1-13 19:52<span id="debuginfo">
+</span>
+</p>
+</div>
+<div id="frt">
+<p>Powered by <strong>Discuz!</strong></p>
+<p class="xs0">Copyright © 2001-2020, Tencent Cloud.</p>
+</div></div>
+<div id="scrolltop">
+<span><a class="replyfast" href="forum.php?mod=post&amp;action=reply&amp;fid=24&amp;tid=2086258&amp;extra=page%3D1&amp;page=1" onclick="showWindow('reply', this.href)" title="快速回复"><b>快速回复</b></a></span>
+<span hidefocus="true"><a class="scrolltopa" onclick="window.scrollTo('0','0')" title="返回顶部"><b>返回顶部</b></a></span>
+<span>
+<a class="returnlist" hidefocus="true" href="forum-24-1.html" title="返回列表"><b>返回列表</b></a>
+</span>
+</div>
+<script>var STYLEID = '1', STATICURL = 'https://static.52pojie.cn/static/', IMGDIR = 'https://static.52pojie.cn/static/image/common', VERHASH = 'q9b', charset = 'gbk', discuz_uid = '588268', cookiepre = 'htVC_2132_', cookiedomain = '', cookiepath = '/', showusercard = '0', attackevasive = '0', disallowfloat = 'login|newthread', creditnotice = '1|威望|点,2|吾爱币|CB,3|贡献值|点,4|悬赏值|点,5|采纳率|%,6|热心值|点,8|违规|次', defaultstyle = './template/default/style/t5', REPORTURL = 'aHR0cHM6Ly93d3cuNTJwb2ppZS5jbi90aHJlYWQtMjA4NjI1OC0xLTEuaHRtbA==', SITEURL = 'https://www.52pojie.cn/', JSPATH = 'https://static.52pojie.cn/cache/', CSSPATH = 'https://static.52pojie.cn/cache/style_', DYNAMICURL = '';</script><script src="https://static.52pojie.cn/cache/common.js?q9b"></script><script>HTMLNODE.className += ' widthauto'</script><script src="https://static.52pojie.cn/cache/forum.js?q9b"></script><script language="javascript">delayShow($('myprompt'), function() {showMenu({'ctrlid':'myprompt','duration':3})});</script><script>
+initSearchmenu('scbar', '');
+</script><script charset="utf-8" src="https://static.52pojie.cn/highlight/highlight.min.js"></script><script>hljs.initHighlightingOnLoad();</script><script src="https://lib.baomitu.com/tocbot/4.18.0/tocbot.min.js"></script><script>var fid = parseInt('24'), tid = parseInt('2086258');</script><script src="https://static.52pojie.cn/cache/forum_viewthread.js?q9b"></script><script>zoomstatus = parseInt(1);var imagemaxwidth = '1080';var aimgcount = new Array();</script><script>(function(){var basePath = window.location.href.split('#')[0].split('/').pop();tocbot.init({tocSelector: '#markdown_toc_54646802',contentSelector: '#postmessage_54646802',headingSelector: 'h1, h2, h3',collapseDepth: 0,basePath: basePath});})();</script><script>
+function votekickupdate() {
+var obj = $('votes');
+obj.innerHTML = parseInt(obj.innerHTML) + 1;
+}
+</script><script reload="1">
+aimgcount[54646802] = ['2826937','2826938','2826939','2826940','2826941','2826942'];
+attachimggroup(54646802);
+var aimgfid = 0;
+</script><script>
+var postminchars = parseInt('8');
+var postmaxchars = parseInt('0');
+var disablepostctrl = parseInt('0');
+</script><script src="https://static.52pojie.cn/cache/seditor.js?q9b"></script><script reload="1">smilies_show('fastpostsmiliesdiv', 8, 'fastpost');</script><script src="https://static.52pojie.cn/cache/at.js?q9b"></script><script>
+var editorid = '';
+var ATTACHNUM = {'imageused':0,'imageunused':0,'attachused':0,'attachunused':0}, ATTACHUNUSEDAID = new Array(), IMGUNUSEDAID = new Array();
+</script><script src="https://static.52pojie.cn/cache/upload.js?q9b"></script><script>
+var upload = new SWFUpload({
+upload_url: "https://www.52pojie.cn/misc.php?mod=swfupload&action=swfupload&operation=upload&fid=24",
+post_params: {"uid" : "588268", "hash":"8350575a36dbfe0e745a2e3db224679b"},
+file_size_limit : "3072",
+file_types : "*.rar;*.7z;*.zip;*.txt;*.jpg;*.gif;*.png",
+file_types_description : "All Support Formats",
+file_upload_limit : 0,
+file_queue_limit : 0,
+swfupload_preload_handler : preLoad,
+swfupload_load_failed_handler : loadFailed,
+file_dialog_start_handler : fileDialogStart,
+file_queued_handler : fileQueued,
+file_queue_error_handler : fileQueueError,
+file_dialog_complete_handler : fileDialogComplete,
+upload_start_handler : uploadStart,
+upload_progress_handler : uploadProgress,
+upload_error_handler : uploadError,
+upload_success_handler : uploadSuccess,
+upload_complete_handler : uploadComplete,
+button_image_url : "https://static.52pojie.cn/static/image/common/uploadbutton_small.png",
+button_placeholder_id : "spanButtonPlaceholder",
+button_width: 17,
+button_height: 25,
+button_cursor:SWFUpload.CURSOR.HAND,
+button_window_mode: "transparent",
+custom_settings : {
+progressTarget : "attachlist",
+uploadSource: 'forum',
+uploadType: 'attach',
+maxSizePerDay: 52428800,
+uploadFrom: 'fastpost'
+},
+debug: false
+});
+</script><script>if(getcookie('fastpostrefresh') == 1) {$('fastpostrefresh').checked=true;}</script><script>
+$("fastpostmessage").style.background = 'url(https://static.52pojie.cn/static/image/common/bj.gif) no-repeat left top';
+
+$("fastpostmessage").onfocus = function (){
+$("fastpostmessage").style = '';
+}
+$("fastpostmessage").onblur = function (){
+if($("fastpostmessage").value == ''){
+$("fastpostmessage").style.background = 'url(https://static.52pojie.cn/static/image/common/bj.gif) no-repeat left top';
+}
+}
+
+ </script><script>
+new lazyload();
+</script><script>document.onkeyup = function(e){keyPageScroll(e, 0, 0, 'forum.php?mod=viewthread&tid=2086258&extra=page%3D1', 1);}</script><script>
+function succeedhandle_followmod(url, msg, values) {
+var fObj = $('followmod_'+values['fuid']);
+if(values['type'] == 'add') {
+fObj.innerHTML = '不收听';
+fObj.href = 'home.php?mod=spacecp&ac=follow&op=del&fuid='+values['fuid'];
+} else if(values['type'] == 'del') {
+fObj.innerHTML = '收听TA';
+fObj.href = 'home.php?mod=spacecp&ac=follow&op=add&hash=7f5fdc25&fuid='+values['fuid'];
+}
+}
+fixed_avatar([54646802,54646828,54646876,54646935,54647201,54647478,54647537,54647577], 1);
+</script><script src="source/plugin/zxsq_markdown/js/code-tools.js?ver=2.8.5"></script><script src="source/plugin/zxsq_markdown/js/zoom.js?ver=2.8.5"></script><script type="text/x-mathjax-config">
+	MathJax.Hub.Config({ 
+		tex2jax: {
+			inlineMath: [["$","$"], ['\\(','\\)']],
+			processClass: "math-render",
+			ignoreClass: "pct",
+		},
+		skipTags: ['script', 'noscript', 'style', 'textarea', 'pre','code','a'],
+		showProcessingMessages: false,
+		messageStyle: "none",
+		TeX: { equationNumbers: {autoNumber: "AMS"} },
+	});
+</script><script src="https://lib.baomitu.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&amp;noContrib"></script><script>
+var mw_brush = eval({"asm":["Asm","true"],"c":["C","true"],"cpp":["C++","true"],"csharp":["C#","true"],"java":["Java","true"],"python":["Python","true"],"lua":["Lua","true"],"html":["HTML","true"],"php":["PHP","true"],"javascript":["JavaScript","true"],"css":["CSS","true"],"golang":["Golang","true"],"objc":["Objective-C","true"],"applescript":["AppleScript","true"],"actionscript3":["Actionscript3","true"],"bash":["Bash shell","true"],"coldfusion":["ColdFusion","true"],"delphi":["Delphi","true"],"diff":["Diff","true"],"erlang":["Erlang","true"],"groovy":["Groovy","true"],"javafx":["JavaFX","true"],"pascal":["Pascal","true"],"patch":["Patch","true"],"perl":["Perl","true"],"text":["Plain Text","true"],"powershell":["PowerShell","true"],"ruby":["Ruby","true"],"rails":["Ruby on Rails","true"],"sass":["Sass","true"],"scala":["Scala","true"],"scss":["Scss","true"],"shell":["Shell","true"],"sql":["SQL","true"],"vb":["Visual Basic","true"],"vbnet":["Visual Basic .NET","true"],"xhtml":["XHTML","true"],"xml":["XML","true"],"xslt":["XSLT","true"],"aauto":["AAuto","true"],"il":["IL","true"]});
+var mw_gutter = 1;
+var mw_lang_codebox = { 'select_lang': '请输入要插入的代码<br>选择语言：', 'show_gutter': '显示行号：', 'your_code': '你的代码：', 'close': '关闭', 'submit': '提交', 'cancle': '取消' };
+</script><script src="https://static.52pojie.cn/mw_syntaxhighlighter/static/js/mw_syntaxhighlighter.js?q9b"></script><script reload="1">mw_syntaxhighlighter("fastpost");</script><script src="https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shCore.js?ver=3.0.90"></script><script src="https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shAutoloader.js?ver=3.0.90"></script><script src="https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushXml.js?ver=3.0.90"></script><script>//<![CDATA[
+	SyntaxHighlighter.autoloader(
+	"applescript	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushAppleScript.js?ver=3.0.90"
+	,"as3 actionscript3	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushAS3.js?ver=3.0.90"
+	,"bash shell	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushBash.js?ver=3.0.90"
+	,"cf coldfusion	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushColdFusion.js?ver=3.0.90"
+	,"cpp c	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushCpp.js?ver=3.0.90"
+	,"c# c-sharp csharp	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushCSharp.js?ver=3.0.90"
+	,"css	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushCss.js?ver=3.0.90"
+	,"delphi pas pascal	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushDelphi.js?ver=3.0.90"
+	,"diff patch	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushDiff.js?ver=3.0.90"
+	,"erl erlang	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushErlang.js?ver=3.0.90"
+	,"groovy	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushGroovy.js?ver=3.0.90"
+	,"java	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushJava.js?ver=3.0.90"
+	,"jfx javafx	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushJavaFX.js?ver=3.0.90"
+	,"js jscript javascript	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushJScript.js?ver=3.0.90"
+	,"perl pl	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushPerl.js?ver=3.0.90"
+	,"php	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushPhp.js?ver=3.0.90"
+	,"plain text	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushPlain.js?ver=3.0.90"
+	,"ps powershell	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushPowerShell.js?ver=3.0.90"
+	,"py python	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushPython.js?ver=3.0.90"
+	,"rails ror ruby rb	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushRuby.js?ver=3.0.90"
+	,"sass scss	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushSass.js?ver=3.0.90"
+	,"scala	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushScala.js?ver=3.0.90"
+	,"sql	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushSql.js?ver=3.0.90"
+	,"vb vbnet	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushVb.js?ver=3.0.90"
+	,"xml xhtml xslt html	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushXml.js?ver=3.0.90"
+	,"objc	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushObjC.js?ver=3.0.90"
+	,"asm	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushAsm.js?ver=3.0.90"
+	,"aauto	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushAAuto.js?ver=3.0.90"
+	,"go golang	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushGo.js?ver=3.0.90"
+	,"lua	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushLua.js?ver=3.0.90"
+	,"il	https://static.52pojie.cn/mw_syntaxhighlighter/static/syntaxhighlighter3/scripts/shBrushIL.js?ver=3.0.90"
+	);
+	SyntaxHighlighter.defaults['auto-links'] = false;
+	SyntaxHighlighter.defaults['quick-code'] = true;
+	SyntaxHighlighter.defaults['title'] = '';
+	SyntaxHighlighter.defaults['class-name'] = 'notranslate';
+	SyntaxHighlighter.defaults['collapse'] = false;
+	SyntaxHighlighter.defaults['first-line'] = 1;
+	SyntaxHighlighter.defaults['gutter'] = true;
+	SyntaxHighlighter.defaults['pad-line-numbers'] = 1;
+	SyntaxHighlighter.defaults['smart-tabs'] = true;
+	SyntaxHighlighter.defaults['tab-size'] = 4;
+	SyntaxHighlighter.defaults['toolbar'] = true;
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter';
+	SyntaxHighlighter.config.strings.noBrush = "Can\'t find brush for: ";
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = "Brush wasn\'t configured for html-script option: ";
+	SyntaxHighlighter.all();
+	
+//]]></script><script>
+var mw_libversion = '3.0.90';
+var mw_lang_toolbar = {'copyed': '代码已复制到剪贴板'};
+</script><script src="https://static.52pojie.cn/mw_syntaxhighlighter/static/js/toolbar.js?q9b"></script><script async="" defer="" src="/static/js/index.min.js"></script><script src="https://static.52pojie.cn/noti/noti.js?q9b"></script><script>
+time=1768305132;
+activemode = true;
+hookCredit();
+if(activemode)ifvisible.now();
+setTimeout(function () { noti_run('&type=3_3_1&h=7f5fdc25', 10000, 180000);}, 100);
+</script><script> 
+function goTopEx() {
+ var obj = document.getElementById("goTopBtn");
+
+ function getScrollTop() {
+ return document.documentElement.scrollTop || document.body.scrollTop;
+ }
+
+ function setScrollTop(value) {
+ if (document.documentElement.scrollTop) {
+ document.documentElement.scrollTop = value;
+ } else {
+ document.body.scrollTop = value;
+ }
+
+ }
+ window.onscroll = function() {
+ getScrollTop() > 0 ? obj.style.display = "" : obj.style.display = "none";
+ var h = document.body.scrollHeight - getScrollTop() - obj.offsetTop - obj.offsetHeight;
+ obj.style.bottom = 0 + "px";
+ if (h < 350) {
+ obj.style.bottom = 340 + "px";
+ obj.style.top = "auto";
+ }
+
+
+ }
+ obj.onclick = function() {
+ function scrollToTop() {
+ let y = getScrollTop();
+ const interval = setInterval(function() {
+ if (getScrollTop() - 5 > y) {
+ // User trying to scroll - abort
+ clearInterval(interval);
+ return;
+ }
+ y = y / 1.1;
+ setScrollTop(y);
+ if (y < 1) {
+ clearInterval(interval);
+ setScrollTop(0);
+ }
+ }, 10);
+ }
+ scrollToTop()
+ }
+}
+</script><script type="text/javascript">goTopEx();</script><script>
+var _hmt = _hmt || [];
+(function() {
+ var hm = document.createElement("script");
+ hm.src = "https://hm.baidu.com/hm.js?46d556462595ed05e05f009cdafff31a";
+ var s = document.getElementsByTagName("script")[0]; 
+ s.parentNode.insertBefore(hm, s);
+})();
+</script><script src="home.php?mod=spacecp&amp;ac=follow&amp;op=checkfeed&amp;rand=1768305132"></script><script>noticeTitle();</script><script>_attachEvent(window, 'scroll', function () { showTopLink(); });checkBlind();</script></link></body>
+</html>
